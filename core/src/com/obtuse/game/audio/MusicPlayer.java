@@ -31,16 +31,20 @@ public class MusicPlayer {
     }
 
     public static void play(String name, float volume) {
+        // On the web not every track is bundled (see MusicPlayer.shippedTracks). If this one
+        // is not, leave whatever is currently playing alone — DON'T stop it — so the overworld
+        // theme keeps playing through fights instead of cutting to silence. Stopping here also
+        // left `music` referencing a disposed object; the next play() then disposed it a second
+        // time, which froze the game on fight exit. null shippedTracks = all tracks available
+        // (desktop/Android), so this is a no-op there.
+        if (shippedTracks != null && !shippedTracks.contains(name))
+            return;
         if (music != null) {
             music.stop();
             music.dispose();
+            music = null;
         }
         playing = name;
-        // On the web, a track that was not bundled cannot be loaded (readBytes would fail on
-        // the missing file). Skip it rather than crash. null shippedTracks = every track is
-        // available (desktop/Android), so this guard is a no-op there.
-        if (shippedTracks != null && !shippedTracks.contains(name))
-            return;
         if (fileNames.containsKey(name)) {
             music = Gdx.audio.newMusic(fileNames.get(name));
             music.setVolume(volume * musicVolume);
