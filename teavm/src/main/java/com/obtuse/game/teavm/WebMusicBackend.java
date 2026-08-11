@@ -33,9 +33,10 @@ public class WebMusicBackend implements MusicPlayer.Backend {
             loading(false);
             return;
         }
-        // Not downloaded yet. Keep the current track playing; only show the loading overlay if
-        // something is already playing (i.e. a real switch — not the very first track at startup).
-        loading(current != null);
+        // Not downloaded yet. Keep the current track playing (if any) and show the small
+        // "loading music…" label until it arrives — for every track, including the overworld
+        // theme at startup.
+        loading(true);
         downloader.load(true, "assets/" + filePath, AssetType.Binary, new AssetLoaderListener<WebBlob>() {
             @Override
             public void onSuccess(String url, WebBlob blob) {
@@ -71,10 +72,10 @@ public class WebMusicBackend implements MusicPlayer.Backend {
         m.play();
     }
 
-    /** Show/hide the loading overlay declared in index.html. No-op if the element is absent. */
+    /** Show/hide the small "loading music…" label declared in index.html. No-op if absent. */
     private void loading(boolean show) {
         HTMLElement el = HTMLDocument.current().getElementById("music-loading");
         if (el != null)
-            el.getStyle().setProperty("display", show ? "flex" : "none");
+            el.getStyle().setProperty("display", show ? "block" : "none");
     }
 }

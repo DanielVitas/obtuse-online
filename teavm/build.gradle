@@ -59,17 +59,18 @@ def deferAllMusic = {
     logger.lifecycle("Deferred ${dropped} music track(s) from preload (fetched on demand)")
 }
 
-// A simple overlay shown while a not-yet-cached track downloads (WebMusicBackend toggles its
-// display). Hidden by default; injected here because the backend regenerates index.html.
+// A small "loading music…" label in the top-right corner, shown while a not-yet-cached track
+// downloads (WebMusicBackend toggles its display). Hidden by default; injected here because the
+// backend regenerates index.html on every build.
 def injectLoadingOverlay = {
     def html = new File(webappDir, 'index.html')
     if (!html.exists() || html.text.contains('id="music-loading"')) return
     def anchor = '<body oncontextmenu="return false">'
-    def overlay = anchor + '\n        <div id="music-loading" style="display:none;position:fixed;' +
-        'inset:0;z-index:10;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);' +
-        'color:#fff;font-family:monospace;font-size:20px;letter-spacing:1px;">loading music…</div>'
-    html.text = html.text.replace(anchor, overlay)
-    logger.lifecycle("Injected music loading overlay")
+    def label = anchor + '\n        <div id="music-loading" style="display:none;position:fixed;' +
+        'top:8px;right:12px;z-index:10;color:#fff;font-family:monospace;font-size:13px;opacity:0.7;' +
+        'text-shadow:0 0 3px #000,0 0 3px #000;pointer-events:none;">loading music…</div>'
+    html.text = html.text.replace(anchor, label)
+    logger.lifecycle("Injected music loading label")
 }
 
 // Build the JS app into teavm/build/dist (release: obfuscated, optimized).
