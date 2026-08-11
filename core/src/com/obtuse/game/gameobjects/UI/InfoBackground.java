@@ -12,16 +12,10 @@ import com.obtuse.game.Obtuse;
 import com.obtuse.game.gameobjects.BasicObject;
 
 public abstract class InfoBackground extends BasicObject {
-    /** Very light grey tooltip body. */
-    public static final Color BG = new Color(0.90f, 0.90f, 0.92f, 1f);
-    /** Dark text (stats/description), readable on the light body. */
-    public static final Color TEXT = new Color(0.13f, 0.13f, 0.16f, 1f);
-    /** Red name/title. */
-    public static final Color NAME = new Color(0.80f, 0.12f, 0.12f, 1f);
-
-    // Tight silver frame around just the name, computed by buildTooltip().
-    private boolean hasNameRect = false;
-    private float nameRectX, nameRectY, nameRectW, nameRectH;
+    /** Light text (stats/description) on the charcoal box. */
+    public static final Color TEXT = Border.ROYAL_TEXT;
+    /** Red name/title, readable on the dark box. */
+    public static final Color NAME = new Color(0.937f, 0.427f, 0.427f, 1f); // #ef6d6d
 
     public InfoBackground(String name, float defaultFD) {
         super();
@@ -102,13 +96,6 @@ public abstract class InfoBackground extends BasicObject {
         float x = getX(), y = getY(), top = y + h;
         float nameY = top - pad - titleH;
         name.setPosition(x + pad, nameY + (titleH - name.getHeight()) / 2f);
-        // Tight silver frame hugging the name (a little breathing room left/right/top/bottom).
-        float nb = pad * 0.35f;
-        hasNameRect = true;
-        nameRectX = x + pad - nb;
-        nameRectY = nameY - nb;
-        nameRectW = name.getWidth() + 2 * nb;
-        nameRectH = titleH + 2 * nb;
 
         if (inlineStat != null)
             inlineStat.setPosition(x + w - pad - inlineStat.getWidth(),
@@ -141,13 +128,9 @@ public abstract class InfoBackground extends BasicObject {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        // Solid very-light-grey body (no sprite art), a silver frame around the whole window, and a
-        // tight silver frame around the name. Do NOT call super.draw() — we replace the art.
-        float x = getX(), y = getY(), w = getWidth(), h = getHeight();
-        float t = Math.min(w, h) * 0.02f;
-        Border.fillRect(batch, x, y, w, h, BG, parentAlpha);
-        Border.drawRect(batch, x, y, w, h, t, Border.SILVER, parentAlpha);
-        if (hasNameRect)
-            Border.drawRect(batch, nameRectX, nameRectY, nameRectW, nameRectH, t, Border.SILVER, parentAlpha);
+        // Royal-gold box (charcoal panel, gold frame + inner ring, bright corner brackets). Do NOT
+        // call super.draw() — we replace the sprite art.
+        float t = Math.min(getWidth(), getHeight()) * 0.03f;
+        Border.drawGoldBox(batch, getX(), getY(), getWidth(), getHeight(), t, parentAlpha, 0);
     }
 }

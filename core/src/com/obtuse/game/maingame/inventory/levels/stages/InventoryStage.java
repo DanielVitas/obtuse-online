@@ -3,7 +3,6 @@ package com.obtuse.game.maingame.inventory.levels.stages;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.obtuse.game.Obtuse;
-import com.obtuse.game.gameobjects.UI.Border;
 import com.obtuse.game.gameobjects.UI.arrows.DownArrow;
 import com.obtuse.game.gameobjects.UI.SimpleArrow;
 import com.obtuse.game.gameobjects.UI.arrows.LeftArrow;
@@ -27,7 +26,6 @@ public class InventoryStage extends GameStage {
     private static final float[] equipmentX = {6.25f, 7.25f, 8.25f};
     private Array<Item> created = new Array<Item>();
     public Array<SimpleArrow> arrows = new Array<SimpleArrow>();
-    private Array<Border> borders = new Array<Border>();
 
     public InventoryStage(Stage stage) {
         super(stage);
@@ -36,8 +34,6 @@ public class InventoryStage extends GameStage {
     public void setup(Hero hero) {
         clearItems();
         clearArrows();
-        clearBorders();
-        setupBorders();
         setupInventory();
         setupAbilityOrbs(hero);
         setupEquipment(hero);
@@ -95,32 +91,23 @@ public class InventoryStage extends GameStage {
         return abilityRowY() + rightGap();
     }
 
-    // Dashed silver frames around every slot (inventory grid, ability-orb slots, equipment slots),
-    // drawn whether or not the slot holds an item. Each frame is a full cell so adjacent frames tile
-    // edge-to-edge. World-unit coords/thickness (world camera).
-    public void setupBorders() {
-        float cw = cellW(), ch = cellH();
-        for (int j = 0; j < gridRows; j++)
-            for (int i = 0; i < gridCols; i++)
-                addCellBorder(colLeft(i), rowBottom(j), cw, ch);
-        float abilityY = abilityRowY();
-        for (float x : abilityOrbX)
-            addCellBorder(x + size / 2f - rightSlot / 2f, abilityY + size / 2f - rightSlot / 2f, rightSlot, rightSlot);
-        float equipmentY = equipmentRowY();
-        for (float x : equipmentX)
-            addCellBorder(x + size / 2f - rightSlot / 2f, equipmentY + size / 2f - rightSlot / 2f, rightSlot, rightSlot);
+    // World-unit rects [x, y, w, h] of the three grouped areas: the inventory grid, the ability-orb
+    // ("Moves") row, and the equipment ("Items") row. The InfoStage reads these to place titles.
+    public float[] gridArea() {
+        float pad = 0.14f;
+        return new float[]{gridLeftX - pad, gridBottomY() - pad, gridCols * cellW() + 2 * pad, gridRows * cellH() + 2 * pad};
     }
 
-    private void addCellBorder(float x, float y, float cw, float ch) {
-        Border border = new Border(x, y, cw, ch, Math.min(cw, ch) * 0.02f, Border.SILVER, true);
-        borders.add(border);
-        add(border);
+    public float[] movesArea() {
+        float pad = 0.24f;
+        float left = abilityOrbX[0], right = abilityOrbX[abilityOrbX.length - 1] + size, y = abilityRowY();
+        return new float[]{left - pad, y - pad, (right - left) + 2 * pad, size + 2 * pad};
     }
 
-    public void clearBorders() {
-        for (Border border : borders)
-            border.remove();
-        borders.clear();
+    public float[] itemsArea() {
+        float pad = 0.24f;
+        float left = equipmentX[0], right = equipmentX[equipmentX.length - 1] + size, y = equipmentRowY();
+        return new float[]{left - pad, y - pad, (right - left) + 2 * pad, size + 2 * pad};
     }
 
     public void clearArrows() {

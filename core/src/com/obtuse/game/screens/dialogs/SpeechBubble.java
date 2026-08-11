@@ -34,36 +34,26 @@ public abstract class SpeechBubble extends Dialog {
 
     @Override
     public void show() {
-        GameWorld.pause = true;
+        // Do NOT pause the world — the player can keep moving; the bubble tracks the speaker.
         WorldScreen screen = (WorldScreen) MyScreen.game.getScreen();
         OrthographicCamera cam = screen.camera(0);
 
-        // Speaker's position as a fraction of the visible world, so we can place the bubble on the
-        // screen-space dialog stage right above their head.
-        Vector2 wc = speaker.body.body.getWorldCenter();
-        float fx = (wc.x - (cam.position.x - cam.viewportWidth / 2f)) / cam.viewportWidth;
-        float fy = (wc.y - (cam.position.y - cam.viewportHeight / 2f)) / cam.viewportHeight;
-
         float bw = w(0.5f), bh = h(0.2f);
-        float bx = fx * Obtuse.width - bw / 2f;      // centred above the speaker
-        float by = fy * Obtuse.height + h(0.03f);    // tail tip just above the speaker
-        bx = Math.max(w(0.01f), Math.min(bx, Obtuse.width - bw - w(0.01f)));
-        by = Math.min(by, Obtuse.height - bh - h(0.01f));
-
-        bubble = new SpeechBubbleBackground();
-        bubble.setBounds(bx, by, bw, bh);
-        screen.stage(1).addActor(bubble);
-
         float tailH = bh * 0.22f, pad = bw * 0.04f;
+
         Label textLabel = new Label(text, Fonts.get("worldDialog"));
         textLabel.setColor(InfoBackground.TEXT);
         textLabel.setWidth(bw - 2 * pad);
         textLabel.setWrap(true);
         textLabel.setAlignment(Align.center);
         textLabel.setHeight(bh - tailH - 2 * pad);
-        textLabel.setPosition(bx + pad, by + tailH + pad);
-        screen.stage(1).addActor(textLabel);
         labels.add(textLabel);
+
+        bubble = new SpeechBubbleBackground();
+        bubble.setSize(bw, bh);
+        bubble.track(speaker, cam, textLabel);   // positions the bubble + text above the speaker
+        screen.stage(1).addActor(bubble);
+        screen.stage(1).addActor(textLabel);
     }
 
     @Override
@@ -73,6 +63,5 @@ public abstract class SpeechBubble extends Dialog {
         if (bubble != null)
             bubble.remove();
         WorldGame.lastInteract = System.currentTimeMillis();
-        GameWorld.pause = false;
     }
 }

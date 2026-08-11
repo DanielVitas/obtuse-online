@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.Array;
 import com.obtuse.game.Fonts;
 import com.obtuse.game.abilities.AbilityInstance;
 import com.obtuse.game.abilities.all.SkipTurn;
+import com.obtuse.game.gameobjects.UI.Border;
+import com.obtuse.game.gameobjects.UI.GoldFrame;
 import com.obtuse.game.gameobjects.UI.InfoBackground;
 import com.obtuse.game.gameobjects.UI.info.GeneralInfoBackground;
 import com.obtuse.game.gameobjects.fight.Hero;
@@ -22,6 +24,8 @@ public class InfoStage extends GameStage {
     private Array<Label> itemLabels = new Array<Label>();
     private Array<Label> additionalLabels = new Array<Label>();
     private Array<Label> infoLabels = new Array<Label>();
+    private Array<Label> areaTitles = new Array<Label>();
+    private Array<GoldFrame> areaFrames = new Array<GoldFrame>();
     private InfoBackground infoBackground;
 
     public InfoStage(Stage stage) {
@@ -60,6 +64,43 @@ public class InfoStage extends GameStage {
             infoBackground.remove();
         infoLabels.clear();
         infoBackground = null;
+    }
+
+    // Gold frames + titles around the three grouped areas. The InventoryStage gives world rects;
+    // we draw the frames on THIS screen-space stage (the 1x1 pixel bleeds on the world camera) by
+    // projecting those rects to screen — the same projection the item-name labels use.
+    public void setupAreaTitles(com.obtuse.game.maingame.inventory.levels.stages.InventoryStage inv) {
+        clearAreaTitles();
+        addArea("Inventory", inv.gridArea());
+        addArea("Moves", inv.movesArea());
+        addArea("Items", inv.itemsArea());
+    }
+
+    private void addArea(String text, float[] r) {
+        float sx = r[0] / cameraWidth * w(1);
+        float sy = r[1] / cameraWidth * ratio * h(1);
+        float sw = r[2] / cameraWidth * w(1);
+        float sh = r[3] / cameraWidth * ratio * h(1);
+        GoldFrame frame = new GoldFrame(sx, sy, sw, sh);
+        areaFrames.add(frame);
+        add(frame);
+
+        Label label = new Label(text, Fonts.get("inventoryInfoTableTitle"));
+        label.setColor(Border.ROYAL_BRIGHTGOLD);
+        label.setWidth(w(0.3f));
+        label.setAlignment(Align.center);
+        label.setPosition(sx + sw / 2f - label.getWidth() / 2f, sy + sh + h(0.004f));
+        areaTitles.add(label);
+        add(label);
+    }
+
+    public void clearAreaTitles() {
+        for (Label label : areaTitles)
+            label.remove();
+        for (GoldFrame frame : areaFrames)
+            frame.remove();
+        areaTitles.clear();
+        areaFrames.clear();
     }
 
     public void setItemLabels(Hero hero) {

@@ -35,6 +35,7 @@ public class InventoryLevel extends Level {
     public void setup() {
         ((InventoryStage) stages.get(1)).setup(hero);
         ((InfoStage) stages.get(2)).setItemLabels(hero);
+        ((InfoStage) stages.get(2)).setupAreaTitles((InventoryStage) stages.get(1));
         setInventoryButtons();
         setHeroButtons();
         setArrowButtons();

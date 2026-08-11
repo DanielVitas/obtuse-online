@@ -17,6 +17,14 @@ public class Border extends Actor {
     public static final Color GOLD = new Color(0.68f, 0.62f, 0.46f, 1f);
     /** Silver-grey for tooltips and inventory slots. */
     public static final Color SILVER = new Color(0.70f, 0.73f, 0.78f, 1f);
+    // "Royal gold" box palette (the chosen UI style): dark charcoal panel, a gold frame with a
+    // darker inner ring, and bright gold corner brackets.
+    public static final Color ROYAL_CHARCOAL = new Color(0.098f, 0.102f, 0.133f, 1f); // #191a22
+    public static final Color ROYAL_GOLD = new Color(0.79f, 0.635f, 0.294f, 1f);      // #c9a24b
+    public static final Color ROYAL_DARKGOLD = new Color(0.427f, 0.333f, 0.122f, 1f); // #6d551f
+    public static final Color ROYAL_BRIGHTGOLD = new Color(0.906f, 0.784f, 0.455f, 1f);// #e7c874
+    /** Light text on the charcoal panel. */
+    public static final Color ROYAL_TEXT = new Color(0.925f, 0.874f, 0.749f, 1f);      // #ecdfbf
     private static TextureRegion pixel;
 
     private final float thickness;
@@ -61,6 +69,47 @@ public class Border extends Actor {
         batch.draw(p, x, y + h - t, w, t); // top
         batch.draw(p, x, y, t, h);         // left
         batch.draw(p, x + w - t, y, t, h); // right
+        batch.setColor(1f, 1f, 1f, 1f);
+    }
+
+    /**
+     * Draw the "royal gold" box: charcoal fill, gold frame + darker inner ring, and bright gold
+     * corner brackets (top-left + bottom-right). state 0 = default, 1 = hovered, 2 = selected
+     * (brighter frame). Restores opaque white.
+     */
+    public static void drawGoldBox(Batch batch, float x, float y, float w, float h, float t,
+                                   float parentAlpha, int state) {
+        fillRect(batch, x, y, w, h, ROYAL_CHARCOAL, parentAlpha);
+        Color frame = state >= 1 ? ROYAL_BRIGHTGOLD : ROYAL_GOLD;
+        drawRect(batch, x, y, w, h, t, frame, parentAlpha);
+        float g = t * 2f;
+        if (w > 2 * g && h > 2 * g)
+            drawRect(batch, x + g, y + g, w - 2 * g, h - 2 * g, Math.max(1f, t * 0.6f), ROYAL_DARKGOLD, parentAlpha);
+        float bl = Math.min(w, h) * 0.16f, bt = t * 1.4f;
+        // top-left bracket
+        fillRect(batch, x, y + h - bl, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
+        fillRect(batch, x, y + h - bt, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
+        // bottom-right bracket
+        fillRect(batch, x + w - bt, y, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
+        fillRect(batch, x + w - bl, y, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
+        batch.setColor(1f, 1f, 1f, 1f);
+    }
+
+    /**
+     * The royal-gold FRAME only (gold border + darker inner ring + bright corner brackets), no
+     * charcoal fill — for large panels on the world camera, where stretching the 1x1 white pixel
+     * across a big fill bleeds into neighbouring atlas art. Thin frame lines tint cleanly.
+     */
+    public static void drawGoldFrame(Batch batch, float x, float y, float w, float h, float t, float parentAlpha) {
+        drawRect(batch, x, y, w, h, t, ROYAL_GOLD, parentAlpha);
+        float g = t * 2f;
+        if (w > 2 * g && h > 2 * g)
+            drawRect(batch, x + g, y + g, w - 2 * g, h - 2 * g, Math.max(1f, t * 0.6f), ROYAL_DARKGOLD, parentAlpha);
+        float bl = Math.min(w, h) * 0.12f, bt = t * 1.4f;
+        fillRect(batch, x, y + h - bl, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
+        fillRect(batch, x, y + h - bt, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
+        fillRect(batch, x + w - bt, y, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
+        fillRect(batch, x + w - bl, y, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
         batch.setColor(1f, 1f, 1f, 1f);
     }
 
