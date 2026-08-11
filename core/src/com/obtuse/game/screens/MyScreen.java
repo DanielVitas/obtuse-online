@@ -126,6 +126,23 @@ public abstract class MyScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
+    // One SpriteBatch, created lazily INSIDE render() — i.e. during this screen's live GL frame —
+    // and used to draw EVERY stage, instead of each Stage's own internal batch. On real mobile GL
+    // the per-stage SpriteBatches (created during Obtuse.create()/scene setup, outside any render
+    // frame) drew nothing at all — proven by probes: a batch created inside render renders fine
+    // through the same camera, a stage's own batch does not. Desktop/Android and the desktop-Chrome
+    // emulation tolerated the stage batches, which is why this only ever bit the real phone.
+    private SpriteBatch sharedBatch;
+    private static final Comparator<Actor> DEPTH = new Comparator<Actor>() {
+        @Override
+        public int compare(Actor o1, Actor o2) {
+            if (o1 instanceof DepthObject && o2 instanceof DepthObject)
+                return (int) -((((DepthObject) o1).getZ() - ((DepthObject) o2).getZ()) * pow(16, 1));
+            else
+                return 0;
+        }
+    };
+
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -134,86 +151,25 @@ public abstract class MyScreen implements Screen {
             try {
                 stage.act();
             } catch (NullPointerException e) {e.printStackTrace();}
-        for (Stage stage : stages)
+        if (sharedBatch == null) sharedBatch = new SpriteBatch();
+        for (int i = 0; i < stages.size; i++)
             try {
-                stage.getActors().sort(new Comparator<Actor>() {
-                    @Override
-                    public int compare(Actor o1, Actor o2) {
-                        if (o1 instanceof DepthObject && o2 instanceof DepthObject)
-                            return (int) -((((DepthObject) o1).getZ() - ((DepthObject) o2).getZ()) * pow(16,1));
-                        else
-                            return 0;
-                    }
-                });
-                stage.draw();
-            } catch (IndexOutOfBoundsException e) {e.printStackTrace();}
-            catch (IllegalStateException e) {e.printStackTrace();}
-            catch (NullPointerException e) {e.printStackTrace();}
-            // On the web (TeaVM) a SpriteBatch draw of a null/undefined TextureRegion throws
-            // a JS TypeError instead of being tolerated as it is on desktop/Android, and that
-            // error is not a NullPointerException so the catches above miss it. Left unguarded
-            // it aborts the whole frame and blacks out the entire screen (this is what made the
-            // inventory render as a black screen). Isolate a bad draw to its own stage instead.
+                stage(i).getActors().sort(DEPTH);
+                OrthographicCamera cam = camera(i);
+                cam.update();
+                sharedBatch.setProjectionMatrix(cam.combined);
+                sharedBatch.setColor(1f, 1f, 1f, 1f);
+                sharedBatch.begin();
+                stage(i).getRoot().draw(sharedBatch, 1);
+                sharedBatch.end();
+            }
+            // On the web (TeaVM) a SpriteBatch draw of a null/undefined TextureRegion throws a JS
+            // TypeError (not an NPE), so catch everything and isolate a bad draw to its own stage
+            // rather than letting it blank the whole frame.
             catch (Throwable e) {e.printStackTrace();}
         spriteDump();
-        diagShapesTest();
         loop();
     }
-
-    // TEMP DIAGNOSTIC (v7): draw a solid magenta square through the WORLD camera (0), where a
-    // slot sits, and a solid cyan square through the SCREEN camera (2). No textures involved.
-    // If magenta is missing but cyan shows on the device, the world camera renders NO geometry
-    // at all (projection/viewport problem below scene2d); if both show, world rendering is fine
-    // and the fault is sprite-specific; if neither, the ShapeRenderer path itself is the issue.
-    private static ShapeRenderer diagShapes;
-    private void diagShapesTest() {
-        if (!name.equals("FightScreen") && !name.equals("InventoryScreen")) return;
-        try {
-            if (diagShapes == null) diagShapes = new ShapeRenderer();
-            diagShapes.setProjectionMatrix(camera(0).combined);
-            diagShapes.begin(ShapeRenderer.ShapeType.Filled);
-            diagShapes.setColor(1f, 0f, 1f, 1f);
-            diagShapes.rect(3f, 8f, 3f, 3f); // world coords, inside the 10x18.8 view
-            diagShapes.end();
-            diagShapes.setProjectionMatrix(camera(stages.size - 1).combined);
-            diagShapes.begin(ShapeRenderer.ShapeType.Filled);
-            diagShapes.setColor(0f, 1f, 1f, 1f);
-            diagShapes.rect(Obtuse.width * 0.05f, Obtuse.height * 0.4f, Obtuse.width * 0.2f, Obtuse.width * 0.2f);
-            diagShapes.end();
-            // Textured SpriteBatch probe: a yellow-tinted atlas region through the WORLD camera (0)
-            // at world (6.5,12), and through the SCREEN camera at bottom-right. If the world one is
-            // missing but the screen one shows, textured SpriteBatch fails specifically through the
-            // world camera on this GPU (ShapeRenderer through the same camera already works).
-            if (diagBatch == null) diagBatch = new SpriteBatch();
-            TextureRegion reg = Obtuse.textureAtlas.getRegions().first();
-            // Isolate batch vs camera with 2x2. YELLOW = fresh batch + camera(0) (reference).
-            diagBatch.setProjectionMatrix(camera(0).combined);
-            diagBatch.begin();
-            diagBatch.setColor(1f, 1f, 0f, 1f);
-            diagBatch.draw(reg, 6.5f, 12f, 2f, 2f);
-            diagBatch.end();
-            diagBatch.setColor(1f, 1f, 1f, 1f);
-            if (name.equals("FightScreen")) {
-                // GREEN = stage(1)'s OWN batch + camera(0) (the KNOWN-GOOD camera). Missing => the
-                // stage's batch object is broken.
-                com.badlogic.gdx.graphics.g2d.Batch sb = stage(1).getBatch();
-                sb.setProjectionMatrix(camera(0).combined);
-                sb.begin();
-                sb.setColor(0f, 1f, 0f, 1f);
-                sb.draw(reg, 2f, 15f, 2f, 2f);
-                sb.setColor(1f, 1f, 1f, 1f);
-                sb.end();
-                // BLUE = fresh batch + camera(1). Missing => camera(1) is broken.
-                diagBatch.setProjectionMatrix(camera(1).combined);
-                diagBatch.begin();
-                diagBatch.setColor(0f, 0.6f, 1f, 1f);
-                diagBatch.draw(reg, 6.5f, 15f, 2f, 2f);
-                diagBatch.end();
-                diagBatch.setColor(1f, 1f, 1f, 1f);
-            }
-        } catch (Throwable e) {e.printStackTrace();}
-    }
-    private static SpriteBatch diagBatch;
 
     // TEMP DIAGNOSTIC (v4): for the first few frames after a fight/inventory screen is shown,
     // log every actor's class, position, size, visibility and alpha. Piped to the on-screen
