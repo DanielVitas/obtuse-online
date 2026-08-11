@@ -55,12 +55,15 @@ public class TeaVMBuilder {
             // Assets live under android/assets in this project's layout.
             .addAssets(new AssetFileHandle("../android/assets"))
 
-            .setOptimizationLevel(debug ? TeaVMOptimizationLevel.SIMPLE : TeaVMOptimizationLevel.ADVANCED)
+            // SIMPLE optimization for BOTH debug and release. TeaVM 1.5.6's ADVANCED level
+            // miscompiles this game: it emits references to methods it then dead-code-strips
+            // (e.g. "cbgssa_TemporalAction__init_1 is not defined", "CfX is not defined"), so
+            // the page never boots — and it's not reproducible across machines (my local
+            // ADVANCED build ran; the identical CI build did not). SIMPLE is what the debug
+            // build has always used and it is reliable everywhere. Slightly larger app.js.
+            .setOptimizationLevel(TeaVMOptimizationLevel.SIMPLE)
             .setMainClass(TeaVMLauncher.class.getName())
-            // Obfuscation is left OFF even for release: with it on, TeaVM 1.5.6's ADVANCED
-            // output references an undefined top-level symbol (e.g. "CfX is not defined") and
-            // the page never boots. Unobfuscated release still optimizes and runs; the only
-            // cost is a larger, readable app.js (dwarfed by the 76 MB of assets anyway).
+            // Obfuscation off too: TeaVM 1.5.6's obfuscator has the same undefined-symbol bug.
             .setObfuscated(false)
             .setDebugInformationGenerated(debug)
             .setSourceMapsFileGenerated(debug)

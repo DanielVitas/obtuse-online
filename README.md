@@ -4,7 +4,7 @@ A 2D libGDX game (2018), modernised and now playable in the browser, on Android,
 
 ## Play in the browser
 
-🎮 **https://USERNAME.github.io/REPO/** ← update this once GitHub Pages is live.
+🎮 **https://DanielVitas.github.io/obtuse-online/**
 
 Every push to `main` rebuilds the web version and publishes it automatically via GitHub
 Actions (`.github/workflows/deploy.yml`). The build needs only a JDK — `WEB_ONLY=1` leaves
