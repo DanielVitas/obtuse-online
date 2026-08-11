@@ -41,6 +41,21 @@ public class AnimationDrawable extends BaseDrawable {
                 stateTime.add(-delta);
     }
 
+    // TEMP DIAGNOSTIC (v5): report the current frame's region/texture/filter so we can see, on a
+    // real device, whether a sprite that "draws" is actually pointing at a valid, complete texture.
+    public String diag() {
+        try {
+            TextureRegion tr = (TextureRegion) animation.getKeyFrame(0f);
+            if (tr == null) return "regNULL";
+            com.badlogic.gdx.graphics.Texture t = tr.getTexture();
+            return "reg" + tr.getRegionWidth() + "x" + tr.getRegionHeight()
+                    + " tex" + (t == null ? "NULL" : (t.getWidth() + "x" + t.getHeight()))
+                    + " min" + (t == null ? "?" : t.getMinFilter().toString());
+        } catch (Throwable e) {
+            return "regERR:" + e.getClass().getSimpleName();
+        }
+    }
+
     @Override
     public void draw(Batch batch, float x, float y, float width, float height) {
         float w, h;
