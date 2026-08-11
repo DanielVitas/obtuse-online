@@ -39,6 +39,8 @@ public class FightGame extends GameGame {
     public Holder selectedHolder;
     private boolean wait = false;
     private Fight fight;
+    private final Array<FightObject> summonOrder = new Array<FightObject>();
+    private boolean needSummon = false;
 
     public FightGame(MyScreen screen) {
         super(screen);
@@ -46,37 +48,48 @@ public class FightGame extends GameGame {
 
     public void setup(Fight fight){
         this.fight = fight;
+        turn = new Turn() {
+            @Override
+            public void run() {
+
+            }
+        };
         arenas.clear();
         setLevel(new FightLevel(screen, this));
         level.create();
         //level.stage(2).addActor(new BackgroundBackground(w(0.4f), h(0.075f), w(0.2f), h(0.15f)));
         fight.setup(this);
-        // Everyone on the field, ordered by who acts first this turn (fastest first). Hide them all,
-        // then summon them ONE AT A TIME on the combat thread with their entrance animation. Making
-        // this the fight's `turn` also gates the turn loop — runAll() only starts conduct() once
-        // turn.isAlive() is false — so combat begins after the summons finish.
-        final Array<FightObject> order = new Array<FightObject>();
+        // Hide everyone (and their health bars) and record them in first-turn order (fastest first).
+        // The actual sequential summon runs at the START of the combat turn (runAll), which has the
+        // proper coroutine context so Turn.sleep() actually pauses between entrances.
+        summonOrder.clear();
         for (Array<Holder> holderArray : new Array[]{arenas.get(0).heroHolders, arenas.get(0).enemyHolders, arenas.get(0).summonHolders})
             for (final Holder holder : holderArray)
                 if (holder.fightObject != null) {
                     holder.fightObject.setVisible(false);
-                    order.add(holder.fightObject);
+                    if (holder.healthBar != null)
+                        holder.healthBar.setVisible(false);
+                    summonOrder.add(holder.fightObject);
                 }
-        order.sort(new Comparator<FightObject>() {
+        summonOrder.sort(new Comparator<FightObject>() {
             @Override
             public int compare(FightObject a, FightObject b) {
-                return b.speed - a.speed;
+                return b.speed - a.speed;   // fastest first = first-turn order
             }
         });
-        turn = new Turn() {
-            @Override
-            public void run() {
-                for (FightObject fightObject : order) {
-                    fightObject.setVisible(true);
-                    Turn.sleep(fightObject.summon());
-                }
-            }
-        };
+        needSummon = true;
+    }
+
+    // Reveal each fighter one at a time in first-turn order: show it, start its health-bar fill, play
+    // its entrance animation, and wait a beat before the next (so even fighters with no summon
+    // animation clearly enter one by one — the health bar filling is then their entrance).
+    private void summonInOrder() {
+        for (FightObject fightObject : summonOrder) {
+            fightObject.setVisible(true);
+            if (fightObject.holder != null && fightObject.holder.healthBar != null)
+                fightObject.holder.healthBar.setVisible(true);
+            Turn.sleep(Math.max(fightObject.summon(), 0.8f));
+        }
     }
 
     private void win() {
@@ -255,6 +268,10 @@ public class FightGame extends GameGame {
             turn = new Turn() {
                 @Override
                 public void run() {
+                    if (needSummon) {
+                        summonInOrder();
+                        needSummon = false;
+                    }
                     Array<Arena> toRemove = new Array<Arena>();
                     for (Arena arena : arenas)
                         if (arena.finished)

@@ -71,8 +71,7 @@ public class InfoStage extends GameStage {
 
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
-        infoBackground.create(w(abilityPosition[8]), h(abilityPosition[9]), w(0.3f), h(0.225f));
-        infoBackground.positionAtPointer(stage);
+        infoBackground.create(0, 0, w(0.42f), h(0.1f)); // width only; buildTooltip sizes + positions
         add(infoBackground);
     }
 
@@ -108,18 +107,26 @@ public class InfoStage extends GameStage {
         createGeneralBackground();
         FightObject fo = holder.fightObject;
         Label name = new Label(fo.getName(), Fonts.get("fightInfoTableTitle"));
-        Label hp = new Label((fo.hp - fo.damageTaken) + " /" + fo.hp + " HP", Fonts.get("fightInfoTableContent"));
-        StringBuilder body = new StringBuilder(fo.speed + " SPD");
+        // HP and SPD together on the line below the name.
+        Label hpSpd = new Label((fo.hp - fo.damageTaken) + " /" + fo.hp + " HP    " + fo.speed + " SPD",
+                Fonts.get("fightInfoTableContent"));
+        StringBuilder body = new StringBuilder();
         if (fo.alive())
-            for (Status status : fo.getStatuses())
-                body.append("\n").append(status.getName());
-        if (holder.burning != 0)
-            body.append("\nBurning: ").append(holder.burning);
-        Label description = new Label(body.toString(), Fonts.get("fightInfoTableContent"));
-        infoBackground.layoutTooltip(name, hp, description);
+            for (Status status : fo.getStatuses()) {
+                if (body.length() > 0) body.append("\n");
+                body.append(status.getName());
+            }
+        if (holder.burning != 0) {
+            if (body.length() > 0) body.append("\n");
+            body.append("Burning: ").append(holder.burning);
+        }
+        Label description = body.length() > 0
+                ? new Label(body.toString(), Fonts.get("fightInfoTableContent")) : null;
+        infoBackground.buildTooltip(stage, name, null, hpSpd, description);
         addInfoLabel(name);
-        addInfoLabel(hp);
-        addInfoLabel(description);
+        addInfoLabel(hpSpd);
+        if (description != null)
+            addInfoLabel(description);
     }
 
     public void setup(AbilityInstance ability) {
@@ -129,7 +136,7 @@ public class InfoStage extends GameStage {
             Label pp = new Label((ability.pp - ability.ppUsed) + " /" + ability.pp + " PP",
                     Fonts.get("fightInfoTableContent"));
             Label description = new Label(ability.getDescription(), Fonts.get("fightInfoTableDescription"));
-            infoBackground.layoutTooltip(name, pp, description);
+            infoBackground.buildTooltip(stage, name, pp, null, description);
             addInfoLabel(name);
             addInfoLabel(pp);
             addInfoLabel(description);

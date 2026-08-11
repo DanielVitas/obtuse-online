@@ -31,20 +31,18 @@ public class DefaultInfoStage extends GameStage {
     // description printed at the bottom of the screen.
     public void setup(Item item) {
         infoBackground = new GeneralInfoBackground();
-        infoBackground.create(w(0.55f), h(0.01f), w(0.445f), h(0.35f));
-        infoBackground.positionAtPointer(stage);
+        infoBackground.create(0, 0, w(0.42f), h(0.1f));
         add(infoBackground);
 
         Label name = new Label(item.getName(), Fonts.get("inventoryInfoTableTitle"));
-        Label stat = null;
+        Label pp = null;
         if (item instanceof AbilityOrb)
-            stat = new Label(Integer.toString(((AbilityOrb) item).ability.pp) + " PP",
-                    Fonts.get("inventoryInfoTableContent"));
+            pp = new Label(((AbilityOrb) item).ability.pp + " PP", Fonts.get("inventoryInfoTableContent"));
         Label description = new Label(item.getDescription(), Fonts.get("inventoryInfoTableDescription"));
-        infoBackground.layoutTooltip(name, stat, description);
+        infoBackground.buildTooltip(stage, name, pp, null, description);
         addLabel(name);
-        if (stat != null)
-            addLabel(stat);
+        if (pp != null)
+            addLabel(pp);
         addLabel(description);
     }
 

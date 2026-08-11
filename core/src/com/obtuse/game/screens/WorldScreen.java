@@ -46,6 +46,10 @@ public class WorldScreen extends MyScreen {
     public void show() {
         super.show();
         GameWorld.pause = false;
+        // Put the camera on the player before the first frame is drawn (refreshLayout() in
+        // super.show() recentered it), else there's a one-frame flash at the recentered spot.
+        if (gameGame != null && gameGame.level instanceof com.obtuse.game.maingame.world.WorldLevel)
+            ((com.obtuse.game.maingame.world.WorldLevel) gameGame.level).centerCamera();
     }
 
     @Override

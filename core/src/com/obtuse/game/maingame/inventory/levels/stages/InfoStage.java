@@ -30,23 +30,21 @@ public class InfoStage extends GameStage {
 
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
-        infoBackground.create(w(0.55f), h(0.01f), w(0.445f), h(0.35f));
-        infoBackground.positionAtPointer(stage);
+        infoBackground.create(0, 0, w(0.42f), h(0.1f)); // width only; buildTooltip sizes + positions
         add(infoBackground);
     }
 
     public void setup(Item item) {
         createGeneralBackground();
         Label name = new Label(item.getName(), Fonts.get("inventoryInfoTableTitle"));
-        Label stat = null;
+        Label pp = null;
         if (item instanceof AbilityOrb)
-            stat = new Label(Integer.toString(((AbilityOrb) item).ability.pp) + " PP",
-                    Fonts.get("inventoryInfoTableContent"));
+            pp = new Label(((AbilityOrb) item).ability.pp + " PP", Fonts.get("inventoryInfoTableContent"));
         Label description = new Label(item.getDescription(), Fonts.get("inventoryInfoTableDescription"));
-        infoBackground.layoutTooltip(name, stat, description);
+        infoBackground.buildTooltip(stage, name, pp, null, description);
         addInfoLabel(name);
-        if (stat != null)
-            addInfoLabel(stat);
+        if (pp != null)
+            addInfoLabel(pp);
         addInfoLabel(description);
     }
 
@@ -101,11 +99,11 @@ public class InfoStage extends GameStage {
 
     private void createItemLabel(Item item) {
         Label name = new Label(item.getName(), Fonts.get("inventoryName"));
-        name.setWidth(w(0.1f));
+        name.setWidth(w(0.11f)); // ~ the grid cell width, so short names fit on one line
         name.setWrap(true);
         name.setAlignment(Align.top);
         name.setPosition(item.getX() / cameraWidth * w(1) + item.getWidth() / 2 / cameraWidth * w(1) - name.getWidth() / 2,
-                item.getY() / cameraWidth * ratio * h(1) - name.getHeight() - h(0.01f));
+                item.getY() / cameraWidth * ratio * h(1) - name.getHeight() - h(0.005f));
         itemLabels.add(name);
         add(name);
     }
