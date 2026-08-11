@@ -33,61 +33,65 @@ public class Fonts {
         scale = 1.3f * Math.max(1f, generatedHeight / designHeight);
         try {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/000webfont.ttf"));
+            // The royal-gold "box" UI (tooltips, move/inventory/loot boxes) uses the clean monospace
+            // face from the style preview (JetBrains Mono); the pixel display font stays for the
+            // world dialog and floating damage numbers.
+            FreeTypeFontGenerator mono = new FreeTypeFontGenerator(Gdx.files.internal("fonts/JetBrainsMono-Regular.ttf"));
             FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
-            parameter.size = (int) (15 * scale);
+            parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
-            fonts.put("fightInfoTable", generator.generateFont(parameter));
+            fonts.put("fightInfoTable", mono.generateFont(parameter));
 
-            parameter.size = (int) (15 * scale);
+            parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.RED;
-            fonts.put("fightInfoTableTitle", generator.generateFont(parameter));
+            fonts.put("fightInfoTableTitle", mono.generateFont(parameter));
 
-            parameter.size = (int) (15 * scale);
+            parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
-            fonts.put("fightInfoTableContent", generator.generateFont(parameter));
+            fonts.put("fightInfoTableContent", mono.generateFont(parameter));
 
             parameter.size = (int) (11 * scale);
             parameter.borderWidth = 1f;
             parameter.color = Color.WHITE;
-            fonts.put("fightInfoTableDescription", generator.generateFont(parameter));
+            fonts.put("fightInfoTableDescription", mono.generateFont(parameter));
 
-            parameter.size = (int) (15 * scale);
+            parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.RED;
-            fonts.put("inventoryInfoTableTitle", generator.generateFont(parameter));
+            fonts.put("inventoryInfoTableTitle", mono.generateFont(parameter));
 
-            parameter.size = (int) (15 * scale);
+            parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
-            fonts.put("inventoryInfoTableContent", generator.generateFont(parameter));
+            fonts.put("inventoryInfoTableContent", mono.generateFont(parameter));
 
-            parameter.size = (int) (15 * scale);
+            parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1f;
             parameter.color = Color.WHITE;
-            fonts.put("inventoryInfoTableDescription", generator.generateFont(parameter));
+            fonts.put("inventoryInfoTableDescription", mono.generateFont(parameter));
 
-            parameter.size = (int) (20 * scale);
+            parameter.size = (int) (18 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
-            fonts.put("lootDescription", generator.generateFont(parameter));
+            fonts.put("lootDescription", mono.generateFont(parameter));
 
-            parameter.size = (int) (20 * scale);
+            parameter.size = (int) (16 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
-            fonts.put("pp", generator.generateFont(parameter));
+            fonts.put("pp", mono.generateFont(parameter));
 
             parameter.size = (int) (20 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
             fonts.put("damage", generator.generateFont(parameter));
 
-            parameter.size = (int) (10 * scale);
+            parameter.size = (int) (9 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
-            fonts.put("inventoryName", generator.generateFont(parameter));
+            fonts.put("inventoryName", mono.generateFont(parameter));
 
             parameter.size = (int) (15 * scale);
             parameter.borderWidth = 1;
@@ -99,6 +103,7 @@ public class Fonts {
             parameter.color = Color.WHITE;
             fonts.put("worldDialog", generator.generateFont(parameter));
 
+            mono.dispose();
             generator.dispose();
         } catch (RuntimeException e) {e.printStackTrace();}
     }

@@ -56,22 +56,22 @@ public class InfoStage extends GameStage {
     }
 
     public void choice(FightObject caster) {
-        // Name inset from the box border and pushed to the TOP, leaving room below-right for the PP.
-        float mx = defaultAbilityWidth * 0.09f, my = defaultAbilityHeight * 0.1f;
+        // Name centred (roughly the middle of the box); the PP sits up in the top-left corner.
+        float mx = defaultAbilityWidth * 0.09f;
         for (int i = 0; i < caster.abilities.size; i++) {
             Label name = new Label(caster.abilities.get(i).getName(), Fonts.get("fightInfoTable"));
             name.setWidth(defaultAbilityWidth - 2 * mx);
-            name.setHeight(defaultAbilityHeight - 2 * my);
+            name.setHeight(defaultAbilityHeight);
             name.setWrap(true);
-            name.setAlignment(Align.top);
-            name.setPosition(w(abilityPosition[2 * i]) + mx, h(abilityPosition[2 * i + 1]) + my);
+            name.setAlignment(Align.center);
+            name.setPosition(w(abilityPosition[2 * i]) + mx, h(abilityPosition[2 * i + 1]));
             addAbilitySelectLabel(name);
         }
     }
 
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
-        infoBackground.create(0, 0, w(0.42f), h(0.1f)); // width only; buildTooltip sizes + positions
+        infoBackground.create(0, 0, w(0.27f), h(0.1f)); // narrower base so long text grows taller, not wider
         add(infoBackground);
     }
 

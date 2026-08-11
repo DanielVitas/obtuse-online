@@ -67,12 +67,12 @@ public abstract class InfoBackground extends BasicObject {
         }
 
         // Grow the box just enough for the title line (name + inline stat) if needed.
-        float padGuess = getWidth() * 0.06f;
+        float padGuess = getWidth() * 0.08f;
         float titleNeeded = padGuess * 2 + name.getWidth()
                 + (inlineStat != null ? padGuess * 2 + inlineStat.getWidth() : 0);
         float w = Math.max(getWidth(), titleNeeded);
         setWidth(w);
-        float pad = w * 0.06f;
+        float pad = w * 0.08f;
         float innerW = w - 2 * pad;
         float gap = pad * 0.5f;
 
@@ -129,8 +129,9 @@ public abstract class InfoBackground extends BasicObject {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         // Royal-gold box (charcoal panel, gold frame + inner ring, bright corner brackets). Do NOT
-        // call super.draw() — we replace the sprite art.
-        float t = Math.min(getWidth(), getHeight()) * 0.03f;
+        // call super.draw() — we replace the sprite art. Thickness is a CONSTANT screen fraction so
+        // the border reads the same on a small stat tooltip and a tall description one.
+        float t = Math.max(2f, Obtuse.height * 0.006f);
         Border.drawGoldBox(batch, getX(), getY(), getWidth(), getHeight(), t, parentAlpha, 0);
     }
 }

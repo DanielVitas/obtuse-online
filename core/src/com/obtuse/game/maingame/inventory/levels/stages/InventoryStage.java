@@ -1,7 +1,6 @@
 package com.obtuse.game.maingame.inventory.levels.stages;
 
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.utils.Array;
 import com.obtuse.game.Obtuse;
 import com.obtuse.game.gameobjects.UI.arrows.DownArrow;
@@ -27,16 +26,6 @@ public class InventoryStage extends GameStage {
     private static final float[] equipmentX = {6.25f, 7.25f, 8.25f};
     private Array<Item> created = new Array<Item>();
     public Array<SimpleArrow> arrows = new Array<SimpleArrow>();
-
-    // The whole party is shown side by side; the selected hero is bigger and stands forward (a lower
-    // Y draws on top — getZ() is Y). Selecting another makes it walk forward while the old one steps
-    // back "in line". Heroes are drawn to a common target height (so the selected one always reads as
-    // bigger regardless of its intrinsic size), keeping each hero's own aspect ratio.
-    public Array<Hero> heroes = new Array<Hero>();
-    private final Array<Float> baseW = new Array<Float>();
-    private final Array<Float> baseH = new Array<Float>();
-    public int selectedIndex = 0;
-    private static final float SELECTED_H = 2.1f, LINE_H = 1.45f, FORWARD_STEP = 0.4f;
 
     public InventoryStage(Stage stage) {
         super(stage);
@@ -85,20 +74,24 @@ public class InventoryStage extends GameStage {
     // (bigger than a slot box) so nothing overlaps and the hero stays on screen.
     private float equipmentRowY() {
         if (Obtuse.ratio < 1f) return 4.5f / Obtuse.ratio;
-        return visibleHeight() * 0.08f;
+        // High enough off the bottom that the (now taller) Items box stays fully on screen.
+        return Math.max(1.15f, visibleHeight() * 0.14f);
     }
 
-    private float rightGap() {
-        // Roomier than a slot pitch so the hero (drawn big) plus its HP/SPD stat line both fit in the
-        // gap above the Moves box without colliding with the "Moves" title.
-        return Math.max(2.4f, visibleHeight() * 0.26f);
+    // A generous vertical gap between the Moves box and the Items box below it.
+    private float movesItemsGap() {
+        return Math.max(2.9f, visibleHeight() * 0.32f);
     }
 
-    // The hero's HP/SPD line, set in the gap between the hero and the Moves box (clear of both the
-    // hero's feet and the "Moves" title just above the box).
+    // Room above the Moves box for the hero plus its HP/SPD stat line.
+    private float heroGap() {
+        return Math.max(1.9f, visibleHeight() * 0.22f);
+    }
+
+    // The hero's HP/SPD line, set just above the Moves box (low, in the gap under the hero).
     public float statsRowY() {
         float[] moves = movesArea();
-        return moves[1] + moves[3] + 0.6f;
+        return moves[1] + moves[3] + 0.3f;
     }
 
     public float heroCenterX() {
@@ -107,12 +100,12 @@ public class InventoryStage extends GameStage {
 
     private float abilityRowY() {
         if (Obtuse.ratio < 1f) return 6f / Obtuse.ratio;
-        return equipmentRowY() + rightGap();
+        return equipmentRowY() + movesItemsGap();
     }
 
     private float heroRowY() {
         if (Obtuse.ratio < 1f) return 7.5f / Obtuse.ratio;
-        return abilityRowY() + rightGap();
+        return abilityRowY() + heroGap();
     }
 
     // World-unit rects [x, y, w, h] of the three grouped areas: the inventory grid, the ability-orb
@@ -141,8 +134,10 @@ public class InventoryStage extends GameStage {
         arrows.clear();
     }
 
-    // Arrows are gone: heroes are picked by tapping them directly (see placeHeroes / heroSlotRect).
+    // Left/right arrows flank the hero to cycle through the party.
     public void makeArrows() {
+        addArrow(new LeftArrow(), 5.5f, heroRowY(), 0.5f, 1f);
+        addArrow(new RightArrow(), 9f, heroRowY(), 0.5f, 1f);
     }
 
     private void addArrow(SimpleArrow arrow, float x, float y, float width, float height) {
@@ -151,69 +146,10 @@ public class InventoryStage extends GameStage {
         add(arrow);
     }
 
-    // Place the whole party in a row and set the selected one big + forward, everyone else small + in
-    // line. Actors are added once (and their intrinsic sizes captured) so re-layout just repositions.
-    public void placeHeroes(Array<Hero> party, int selected) {
-        if (heroes.size == 0)
-            for (Hero hero : party) {
-                heroes.add(hero);
-                baseW.add(hero.getWidth());
-                baseH.add(hero.getHeight());
-                add(hero);
-            }
-        selectedIndex = selected;
-        for (int i = 0; i < heroes.size; i++)
-            applyHeroState(i, i == selected, false);
-    }
-
-    // Walk the newly-selected hero forward and the previously-selected one back into line.
-    public void animateSelect(int selected) {
-        selectedIndex = selected;
-        for (int i = 0; i < heroes.size; i++)
-            applyHeroState(i, i == selected, true);
-    }
-
-    private void applyHeroState(int i, boolean selected, boolean animate) {
-        Hero hero = heroes.get(i);
-        float hgt = selected ? SELECTED_H : LINE_H;
-        float wdt = hgt * (baseW.get(i) / baseH.get(i)); // keep the hero's own aspect
-        float x = heroCenterXFor(i) - wdt / 2f;
-        float y = heroRowY() - (selected ? FORWARD_STEP : 0f); // forward = lower (drawn on top)
-        hero.clearActions();
-        if (animate)
-            hero.addAction(Actions.parallel(Actions.sizeTo(wdt, hgt, 0.22f), Actions.moveTo(x, y, 0.22f)));
-        else {
-            hero.setSize(wdt, hgt);
-            hero.setPosition(x, y);
-        }
-        hero.play("default", 0);
-    }
-
-    private float heroPitch() {
-        int n = heroes.size;
-        return n > 1 ? Math.min(2.8f, 6f / n) : 0f;
-    }
-
-    private float heroCenterXFor(int i) {
-        int n = heroes.size;
-        return 7.5f + (i - (n - 1) / 2f) * heroPitch();
-    }
-
-    // World rect [x, y, w, h] of hero i's tap area (a column a little wider/taller than the sprite).
-    public float[] heroSlotRect(int i) {
-        float p = heroPitch();
-        float cw = p > 0 ? p * 0.92f : 3f;
-        float ch = SELECTED_H + 0.6f;
-        return new float[]{heroCenterXFor(i) - cw / 2f, heroRowY() - FORWARD_STEP, cw, ch};
-    }
-
-    // Anchor for the selected hero's name tag: centred over its head.
-    public float selectedCenterXWorld() {
-        return heroes.size == 0 ? 7.5f : heroCenterXFor(selectedIndex);
-    }
-
-    public float selectedTopYWorld() {
-        return heroRowY() - FORWARD_STEP + SELECTED_H;
+    public void makeHero(Hero hero) {
+        hero.create(7.5f - hero.getWidth() / 2, heroRowY());
+        hero.play("summon");
+        add(hero);
     }
 
     public void setupInventory() {

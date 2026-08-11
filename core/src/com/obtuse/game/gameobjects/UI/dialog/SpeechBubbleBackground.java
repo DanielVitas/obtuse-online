@@ -36,11 +36,13 @@ public class SpeechBubbleBackground extends Actor {
         if (speaker == null || speaker.body == null || speaker.body.body == null)
             return;
         Vector2 wc = speaker.body.body.getWorldCenter();
+        // Aim the tail tip just above the speaker's HEAD (top of the sprite), not their centre.
+        float headWorldY = wc.y + (speaker.getHeight() > 0 ? speaker.getHeight() * 0.5f : 0.5f);
         float fx = (wc.x - (cam.position.x - cam.viewportWidth / 2f)) / cam.viewportWidth;
-        float fy = (wc.y - (cam.position.y - cam.viewportHeight / 2f)) / cam.viewportHeight;
+        float fy = (headWorldY - (cam.position.y - cam.viewportHeight / 2f)) / cam.viewportHeight;
         float bw = getWidth(), bh = getHeight();
-        float bx = fx * Obtuse.width - bw / 2f;                 // centred above the speaker
-        float by = fy * Obtuse.height + Obtuse.height * 0.03f;  // tail tip just above them
+        float bx = fx * Obtuse.width - bw / 2f;                 // centred exactly above the speaker
+        float by = fy * Obtuse.height + Obtuse.height * 0.02f;  // tail tip just above their head
         bx = Math.max(Obtuse.width * 0.01f, Math.min(bx, Obtuse.width - bw - Obtuse.width * 0.01f));
         by = Math.min(by, Obtuse.height - bh - Obtuse.height * 0.01f);
         setPosition(bx, by);
@@ -53,15 +55,25 @@ public class SpeechBubbleBackground extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         float x = getX(), y = getY(), w = getWidth(), h = getHeight();
-        float t = Math.max(2f, Math.min(w, h) * 0.025f);
+        float t = Math.max(2f, Obtuse.height * 0.006f); // constant thickness, like the tooltips
         float tailH = h * 0.22f, boxY = y + tailH, boxH = h - tailH;
-        // Charcoal tail tapering down to a point above the speaker.
         float cx = x + w / 2f, halfBase = w * 0.055f;
-        int steps = 8;
+        int steps = 12;
+        // Charcoal fill of the tail (a triangle tapering down to a point above the speaker).
         for (int i = 0; i < steps; i++) {
             float f = i / (float) steps;
             float hw = halfBase * (1 - f);
-            Border.fillRect(batch, cx - hw, boxY - tailH * f - tailH / steps, hw * 2, tailH / steps + t, Border.ROYAL_CHARCOAL, parentAlpha);
+            float segY = boxY - tailH * (i + 1) / steps;
+            Border.fillRect(batch, cx - hw, segY, hw * 2, tailH / steps + t, Border.ROYAL_CHARCOAL, parentAlpha);
+        }
+        // Gold outline down both slanted edges of the tail so it is framed like the box.
+        for (int i = 0; i < steps; i++) {
+            float f = i / (float) steps;
+            float hw = halfBase * (1 - f);
+            float segY = boxY - tailH * (i + 1) / steps;
+            float segH = tailH / steps + t;
+            Border.fillRect(batch, cx - hw - t, segY, t, segH, Border.ROYAL_GOLD, parentAlpha); // left edge
+            Border.fillRect(batch, cx + hw, segY, t, segH, Border.ROYAL_GOLD, parentAlpha);     // right edge
         }
         Border.drawGoldBox(batch, x, boxY, w, boxH, t, parentAlpha, 0);
     }

@@ -34,7 +34,7 @@ public class InfoStage extends GameStage {
 
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
-        infoBackground.create(0, 0, w(0.42f), h(0.1f)); // width only; buildTooltip sizes + positions
+        infoBackground.create(0, 0, w(0.27f), h(0.1f)); // narrower base so long text grows taller, not wider
         add(infoBackground);
     }
 
@@ -122,15 +122,16 @@ public class InfoStage extends GameStage {
         additionalLabels.clear();
     }
 
-    // Name tag over the SELECTED hero's head (only the selected hero shows one).
-    public void addHeroName(Hero hero, InventoryStage inv) {
+    // Name tag centred above the hero's head.
+    public void addHeroName(Hero hero) {
         Label name = new Label(hero.getName(), Fonts.get("fightInfoTable"));
         name.setColor(Border.ROYAL_TEXT);
         name.setWidth(w(0.25f));
         name.setWrap(true);
         name.setAlignment(Align.center);
-        name.setPosition(inv.selectedCenterXWorld() / cameraWidth * w(1) - name.getWidth() / 2,
-                inv.selectedTopYWorld() / cameraWidth * ratio * h(1) + h(0.006f));
+        float cx = (hero.getX() + hero.getWidth() / 2f) / cameraWidth * w(1);
+        float topY = (hero.getY() + hero.getHeight()) / cameraWidth * ratio * h(1);
+        name.setPosition(cx - name.getWidth() / 2, topY + h(0.006f));
         additionalLabels.add(name);
         add(name);
     }
@@ -143,7 +144,7 @@ public class InfoStage extends GameStage {
         float sw = w(0.34f);
         stats.setWidth(sw);
         stats.setAlignment(Align.center);
-        stats.setPosition(inv.selectedCenterXWorld() / cameraWidth * w(1) - sw / 2,
+        stats.setPosition(inv.heroCenterX() / cameraWidth * w(1) - sw / 2,
                 inv.statsRowY() / cameraWidth * ratio * h(1));
         additionalLabels.add(stats);
         add(stats);

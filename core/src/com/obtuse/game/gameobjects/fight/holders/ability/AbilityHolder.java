@@ -55,19 +55,18 @@ public class AbilityHolder {
         stage.addAbilityBackground(abilityBackground);
     }
 
-    private static final Color PP_DISABLED = new Color(0.5f, 0.5f, 0.55f, 1f);
-
     public void refreshPPLabel(int index) {
         if (ppLabel != null) {
             int ppRemaining = ability.pp - ability.ppUsed;
             boolean empty = ppRemaining <= 0;
-            ppLabel.setText(toRoman(ppRemaining));
-            ppLabel.setColor(empty ? PP_DISABLED : com.obtuse.game.gameobjects.UI.Border.ROYAL_BRIGHTGOLD);
-            // Below-right of the (now top-aligned) move name.
+            // Out of PP: don't show a number at all (the box is greyed out instead).
+            ppLabel.setText(empty ? "" : toRoman(ppRemaining));
+            ppLabel.setColor(com.obtuse.game.gameobjects.UI.Border.ROYAL_BRIGHTGOLD);
+            // Up in the top-left corner, above the centred move name.
             float bw = abilityBackground.getWidth(), bh = abilityBackground.getHeight();
-            ppLabel.setSize(bw * 0.5f, bh * 0.34f);
-            ppLabel.setAlignment(Align.right);
-            ppLabel.setPosition(this.x + bw * 0.45f, this.y + bh * 0.1f);
+            ppLabel.setSize(bw * 0.5f, bh * 0.3f);
+            ppLabel.setAlignment(Align.left);
+            ppLabel.setPosition(this.x + bw * 0.08f, this.y + bh - bh * 0.32f);
             abilityBackground.setDisabled(empty);
         }
     }
