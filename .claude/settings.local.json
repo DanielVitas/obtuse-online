@@ -46,7 +46,8 @@
       "Bash(curl -s \"https://danielvitas.github.io/obtuse-online/app.js\" -o /tmp/deployed_app.js)",
       "Read(//tmp/**)",
       "Bash(perl -0pi -e 's/doLast \\\\{ injectFreetypeScript\\\\\\(\\\\\\); deferAllMusic\\\\\\(\\\\\\); injectLoadingOverlay\\\\\\(\\\\\\) \\\\}/doLast { injectFreetypeScript\\(\\); deferAllMusic\\(\\); injectLoadingOverlay\\(\\); injectDimsDebug\\(\\) }/g' teavm/build.gradle)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(git push *)"
     ]
   }
 }
