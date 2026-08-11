@@ -3,6 +3,9 @@ package com.obtuse.game.teavm;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
 import com.obtuse.game.Obtuse;
+import com.obtuse.game.audio.MusicPlayer;
+import java.util.HashSet;
+import java.util.Arrays;
 import com.obtuse.game.maingame.fight.arenas.BossArena;
 import com.obtuse.game.maingame.fight.arenas.DuelArena;
 import com.obtuse.game.maingame.fight.arenas.MainArena;
@@ -22,6 +25,10 @@ import com.obtuse.game.screens.WorldScreen;
 public class TeaVMLauncher {
     public static void main(String[] args) {
         keepReflectivelyLoadedClasses();
+        // Only the overworld music is bundled on the web (see TeaVMBuilder's asset filter),
+        // to keep the first load small. MusicPlayer skips any track not listed here instead
+        // of trying to load a file that was not shipped.
+        MusicPlayer.shippedTracks = new HashSet<String>(Arrays.asList("satieGnossienne", "verdiDiesIrae"));
         WebApplicationConfiguration config = new WebApplicationConfiguration("canvas");
         config.width = 0;
         config.height = 0;

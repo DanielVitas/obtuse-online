@@ -14,6 +14,13 @@ public class MusicPlayer {
     private static Map<String, FileHandle> fileNames = new HashMap<String, FileHandle>();
     private static Music music;
     public static String playing = "";
+    /**
+     * Track names that were actually shipped (preloaded) — used by the web build, where not
+     * every music file is bundled to keep the first load small. null means "all tracks are
+     * available" (desktop/Android), so those platforms are unaffected. play() silently skips
+     * a request for a track that is not shipped instead of failing to load it.
+     */
+    public static java.util.Set<String> shippedTracks = null;
 
     public MusicPlayer() {
         addFileNames();
@@ -29,6 +36,11 @@ public class MusicPlayer {
             music.dispose();
         }
         playing = name;
+        // On the web, a track that was not bundled cannot be loaded (readBytes would fail on
+        // the missing file). Skip it rather than crash. null shippedTracks = every track is
+        // available (desktop/Android), so this guard is a no-op there.
+        if (shippedTracks != null && !shippedTracks.contains(name))
+            return;
         if (fileNames.containsKey(name)) {
             music = Gdx.audio.newMusic(fileNames.get(name));
             music.setVolume(volume * musicVolume);
