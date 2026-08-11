@@ -3,6 +3,7 @@ package com.obtuse.game.maingame.inventory.levels.stages;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.obtuse.game.Obtuse;
+import com.obtuse.game.gameobjects.UI.Border;
 import com.obtuse.game.gameobjects.UI.arrows.DownArrow;
 import com.obtuse.game.gameobjects.UI.SimpleArrow;
 import com.obtuse.game.gameobjects.UI.arrows.LeftArrow;
@@ -25,6 +26,7 @@ public class InventoryStage extends GameStage {
     private static final float[] equipmentX = {6.25f, 7.25f, 8.25f};
     private Array<Item> created = new Array<Item>();
     public Array<SimpleArrow> arrows = new Array<SimpleArrow>();
+    private Array<Border> borders = new Array<Border>();
 
     public InventoryStage(Stage stage) {
         super(stage);
@@ -33,10 +35,42 @@ public class InventoryStage extends GameStage {
     public void setup(Hero hero) {
         clearItems();
         clearArrows();
+        clearBorders();
+        setupBorders();
         setupInventory();
         setupAbilityOrbs(hero);
         setupEquipment(hero);
         makeArrows();
+    }
+
+    // Gold frames around every slot (inventory grid, ability-orb slots, equipment slots) — drawn
+    // whether or not the slot currently holds an item. World-unit coords/thickness (world camera).
+    public void setupBorders() {
+        float t = 0.035f;
+        for (int k = 0; k < Inventory.maxSize; k++) {
+            int i = k % columns.length;
+            int j = k / columns.length;
+            if (j >= rows.length) break;
+            addBorder(columns[i], rows[j], t);
+        }
+        float abilityY = 6f / Obtuse.ratio;
+        for (float x : abilityOrbX)
+            addBorder(x, abilityY, t);
+        float equipmentY = 4.5f / Obtuse.ratio;
+        for (float x : equipmentX)
+            addBorder(x, equipmentY, t);
+    }
+
+    private void addBorder(float x, float y, float thickness) {
+        Border border = new Border(x, y, size, size, thickness);
+        borders.add(border);
+        add(border);
+    }
+
+    public void clearBorders() {
+        for (Border border : borders)
+            border.remove();
+        borders.clear();
     }
 
     public void clearArrows() {

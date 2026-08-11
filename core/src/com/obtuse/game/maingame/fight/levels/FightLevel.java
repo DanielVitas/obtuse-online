@@ -140,15 +140,15 @@ public class FightLevel extends Level {
     }
 
     private void createSkip() {
+        // Much smaller than the ability boxes — a compact button in the bottom-left corner.
         Label label = new Label("Pass", Fonts.get("fightInfoTable"));
-        label.setWidth(w(0.3f));
-        label.setHeight(InfoStage.defaultAbilityHeight * 1);
+        label.setWidth(w(0.14f));
+        label.setHeight(InfoStage.defaultAbilityHeight * 0.55f);
         label.setAlignment(Align.center);
         label.setPosition(w(InfoStage.abilityPosition[8]), h(InfoStage.abilityPosition[9]));
         ((InfoStage) stages.get(2)).addAbilitySelectLabel(label);
         AbilityHolder abilityHolder = new AbilityHolder(label.getX(), label.getY(), label.getWidth(), label.getHeight(),
                 new AbilityInstance(new SkipTurn()), (InfoStage) stages.get(2));
-        abilityHolder.abilityBackground.setWidth(label.getWidth());
         abilityMap.put(new SquareButton(label.getX(), label.getY(), label.getWidth(), label.getHeight()),
                 abilityHolder);
     }

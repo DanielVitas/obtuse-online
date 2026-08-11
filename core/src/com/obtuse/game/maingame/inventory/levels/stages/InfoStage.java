@@ -31,6 +31,7 @@ public class InfoStage extends GameStage {
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
         infoBackground.create(w(0.55f), h(0.01f), w(0.445f), h(0.35f));
+        infoBackground.positionAtPointer(stage);
         add(infoBackground);
     }
 

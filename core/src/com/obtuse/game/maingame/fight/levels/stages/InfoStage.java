@@ -9,6 +9,7 @@ import com.obtuse.game.Fonts;
 import com.obtuse.game.Obtuse;
 import com.obtuse.game.abilities.AbilityInstance;
 import com.obtuse.game.abilities.all.SkipTurn;
+import com.obtuse.game.gameobjects.UI.Border;
 import com.obtuse.game.gameobjects.UI.InfoBackground;
 import com.obtuse.game.gameobjects.UI.info.AbilityInfoBackground;
 import com.obtuse.game.gameobjects.UI.info.BasicInfoBackground;
@@ -49,6 +50,7 @@ public class InfoStage extends GameStage {
     private Array<Label> infoLabels = new Array<Label>();
     public Array<Label> abilitySelectLabels = new Array<Label>();
     public Array<AbilityBackground> abilityBackgrounds = new Array<AbilityBackground>();
+    private Array<Border> abilityBorders = new Array<Border>();
     private InfoBackground infoBackground;
 
     public InfoStage(Stage stage) {
@@ -70,6 +72,7 @@ public class InfoStage extends GameStage {
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
         infoBackground.create(w(abilityPosition[8]), h(abilityPosition[9]), w(0.3f), h(0.225f));
+        infoBackground.positionAtPointer(stage);
         add(infoBackground);
     }
 
@@ -204,6 +207,12 @@ public class InfoStage extends GameStage {
     public void addAbilityBackground(AbilityBackground abilityBackground) {
         abilityBackgrounds.add(abilityBackground);
         add(abilityBackground);
+        // Gold frame around each selectable move box.
+        float t = Math.min(abilityBackground.getWidth(), abilityBackground.getHeight()) * 0.045f;
+        Border border = new Border(abilityBackground.getX(), abilityBackground.getY(),
+                abilityBackground.getWidth(), abilityBackground.getHeight(), t);
+        abilityBorders.add(border);
+        add(border);
     }
 
     public void clearInfoLabels() {
@@ -220,8 +229,11 @@ public class InfoStage extends GameStage {
             label.remove();
         for (AbilityBackground abilityBackground : abilityBackgrounds)
             abilityBackground.remove();
+        for (Border border : abilityBorders)
+            border.remove();
         abilitySelectLabels.clear();
         abilityBackgrounds.clear();
+        abilityBorders.clear();
     }
 
     @Override
