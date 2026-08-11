@@ -1,0 +1,85 @@
+// The web (browser) backend, via xpenatan's gdx-teavm. Modeled on the proven ../spike.
+// This module transpiles :core to JavaScript with TeaVM. It is independent of :android;
+// both sit on top of :core. Nothing here affects the Android APK build.
+plugins {
+    id 'java'
+}
+
+// This project keeps assets under android/assets (old libGDX layout), not at the root.
+sourceSets.main.resources.srcDirs += [ rootProject.file('android/assets').path ]
+project.ext.mainClassName = 'com.obtuse.game.teavm.TeaVMBuilder'
+
+// TeaVM needs at least Java 11 and no higher than the JDK building the project (21 here).
+// This only affects the :teavm module; :core and :android stay at Java 8.
+java.sourceCompatibility = '11'
+java.targetCompatibility = '11'
+
+dependencies {
+    implementation project(':core')
+
+    // Web replacements for the native Box2D/FreeType the core uses. gdx-box2d-gwt is the
+    // GWT/TeaVM-compatible Box2D; the -teavm freetype backend replaces the native .so.
+    implementation "com.badlogicgames.gdx:gdx-box2d-gwt:$gdxVersion"
+    implementation "com.github.xpenatan.gdx-teavm:backend-web:$gdxTeaVMVersion"
+    implementation "com.github.xpenatan.gdx-teavm:gdx-freetype-teavm:$gdxTeaVMVersion"
+}
+
+def webappDir = file("$buildDir/dist/webapp")
+
+// The generated index.html loads only app.js. The backend auto-loads gdx.wasm.js (Box2D)
+// and howler.js (audio), but NOT freetype.js — yet FreeType's emscripten glue defines the
+// global `Module` that the transpiled Fonts code calls into. Without it the browser throws
+// `ReferenceError: Module is not defined` and create() dies. The backend regenerates
+// index.html on every build and exposes no script-injection hook, so we splice the tag in
+// afterwards. freetype.js is already copied into webapp/scripts by the build.
+def injectFreetypeScript = {
+    def html = new File(webappDir, 'index.html')
+    if (!html.exists()) return
+    def text = html.text
+    if (text.contains('scripts/freetype.js')) return
+    def appTag = '<script type="text/javascript" charset="utf-8" src="app.js"></script>'
+    def ftTag  = '<script type="text/javascript" charset="utf-8" src="scripts/freetype.js"></script>'
+    html.text = text.replace(appTag, ftTag + '\n        ' + appTag)
+    logger.lifecycle("Injected freetype.js <script> into ${html}")
+}
+
+// Build the JS app into teavm/build/dist (release: obfuscated, optimized).
+tasks.register('buildRelease', JavaExec) {
+    description = 'Transpile the game to JavaScript into teavm/build/dist'
+    group = 'build'
+    dependsOn classes
+    mainClass.set(project.mainClassName)
+    setClasspath(sourceSets.main.runtimeClasspath)
+    doLast { injectFreetypeScript() }
+}
+
+// Same, with debug info + source maps and no obfuscation — slower, but debuggable.
+tasks.register('buildDebug', JavaExec) {
+    description = 'Transpile the game to JavaScript with debug info and source maps'
+    group = 'build'
+    dependsOn classes
+    mainClass.set(project.mainClassName)
+    setClasspath(sourceSets.main.runtimeClasspath)
+    args += ['debug']
+    doLast { injectFreetypeScript() }
+}
+
+// Build (debug) then serve the finished webapp at http://localhost:8080. We do NOT use the
+// backend's own `run`/Jetty: it regenerates index.html and serves it in one blocking step,
+// leaving no point at which to inject the freetype.js tag. Serving the already-patched
+// output with a plain static server is simpler and keeps the fix in one place.
+tasks.register('run') {
+    description = 'Build (debug) and serve the game at http://localhost:8080'
+    group = 'application'
+    dependsOn 'buildDebug'
+    doLast {
+        logger.lifecycle('Serving at http://localhost:8080  (Ctrl-C to stop)')
+        exec {
+            workingDir webappDir
+            commandLine 'python3', '-m', 'http.server', '8080', '--bind', '127.0.0.1'
+            // Stopping the dev server with Ctrl-C makes python exit non-zero; that is a
+            // normal stop, not a build failure, so don't let it fail the task.
+            ignoreExitValue = true
+        }
+    }
+}

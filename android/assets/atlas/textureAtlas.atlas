@@ -1,0 +1,4695 @@
+textureAtlas.png
+size: 840, 840
+format: RGBA8888
+filter: MipMap,MipMap
+repeat: none
+fight/abilities/bloodSacrifice/blood/main
+  rotate: false
+  xy: 779, 683
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/bloodSacrifice/blood/main
+  rotate: false
+  xy: 575, 699
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/bloodSacrifice/blood/main
+  rotate: false
+  xy: 593, 699
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/bloodSacrifice/blood/main
+  rotate: false
+  xy: 611, 699
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/abilities/delayedHit/mark/main
+  rotate: false
+  xy: 793, 1
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+fight/abilities/delayedHit/mark/main
+  rotate: false
+  xy: 793, 35
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+fight/abilities/duel/teleportation/main
+  rotate: false
+  xy: 813, 761
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/duel/teleportation/main
+  rotate: false
+  xy: 570, 751
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/duel/teleportation/main
+  rotate: false
+  xy: 541, 764
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/duel/teleportation/main
+  rotate: false
+  xy: 588, 751
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/abilities/duel/teleportation/main
+  rotate: false
+  xy: 606, 751
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/abilities/duel/teleportation/main
+  rotate: false
+  xy: 624, 751
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/abilities/fireBall/explosion/main
+  rotate: false
+  xy: 642, 751
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/fireBall/explosion/main
+  rotate: false
+  xy: 660, 751
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/fireBall/explosion/main
+  rotate: false
+  xy: 678, 751
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/fireBall/explosion/main
+  rotate: false
+  xy: 405, 767
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/abilities/poison/poison/main
+  rotate: false
+  xy: 423, 767
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/poison/poison/main
+  rotate: false
+  xy: 441, 767
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/poison/poison/main
+  rotate: false
+  xy: 459, 767
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/poison/poison/main
+  rotate: false
+  xy: 477, 767
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/abilities/speedSwitch/down/main
+  rotate: false
+  xy: 495, 767
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/speedSwitch/down/main
+  rotate: false
+  xy: 513, 767
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/speedSwitch/down/main
+  rotate: false
+  xy: 559, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/speedSwitch/up/main
+  rotate: false
+  xy: 531, 782
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/speedSwitch/up/main
+  rotate: false
+  xy: 405, 785
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/speedSwitch/up/main
+  rotate: false
+  xy: 423, 785
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/steal/coins/main
+  rotate: false
+  xy: 441, 785
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/steal/coins/main
+  rotate: false
+  xy: 459, 785
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/steal/coins/main
+  rotate: false
+  xy: 477, 785
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/thunderstrike/lightning/main
+  rotate: false
+  xy: 495, 785
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/thunderstrike/lightning/main
+  rotate: false
+  xy: 513, 785
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/thunderstrike/lightning/main
+  rotate: false
+  xy: 577, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/thunderstrike/lightning/main
+  rotate: false
+  xy: 595, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/backgrounds/ability/basic/default/main
+  rotate: false
+  xy: 793, 171
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fight/backgrounds/ability/basic/hovered/main
+  rotate: false
+  xy: 643, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fight/backgrounds/ability/basic/hovered/main
+  rotate: false
+  xy: 793, 171
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 2
+fight/backgrounds/ability/basic/selected/main
+  rotate: false
+  xy: 677, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fight/backgrounds/ability/basic/selected/main
+  rotate: false
+  xy: 711, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 2
+fight/backgrounds/ability/skip/default/main
+  rotate: false
+  xy: 793, 171
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fight/backgrounds/ability/skip/hovered/main
+  rotate: false
+  xy: 643, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fight/backgrounds/ability/skip/hovered/main
+  rotate: false
+  xy: 793, 171
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 2
+fight/backgrounds/ability/skip/selected/main
+  rotate: false
+  xy: 677, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fight/backgrounds/ability/skip/selected/main
+  rotate: false
+  xy: 711, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/cheshireCat/cast/main
+  rotate: false
+  xy: 1, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/cast/main
+  rotate: false
+  xy: 1, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/cast/main
+  rotate: false
+  xy: 1, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/cheshireCat/cast/main
+  rotate: false
+  xy: 1, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/cheshireCat/cast/main
+  rotate: false
+  xy: 1, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 1, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 1, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 1, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 1, 529
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 1, 595
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 1, 661
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 1, 727
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/cheshireCat/death/main
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+fight/characters/enemies/cheshireCat/deathStunned/main
+  rotate: false
+  xy: 67, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/deathStunned/main
+  rotate: false
+  xy: 67, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/deathStunned/main
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/cheshireCat/hurt/main
+  rotate: false
+  xy: 67, 529
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/hurt/main
+  rotate: false
+  xy: 67, 595
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/profile/default/main
+  rotate: false
+  xy: 67, 661
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/profile/onTurn/main
+  rotate: false
+  xy: 67, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/stunned/main
+  rotate: false
+  xy: 67, 727
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/stunned/main
+  rotate: false
+  xy: 133, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/summon/main
+  rotate: false
+  xy: 133, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/cheshireCat/summon/main
+  rotate: false
+  xy: 133, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/summon/main
+  rotate: false
+  xy: 167, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/cheshireCat/unstunned/main
+  rotate: false
+  xy: 133, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/cheshireCat/unstunned/main
+  rotate: false
+  xy: 67, 727
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/cast/main
+  rotate: false
+  xy: 199, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/cast/main
+  rotate: false
+  xy: 199, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/cast/main
+  rotate: false
+  xy: 199, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/cast/main
+  rotate: false
+  xy: 233, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/demon/cast/main
+  rotate: false
+  xy: 265, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/demon/cast/main
+  rotate: false
+  xy: 265, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 265, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 299, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 331, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 331, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 331, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 365, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 397, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 397, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/demon/death/main
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+fight/characters/enemies/demon/deathStunned/main
+  rotate: false
+  xy: 397, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/deathStunned/main
+  rotate: false
+  xy: 431, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/deathStunned/main
+  rotate: false
+  xy: 463, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/deathStunned/main
+  rotate: false
+  xy: 463, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/demon/deathStunned/main
+  rotate: false
+  xy: 463, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/demon/deathStunned/main
+  rotate: false
+  xy: 67, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/demon/default/main
+  rotate: false
+  xy: 497, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/default/main
+  rotate: false
+  xy: 529, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/default/main
+  rotate: false
+  xy: 529, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/default/main
+  rotate: false
+  xy: 529, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/demon/default/main
+  rotate: false
+  xy: 563, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/demon/default/main
+  rotate: false
+  xy: 595, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/demon/defaultStunned/main
+  rotate: false
+  xy: 595, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/defaultStunned/main
+  rotate: false
+  xy: 595, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/defaultStunned/main
+  rotate: false
+  xy: 629, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/defaultStunned/main
+  rotate: false
+  xy: 661, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/demon/defaultStunned/main
+  rotate: false
+  xy: 661, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/demon/defaultStunned/main
+  rotate: false
+  xy: 661, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/demon/hurt/main
+  rotate: false
+  xy: 695, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/hurt/main
+  rotate: false
+  xy: 727, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/hurt/main
+  rotate: false
+  xy: 727, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/hurt/main
+  rotate: false
+  xy: 727, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/demon/profile/default/main
+  rotate: false
+  xy: 541, 733
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/profile/onTurn/main
+  rotate: false
+  xy: 541, 733
+  size: 27, 29
+  orig: 27, 29
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/stunned/main
+  rotate: false
+  xy: 761, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/stunned/main
+  rotate: false
+  xy: 167, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 233, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 299, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 365, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 431, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 497, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 563, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 629, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 695, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 761, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 8
+fight/characters/enemies/demon/summon/main
+  rotate: false
+  xy: 167, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 9
+fight/characters/enemies/demon/unstunned/main
+  rotate: false
+  xy: 167, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/demon/unstunned/main
+  rotate: false
+  xy: 761, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/dragon/default/main
+  rotate: false
+  xy: 613, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/dragon/default/main
+  rotate: false
+  xy: 631, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/dragon/default/main
+  rotate: false
+  xy: 649, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/dummy/cast/main
+  rotate: false
+  xy: 667, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/dummy/death/main
+  rotate: false
+  xy: 685, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/dummy/death/main
+  rotate: false
+  xy: 703, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/dummy/death/main
+  rotate: false
+  xy: 721, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/dummy/death/main
+  rotate: false
+  xy: 739, 775
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/dummy/deathStunned/main
+  rotate: false
+  xy: 667, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/dummy/default/main
+  rotate: false
+  xy: 667, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/dummy/hurt/main
+  rotate: false
+  xy: 667, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/dummy/profile/default/main
+  rotate: false
+  xy: 55, 827
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/dummy/profile/onTurn/main
+  rotate: false
+  xy: 55, 827
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/dummy/stunned/main
+  rotate: false
+  xy: 667, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/dummy/unstunned/main
+  rotate: false
+  xy: 667, 769
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/kobold/default/main
+  rotate: false
+  xy: 757, 775
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/kobold/default/main
+  rotate: false
+  xy: 775, 775
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/kobold/default/main
+  rotate: false
+  xy: 793, 779
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 233, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 299, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 365, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 431, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 497, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 563, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 299, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/reaper/cast/main
+  rotate: false
+  xy: 629, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 695, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 761, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 167, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 233, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 299, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 365, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 431, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/reaper/death/main
+  rotate: false
+  xy: 497, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/reaper/deathStunned/main
+  rotate: false
+  xy: 563, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/deathStunned/main
+  rotate: false
+  xy: 629, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/reaper/deathStunned/main
+  rotate: false
+  xy: 695, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/reaper/deathStunned/main
+  rotate: false
+  xy: 761, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/reaper/deathStunned/main
+  rotate: false
+  xy: 167, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/reaper/deathStunned/main
+  rotate: false
+  xy: 233, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/reaper/default/main
+  rotate: false
+  xy: 299, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/default/main
+  rotate: false
+  xy: 365, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/reaper/hurt/main
+  rotate: false
+  xy: 695, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/profile/default/main
+  rotate: false
+  xy: 185, 819
+  size: 16, 15
+  orig: 16, 15
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/profile/onTurn/main
+  rotate: false
+  xy: 185, 819
+  size: 16, 15
+  orig: 16, 15
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/stunned/main
+  rotate: false
+  xy: 431, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/stunned/main
+  rotate: false
+  xy: 497, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/reaper/summon/main
+  rotate: false
+  xy: 563, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/summon/main
+  rotate: false
+  xy: 629, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/reaper/summon/main
+  rotate: false
+  xy: 695, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/reaper/summon/main
+  rotate: false
+  xy: 761, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/reaper/summon/main
+  rotate: false
+  xy: 167, 529
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/reaper/summon/main
+  rotate: false
+  xy: 233, 529
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/reaper/summon/main
+  rotate: false
+  xy: 299, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/reaper/unstunned/main
+  rotate: false
+  xy: 497, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+fight/characters/enemies/reaper/unstunned/main
+  rotate: false
+  xy: 431, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/cast/main
+  rotate: false
+  xy: 811, 779
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/cast/main
+  rotate: false
+  xy: 549, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/redSkull/cast/main
+  rotate: false
+  xy: 531, 800
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/redSkull/death/main
+  rotate: false
+  xy: 567, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/death/main
+  rotate: false
+  xy: 585, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/redSkull/death/main
+  rotate: false
+  xy: 603, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/redSkull/death/main
+  rotate: false
+  xy: 621, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/redSkull/deathStunned/main
+  rotate: false
+  xy: 567, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/deathStunned/main
+  rotate: false
+  xy: 585, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/redSkull/deathStunned/main
+  rotate: false
+  xy: 603, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/redSkull/deathStunned/main
+  rotate: false
+  xy: 621, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/redSkull/default/main
+  rotate: false
+  xy: 639, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/default/main
+  rotate: false
+  xy: 657, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/redSkull/hurt/main
+  rotate: false
+  xy: 675, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/profile/default/main
+  rotate: false
+  xy: 399, 547
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/profile/onTurn/main
+  rotate: false
+  xy: 399, 547
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/profile/onTurn/main
+  rotate: false
+  xy: 399, 557
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/redSkull/stunned/main
+  rotate: false
+  xy: 693, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/redSkull/unstunned/main
+  rotate: false
+  xy: 711, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/skeleton/cast/main
+  rotate: false
+  xy: 729, 793
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/cast/main
+  rotate: false
+  xy: 747, 793
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/skeleton/cast/main
+  rotate: false
+  xy: 765, 793
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/skeleton/death/main
+  rotate: false
+  xy: 783, 797
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/death/main
+  rotate: false
+  xy: 801, 797
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/skeleton/death/main
+  rotate: false
+  xy: 819, 797
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/skeleton/death/main
+  rotate: false
+  xy: 549, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/skeleton/deathStunned/main
+  rotate: false
+  xy: 783, 797
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/deathStunned/main
+  rotate: false
+  xy: 801, 797
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/skeleton/deathStunned/main
+  rotate: false
+  xy: 819, 797
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/skeleton/deathStunned/main
+  rotate: false
+  xy: 549, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/skeleton/default/main
+  rotate: false
+  xy: 567, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/default/main
+  rotate: false
+  xy: 585, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/skeleton/hurt/main
+  rotate: false
+  xy: 603, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/profile/default/main
+  rotate: false
+  xy: 827, 199
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/profile/onTurn/main
+  rotate: false
+  xy: 827, 199
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/profile/onTurn/main
+  rotate: false
+  xy: 829, 185
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/skeleton/stunned/main
+  rotate: false
+  xy: 567, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/skeleton/unstunned/main
+  rotate: false
+  xy: 585, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 793, 69
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 6
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 793, 103
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 7
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 793, 137
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 8
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 133, 265
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 9
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 133, 299
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 10
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 133, 333
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 11
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 133, 367
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 12
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 133, 401
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 13
+fight/characters/heroes/mageKnight/cast/main
+  rotate: false
+  xy: 133, 435
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 15
+fight/characters/heroes/mageKnight/death/main
+  rotate: false
+  xy: 133, 469
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 30
+fight/characters/heroes/mageKnight/death/main
+  rotate: false
+  xy: 133, 503
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 31
+fight/characters/heroes/mageKnight/death/main
+  rotate: false
+  xy: 133, 537
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 32
+fight/characters/heroes/mageKnight/death/main
+  rotate: false
+  xy: 133, 571
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 33
+fight/characters/heroes/mageKnight/deathStunned/main
+  rotate: false
+  xy: 415, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+fight/characters/heroes/mageKnight/deathStunned/main
+  rotate: false
+  xy: 365, 547
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/mageKnight/deathStunned/main
+  rotate: false
+  xy: 449, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/mageKnight/deathStunned/main
+  rotate: false
+  xy: 483, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+fight/characters/heroes/mageKnight/default/main
+  rotate: false
+  xy: 517, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 26
+fight/characters/heroes/mageKnight/default/main
+  rotate: false
+  xy: 551, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 27
+fight/characters/heroes/mageKnight/default/main
+  rotate: false
+  xy: 793, 69
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 28
+fight/characters/heroes/mageKnight/default/main
+  rotate: false
+  xy: 585, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 29
+fight/characters/heroes/mageKnight/hurt/main
+  rotate: false
+  xy: 619, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 17
+fight/characters/heroes/mageKnight/hurt/main
+  rotate: false
+  xy: 653, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 20
+fight/characters/heroes/mageKnight/hurt/main
+  rotate: false
+  xy: 653, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 21
+fight/characters/heroes/mageKnight/hurt/main
+  rotate: false
+  xy: 653, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 22
+fight/characters/heroes/mageKnight/hurt/main
+  rotate: false
+  xy: 687, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 23
+fight/characters/heroes/mageKnight/hurt/main
+  rotate: false
+  xy: 721, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 24
+fight/characters/heroes/mageKnight/profile/default/main
+  rotate: false
+  xy: 827, 299
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/mageKnight/profile/onTurn/main
+  rotate: false
+  xy: 827, 299
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/mageKnight/stunned/main
+  rotate: false
+  xy: 755, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+fight/characters/heroes/mageKnight/stunned/main
+  rotate: false
+  xy: 789, 529
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/mageKnight/stunned/main
+  rotate: false
+  xy: 409, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/mageKnight/summon/main
+  rotate: false
+  xy: 167, 595
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+fight/characters/heroes/mageKnight/summon/main
+  rotate: false
+  xy: 133, 605
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/mageKnight/summon/main
+  rotate: false
+  xy: 201, 595
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/mageKnight/summon/main
+  rotate: false
+  xy: 235, 595
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+fight/characters/heroes/mageKnight/summon/main
+  rotate: false
+  xy: 269, 595
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+fight/characters/heroes/mageKnight/summon/main
+  rotate: false
+  xy: 793, 69
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+fight/characters/heroes/mageKnight/unstunned/main
+  rotate: false
+  xy: 303, 595
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+fight/characters/heroes/mageKnight/unstunned/main
+  rotate: false
+  xy: 337, 595
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+fight/characters/heroes/mageKnight/unstunned/main
+  rotate: false
+  xy: 371, 594
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 6
+fight/characters/heroes/wizard/cast/main
+  rotate: false
+  xy: 621, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/cast/main
+  rotate: false
+  xy: 639, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/wizard/cast/main
+  rotate: false
+  xy: 657, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/heroes/wizard/cast/main
+  rotate: false
+  xy: 675, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/heroes/wizard/death/main
+  rotate: false
+  xy: 693, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/death/main
+  rotate: false
+  xy: 711, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/wizard/death/main
+  rotate: false
+  xy: 729, 811
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/heroes/wizard/death/main
+  rotate: false
+  xy: 747, 811
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/heroes/wizard/deathStunned/main
+  rotate: false
+  xy: 693, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/deathStunned/main
+  rotate: false
+  xy: 711, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/wizard/deathStunned/main
+  rotate: false
+  xy: 729, 811
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/heroes/wizard/deathStunned/main
+  rotate: false
+  xy: 747, 811
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/heroes/wizard/default/main
+  rotate: false
+  xy: 765, 811
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/default/main
+  rotate: false
+  xy: 621, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/wizard/hurt/main
+  rotate: false
+  xy: 783, 815
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/profile/default/main
+  rotate: false
+  xy: 827, 160
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/profile/onTurn/main
+  rotate: false
+  xy: 827, 160
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/profile/onTurn/main
+  rotate: false
+  xy: 827, 171
+  size: 9, 9
+  orig: 9, 9
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/wizard/stunned/main
+  rotate: false
+  xy: 765, 811
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/stunned/main
+  rotate: false
+  xy: 621, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/heroes/wizard/unstunned/main
+  rotate: false
+  xy: 765, 811
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/heroes/wizard/unstunned/main
+  rotate: false
+  xy: 621, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/healthBar/background/main
+  rotate: false
+  xy: 443, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+fight/healthBar/default/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+fight/healthBar/default/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+fight/healthBar/default/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+fight/healthBar/default/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+fight/healthBar/default/main
+  rotate: false
+  xy: 511, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+fight/healthBar/default/main
+  rotate: false
+  xy: 545, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+fight/healthBar/default/main
+  rotate: false
+  xy: 579, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 6
+fight/healthBar/default/main
+  rotate: false
+  xy: 613, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 7
+fight/healthBar/default/main
+  rotate: false
+  xy: 647, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 8
+fight/healthBar/default/main
+  rotate: false
+  xy: 681, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 9
+fight/healthBar/default/main
+  rotate: false
+  xy: 715, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 10
+fight/healthBar/default/main
+  rotate: false
+  xy: 749, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 11
+fight/healthBar/default/main
+  rotate: false
+  xy: 783, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 12
+fight/healthBar/default/main
+  rotate: false
+  xy: 405, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 13
+fight/healthBar/default/main
+  rotate: false
+  xy: 371, 628
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 14
+fight/healthBar/default/main
+  rotate: false
+  xy: 167, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 15
+fight/healthBar/default/main
+  rotate: false
+  xy: 133, 639
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 16
+fight/healthBar/default/main
+  rotate: false
+  xy: 201, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 17
+fight/healthBar/default/main
+  rotate: false
+  xy: 235, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 18
+fight/healthBar/default/main
+  rotate: false
+  xy: 269, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 19
+fight/healthBar/default/main
+  rotate: false
+  xy: 303, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 20
+fight/healthBar/default/main
+  rotate: false
+  xy: 337, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 21
+fight/healthBar/default/main
+  rotate: false
+  xy: 439, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 22
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 23
+fight/healthBar/default/main
+  rotate: false
+  xy: 507, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 24
+fight/healthBar/default/main
+  rotate: false
+  xy: 541, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 25
+fight/healthBar/default/main
+  rotate: false
+  xy: 575, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 26
+fight/healthBar/default/main
+  rotate: false
+  xy: 609, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 27
+fight/healthBar/default/main
+  rotate: false
+  xy: 643, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 28
+fight/healthBar/default/main
+  rotate: false
+  xy: 677, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 29
+fight/healthBar/default/main
+  rotate: false
+  xy: 711, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 30
+fight/healthBar/default/main
+  rotate: false
+  xy: 745, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 31
+fight/healthBar/default/main
+  rotate: false
+  xy: 779, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 32
+fight/healthBar/default/main
+  rotate: false
+  xy: 405, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 33
+fight/healthBar/default/main
+  rotate: false
+  xy: 371, 662
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 34
+fight/healthBar/default/main
+  rotate: false
+  xy: 167, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 35
+fight/healthBar/default/main
+  rotate: false
+  xy: 133, 673
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 36
+fight/healthBar/default/main
+  rotate: false
+  xy: 201, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 37
+fight/healthBar/default/main
+  rotate: false
+  xy: 235, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 38
+fight/healthBar/default/main
+  rotate: false
+  xy: 269, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 39
+fight/healthBar/default/main
+  rotate: false
+  xy: 303, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 40
+fight/healthBar/default/main
+  rotate: false
+  xy: 337, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 41
+fight/healthBar/default/main
+  rotate: false
+  xy: 439, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 42
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 43
+fight/healthBar/default/main
+  rotate: false
+  xy: 507, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 44
+fight/healthBar/default/main
+  rotate: false
+  xy: 541, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 45
+fight/healthBar/default/main
+  rotate: false
+  xy: 575, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 46
+fight/healthBar/default/main
+  rotate: false
+  xy: 609, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 47
+fight/healthBar/default/main
+  rotate: false
+  xy: 643, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 48
+fight/healthBar/default/main
+  rotate: false
+  xy: 677, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 49
+fight/healthBar/default/main
+  rotate: false
+  xy: 711, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 50
+fight/healthBar/default/main
+  rotate: false
+  xy: 745, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 51
+fight/healthBar/default/main
+  rotate: false
+  xy: 779, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 52
+fight/healthBar/default/main
+  rotate: false
+  xy: 405, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 53
+fight/healthBar/default/main
+  rotate: false
+  xy: 371, 696
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 54
+fight/healthBar/default/main
+  rotate: false
+  xy: 167, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 55
+fight/healthBar/default/main
+  rotate: false
+  xy: 133, 707
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 56
+fight/healthBar/default/main
+  rotate: false
+  xy: 201, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 57
+fight/healthBar/default/main
+  rotate: false
+  xy: 235, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 58
+fight/healthBar/default/main
+  rotate: false
+  xy: 269, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 59
+fight/healthBar/default/main
+  rotate: false
+  xy: 303, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 60
+fight/healthBar/default/main
+  rotate: false
+  xy: 337, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 61
+fight/healthBar/default/main
+  rotate: false
+  xy: 439, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 62
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 63
+fight/healthBar/default/main
+  rotate: false
+  xy: 507, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 64
+fight/healthBar/default/main
+  rotate: false
+  xy: 541, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 65
+fight/healthBar/default/main
+  rotate: false
+  xy: 575, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 66
+fight/healthBar/default/main
+  rotate: false
+  xy: 609, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 67
+fight/healthBar/default/main
+  rotate: false
+  xy: 643, 683
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 68
+fight/healthBar/default/main
+  rotate: false
+  xy: 677, 683
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 69
+fight/healthBar/default/main
+  rotate: false
+  xy: 711, 701
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 70
+fight/healthBar/default/main
+  rotate: false
+  xy: 745, 701
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 71
+fight/healthBar/default/main
+  rotate: false
+  xy: 779, 701
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 72
+fight/healthBar/default/main
+  rotate: false
+  xy: 405, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 73
+fight/healthBar/default/main
+  rotate: false
+  xy: 371, 730
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 74
+fight/healthBar/default/main
+  rotate: false
+  xy: 167, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 75
+fight/healthBar/default/main
+  rotate: false
+  xy: 133, 741
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 76
+fight/healthBar/default/main
+  rotate: false
+  xy: 201, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 77
+fight/healthBar/default/main
+  rotate: false
+  xy: 235, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 78
+fight/healthBar/default/main
+  rotate: false
+  xy: 269, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 79
+fight/healthBar/default/main
+  rotate: false
+  xy: 303, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 80
+fight/healthBar/default/main
+  rotate: false
+  xy: 337, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 81
+fight/healthBar/default/main
+  rotate: false
+  xy: 439, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 82
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 83
+fight/healthBar/default/main
+  rotate: false
+  xy: 507, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 84
+fight/healthBar/default/main
+  rotate: false
+  xy: 541, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 85
+fight/healthBar/default/main
+  rotate: false
+  xy: 575, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 86
+fight/healthBar/default/main
+  rotate: false
+  xy: 609, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 87
+fight/healthBar/default/main
+  rotate: false
+  xy: 643, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 88
+fight/healthBar/default/main
+  rotate: false
+  xy: 677, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 89
+fight/healthBar/default/main
+  rotate: false
+  xy: 711, 735
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 90
+fight/healthBar/default/main
+  rotate: false
+  xy: 745, 741
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 91
+fight/healthBar/default/main
+  rotate: false
+  xy: 779, 741
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 92
+fight/healthBar/default/main
+  rotate: false
+  xy: 405, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 93
+fight/healthBar/default/main
+  rotate: false
+  xy: 371, 764
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 94
+fight/healthBar/default/main
+  rotate: false
+  xy: 439, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 95
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 96
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 97
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 98
+fight/healthBar/default/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 99
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 477, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 511, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 545, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 579, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 6
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 613, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 7
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 647, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 8
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 681, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 9
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 715, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 10
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 749, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 11
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 783, 563
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 12
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 405, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 13
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 371, 628
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 14
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 167, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 15
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 133, 639
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 16
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 201, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 17
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 235, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 18
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 269, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 19
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 303, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 20
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 337, 629
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 21
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 439, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 22
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 23
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 507, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 24
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 541, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 25
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 575, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 26
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 609, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 27
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 643, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 28
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 677, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 29
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 711, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 30
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 745, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 31
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 779, 597
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 32
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 405, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 33
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 371, 662
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 34
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 167, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 35
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 133, 673
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 36
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 201, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 37
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 235, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 38
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 269, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 39
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 303, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 40
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 337, 663
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 41
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 439, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 42
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 43
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 507, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 44
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 541, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 45
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 575, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 46
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 609, 631
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 47
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 643, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 48
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 677, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 49
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 711, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 50
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 745, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 51
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 779, 649
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 52
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 405, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 53
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 371, 696
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 54
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 167, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 55
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 133, 707
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 56
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 201, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 57
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 235, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 58
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 269, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 59
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 303, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 60
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 337, 697
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 61
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 439, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 62
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 63
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 507, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 64
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 541, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 65
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 575, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 66
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 609, 665
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 67
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 643, 683
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 68
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 677, 683
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 69
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 711, 701
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 70
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 745, 701
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 71
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 779, 701
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 72
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 405, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 73
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 371, 730
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 74
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 167, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 75
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 133, 741
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 76
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 201, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 77
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 235, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 78
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 269, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 79
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 303, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 80
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 337, 731
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 81
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 439, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 82
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 83
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 507, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 84
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 541, 699
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 85
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 575, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 86
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 609, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 87
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 643, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 88
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 677, 717
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 89
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 711, 735
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 90
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 745, 741
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 91
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 779, 741
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 92
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 405, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 93
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 371, 764
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 94
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 439, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 95
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 96
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 97
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 98
+fight/healthBar/reversed/main
+  rotate: false
+  xy: 473, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 99
+fight/slots/basic/burning/main
+  rotate: false
+  xy: 745, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 0
+fight/slots/basic/burning/main
+  rotate: false
+  xy: 779, 631
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 1
+fight/slots/basic/burning/main
+  rotate: false
+  xy: 711, 683
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 2
+fight/slots/basic/default/main
+  rotate: false
+  xy: 761, 829
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 1
+fight/slots/basic/hovered/main
+  rotate: false
+  xy: 66, 829
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 1
+fight/slots/basic/onTurn/main
+  rotate: false
+  xy: 84, 829
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 1
+fight/slots/basic/targeted/main
+  rotate: false
+  xy: 102, 829
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 1
+fight/status/stun/default/main
+  rotate: false
+  xy: 827, 308
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 0
+fight/status/stun/default/main
+  rotate: false
+  xy: 827, 308
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 1
+fight/status/stun/default/main
+  rotate: false
+  xy: 827, 317
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 2
+fight/status/stun/default/main
+  rotate: false
+  xy: 827, 326
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 3
+fight/status/stun/default/main
+  rotate: false
+  xy: 827, 335
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 4
+fight/status/stun/default/main
+  rotate: false
+  xy: 827, 344
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 5
+fight/status/stun/default/main
+  rotate: false
+  xy: 827, 353
+  size: 7, 7
+  orig: 7, 7
+  offset: 0, 0
+  index: 6
+fight/summons/flamingSword/cast/main
+  rotate: false
+  xy: 801, 815
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/cast/main
+  rotate: false
+  xy: 819, 815
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/flamingSword/cast/main
+  rotate: false
+  xy: 167, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/flamingSword/cast/main
+  rotate: false
+  xy: 133, 775
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/flamingSword/cast/main
+  rotate: false
+  xy: 185, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/summons/flamingSword/death/main
+  rotate: false
+  xy: 203, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/death/main
+  rotate: false
+  xy: 221, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/flamingSword/death/main
+  rotate: false
+  xy: 239, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/flamingSword/death/main
+  rotate: false
+  xy: 257, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/flamingSword/deathStunned/main
+  rotate: false
+  xy: 203, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/deathStunned/main
+  rotate: false
+  xy: 221, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/flamingSword/deathStunned/main
+  rotate: false
+  xy: 239, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/flamingSword/deathStunned/main
+  rotate: false
+  xy: 257, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/flamingSword/default/main
+  rotate: false
+  xy: 275, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/default/main
+  rotate: false
+  xy: 293, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/flamingSword/default/main
+  rotate: false
+  xy: 311, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/flamingSword/default/main
+  rotate: false
+  xy: 329, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/flamingSword/hurt/main
+  rotate: false
+  xy: 347, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/hurt/main
+  rotate: false
+  xy: 167, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/flamingSword/hurt/main
+  rotate: false
+  xy: 185, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/flamingSword/hurt/main
+  rotate: false
+  xy: 203, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/flamingSword/profile/default/main
+  rotate: false
+  xy: 275, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/profile/onTurn/main
+  rotate: false
+  xy: 275, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/profile/onTurn/main
+  rotate: false
+  xy: 293, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/flamingSword/profile/onTurn/main
+  rotate: false
+  xy: 311, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/flamingSword/profile/onTurn/main
+  rotate: false
+  xy: 329, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/flamingSword/stunned/main
+  rotate: false
+  xy: 275, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 221, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 239, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 257, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 275, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 293, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 311, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 329, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 347, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 8
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 365, 798
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 9
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 383, 798
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 10
+fight/summons/flamingSword/summon/main
+  rotate: false
+  xy: 347, 783
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 11
+fight/summons/flamingSword/unstunned/main
+  rotate: false
+  xy: 275, 765
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+items/abilityOrbs/fireBallOrb/default/main
+  rotate: false
+  xy: 827, 209
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+items/equipment/bloodChalice/default/main
+  rotate: false
+  xy: 401, 803
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/bootsOfSpeed/default/main
+  rotate: false
+  xy: 419, 803
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/crownOfThorns/default/main
+  rotate: false
+  xy: 437, 803
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/divineOrb/default/main
+  rotate: false
+  xy: 455, 803
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/glovesOfDamage/default/main
+  rotate: false
+  xy: 473, 803
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/healingStaff/default/main
+  rotate: false
+  xy: 491, 803
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/seashell/default/main
+  rotate: false
+  xy: 509, 803
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/shield/default/main
+  rotate: false
+  xy: 527, 818
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+items/equipment/summoningHorn/default/main
+  rotate: false
+  xy: 545, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+misc/pilesOfGold/pile01
+  rotate: false
+  xy: 563, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+misc/pilesOfGold/pile02
+  rotate: false
+  xy: 581, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+misc/pilesOfGold/pile03
+  rotate: false
+  xy: 599, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+misc/pilesOfGold/pile04
+  rotate: false
+  xy: 617, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+UI/abilities/backgrounds/background/default/main
+  rotate: false
+  xy: 67, 793
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/abilities/backgrounds/basic/default/main
+  rotate: false
+  xy: 117, 793
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/abilities/backgrounds/basic/hovered/main
+  rotate: false
+  xy: 67, 811
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/abilities/backgrounds/basic/selected/main
+  rotate: false
+  xy: 117, 811
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/abilities/backgrounds/skip/default/main
+  rotate: false
+  xy: 117, 793
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/abilities/backgrounds/skip/hovered/main
+  rotate: false
+  xy: 67, 811
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/abilities/backgrounds/skip/selected/main
+  rotate: false
+  xy: 117, 811
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/arrows/down/clicked/main
+  rotate: false
+  xy: 793, 189
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 0
+UI/arrows/down/default/main
+  rotate: false
+  xy: 811, 189
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 0
+UI/arrows/down/hovered/main
+  rotate: false
+  xy: 383, 581
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 1
+UI/arrows/down/hovered/main
+  rotate: false
+  xy: 811, 189
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 2
+UI/arrows/left/clicked/main
+  rotate: false
+  xy: 827, 1
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 0
+UI/arrows/left/default/main
+  rotate: false
+  xy: 827, 19
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 0
+UI/arrows/left/hovered/main
+  rotate: false
+  xy: 827, 37
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 1
+UI/arrows/left/hovered/main
+  rotate: false
+  xy: 827, 19
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 2
+UI/arrows/right/clicked/main
+  rotate: false
+  xy: 827, 1
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 0
+UI/arrows/right/default/main
+  rotate: false
+  xy: 827, 55
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 0
+UI/arrows/right/hovered/main
+  rotate: false
+  xy: 827, 73
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 1
+UI/arrows/right/hovered/main
+  rotate: false
+  xy: 827, 55
+  size: 8, 16
+  orig: 8, 16
+  offset: 0, 0
+  index: 2
+UI/arrows/up/clicked/main
+  rotate: false
+  xy: 793, 189
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 0
+UI/arrows/up/default/main
+  rotate: false
+  xy: 725, 829
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 0
+UI/arrows/up/hovered/main
+  rotate: false
+  xy: 743, 829
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 1
+UI/arrows/up/hovered/main
+  rotate: false
+  xy: 725, 829
+  size: 16, 8
+  orig: 16, 8
+  offset: 0, 0
+  index: 2
+UI/dialog/world/default/main
+  rotate: false
+  xy: 365, 529
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/info/ability/default/main
+  rotate: false
+  xy: 1, 793
+  size: 64, 32
+  orig: 64, 32
+  offset: 0, 0
+  index: 1
+UI/info/basic/default/main
+  rotate: false
+  xy: 133, 199
+  size: 32, 64
+  orig: 32, 64
+  offset: 0, 0
+  index: 1
+UI/info/general/default/main
+  rotate: false
+  xy: 117, 793
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: 1
+UI/profiles/basic/default/main
+  rotate: false
+  xy: 813, 701
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: 0
+UI/profiles/basic/hovered/main
+  rotate: false
+  xy: 813, 721
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: 0
+UI/profiles/basic/onTurn/main
+  rotate: false
+  xy: 813, 741
+  size: 18, 18
+  orig: 18, 18
+  offset: 0, 0
+  index: 0
+world/characters/uros/walkDown/main
+  rotate: false
+  xy: 635, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/characters/uros/walkDown/main_01original
+  rotate: false
+  xy: 827, 219
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
+world/characters/uros/walkDown/main
+  rotate: false
+  xy: 827, 229
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 2
+world/characters/uros/walkLeft/main
+  rotate: false
+  xy: 827, 239
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+world/characters/uros/walkLeft/main
+  rotate: false
+  xy: 827, 249
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 2
+world/characters/uros/walkRight/main
+  rotate: false
+  xy: 827, 259
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+world/characters/uros/walkRight/main
+  rotate: false
+  xy: 827, 269
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 2
+world/characters/uros/walkUp/main
+  rotate: false
+  xy: 827, 279
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 1
+world/characters/uros/walkUp/main
+  rotate: false
+  xy: 827, 289
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: 2
+world/characters/wizard/torchDown/main
+  rotate: false
+  xy: 827, 109
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 0
+world/characters/wizard/torchDown/main
+  rotate: false
+  xy: 831, 91
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 1
+world/characters/wizard/torchDown/main
+  rotate: false
+  xy: 827, 126
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 2
+world/characters/wizard/torchDown/main
+  rotate: false
+  xy: 827, 143
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 3
+world/characters/wizard/torchLeft/main
+  rotate: false
+  xy: 827, 109
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 0
+world/characters/wizard/torchLeft/main
+  rotate: false
+  xy: 831, 91
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 1
+world/characters/wizard/torchLeft/main
+  rotate: false
+  xy: 827, 126
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 2
+world/characters/wizard/torchLeft/main
+  rotate: false
+  xy: 827, 143
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 3
+world/characters/wizard/torchRight/main
+  rotate: false
+  xy: 827, 109
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 0
+world/characters/wizard/torchRight/main
+  rotate: false
+  xy: 831, 91
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 1
+world/characters/wizard/torchRight/main
+  rotate: false
+  xy: 827, 126
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 2
+world/characters/wizard/torchRight/main
+  rotate: false
+  xy: 827, 143
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 3
+world/characters/wizard/torchUp/main
+  rotate: false
+  xy: 827, 109
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 0
+world/characters/wizard/torchUp/main
+  rotate: false
+  xy: 831, 91
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 1
+world/characters/wizard/torchUp/main
+  rotate: false
+  xy: 827, 126
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 2
+world/characters/wizard/torchUp/main
+  rotate: false
+  xy: 827, 143
+  size: 5, 15
+  orig: 5, 15
+  offset: 0, 0
+  index: 3
+world/characters/wizard/walkDown/main
+  rotate: false
+  xy: 653, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/characters/wizard/walkDown/main
+  rotate: false
+  xy: 671, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/characters/wizard/walkDown/main
+  rotate: false
+  xy: 653, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/characters/wizard/walkDown/main
+  rotate: false
+  xy: 689, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+world/characters/wizard/walkLeft/main
+  rotate: false
+  xy: 707, 823
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/characters/wizard/walkLeft/main
+  rotate: false
+  xy: 167, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/characters/wizard/walkLeft/main
+  rotate: false
+  xy: 185, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/characters/wizard/walkLeft/main
+  rotate: false
+  xy: 203, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+world/characters/wizard/walkRight/main
+  rotate: false
+  xy: 221, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/characters/wizard/walkRight/main
+  rotate: false
+  xy: 239, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/characters/wizard/walkRight/main
+  rotate: false
+  xy: 257, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/characters/wizard/walkRight/main
+  rotate: false
+  xy: 275, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+world/characters/wizard/walkUp/main
+  rotate: false
+  xy: 293, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/characters/wizard/walkUp/main
+  rotate: false
+  xy: 311, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/characters/wizard/walkUp/main
+  rotate: false
+  xy: 293, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/characters/wizard/walkUp/main
+  rotate: false
+  xy: 329, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+world/interactive/chests/woodenChest/default/main
+  rotate: false
+  xy: 1, 827
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 0
+world/interactive/chests/woodenChest/opened/main
+  rotate: false
+  xy: 19, 827
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 0
+world/interactive/chests/woodenChest/opening/main
+  rotate: false
+  xy: 37, 827
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 0
+world/interactive/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+world/interactive/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 265
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+world/interactive/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 331
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+world/interactive/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 397
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+world/interactive/enemies/cheshireCat/default/main
+  rotate: false
+  xy: 67, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+world/interactive/enemies/demon/default/main
+  rotate: false
+  xy: 497, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+world/interactive/enemies/demon/default/main
+  rotate: false
+  xy: 529, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+world/interactive/enemies/demon/default/main
+  rotate: false
+  xy: 529, 67
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 2
+world/interactive/enemies/demon/default/main
+  rotate: false
+  xy: 529, 133
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 3
+world/interactive/enemies/demon/default/main
+  rotate: false
+  xy: 563, 199
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 4
+world/interactive/enemies/demon/default/main
+  rotate: false
+  xy: 595, 1
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 5
+world/interactive/enemies/reaper/default/main
+  rotate: false
+  xy: 299, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 0
+world/interactive/enemies/reaper/default/main
+  rotate: false
+  xy: 365, 463
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: 1
+world/interactive/enemies/redSkull/default/main
+  rotate: false
+  xy: 639, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/interactive/enemies/redSkull/default/main
+  rotate: false
+  xy: 657, 787
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/interactive/enemies/skeleton/default/main
+  rotate: false
+  xy: 567, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/interactive/enemies/skeleton/default/main
+  rotate: false
+  xy: 585, 805
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/interactive/house/door/up/default/main
+  rotate: false
+  xy: 347, 801
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/interactive/house/door/up/opening/main
+  rotate: false
+  xy: 365, 816
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/interactive/house/door/up/opening/main
+  rotate: false
+  xy: 383, 816
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/obstacles/house/bed/default/main
+  rotate: false
+  xy: 813, 675
+  size: 16, 24
+  orig: 16, 24
+  offset: 0, 0
+  index: 0
+world/obstacles/house/bookshelf/default/main
+  rotate: false
+  xy: 401, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/obstacles/house/clock/default/main
+  rotate: false
+  xy: 823, 529
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 0
+world/obstacles/house/closet/default/main
+  rotate: false
+  xy: 817, 563
+  size: 16, 32
+  orig: 16, 32
+  offset: 0, 0
+  index: 0
+world/obstacles/house/cooker/default/main
+  rotate: false
+  xy: 419, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/obstacles/house/cooker/lit/main
+  rotate: false
+  xy: 437, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/obstacles/house/cooker/lit/main
+  rotate: false
+  xy: 455, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/obstacles/house/cooker/lit/main
+  rotate: false
+  xy: 473, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+world/obstacles/house/cooker/lit/main
+  rotate: false
+  xy: 491, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+world/obstacles/house/cooker/lit/main
+  rotate: false
+  xy: 455, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+world/obstacles/house/couch/default/main
+  rotate: false
+  xy: 745, 683
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: 0
+world/obstacles/house/door/up/default/main
+  rotate: false
+  xy: 813, 597
+  size: 20, 24
+  orig: 20, 24
+  offset: 0, 0
+  index: 0
+world/obstacles/house/door/up/opening/main
+  rotate: false
+  xy: 813, 623
+  size: 20, 24
+  orig: 20, 24
+  offset: 0, 0
+  index: 1
+world/obstacles/house/door/up/opening/main
+  rotate: false
+  xy: 813, 649
+  size: 20, 24
+  orig: 20, 24
+  offset: 0, 0
+  index: 2
+world/obstacles/house/drawer/default/main
+  rotate: false
+  xy: 203, 819
+  size: 16, 13
+  orig: 16, 13
+  offset: 0, 0
+  index: 0
+world/obstacles/house/table/default/main
+  rotate: false
+  xy: 365, 581
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 0
+world/obstacles/house/walls/classicWall/default/main
+  rotate: false
+  xy: 507, 733
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+world/obstacles/house/walls/upFiller/default/main
+  rotate: false
+  xy: 509, 821
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+world/obstacles/whiteBox/default/main
+  rotate: false
+  xy: 827, 182
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: 1
+world/static/background/floor/floor
+  rotate: false
+  xy: 167, 819
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+world/static/background/grass/grass
+  rotate: false
+  xy: 299, 529
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+world/static/foreground/walls/wooden/wall
+  rotate: false
+  xy: 827, 91
+  size: 2, 16
+  orig: 2, 16
+  offset: 0, 0
+  index: -1

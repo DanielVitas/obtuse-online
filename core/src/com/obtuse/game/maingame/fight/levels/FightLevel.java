@@ -1,0 +1,176 @@
+package com.obtuse.game.maingame.fight.levels;
+
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
+import com.badlogic.gdx.utils.Array;
+import com.obtuse.game.Fonts;
+import com.obtuse.game.abilities.AbilityInstance;
+import com.obtuse.game.abilities.all.SkipTurn;
+import com.obtuse.game.buttons.GameButton;
+import com.obtuse.game.buttons.SquareButton;
+import com.obtuse.game.gameobjects.fight.FightObject;
+import com.obtuse.game.gameobjects.fight.holders.ability.AbilityHolder;
+import com.obtuse.game.gameobjects.fight.holders.fightObject.Holder;
+import com.obtuse.game.maingame.Level;
+import com.obtuse.game.maingame.fight.Arena;
+import com.obtuse.game.maingame.fight.FightGame;
+import com.obtuse.game.maingame.fight.Turn;
+import com.obtuse.game.maingame.fight.levels.stages.BackgroundStage;
+import com.obtuse.game.maingame.fight.levels.stages.ArenaStage;
+import com.obtuse.game.maingame.fight.levels.stages.InfoStage;
+import com.obtuse.game.screens.MyScreen;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.obtuse.game.Obtuse.h;
+import static com.obtuse.game.Obtuse.w;
+
+public class FightLevel extends Level {
+    public FightGame game;
+    public Map<GameButton, Holder> buttonMap = new HashMap<GameButton, Holder>();
+    public Map<GameButton, AbilityHolder> abilityMap = new HashMap<GameButton, AbilityHolder>();
+    public AbilityInstance selectedAbility;
+    public Holder selectedTarget;
+    public boolean targeting = false;
+    public boolean back = false;
+
+    public FightLevel(MyScreen screen, FightGame game) {
+        super(screen);
+        this.game = game;
+        add(new BackgroundStage(stage(0)));
+        add(new ArenaStage(stage(1)));
+        add(new InfoStage(stage(2)));
+    }
+
+    public void switchArena(Arena arena) {
+        for (Holder holder : buttonMap.values()) {
+            removeHolder(holder);
+        }
+        ((ArenaStage) stages.get(1)).switchArena(arena);
+        buttonMap.clear();
+        for (Array<Holder> holderArray : new Array[]{arena.heroHolders, arena.enemyHolders, arena.summonHolders})
+            for (Holder holder : holderArray) {
+                addHolder(holder);
+            }
+    }
+
+    public void removeHolderInfo(Holder holder) {
+        if (holder.hpLabel != null)
+            holder.hpLabel.remove();
+        if (holder.healthBar != null)
+            holder.healthBar.remove();
+    }
+
+    public void removeHolder(Holder holder) {
+        removeHolderInfo(holder);
+        if (holder.fightObject != null)
+            holder.fightObject.remove();
+    }
+
+    public void addHolder(Holder holder) {
+        holder.createAndAdd(stage(1));
+        addButton(holder);
+        ((InfoStage) stages.get(2)).addHPLabel(holder);
+    }
+
+    public void refreshButtons(Arena arena) {
+        buttonMap.clear();
+        for (Array<Holder> holderArray : new Array[]{arena.heroHolders, arena.enemyHolders, arena.summonHolders}) {
+            for (Holder holder : holderArray)
+                addButton(holder);
+        }
+    }
+
+    public void addButton(Holder holder) {
+        buttonMap.put(new SquareButton(holder.getX(), holder.getY(), holder.getWidth(), holder.getHeight()), holder);
+    }
+
+    public void choice(FightObject caster) {
+        chooseAbilityAndTarget(caster);
+        abilityMap.clear();
+        selectedAbility.run(caster, selectedTarget, this);
+    }
+
+    private void chooseAbilityAndTarget(FightObject caster) {
+        selectedAbility = null;
+        while (selectedAbility == null) {
+            chooseAbility(caster);
+            chooseTarget(caster);
+        }
+    }
+
+    private void chooseAbility(FightObject caster) {
+        ((InfoStage) stages.get(2)).choice(caster);
+        for (int i = 0; i < ((InfoStage) stages.get(2)).abilitySelectLabels.size; i++) {
+            Label label = ((InfoStage) stages.get(2)).abilitySelectLabels.get(i);
+            AbilityHolder abilityHolder = new AbilityHolder(label.getX(), label.getY(), caster.abilities.get(i),
+                    (InfoStage) stages.get(2));
+            abilityHolder.refreshPPLabel(i);
+            stage(2).addActor(abilityHolder.ppLabel);
+            abilityMap.put(new SquareButton(label.getX(), label.getY(), label.getWidth(), label.getHeight()),
+                    abilityHolder);
+        }
+        createSkip();
+        game.loseInfo();
+        ((InfoStage) stages.get(2)).installAbilitySelectLabels();
+
+        while (selectedAbility == null)
+            Turn.sleep();
+        for (AbilityHolder abilityHolder : abilityMap.values())
+            abilityHolder.ppLabel.remove();
+    }
+
+    private void chooseTarget(FightObject caster) {
+        selectedTarget = null;
+        if (selectedAbility.ability.targets.size != 0) {
+            targeting = true;
+            back = false;
+            while (selectedTarget == null) {
+                if (back) {
+                    back = false;
+                    selectedAbility = null;
+                    break;
+                }
+                Turn.sleep();
+            }
+            targeting = false;
+        }
+    }
+
+    private void createSkip() {
+        Label label = new Label("Pass", Fonts.get("fightInfoTable"));
+        label.setWidth(w(0.3f));
+        label.setHeight(InfoStage.defaultAbilityHeight * 1);
+        label.setAlignment(Align.center);
+        label.setPosition(w(InfoStage.abilityPosition[8]), h(InfoStage.abilityPosition[9]));
+        ((InfoStage) stages.get(2)).addAbilitySelectLabel(label);
+        AbilityHolder abilityHolder = new AbilityHolder(label.getX(), label.getY(), label.getWidth(), label.getHeight(),
+                new AbilityInstance(new SkipTurn()), (InfoStage) stages.get(2));
+        abilityHolder.abilityBackground.setWidth(label.getWidth());
+        abilityMap.put(new SquareButton(label.getX(), label.getY(), label.getWidth(), label.getHeight()),
+                abilityHolder);
+    }
+
+    public void gatherInfo(Holder holder) {
+        ((InfoStage) stages.get(2)).setup(holder);
+    }
+
+    public void gatherInfo(AbilityInstance ability) {
+        ((InfoStage) stages.get(2)).setup(ability);
+    }
+
+    public void loseInfo() {
+        ((InfoStage) stages.get(2)).clearInfoLabels();
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+    @Override
+    public void basic() {
+    }
+}

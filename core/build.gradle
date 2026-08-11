@@ -1,0 +1,22 @@
+plugins {
+    id 'java-library'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+sourceSets.main.java.srcDirs = ['src/']
+compileJava.options.encoding = 'UTF-8'
+
+dependencies {
+    // api, not implementation: the android module compiles against these types too.
+    api "com.badlogicgames.gdx:gdx:$gdxVersion"
+    api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+    api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+    // gdx-bullet, gdx-controllers, ashley and gdx-ai were declared in 2018 but no class
+    // in core/src imports them, so they are gone along with the 31 MB of bullet natives.
+    // box2dlights went too: the whole game created exactly one light, and it has no
+    // dependable web build. See BUILD.md.
+}

@@ -1,0 +1,25 @@
+# Gradle / build output
+.gradle/
+build/
+*/build/
+!src/**/build/
+
+# Native libs fetched by copyAndroidNatives — never commit these (see CLAUDE.md)
+android/libs/
+
+# Machine-specific SDK path
+local.properties
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Conversion scratch (safe to delete entirely)
+_to_delete/

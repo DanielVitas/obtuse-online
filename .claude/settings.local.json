@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"/Users/daniel/Documents/claude-folder/18 obtuse android\" && cat build.gradle; echo \"=== gradle wrapper ===\"; grep distributionUrl gradle/wrapper/gradle-wrapper.properties; echo \"=== installed platforms ===\"; ls $HOME/Library/Android/sdk/platforms/)",
+      "Bash(export ANDROID_HOME=$HOME/Library/Android/sdk)",
+      "Bash(cd \"/Users/daniel/Documents/claude-folder/18 obtuse android\" *)",
+      "Bash(/usr/libexec/java_home -V)",
+      "Bash(nohup python3 -m http.server 8099 --bind 127.0.0.1)",
+      "Bash(echo \"server pid $!\")",
+      "Bash(curl -sI http://127.0.0.1:8099/index.html)",
+      "Bash(curl -sS -o /dev/null -w \"index.html -> HTTP %{http_code}\\\\n\" http://127.0.0.1:8099/index.html)",
+      "Bash(curl -sS -o /dev/null -w \"app.js -> HTTP %{http_code} \\(%{size_download} bytes\\)\\\\n\" http://127.0.0.1:8099/app.js)",
+      "Bash(curl -s http://127.0.0.1:8099/app.js)",
+      "Bash(curl -sI http://127.0.0.1:8099/app.js)",
+      "Bash(nohup python3 -m http.server 8098 --bind 127.0.0.1)",
+      "Bash(curl -sI http://127.0.0.1:8098/index.html)",
+      "Bash(javap -c -p com/github/xpenatan/gdx/teavm/backends/web/WebApplication.class)",
+      "Bash(javap -c -p com/github/xpenatan/gdx/teavm/backends/web/config/backend/WebBackend.class)",
+      "Bash(javap -c -p bwjar/com/github/xpenatan/gdx/teavm/backends/web/WebApplication.class)",
+      "Bash(javap -c -p com/github/xpenatan/gdx/teavm/backends/shared/config/compiler/TeaCompiler.class)",
+      "Bash(awk '/addReflectionClass\\\\\\(java.lang.String\\\\\\)/,/^$/')",
+      "Bash(javap -p com/github/xpenatan/gdx/teavm/backends/shared/config/reflection/DefaultReflectionListener.class)",
+      "Bash(javap -c -p com/github/xpenatan/gdx/teavm/backends/shared/config/reflection/DefaultReflectionListener.class)",
+      "Bash(awk '/addClassOrPackage/,/^$/')",
+      "Bash(javap -p com/github/xpenatan/gdx/teavm/backends/shared/config/compiler/TeaBackend.class)",
+      "Bash(javap -c -p com/github/xpenatan/gdx/teavm/backends/shared/config/compiler/TeaBackend.class)",
+      "Bash(javap -p com/github/xpenatan/gdx/teavm/backends/web/config/backend/WebBackend.class)",
+      "Bash(xargs kill)",
+      "Bash(curl -s http://127.0.0.1:8099/index.html)",
+      "Bash(curl -sS -o /dev/null -w \"HTTP %{http_code} size=%{size_download}\\\\n\" http://127.0.0.1:8099/app.js)",
+      "Bash(awk '/getType/,/areturn|ireturn/')",
+      "Bash(env -u ANDROID_HOME WEB_ONLY=1 ./gradlew :teavm:buildRelease --console=plain)",
+      "Bash(git init *)",
+      "Bash(git config *)",
+      "Bash(chmod +x gradlew)",
+      "Bash(git add *)",
+      "Bash(xargs -0 du -h)"
+    ]
+  }
+}

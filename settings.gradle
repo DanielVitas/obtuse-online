@@ -1,0 +1,33 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+        // The gdx-teavm web backend and its transitive gwt/teavm artifacts are not on
+        // Maven Central. Additive — the android/core modules resolve exactly as before.
+        maven { url = 'https://jitpack.io' }
+        maven { url = 'https://teavm.org/maven/repository/' }
+    }
+}
+
+rootProject.name = 'Obtuse'
+
+// core is shared by both platforms; teavm is the browser backend (see teavm/build.gradle).
+// The desktop/, ios/ and ios-moe/ folders are still on disk but not in the build: RoboVM
+// and Multi-OS Engine are no longer resolvable.
+include 'core', 'teavm'
+
+// The Android app applies the Android Gradle plugin, which needs the Android SDK just to
+// configure. A web-only build (CI / GitHub Pages) sets WEB_ONLY=1 to leave :android out,
+// so the browser bundle builds with nothing but a JDK. Local Android builds are unaffected
+// (WEB_ONLY is unset, so :android is included as before).
+if (System.getenv('WEB_ONLY') == null) {
+    include 'android'
+}
