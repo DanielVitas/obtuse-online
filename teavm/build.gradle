@@ -99,7 +99,7 @@ tasks.register('buildRelease', JavaExec) {
     dependsOn classes
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectRotatePrompt() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
 }
 
 // Same, with debug info + source maps and no obfuscation — slower, but debuggable.
@@ -110,7 +110,7 @@ tasks.register('buildDebug', JavaExec) {
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
     args += ['debug']
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectRotatePrompt() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
 }
 
 // Build (debug) then serve the finished webapp at http://localhost:8080. We do NOT use the

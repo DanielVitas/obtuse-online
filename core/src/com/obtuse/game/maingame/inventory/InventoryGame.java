@@ -56,8 +56,11 @@ public class InventoryGame extends GameGame {
         if (Gdx.app.getType() == Application.ApplicationType.Desktop)
             return;
         screen.stage(2).clear();
+        // Height off the shorter edge so the button isn't absurdly tall in portrait (see the
+        // same reasoning in WorldGame.buildTouchControls); landscape is unchanged (min == height).
+        float unit = Math.min(Obtuse.width, Obtuse.height);
         backButton = new TouchButton(screen.stage(2), "Back", "fightInfoTable",
-                Obtuse.w(0.02f), Obtuse.h(0.86f), Obtuse.w(0.16f), Obtuse.h(0.10f));
+                Obtuse.w(0.02f), Obtuse.h(1f) - unit * 0.13f, Obtuse.w(0.16f), unit * 0.10f);
     }
 
     public static void wait(float duration) {

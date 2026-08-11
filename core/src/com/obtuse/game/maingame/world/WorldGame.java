@@ -93,23 +93,27 @@ public class WorldGame extends GameGame {
         ui.clear();
         // One cell of the movement cross. The arrow art inside is drawn at its own
         // aspect ratio (see TouchButton) - the cell is the touch target, not the picture.
-        float cell = Obtuse.h(0.17f);
+        // Size the controls off the SHORTER screen edge (min of width/height) instead of the
+        // height: in landscape that's the height, so this is identical to before, but in
+        // portrait the height is huge and height-based controls ballooned across the screen.
+        float unit = Math.min(Obtuse.width, Obtuse.height);
+        float cell = unit * 0.17f;
         float x = Obtuse.w(0.02f);
-        float y = Obtuse.h(0.04f);
+        float y = unit * 0.04f;
         padDown = new TouchButton(ui, "UI/arrows/down/default/main", x + cell, y, cell, cell);
         padLeft = new TouchButton(ui, "UI/arrows/left/default/main", x, y + cell, cell, cell);
         padRight = new TouchButton(ui, "UI/arrows/right/default/main", x + 2 * cell, y + cell, cell, cell);
         padUp = new TouchButton(ui, "UI/arrows/up/default/main", x + cell, y + 2 * cell, cell, cell);
 
         // Bag: top left, out of the way of both thumbs, with an icon instead of a word.
-        float bag = Obtuse.h(0.17f);
+        float bag = unit * 0.17f;
         bagButton = new TouchButton(ui, TouchIcons.bag(),
-                Obtuse.w(0.015f), Obtuse.h(1f) - bag - Obtuse.h(0.03f), bag, bag);
+                Obtuse.w(0.015f), Obtuse.h(1f) - bag - unit * 0.03f, bag, bag);
 
         // Use: a big silver disc under the right thumb, showing what it will do.
-        float radius = Obtuse.h(0.19f);
+        float radius = unit * 0.19f;
         useButton = new UseButton(ui,
-                Obtuse.w(1f) - radius - Obtuse.h(0.05f), radius + Obtuse.h(0.05f), radius);
+                Obtuse.w(1f) - radius - unit * 0.05f, radius + unit * 0.05f, radius);
     }
 
     /** What pressing Use would actually trigger right now, or null if nothing is in reach. */
