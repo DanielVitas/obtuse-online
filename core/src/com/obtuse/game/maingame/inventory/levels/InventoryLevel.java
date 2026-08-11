@@ -22,6 +22,7 @@ public class InventoryLevel extends Level {
     public Array<GameButton> inventoryButtons = new Array<GameButton>();
     public Array<GameButton> heroButtons = new Array<GameButton>();
     public Array<GameButton> arrowButtons = new Array<GameButton>();
+    public Array<GameButton> heroSelectButtons = new Array<GameButton>();
     public Hero hero;
     public int index = 0;
 
@@ -39,20 +40,48 @@ public class InventoryLevel extends Level {
         setInventoryButtons();
         setHeroButtons();
         setArrowButtons();
+        setHeroSelectButtons();
     }
 
+    // (Re)build the whole screen for the current orientation: lay the party out side by side (no
+    // animation), refresh the selected hero's tag/stats + item rows. Used on open and after rotation.
     public void changeHero(int indexChange) {
-        ((InfoStage) stages.get(2)).clearAdditionalLabels();
-        if (hero != null)
-            hero.remove();
         index += indexChange;
         while (index < 0)
             index += Party.party.size;
-        Hero hero = Party.party.get(index % Party.party.size);
-        this.hero = hero;
-        ((InventoryStage) stages.get(1)).makeHero(hero);
-        ((InfoStage) stages.get(2)).addHeroName(hero);
+        index %= Party.party.size;
+        this.hero = Party.party.get(index);
+        ((InventoryStage) stages.get(1)).placeHeroes(Party.party, index);
+        refreshHeroInfo();
         setup();
+    }
+
+    // Tap another hero: walk it forward, the old one back into line, and swap the shown items.
+    public void selectHero(int newIndex) {
+        newIndex %= Party.party.size;
+        if (newIndex == index)
+            return;
+        index = newIndex;
+        this.hero = Party.party.get(index);
+        ((InventoryStage) stages.get(1)).animateSelect(index);
+        refreshHeroInfo();
+        setup();
+    }
+
+    private void refreshHeroInfo() {
+        InfoStage info = (InfoStage) stages.get(2);
+        info.clearAdditionalLabels();
+        info.addHeroName(hero, (InventoryStage) stages.get(1));       // tag only on the selected hero
+        info.addHeroStats(hero, (InventoryStage) stages.get(1));
+    }
+
+    public void setHeroSelectButtons() {
+        heroSelectButtons.clear();
+        InventoryStage inv = (InventoryStage) stages.get(1);
+        for (int i = 0; i < inv.heroes.size; i++) {
+            float[] r = inv.heroSlotRect(i);
+            heroSelectButtons.add(new SquareButton(r[0], r[1], r[2], r[3]));
+        }
     }
 
     public void equip(Item item) {

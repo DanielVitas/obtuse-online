@@ -101,6 +101,11 @@ public class InventoryGame extends GameGame {
         }
     }
 
+    private void selectHero(int i) {
+        if (allow())
+            ((InventoryLevel) level).selectHero(i);
+    }
+
     private void clicked(SimpleArrow arrow, int index) {
         if (allow()) {
             wait(arrow.play("clicked"));
@@ -180,6 +185,14 @@ public class InventoryGame extends GameGame {
         unprojectTouch(0);
         touch:
         {
+            for (int i = 0; i < ((InventoryLevel) level).heroSelectButtons.size; i++) {
+                GameButton button = ((InventoryLevel) level).heroSelectButtons.get(i);
+                if (button.check(touchPoint.x, touchPoint.y)) {
+                    if (touchReleased)
+                        selectHero(i);
+                    break touch;
+                }
+            }
             for (int i = 0; i < ((InventoryLevel) level).heroButtons.size; i++) {
                 GameButton button = ((InventoryLevel) level).heroButtons.get(i);
                 if (button.check(touchPoint.x, touchPoint.y)) {
@@ -231,6 +244,14 @@ public class InventoryGame extends GameGame {
             camera(0).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             touch:
             {
+                for (int i = 0; i < ((InventoryLevel) level).heroSelectButtons.size; i++) {
+                    GameButton button = ((InventoryLevel) level).heroSelectButtons.get(i);
+                    if (button.check(touchPoint.x, touchPoint.y)) {
+                        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+                            selectHero(i);
+                        break touch;
+                    }
+                }
                 for (int i = 0; i < ((InventoryLevel) level).heroButtons.size; i++) {
                     GameButton button = ((InventoryLevel) level).heroButtons.get(i);
                     if (button.check(touchPoint.x, touchPoint.y)) {

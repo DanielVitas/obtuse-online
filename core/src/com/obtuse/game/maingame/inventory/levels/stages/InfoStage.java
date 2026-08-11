@@ -87,9 +87,9 @@ public class InfoStage extends GameStage {
 
         Label label = new Label(text, Fonts.get("inventoryInfoTableTitle"));
         label.setColor(Border.ROYAL_BRIGHTGOLD);
-        label.setWidth(w(0.3f));
-        label.setAlignment(Align.center);
-        label.setPosition(sx + sw / 2f - label.getWidth() / 2f, sy + sh + h(0.004f));
+        label.setWidth(sw);
+        label.setAlignment(Align.left);
+        label.setPosition(sx, sy + sh + h(0.004f));
         areaTitles.add(label);
         add(label);
     }
@@ -122,15 +122,31 @@ public class InfoStage extends GameStage {
         additionalLabels.clear();
     }
 
-    public void addHeroName(Hero hero) {
+    // Name tag over the SELECTED hero's head (only the selected hero shows one).
+    public void addHeroName(Hero hero, InventoryStage inv) {
         Label name = new Label(hero.getName(), Fonts.get("fightInfoTable"));
-        name.setWidth(w(0.2f));
+        name.setColor(Border.ROYAL_TEXT);
+        name.setWidth(w(0.25f));
         name.setWrap(true);
-        name.setAlignment(Align.top);
-        name.setPosition(hero.getX() / cameraWidth * w(1) + hero.getWidth() / 2 / cameraWidth * w(1) - name.getWidth() / 2,
-                hero.getY() / cameraWidth * ratio * h(1) - name.getHeight() - h(0.01f));
+        name.setAlignment(Align.center);
+        name.setPosition(inv.selectedCenterXWorld() / cameraWidth * w(1) - name.getWidth() / 2,
+                inv.selectedTopYWorld() / cameraWidth * ratio * h(1) + h(0.006f));
         additionalLabels.add(name);
         add(name);
+    }
+
+    // HP + SPD for the shown hero, written between the hero and the Moves box.
+    public void addHeroStats(Hero hero, InventoryStage inv) {
+        Label stats = new Label(hero.hp + " HP    " + hero.speed + " SPD",
+                Fonts.get("inventoryInfoTableContent"));
+        stats.setColor(Border.ROYAL_TEXT);
+        float sw = w(0.34f);
+        stats.setWidth(sw);
+        stats.setAlignment(Align.center);
+        stats.setPosition(inv.selectedCenterXWorld() / cameraWidth * w(1) - sw / 2,
+                inv.statsRowY() / cameraWidth * ratio * h(1));
+        additionalLabels.add(stats);
+        add(stats);
     }
 
     private void addItemLabels(Array items) {

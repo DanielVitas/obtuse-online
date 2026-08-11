@@ -56,13 +56,15 @@ public class InfoStage extends GameStage {
     }
 
     public void choice(FightObject caster) {
+        // Name inset from the box border and pushed to the TOP, leaving room below-right for the PP.
+        float mx = defaultAbilityWidth * 0.09f, my = defaultAbilityHeight * 0.1f;
         for (int i = 0; i < caster.abilities.size; i++) {
             Label name = new Label(caster.abilities.get(i).getName(), Fonts.get("fightInfoTable"));
-            name.setWidth(defaultAbilityWidth);
-            name.setHeight(defaultAbilityHeight);
+            name.setWidth(defaultAbilityWidth - 2 * mx);
+            name.setHeight(defaultAbilityHeight - 2 * my);
             name.setWrap(true);
-            name.setAlignment(Align.center);
-            name.setPosition(w(abilityPosition[2 * i]), h(abilityPosition[2 * i + 1]));
+            name.setAlignment(Align.top);
+            name.setPosition(w(abilityPosition[2 * i]) + mx, h(abilityPosition[2 * i + 1]) + my);
             addAbilitySelectLabel(name);
         }
     }

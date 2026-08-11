@@ -55,32 +55,32 @@ public class AbilityHolder {
         stage.addAbilityBackground(abilityBackground);
     }
 
+    private static final Color PP_DISABLED = new Color(0.5f, 0.5f, 0.55f, 1f);
+
     public void refreshPPLabel(int index) {
         if (ppLabel != null) {
             int ppRemaining = ability.pp - ability.ppUsed;
-            ppLabel.setText(Integer.toString(ppRemaining));
-            if (ppRemaining == 0)
-                ppLabel.setColor(Color.RED);
-            else
-                ppLabel.setColor(Color.GREEN);
-            switch (index) {
-                case 0:
-                    ppLabel.setPosition(this.x + ppEdge[0],
-                            this.y + abilityBackground.getHeight() - ppLabel.getHeight() - ppEdge[1]);
-                    break;
-                case 1:
-                    ppLabel.setPosition(this.x + abilityBackground.getWidth() - ppLabel.getWidth() - ppEdge[0],
-                            this.y + abilityBackground.getHeight() - ppLabel.getHeight() - ppEdge[1]);
-                    break;
-                case 2:
-                    ppLabel.setPosition(this.x + ppEdge[0], this.y + ppEdge[1]);
-                    break;
-                case 3:
-                    ppLabel.setPosition(this.x + abilityBackground.getWidth() - ppLabel.getWidth() - ppEdge[0],
-                            this.y + ppEdge[1]);
-                    break;
-            }
+            boolean empty = ppRemaining <= 0;
+            ppLabel.setText(toRoman(ppRemaining));
+            ppLabel.setColor(empty ? PP_DISABLED : com.obtuse.game.gameobjects.UI.Border.ROYAL_BRIGHTGOLD);
+            // Below-right of the (now top-aligned) move name.
+            float bw = abilityBackground.getWidth(), bh = abilityBackground.getHeight();
+            ppLabel.setSize(bw * 0.5f, bh * 0.34f);
+            ppLabel.setAlignment(Align.right);
+            ppLabel.setPosition(this.x + bw * 0.45f, this.y + bh * 0.1f);
+            abilityBackground.setDisabled(empty);
         }
+    }
+
+    /** 1..N as Roman numerals; 0 shows as "0" (the box is greyed out anyway). */
+    private static String toRoman(int n) {
+        if (n <= 0) return "0";
+        int[] vals = {10, 9, 5, 4, 1};
+        String[] syms = {"X", "IX", "V", "IV", "I"};
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < vals.length; i++)
+            while (n >= vals[i]) { sb.append(syms[i]); n -= vals[i]; }
+        return sb.toString();
     }
 
     public float getX() {

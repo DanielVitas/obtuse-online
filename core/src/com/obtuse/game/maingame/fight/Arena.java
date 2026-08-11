@@ -161,9 +161,22 @@ public abstract class Arena {
         array.reverse();
     }
 
+    // Set when the order was already computed (by preorder(), for the summon sequence) so the first
+    // conduct() uses that exact order instead of re-shuffling.
+    private boolean preordered = false;
+
+    /** Compute the turn order now (so the summon can appear in the exact first-turn order). */
+    public void preorder() {
+        order();
+        preordered = true;
+    }
+
     public void conduct() {
         check();
-        order();
+        if (preordered)
+            preordered = false;
+        else
+            order();
         createProfiles();
         phase(beginingPhaseEvents);
         check();
@@ -254,7 +267,7 @@ public abstract class Arena {
         return e;
     }
 
-    private void order() {
+    public void order() {
         fighterOrder.clear();
         for (FightObject object : enemies)
             if (object.alive())

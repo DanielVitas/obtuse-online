@@ -24,7 +24,6 @@ import com.obtuse.game.maingame.fight.levels.stages.InfoStage;
 import com.obtuse.game.progress.ProgressKeeper;
 import com.obtuse.game.screens.MyScreen;
 
-import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 
 import static com.obtuse.game.Obtuse.h;
@@ -59,24 +58,21 @@ public class FightGame extends GameGame {
         level.create();
         //level.stage(2).addActor(new BackgroundBackground(w(0.4f), h(0.075f), w(0.2f), h(0.15f)));
         fight.setup(this);
-        // Hide everyone (and their health bars) and record them in first-turn order (fastest first).
-        // The actual sequential summon runs at the START of the combat turn (runAll), which has the
-        // proper coroutine context so Turn.sleep() actually pauses between entrances.
-        summonOrder.clear();
+        // Hide everyone (and their health bars). The actual sequential summon runs at the START of
+        // the combat turn (runAll), which has the proper coroutine context so Turn.sleep() pauses.
         for (Array<Holder> holderArray : new Array[]{arenas.get(0).heroHolders, arenas.get(0).enemyHolders, arenas.get(0).summonHolders})
             for (final Holder holder : holderArray)
                 if (holder.fightObject != null) {
                     holder.fightObject.setVisible(false);
                     if (holder.healthBar != null)
                         holder.healthBar.setVisible(false);
-                    summonOrder.add(holder.fightObject);
                 }
-        summonOrder.sort(new Comparator<FightObject>() {
-            @Override
-            public int compare(FightObject a, FightObject b) {
-                return b.speed - a.speed;   // fastest first = first-turn order
-            }
-        });
+        // Summon in the EXACT order the first turn will use: preorder() computes the arena's
+        // fighterOrder now (shuffle + speed sort), and the first conduct() reuses it instead of
+        // re-shuffling, so the entrance order matches who acts first.
+        arenas.get(0).preorder();
+        summonOrder.clear();
+        summonOrder.addAll(arenas.get(0).fighterOrder);
         needSummon = true;
     }
 

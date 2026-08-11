@@ -102,14 +102,20 @@ public class FightLevel extends Level {
     }
 
     private void chooseAbility(FightObject caster) {
-        ((InfoStage) stages.get(2)).choice(caster);
-        for (int i = 0; i < ((InfoStage) stages.get(2)).abilitySelectLabels.size; i++) {
-            Label label = ((InfoStage) stages.get(2)).abilitySelectLabels.get(i);
-            AbilityHolder abilityHolder = new AbilityHolder(label.getX(), label.getY(), caster.abilities.get(i),
-                    (InfoStage) stages.get(2));
+        InfoStage info = (InfoStage) stages.get(2);
+        info.choice(caster);
+        // The box + hit-area come from the box origin (abilityPosition), NOT the name label —
+        // the name is now inset/top-aligned inside the box, so its bounds no longer match the box.
+        for (int i = 0; i < info.abilitySelectLabels.size; i++) {
+            float bx = w(InfoStage.abilityPosition[2 * i]), by = h(InfoStage.abilityPosition[2 * i + 1]);
+            AbilityInstance ability = caster.abilities.get(i);
+            AbilityHolder abilityHolder = new AbilityHolder(bx, by,
+                    InfoStage.defaultAbilityWidth, InfoStage.defaultAbilityHeight, ability, info);
             abilityHolder.refreshPPLabel(i);
             stage(2).addActor(abilityHolder.ppLabel);
-            abilityMap.put(new SquareButton(label.getX(), label.getY(), label.getWidth(), label.getHeight()),
+            if (ability.pp - ability.ppUsed <= 0) // grey the name when the move is out of PP
+                info.abilitySelectLabels.get(i).setColor(0.5f, 0.5f, 0.55f, 1f);
+            abilityMap.put(new SquareButton(bx, by, InfoStage.defaultAbilityWidth, InfoStage.defaultAbilityHeight),
                     abilityHolder);
         }
         createSkip();

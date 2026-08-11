@@ -85,13 +85,19 @@ public class Border extends Actor {
         float g = t * 2f;
         if (w > 2 * g && h > 2 * g)
             drawRect(batch, x + g, y + g, w - 2 * g, h - 2 * g, Math.max(1f, t * 0.6f), ROYAL_DARKGOLD, parentAlpha);
-        float bl = Math.min(w, h) * 0.16f, bt = t * 1.4f;
-        // top-left bracket
-        fillRect(batch, x, y + h - bl, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
-        fillRect(batch, x, y + h - bt, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
-        // bottom-right bracket
-        fillRect(batch, x + w - bt, y, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
-        fillRect(batch, x + w - bl, y, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
+        drawBrackets(batch, x, y, w, h, t, parentAlpha);
+    }
+
+    // Bright corner brackets (top-left + bottom-right) sitting ON the inner gold ring (inset by 2t),
+    // not the outer edge.
+    private static void drawBrackets(Batch batch, float x, float y, float w, float h, float t, float parentAlpha) {
+        float g = t * 2f;
+        float bx = x + g, by = y + g, bw = w - 2 * g, bh = h - 2 * g;
+        float bl = Math.min(bw, bh) * 0.18f, bt = t * 1.5f;
+        fillRect(batch, bx, by + bh - bl, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);       // TL vertical
+        fillRect(batch, bx, by + bh - bt, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);       // TL horizontal
+        fillRect(batch, bx + bw - bt, by, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);       // BR vertical
+        fillRect(batch, bx + bw - bl, by, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);       // BR horizontal
         batch.setColor(1f, 1f, 1f, 1f);
     }
 
@@ -105,12 +111,7 @@ public class Border extends Actor {
         float g = t * 2f;
         if (w > 2 * g && h > 2 * g)
             drawRect(batch, x + g, y + g, w - 2 * g, h - 2 * g, Math.max(1f, t * 0.6f), ROYAL_DARKGOLD, parentAlpha);
-        float bl = Math.min(w, h) * 0.12f, bt = t * 1.4f;
-        fillRect(batch, x, y + h - bl, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
-        fillRect(batch, x, y + h - bt, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
-        fillRect(batch, x + w - bt, y, bt, bl, ROYAL_BRIGHTGOLD, parentAlpha);
-        fillRect(batch, x + w - bl, y, bl, bt, ROYAL_BRIGHTGOLD, parentAlpha);
-        batch.setColor(1f, 1f, 1f, 1f);
+        drawBrackets(batch, x, y, w, h, t, parentAlpha);
     }
 
     /** Fill a solid rectangle. Restores opaque white. */
