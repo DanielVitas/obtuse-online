@@ -23,7 +23,13 @@ public abstract class GameStage {
     }
 
     public void dispose() {
-        stage.dispose();
+        // Do NOT dispose the underlying Stage here. It is owned and REUSED by the Screen
+        // (Level.stage(i) just returns screen.stage(i)), and MyScreen.dispose() disposes it for
+        // real. Level.dispose() runs on every setLevel() — i.e. every fight/inventory entry — so
+        // disposing the Stage destroyed the reused SpriteBatch, and from the 2nd fight onward the
+        // arena/inventory sprites drew through a DISPOSED batch: nothing on real mobile GL, though
+        // desktop and the emulation tolerated it. Just drop this level's actors instead.
+        stage.clear();
     }
 
     protected void add(Actor actor) {
