@@ -6,9 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -42,10 +40,6 @@ public abstract class MyScreen implements Screen {
     public static Turn dialogInstance;
     /** How many of this screen's cameras were put into world units by fixCamera(). */
     private int worldCameras = 0;
-    // TEMP DIAGNOSTIC (v4): dump fight/inventory sprite actors so we can see, on a real device,
-    // whether they exist and where. Logged for a couple of frames after the screen is shown.
-    public static String currentScreen = "";
-    private int spriteDiag = 0;
 
     public MyScreen(String name) {
         if (name == null)
@@ -112,17 +106,10 @@ public abstract class MyScreen implements Screen {
 
     @Override
     public void show() {
-        // Re-measure against the CURRENT surface every time this screen becomes active.
-        // libGDX only calls resize() on the active screen, so a screen constructed at startup
-        // (FightScreen/InventoryScreen/LootScreen are all built once in Obtuse.create) keeps the
-        // camera it was given at that instant and never sees later resizes while it sits inactive.
-        // On mobile web the canvas is often a transient wrong size at startup (e.g. a 300x150
-        // default → ratio 2.0 → viewportHeight ~5), so those screens froze a landscape-ish camera:
-        // sprites were placed at the correct world-Y (7-13) but fell off the top of a camera that
-        // only showed 0-5. Refreshing on show() re-derives the camera from the live surface.
+        // Re-measure against the current surface whenever this screen becomes active. libGDX also
+        // calls resize() right after show(), but doing it here too is harmless and keeps a screen
+        // that is shown without a following resize correctly laid out.
         refreshLayout();
-        currentScreen = name;
-        spriteDiag = 0;
         Gdx.input.setInputProcessor(multiplexer);
     }
 
@@ -173,53 +160,7 @@ public abstract class MyScreen implements Screen {
                 try { if (batch.isDrawing()) batch.end(); } catch (Throwable e) {e.printStackTrace();}
             }
         }
-        spriteDump();
         loop();
-    }
-
-    // TEMP DIAGNOSTIC (v4): for the first few frames after a fight/inventory screen is shown,
-    // log every actor's class, position, size, visibility and alpha. Piped to the on-screen
-    // readout so we can tell on a real device whether the sprites are absent, zero-sized,
-    // transparent, or positioned off the (known-correct) camera.
-    private void spriteDump() {
-        if (spriteDiag >= 2) return;
-        if (!name.equals("FightScreen") && !name.equals("InventoryScreen")) return;
-        for (int i = 0; i < stages.size; i++) {
-            Array<Actor> actors = stage(i).getActors();
-            OrthographicCamera cam = camera(i);
-            OrthographicCamera scam = (OrthographicCamera) stage(i).getViewport().getCamera();
-            StringBuilder sb = new StringBuilder("SPRDIAG " + name + " s" + i + " n=" + actors.size
-                    + " CAM vp=" + r(cam.viewportWidth) + "x" + r(cam.viewportHeight)
-                    + " pos=" + r(cam.position.x) + "," + r(cam.position.y)
-                    + " zoom=" + r(cam.zoom)
-                    + " m00=" + r4(cam.combined.val[0]) + " m11=" + r4(cam.combined.val[5])
-                    + " sameCam=" + (cam == scam ? 1 : 0));
-            for (int k = 0; k < actors.size && k < 2; k++) {
-                Actor a = actors.get(k);
-                sb.append(" [").append(a.getClass().getSimpleName())
-                        .append(" ").append(r(a.getX())).append(",").append(r(a.getY()))
-                        .append(" ").append(r(a.getWidth())).append("x").append(r(a.getHeight()))
-                        .append(" v").append(a.isVisible() ? 1 : 0)
-                        .append(" a").append(r(a.getColor().a));
-                if (a instanceof com.obtuse.game.gameobjects.BasicObject) {
-                    com.obtuse.game.gameobjects.BasicObject bo = (com.obtuse.game.gameobjects.BasicObject) a;
-                    sb.append(" cd=").append(bo.currentlyDisplayed.size);
-                    if (bo.currentlyDisplayed.size > 0)
-                        sb.append(" ").append(bo.currentlyDisplayed.get(0).diag());
-                }
-                sb.append("]");
-            }
-            Gdx.app.log("OBTUSE", sb.toString());
-        }
-        spriteDiag++;
-    }
-
-    private static float r(float v) {
-        return ((int) (v * 10)) / 10f;
-    }
-
-    private static float r4(float v) {
-        return ((int) (v * 10000)) / 10000f;
     }
 
     /**
