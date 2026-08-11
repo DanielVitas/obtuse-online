@@ -73,26 +73,21 @@ public abstract class MyScreen implements Screen {
         multiplexer.addProcessor(stage);
     }
 
+    // REUSE the existing Stage (and its SpriteBatch + camera) — just drop its actors — instead of
+    // building a brand new one. The old version replaced the Stage on every fight/inventory/loot
+    // entry and discarded the previous one WITHOUT disposing it, leaking a Stage+SpriteBatch each
+    // time. On a real mobile GL context those rebuilt world-camera stages rendered nothing at all
+    // (desktop/emulation tolerated it), which is why fight & inventory sprites were invisible on
+    // the phone while the never-rebuilt overworld stage always rendered. Keeping the stage matches
+    // the overworld and removes the leak. The stage stays registered on the input multiplexer.
     public void resetStage(int index) {
-        if (stages.size >= index + 1) {
-            stages.insert(index, new Stage(new ScreenViewport()));
-            cameras.insert(index, (OrthographicCamera) stages.get(index).getViewport().getCamera());
-            stages.removeIndex(index + 1);
-            cameras.removeIndex(index + 1);
-            multiplexer.addProcessor(stages.get(index));
-        }
+        if (stages.size >= index + 1)
+            stages.get(index).clear();
     }
 
     public void resetStages() {
-        for (int i = 0; i < stages.size; i++) {
-            float width = camera(i).viewportWidth;
-            float height = camera(i).viewportHeight;
-            Vector3 position = camera(i).position;
+        for (int i = 0; i < stages.size; i++)
             resetStage(i);
-            camera(i).viewportWidth = width;
-            camera(i).viewportHeight = height;
-            camera(i).position.set(position);
-        }
         refreshLayout();
     }
 
