@@ -1,6 +1,7 @@
 package com.obtuse.game.teavm;
 
 import com.github.xpenatan.gdx.teavm.backends.shared.config.AssetFileHandle;
+import com.github.xpenatan.gdx.teavm.backends.shared.config.AssetFilter;
 import com.github.xpenatan.gdx.teavm.backends.shared.config.compiler.TeaCompiler;
 import com.github.xpenatan.gdx.teavm.backends.shared.config.plugin.TeaReflectionSupplier;
 import com.github.xpenatan.gdx.teavm.backends.web.config.backend.WebBackend;
@@ -25,6 +26,24 @@ import org.teavm.vm.TeaVMOptimizationLevel;
  * checking the web port's reflection registration."
  */
 public class TeaVMBuilder {
+    /** The assets to ship, minus the atlas source art and editor files (see addAssets call). */
+    private static AssetFileHandle webAssets() {
+        AssetFileHandle assets = new AssetFileHandle("../android/assets");
+        assets.filter = new AssetFilter() {
+            @Override
+            public boolean accept(String path) {
+                String p = path.replace('\\', '/');
+                // Editor/source files — never loaded by the game on any platform.
+                if (p.endsWith(".piskel") || p.endsWith(".zip") || p.endsWith(".tps")) return false;
+                // Raw art under images/ is packed into atlas/ and loaded from there — except
+                // images/world/ (floor, grass, walls are loaded by path). Drop the rest.
+                if (p.contains("images/") && !p.contains("images/world/")) return false;
+                return true;
+            }
+        };
+        return assets;
+    }
+
     public static void main(String[] args) {
         boolean debug = false;
         boolean startJetty = false;
@@ -52,8 +71,16 @@ public class TeaVMBuilder {
                 .setStartJettyAfterBuild(startJetty)
                 .setJettyPort(8080)
         )
-            // Assets live under android/assets in this project's layout.
-            .addAssets(new AssetFileHandle("../android/assets"))
+            // Assets live under android/assets in this project's layout. Ship only what the
+            // game loads at runtime: gdx-teavm otherwise PRELOADS the whole tree (~858 files)
+            // before the first frame — including ~798 raw source PNGs and ~126 .piskel/.zip
+            // editor files that exist only to build atlas/textureAtlas. Over a CDN that many
+            // requests stalls the load on a black screen. The game renders everything from
+            // atlas/ and reads only a few images/world/ textures (floor, grass, walls) by
+            // path, so drop the rest of images/ and the editor files. (Cuts the preload to
+            // ~80 files; see grep in git history confirming no images/ outside world/ is
+            // loaded directly and that all fight/UI/item art is packed in the atlas.)
+            .addAssets(webAssets())
 
             // SIMPLE optimization for BOTH debug and release. TeaVM 1.5.6's ADVANCED level
             // miscompiles this game: it emits references to methods it then dead-code-strips

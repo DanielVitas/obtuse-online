@@ -35,7 +35,8 @@
       "Bash(chmod +x gradlew)",
       "Bash(git add *)",
       "Bash(xargs -0 du -h)",
-      "Bash(env WEB_ONLY=1 ./gradlew :teavm:buildRelease --console=plain)"
+      "Bash(env WEB_ONLY=1 ./gradlew :teavm:buildRelease --console=plain)",
+      "Bash(git commit -q -m ' *)"
     ]
   }
 }
