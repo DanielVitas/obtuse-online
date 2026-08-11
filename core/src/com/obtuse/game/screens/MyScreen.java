@@ -186,24 +186,30 @@ public abstract class MyScreen implements Screen {
             // world camera on this GPU (ShapeRenderer through the same camera already works).
             if (diagBatch == null) diagBatch = new SpriteBatch();
             TextureRegion reg = Obtuse.textureAtlas.getRegions().first();
-            // (A) YELLOW via a FRESH batch through the world camera — already known to render.
+            // Isolate batch vs camera with 2x2. YELLOW = fresh batch + camera(0) (reference).
             diagBatch.setProjectionMatrix(camera(0).combined);
             diagBatch.begin();
             diagBatch.setColor(1f, 1f, 0f, 1f);
             diagBatch.draw(reg, 6.5f, 12f, 2f, 2f);
             diagBatch.end();
             diagBatch.setColor(1f, 1f, 1f, 1f);
-            // (B) GREEN via the ARENA STAGE'S OWN batch (the exact batch the slots use), drawn
-            // standalone. If GREEN shows but slots don't, the batch object is fine and the fault
-            // is the scene2d draw traversal; if GREEN is missing, that stage's batch is broken.
             if (name.equals("FightScreen")) {
+                // GREEN = stage(1)'s OWN batch + camera(0) (the KNOWN-GOOD camera). Missing => the
+                // stage's batch object is broken.
                 com.badlogic.gdx.graphics.g2d.Batch sb = stage(1).getBatch();
-                sb.setProjectionMatrix(camera(1).combined);
+                sb.setProjectionMatrix(camera(0).combined);
                 sb.begin();
                 sb.setColor(0f, 1f, 0f, 1f);
-                sb.draw(reg, 3f, 14f, 2f, 2f);
+                sb.draw(reg, 2f, 15f, 2f, 2f);
                 sb.setColor(1f, 1f, 1f, 1f);
                 sb.end();
+                // BLUE = fresh batch + camera(1). Missing => camera(1) is broken.
+                diagBatch.setProjectionMatrix(camera(1).combined);
+                diagBatch.begin();
+                diagBatch.setColor(0f, 0.6f, 1f, 1f);
+                diagBatch.draw(reg, 6.5f, 15f, 2f, 2f);
+                diagBatch.end();
+                diagBatch.setColor(1f, 1f, 1f, 1f);
             }
         } catch (Throwable e) {e.printStackTrace();}
     }
