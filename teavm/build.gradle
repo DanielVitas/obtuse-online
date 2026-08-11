@@ -73,26 +73,39 @@ def injectLoadingOverlay = {
     logger.lifecycle("Injected music loading label")
 }
 
+// Bump this string every deploy while we are debugging on a real device. It is shown large and
+// green in the TOP-RIGHT corner so the user can confirm at a glance which build their phone is
+// actually running (HTTP caching can serve a stale app.js even after a successful deploy). It is
+// also appended as ?v=<buildVersion> to the app.js <script> so a fresh index.html always fetches
+// the matching code instead of a cached copy.
+def buildVersion = 'v2'
+
 // TEMP DIAGNOSTIC: a green readout (top-left) of the window size, canvas backing size, device
-// pixel ratio, and canvas aspect ratio — to see what dimensions the game actually receives on
-// a real phone (the game uses the canvas size / ratio to place fight & inventory sprites).
+// pixel ratio, and canvas aspect ratio — plus the game's OWN last layout log line (which screen,
+// what ratio, and the resulting world-camera size). Opening a fight/inventory updates the "game"
+// line, so we can see exactly what camera those screens get on a real phone.
 def injectDimsDebug = {
     def html = new File(webappDir, 'index.html')
     if (!html.exists() || html.text.contains('id="dimsdbg"')) return
+    // Cache-bust app.js so a freshly fetched index.html never pairs with a stale cached app.js.
+    html.text = html.text.replace('src="app.js"', 'src="app.js?' + buildVersion + '"')
     def anchor = '<body oncontextmenu="return false">'
     def block = anchor + '\n' +
+        '        <div id="verstamp" style="position:fixed;top:2px;right:6px;z-index:31;color:#0f0;' +
+        'font:bold 20px monospace;text-shadow:0 0 3px #000,0 0 3px #000;pointer-events:none">' + buildVersion + '</div>\n' +
         '        <div id="dimsdbg" style="position:fixed;top:0;left:0;z-index:30;background:#000c;' +
         'color:#0f0;font:12px monospace;padding:4px 6px;pointer-events:none;white-space:pre;line-height:1.4"></div>\n' +
         '        <script>var gameLayout="(waiting)";["log","info"].forEach(function(k){var o=console[k];' +
         'console[k]=function(){var m=Array.prototype.join.call(arguments," ");' +
-        'var idx=m.indexOf("surface");if(idx>=0)gameLayout=m.slice(idx);o.apply(console,arguments);};});' +
+        'var idx=m.indexOf("layout: surface");if(idx>=0)gameLayout=m.slice(m.lastIndexOf("]",idx)+1).trim();' +
+        'o.apply(console,arguments);};});' +
         'function updDims(){var c=document.getElementById("canvas"),d=document.getElementById("dimsdbg");' +
         'if(!d)return;var r=c?(c.width/c.height).toFixed(3):"?";' +
         'd.textContent="win "+window.innerWidth+"x"+window.innerHeight+"  dpr "+(window.devicePixelRatio||1).toFixed(2)+' +
-        '"\\ncanvas "+(c?c.width+"x"+c.height:"?")+"  ratio "+r+"\\ngame "+gameLayout;}' +
+        '"\\ncanvas "+(c?c.width+"x"+c.height:"?")+"  ratio "+r+"\\n"+gameLayout;}' +
         'window.addEventListener("resize",updDims);setInterval(updDims,400);</script>'
     html.text = html.text.replace(anchor, block)
-    logger.lifecycle("Injected dims debug readout")
+    logger.lifecycle("Injected dims debug readout (build " + buildVersion + ")")
 }
 
 // The game is laid out for landscape (the Android app locks orientation; in portrait the
