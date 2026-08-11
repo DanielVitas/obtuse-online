@@ -133,6 +133,11 @@ public abstract class MyScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        // Pick up a surface change (e.g. a phone rotation) even if the backend never fires resize()
+        // — on the web, orientation changes don't reliably deliver a libGDX resize() callback, so
+        // the whole game stayed at the old aspect until reload. Re-derive everything when it moves.
+        if (Gdx.graphics.getWidth() != Obtuse.width || Gdx.graphics.getHeight() != Obtuse.height)
+            refreshLayout();
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         for (Stage stage : stages)

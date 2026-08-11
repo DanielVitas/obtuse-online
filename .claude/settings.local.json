@@ -49,7 +49,8 @@
       "Bash(git commit *)",
       "Bash(git push *)",
       "Bash(unzip -oq \"/Users/daniel/.gradle/caches/modules-2/files-2.1/com.badlogicgames.gdx/gdx/1.14.2/919153aed4ce12001e86c38ac3dc5cdfe1954898/gdx-1.14.2.jar\" com/badlogic/gdx/scenes/scene2d/Stage.class)",
-      "Bash(javap -p -c com/badlogic/gdx/scenes/scene2d/Stage.class)"
+      "Bash(javap -p -c com/badlogic/gdx/scenes/scene2d/Stage.class)",
+      "Bash(python3 -)"
     ]
   }
 }

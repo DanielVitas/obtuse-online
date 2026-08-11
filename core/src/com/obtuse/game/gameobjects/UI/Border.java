@@ -30,13 +30,18 @@ public class Border extends Actor {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
+        drawRect(batch, getX(), getY(), getWidth(), getHeight(), thickness, getColor(), parentAlpha);
+    }
+
+    /** Draw a rectangle outline (four thin quads) in the given batch. Restores opaque white. */
+    public static void drawRect(Batch batch, float x, float y, float w, float h,
+                                float thickness, Color color, float parentAlpha) {
         if (pixel == null)
             pixel = Obtuse.textureAtlas.findRegion("world/obstacles/whiteBox/default/main");
         if (pixel == null)
             return;
-        Color c = getColor();
-        batch.setColor(c.r, c.g, c.b, c.a * parentAlpha);
-        float x = getX(), y = getY(), w = getWidth(), h = getHeight(), t = thickness;
+        float t = thickness;
+        batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
         batch.draw(pixel, x, y, w, t);         // bottom
         batch.draw(pixel, x, y + h - t, w, t); // top
         batch.draw(pixel, x, y, t, h);         // left

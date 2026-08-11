@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.Array;
 import com.obtuse.game.Fonts;
 import com.obtuse.game.Obtuse;
 import com.obtuse.game.buttons.GameButton;
+import com.obtuse.game.gameobjects.UI.InfoBackground;
+import com.obtuse.game.gameobjects.UI.info.GeneralInfoBackground;
 import com.obtuse.game.gameobjects.items.AbilityOrb;
 import com.obtuse.game.gameobjects.items.Equipment;
 import com.obtuse.game.gameobjects.items.Item;
@@ -19,39 +21,43 @@ import static com.obtuse.game.Obtuse.*;
 
 public class DefaultInfoStage extends GameStage {
     public Array<Label> labels = new Array<Label>();
+    private InfoBackground infoBackground;
 
     public DefaultInfoStage(Stage stage) {
         super(stage);
     }
 
+    // A bordered tooltip next to the pointer (name + PP + description), instead of the old flat
+    // description printed at the bottom of the screen.
     public void setup(Item item) {
-        if (item instanceof AbilityOrb)
-            setup((AbilityOrb) item);
-        else if (item instanceof Equipment)
-            setup((Equipment) item);
-    }
+        infoBackground = new GeneralInfoBackground();
+        infoBackground.create(w(0.55f), h(0.01f), w(0.445f), h(0.35f));
+        infoBackground.positionAtPointer(stage);
+        add(infoBackground);
 
-    public void setup(AbilityOrb abilityOrb) {
-        Label pp = new Label(Integer.toString(abilityOrb.ability.pp) + " PP", Fonts.get("lootDescription"));
-        pp.setWidth(w(0.8f));
-        pp.setAlignment(Align.right);
-        pp.setPosition(w(0.1f), h(0.1f));
-        addLabel(pp);
+        Label name = new Label(item.getName(), Fonts.get("inventoryInfoTableTitle"));
+        name.setWidth(infoBackground.getWidth());
+        name.setWrap(true);
+        name.setAlignment(Align.bottom);
+        name.setPosition(infoBackground.getX() + infoBackground.getWidth() / 2 - name.getWidth() / 2,
+                infoBackground.getY() + infoBackground.getHeight());
+        addLabel(name);
 
-        Label description = new Label(abilityOrb.getDescription(), Fonts.get("lootDescription"));
-        description.setWidth(w(0.8f));
+        if (item instanceof AbilityOrb) {
+            Label pp = new Label(Integer.toString(((AbilityOrb) item).ability.pp) + " PP",
+                    Fonts.get("inventoryInfoTableContent"));
+            pp.setWidth(infoBackground.getWidth());
+            pp.setAlignment(Align.right);
+            pp.setPosition(infoBackground.getX(), infoBackground.getY());
+            addLabel(pp);
+        }
+
+        Label description = new Label(item.getDescription(), Fonts.get("inventoryInfoTableDescription"));
+        description.setWidth(infoBackground.getWidth());
         description.setWrap(true);
         description.setAlignment(Align.topLeft);
-        description.setPosition(w(0.1f), h(0.35f));
-        addLabel(description);
-    }
-
-    public void setup(Equipment equipment) {
-        Label description = new Label(equipment.getDescription(), Fonts.get("lootDescription"));
-        description.setWidth(w(0.8f));
-        description.setWrap(true);
-        description.setAlignment(Align.topLeft);
-        description.setPosition(w(0.1f), h(0.35f));
+        description.setPosition(infoBackground.getX() + w(0.0025f),
+                infoBackground.getY() + infoBackground.getHeight() - description.getHeight() - h(0.0025f));
         addLabel(description);
     }
 
@@ -64,6 +70,9 @@ public class DefaultInfoStage extends GameStage {
         for (Label label : labels)
             label.remove();
         labels.clear();
+        if (infoBackground != null)
+            infoBackground.remove();
+        infoBackground = null;
     }
 
     @Deprecated

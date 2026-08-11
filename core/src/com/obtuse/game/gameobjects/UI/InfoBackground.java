@@ -2,6 +2,7 @@ package com.obtuse.game.gameobjects.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.obtuse.game.Obtuse;
@@ -49,5 +50,13 @@ public abstract class InfoBackground extends BasicObject {
 
     public void create(float x, float y) {
         create(x, y, getWidth(), getHeight());
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+        // Gold frame around the tooltip window itself.
+        float t = Math.min(getWidth(), getHeight()) * 0.03f;
+        Border.drawRect(batch, getX(), getY(), getWidth(), getHeight(), t, Border.GOLD, parentAlpha);
     }
 }

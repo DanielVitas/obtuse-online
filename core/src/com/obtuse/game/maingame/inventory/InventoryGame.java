@@ -49,6 +49,12 @@ public class InventoryGame extends GameGame {
 
     @Override
     public void layoutChanged() {
+        // Re-place everything (grid, orb/equipment rows, hero + name) for the new surface — e.g.
+        // after a phone rotation — so the whole screen re-fits the current orientation. changeHero(0)
+        // keeps the same hero but rebuilds its sprite/name/positions (setup() alone leaves the hero
+        // and its name at their old spot). Then rebuild the touch control for the new size.
+        if (level != null && ((InventoryLevel) level).hero != null)
+            ((InventoryLevel) level).changeHero(0);
         buildTouchControls();
     }
 
