@@ -78,7 +78,7 @@ def injectLoadingOverlay = {
 // actually running (HTTP caching can serve a stale app.js even after a successful deploy). It is
 // also appended as ?v=<buildVersion> to the app.js <script> so a fresh index.html always fetches
 // the matching code instead of a cached copy.
-def buildVersion = 'v2'
+def buildVersion = 'v3'
 
 // TEMP DIAGNOSTIC: a green readout (top-left) of the window size, canvas backing size, device
 // pixel ratio, and canvas aspect ratio — plus the game's OWN last layout log line (which screen,
@@ -95,14 +95,27 @@ def injectDimsDebug = {
         'font:bold 20px monospace;text-shadow:0 0 3px #000,0 0 3px #000;pointer-events:none">' + buildVersion + '</div>\n' +
         '        <div id="dimsdbg" style="position:fixed;top:0;left:0;z-index:30;background:#000c;' +
         'color:#0f0;font:12px monospace;padding:4px 6px;pointer-events:none;white-space:pre;line-height:1.4"></div>\n' +
-        '        <script>var gameLayout="(waiting)";["log","info"].forEach(function(k){var o=console[k];' +
+        '        <div id="errdbg" style="position:fixed;bottom:0;left:0;right:0;z-index:30;background:#300c;' +
+        'color:#f88;font:11px monospace;padding:4px 6px;pointer-events:none;white-space:pre-wrap;' +
+        'word-break:break-word;max-height:40vh;overflow:hidden"></div>\n' +
+        '        <script>var gameLayout="(waiting)",lastErr="(no error yet)",errCount=0;' +
+        // Capture the game\'s layout log line (screen name + ratio + world camera size).
+        '["log","info"].forEach(function(k){var o=console[k];' +
         'console[k]=function(){var m=Array.prototype.join.call(arguments," ");' +
         'var idx=m.indexOf("layout: surface");if(idx>=0)gameLayout=m.slice(m.lastIndexOf("]",idx)+1).trim();' +
         'o.apply(console,arguments);};});' +
-        'function updDims(){var c=document.getElementById("canvas"),d=document.getElementById("dimsdbg");' +
-        'if(!d)return;var r=c?(c.width/c.height).toFixed(3):"?";' +
+        // Capture errors/warnings — the per-stage draw catch does printStackTrace(), which lands
+        // here. This is what reveals WHY the sprite stage is being skipped on the device.
+        '["error","warn"].forEach(function(k){var o=console[k];' +
+        'console[k]=function(){var m=Array.prototype.join.call(arguments," ");' +
+        'if(m.indexOf("music")<0){errCount++;lastErr=m;}o.apply(console,arguments);};});' +
+        'window.addEventListener("error",function(e){errCount++;lastErr=(e.message||"")+" @"+(e.filename||"")+":"+(e.lineno||"");});' +
+        'function updDims(){var c=document.getElementById("canvas"),d=document.getElementById("dimsdbg"),' +
+        'ed=document.getElementById("errdbg");' +
+        'if(d){var r=c?(c.width/c.height).toFixed(3):"?";' +
         'd.textContent="win "+window.innerWidth+"x"+window.innerHeight+"  dpr "+(window.devicePixelRatio||1).toFixed(2)+' +
         '"\\ncanvas "+(c?c.width+"x"+c.height:"?")+"  ratio "+r+"\\n"+gameLayout;}' +
+        'if(ed)ed.textContent="err#"+errCount+": "+lastErr.slice(0,600);}' +
         'window.addEventListener("resize",updDims);setInterval(updDims,400);</script>'
     html.text = html.text.replace(anchor, block)
     logger.lifecycle("Injected dims debug readout (build " + buildVersion + ")")
