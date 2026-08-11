@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -153,7 +154,31 @@ public abstract class MyScreen implements Screen {
             // inventory render as a black screen). Isolate a bad draw to its own stage instead.
             catch (Throwable e) {e.printStackTrace();}
         spriteDump();
+        diagShapesTest();
         loop();
+    }
+
+    // TEMP DIAGNOSTIC (v7): draw a solid magenta square through the WORLD camera (0), where a
+    // slot sits, and a solid cyan square through the SCREEN camera (2). No textures involved.
+    // If magenta is missing but cyan shows on the device, the world camera renders NO geometry
+    // at all (projection/viewport problem below scene2d); if both show, world rendering is fine
+    // and the fault is sprite-specific; if neither, the ShapeRenderer path itself is the issue.
+    private static ShapeRenderer diagShapes;
+    private void diagShapesTest() {
+        if (!name.equals("FightScreen") && !name.equals("InventoryScreen")) return;
+        try {
+            if (diagShapes == null) diagShapes = new ShapeRenderer();
+            diagShapes.setProjectionMatrix(camera(0).combined);
+            diagShapes.begin(ShapeRenderer.ShapeType.Filled);
+            diagShapes.setColor(1f, 0f, 1f, 1f);
+            diagShapes.rect(3f, 8f, 3f, 3f); // world coords, inside the 10x18.8 view
+            diagShapes.end();
+            diagShapes.setProjectionMatrix(camera(stages.size - 1).combined);
+            diagShapes.begin(ShapeRenderer.ShapeType.Filled);
+            diagShapes.setColor(0f, 1f, 1f, 1f);
+            diagShapes.rect(Obtuse.width * 0.05f, Obtuse.height * 0.4f, Obtuse.width * 0.2f, Obtuse.width * 0.2f);
+            diagShapes.end();
+        } catch (Throwable e) {e.printStackTrace();}
     }
 
     // TEMP DIAGNOSTIC (v4): for the first few frames after a fight/inventory screen is shown,
