@@ -44,7 +44,9 @@
       "Bash(sed -n '/protected void webInit/,/^    }/p; /protected void runWeb/,/^    }/p' maingame/GameGame.java)",
       "Bash(sed -n '/protected void runDesktop/,/^    }/p' maingame/inventory/InventoryGame.java)",
       "Bash(curl -s \"https://danielvitas.github.io/obtuse-online/app.js\" -o /tmp/deployed_app.js)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(perl -0pi -e 's/doLast \\\\{ injectFreetypeScript\\\\\\(\\\\\\); deferAllMusic\\\\\\(\\\\\\); injectLoadingOverlay\\\\\\(\\\\\\) \\\\}/doLast { injectFreetypeScript\\(\\); deferAllMusic\\(\\); injectLoadingOverlay\\(\\); injectDimsDebug\\(\\) }/g' teavm/build.gradle)",
+      "Bash(git commit *)"
     ]
   }
 }

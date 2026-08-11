@@ -73,6 +73,25 @@ def injectLoadingOverlay = {
     logger.lifecycle("Injected music loading label")
 }
 
+// TEMP DIAGNOSTIC: a green readout (top-left) of the window size, canvas backing size, device
+// pixel ratio, and canvas aspect ratio — to see what dimensions the game actually receives on
+// a real phone (the game uses the canvas size / ratio to place fight & inventory sprites).
+def injectDimsDebug = {
+    def html = new File(webappDir, 'index.html')
+    if (!html.exists() || html.text.contains('id="dimsdbg"')) return
+    def anchor = '<body oncontextmenu="return false">'
+    def block = anchor + '\n' +
+        '        <div id="dimsdbg" style="position:fixed;top:0;left:0;z-index:30;background:#000c;' +
+        'color:#0f0;font:12px monospace;padding:4px 6px;pointer-events:none;white-space:pre;line-height:1.4"></div>\n' +
+        '        <script>function updDims(){var c=document.getElementById("canvas"),d=document.getElementById("dimsdbg");' +
+        'if(!d)return;var r=c?(c.width/c.height).toFixed(3):"?";' +
+        'd.textContent="win "+window.innerWidth+"x"+window.innerHeight+"  dpr "+(window.devicePixelRatio||1).toFixed(2)+' +
+        '"\\ncanvas "+(c?c.width+"x"+c.height:"?")+"  ratio "+r;}' +
+        'window.addEventListener("resize",updDims);setInterval(updDims,400);</script>'
+    html.text = html.text.replace(anchor, block)
+    logger.lifecycle("Injected dims debug readout")
+}
+
 // The game is laid out for landscape (the Android app locks orientation; in portrait the
 // touch controls — sized from screen height — balloon and the play area is squashed). There's
 // no reliable web orientation lock, so on a touch device held in portrait we cover everything
@@ -99,7 +118,7 @@ tasks.register('buildRelease', JavaExec) {
     dependsOn classes
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectDimsDebug() }
 }
 
 // Same, with debug info + source maps and no obfuscation — slower, but debuggable.
@@ -110,7 +129,7 @@ tasks.register('buildDebug', JavaExec) {
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
     args += ['debug']
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectDimsDebug() }
 }
 
 // Build (debug) then serve the finished webapp at http://localhost:8080. We do NOT use the
