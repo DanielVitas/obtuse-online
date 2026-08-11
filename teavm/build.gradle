@@ -73,6 +73,25 @@ def injectLoadingOverlay = {
     logger.lifecycle("Injected music loading label")
 }
 
+// The game is laid out for landscape (the Android app locks orientation; in portrait the
+// touch controls — sized from screen height — balloon and the play area is squashed). There's
+// no reliable web orientation lock, so on a touch device held in portrait we cover everything
+// with a "rotate to landscape" prompt. Pure CSS: `pointer:coarse` targets touch devices only,
+// so desktop browsers (even resized narrow) are unaffected, and it clears itself on rotation.
+def injectRotatePrompt = {
+    def html = new File(webappDir, 'index.html')
+    if (!html.exists() || html.text.contains('id="rotate-device"')) return
+    def anchor = '<body oncontextmenu="return false">'
+    def block = anchor + '\n' +
+        '        <style>#rotate-device{display:none}@media (orientation:portrait) and (pointer:coarse){' +
+        '#rotate-device{display:flex;position:fixed;inset:0;z-index:20;background:#000;color:#fff;' +
+        'align-items:center;justify-content:center;text-align:center;font-family:monospace;font-size:18px;' +
+        'line-height:1.7;padding:24px}}</style>\n' +
+        '        <div id="rotate-device">please rotate your device<br>to landscape&nbsp;⟳</div>'
+    html.text = html.text.replace(anchor, block)
+    logger.lifecycle("Injected rotate-to-landscape prompt")
+}
+
 // Build the JS app into teavm/build/dist (release: obfuscated, optimized).
 tasks.register('buildRelease', JavaExec) {
     description = 'Transpile the game to JavaScript into teavm/build/dist'
@@ -80,7 +99,7 @@ tasks.register('buildRelease', JavaExec) {
     dependsOn classes
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectRotatePrompt() }
 }
 
 // Same, with debug info + source maps and no obfuscation — slower, but debuggable.
@@ -91,7 +110,7 @@ tasks.register('buildDebug', JavaExec) {
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
     args += ['debug']
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectRotatePrompt() }
 }
 
 // Build (debug) then serve the finished webapp at http://localhost:8080. We do NOT use the
