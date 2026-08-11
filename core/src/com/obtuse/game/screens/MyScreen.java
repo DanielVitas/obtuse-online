@@ -7,6 +7,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -178,8 +180,26 @@ public abstract class MyScreen implements Screen {
             diagShapes.setColor(0f, 1f, 1f, 1f);
             diagShapes.rect(Obtuse.width * 0.05f, Obtuse.height * 0.4f, Obtuse.width * 0.2f, Obtuse.width * 0.2f);
             diagShapes.end();
+            // Textured SpriteBatch probe: a yellow-tinted atlas region through the WORLD camera (0)
+            // at world (6.5,12), and through the SCREEN camera at bottom-right. If the world one is
+            // missing but the screen one shows, textured SpriteBatch fails specifically through the
+            // world camera on this GPU (ShapeRenderer through the same camera already works).
+            if (diagBatch == null) diagBatch = new SpriteBatch();
+            TextureRegion reg = Obtuse.textureAtlas.getRegions().first();
+            diagBatch.setProjectionMatrix(camera(0).combined);
+            diagBatch.begin();
+            diagBatch.setColor(1f, 1f, 0f, 1f);
+            diagBatch.draw(reg, 6.5f, 12f, 2f, 2f);
+            diagBatch.end();
+            diagBatch.setProjectionMatrix(camera(stages.size - 1).combined);
+            diagBatch.begin();
+            diagBatch.setColor(1f, 1f, 0f, 1f);
+            diagBatch.draw(reg, Obtuse.width * 0.75f, Obtuse.height * 0.4f, Obtuse.width * 0.2f, Obtuse.width * 0.2f);
+            diagBatch.end();
+            diagBatch.setColor(1f, 1f, 1f, 1f);
         } catch (Throwable e) {e.printStackTrace();}
     }
+    private static SpriteBatch diagBatch;
 
     // TEMP DIAGNOSTIC (v4): for the first few frames after a fight/inventory screen is shown,
     // log every actor's class, position, size, visibility and alpha. Piped to the on-screen

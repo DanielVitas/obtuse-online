@@ -78,7 +78,7 @@ def injectLoadingOverlay = {
 // actually running (HTTP caching can serve a stale app.js even after a successful deploy). It is
 // also appended as ?v=<buildVersion> to the app.js <script> so a fresh index.html always fetches
 // the matching code instead of a cached copy.
-def buildVersion = 'v7'
+def buildVersion = 'v8'
 
 // TEMP DIAGNOSTIC: a green readout (top-left) of the window size, canvas backing size, device
 // pixel ratio, and canvas aspect ratio — plus the game's OWN last layout log line (which screen,
