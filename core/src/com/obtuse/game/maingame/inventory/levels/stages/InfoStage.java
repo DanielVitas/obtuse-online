@@ -36,32 +36,18 @@ public class InfoStage extends GameStage {
     }
 
     public void setup(Item item) {
-            createGeneralBackground();
-
-            if (item instanceof AbilityOrb) {
-                Label pp = new Label(Integer.toString(((AbilityOrb) item).ability.pp) + " PP", Fonts.get("inventoryInfoTableContent"));
-                pp.setWidth(infoBackground.getWidth());
-                pp.setWrap(true);
-                pp.setAlignment(Align.right);
-                pp.setPosition(infoBackground.getX(),infoBackground.getY());
-                addInfoLabel(pp);
-            }
-
-            Label name = new Label(item.getName(), Fonts.get("inventoryInfoTableTitle"));
-            name.setWidth(infoBackground.getWidth());
-            name.setWrap(true);
-            name.setAlignment(Align.bottom);
-            name.setPosition(infoBackground.getX() + infoBackground.getWidth() / 2 - name.getWidth() / 2,
-                    infoBackground.getY() + infoBackground.getHeight());
-            addInfoLabel(name);
-
-            Label description = new Label(item.getDescription(), Fonts.get("inventoryInfoTableDescription"));
-            description.setWidth(infoBackground.getWidth() - w(0.00f));
-            description.setWrap(true);
-            description.setAlignment(Align.topLeft);
-            description.setPosition(infoBackground.getX() +  w(0.0025f),
-                    infoBackground.getY()  + infoBackground.getHeight() - description.getHeight() - h(0.0025f));
-            addInfoLabel(description);
+        createGeneralBackground();
+        Label name = new Label(item.getName(), Fonts.get("inventoryInfoTableTitle"));
+        Label stat = null;
+        if (item instanceof AbilityOrb)
+            stat = new Label(Integer.toString(((AbilityOrb) item).ability.pp) + " PP",
+                    Fonts.get("inventoryInfoTableContent"));
+        Label description = new Label(item.getDescription(), Fonts.get("inventoryInfoTableDescription"));
+        infoBackground.layoutTooltip(name, stat, description);
+        addInfoLabel(name);
+        if (stat != null)
+            addInfoLabel(stat);
+        addInfoLabel(description);
     }
 
     public void addInfoLabel(Label label) {

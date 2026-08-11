@@ -36,28 +36,15 @@ public class DefaultInfoStage extends GameStage {
         add(infoBackground);
 
         Label name = new Label(item.getName(), Fonts.get("inventoryInfoTableTitle"));
-        name.setWidth(infoBackground.getWidth());
-        name.setWrap(true);
-        name.setAlignment(Align.bottom);
-        name.setPosition(infoBackground.getX() + infoBackground.getWidth() / 2 - name.getWidth() / 2,
-                infoBackground.getY() + infoBackground.getHeight());
-        addLabel(name);
-
-        if (item instanceof AbilityOrb) {
-            Label pp = new Label(Integer.toString(((AbilityOrb) item).ability.pp) + " PP",
+        Label stat = null;
+        if (item instanceof AbilityOrb)
+            stat = new Label(Integer.toString(((AbilityOrb) item).ability.pp) + " PP",
                     Fonts.get("inventoryInfoTableContent"));
-            pp.setWidth(infoBackground.getWidth());
-            pp.setAlignment(Align.right);
-            pp.setPosition(infoBackground.getX(), infoBackground.getY());
-            addLabel(pp);
-        }
-
         Label description = new Label(item.getDescription(), Fonts.get("inventoryInfoTableDescription"));
-        description.setWidth(infoBackground.getWidth());
-        description.setWrap(true);
-        description.setAlignment(Align.topLeft);
-        description.setPosition(infoBackground.getX() + w(0.0025f),
-                infoBackground.getY() + infoBackground.getHeight() - description.getHeight() - h(0.0025f));
+        infoBackground.layoutTooltip(name, stat, description);
+        addLabel(name);
+        if (stat != null)
+            addLabel(stat);
         addLabel(description);
     }
 

@@ -218,6 +218,16 @@ public class InventoryGame extends GameGame {
     protected void runDesktop() {
         bindingList.keyBindings("inventory");
         if (!wait) {
+            // The on-screen Back button (shown on the web desktop build too) was never checked on
+            // the desktop input path, so it did nothing on a mouse — only Escape worked. Check it.
+            if (backButton != null) {
+                camera(2).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+                if (backButton.check(touchPoint.x, touchPoint.y)) {
+                    if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+                        world();
+                    return;
+                }
+            }
             camera(0).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
             touch:
             {

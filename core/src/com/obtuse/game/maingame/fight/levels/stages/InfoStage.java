@@ -103,78 +103,35 @@ public class InfoStage extends GameStage {
     }
 
     public void setup(Holder holder) {
+        if (holder.fightObject == null)
+            return;
         createGeneralBackground();
-        int index = 0;
-
-        if (holder.fightObject != null) {
-            Label name = new Label(holder.fightObject.getName(), Fonts.get("fightInfoTableTitle"));
-            name.setWidth(infoBackground.getWidth());
-            name.setWrap(true);
-            name.setAlignment(Align.bottom);
-            name.setPosition(infoBackground.getX() + infoBackground.getWidth() / 2 - name.getWidth() / 2,
-                    infoBackground.getY() + infoBackground.getHeight());
-            addInfoLabel(name);
-
-
-            Array<Status> statuses = holder.fightObject.getStatuses();
-            if (holder.fightObject.alive())
-                while (index < statuses.size) {
-                    Label buffLabel = new Label(statuses.get(index).getName(), Fonts.get("fightInfoTableContent"));
-                    buffLabel.setWidth(w(0.090f));
-                    buffLabel.setPosition(infoBackground.getX() + w(0.0025f),
-                            infoBackground.getY() + infoBackground.getHeight() - buffLabel.getHeight() * (index + 1) - h(0.0025f));
-                    addInfoLabel(buffLabel);
-                    index += 1;
-                }
-
-            Label hp = new Label(Integer.toString(holder.fightObject.hp - holder.fightObject.damageTaken) + " /"
-                    + Integer.toString(holder.fightObject.hp) + " HP", Fonts.get("fightInfoTableContent"));
-            hp.setWidth(infoBackground.getWidth());
-            hp.setAlignment(Align.right);
-            hp.setPosition(infoBackground.getX(), infoBackground.getY());
-            addInfoLabel(hp);
-
-            Label speed = new Label(Integer.toString(holder.fightObject.speed) + " SPD", Fonts.get("fightInfoTableContent"));
-            speed.setWidth(infoBackground.getWidth());
-            speed.setPosition(infoBackground.getX() + w(0.01f), infoBackground.getY());
-            addInfoLabel(speed);
-        }
-
-        if (holder.burning != 0) {
-            Label burning = new Label("Burning: " + holder.burning, Fonts.get("fightInfoTableContent"));
-            burning.setWidth(w(0.090f));
-            burning.setPosition(infoBackground.getX() +  w(0.0025f),
-                    infoBackground.getY() + infoBackground.getHeight() - burning.getHeight() * (index + 1) - h(0.0025f));
-            addInfoLabel(burning);
-            index += 1;
-        }
+        FightObject fo = holder.fightObject;
+        Label name = new Label(fo.getName(), Fonts.get("fightInfoTableTitle"));
+        Label hp = new Label((fo.hp - fo.damageTaken) + " /" + fo.hp + " HP", Fonts.get("fightInfoTableContent"));
+        StringBuilder body = new StringBuilder(fo.speed + " SPD");
+        if (fo.alive())
+            for (Status status : fo.getStatuses())
+                body.append("\n").append(status.getName());
+        if (holder.burning != 0)
+            body.append("\nBurning: ").append(holder.burning);
+        Label description = new Label(body.toString(), Fonts.get("fightInfoTableContent"));
+        infoBackground.layoutTooltip(name, hp, description);
+        addInfoLabel(name);
+        addInfoLabel(hp);
+        addInfoLabel(description);
     }
 
     public void setup(AbilityInstance ability) {
         if (!(ability.ability instanceof SkipTurn)) {
             createGeneralBackground();
-
             Label name = new Label(ability.getName(), Fonts.get("fightInfoTableTitle"));
-            name.setWidth(infoBackground.getWidth());
-            name.setWrap(true);
-            name.setAlignment(Align.bottom);
-            name.setPosition(infoBackground.getX() + infoBackground.getWidth() / 2 - name.getWidth() / 2,
-                    infoBackground.getY() + infoBackground.getHeight());
-            addInfoLabel(name);
-
-            Label pp = new Label(Integer.toString(ability.pp - ability.ppUsed) + " /" + Integer.toString(ability.pp)
-                    + " PP", Fonts.get("fightInfoTableContent"));
-            pp.setWidth(infoBackground.getWidth());
-            pp.setAlignment(Align.right);
-            pp.setPosition(infoBackground.getX(),infoBackground.getY());
-            addInfoLabel(pp);
-
+            Label pp = new Label((ability.pp - ability.ppUsed) + " /" + ability.pp + " PP",
+                    Fonts.get("fightInfoTableContent"));
             Label description = new Label(ability.getDescription(), Fonts.get("fightInfoTableDescription"));
-            description.setWidth(infoBackground.getWidth() - w(0.00f));
-            description.setWrap(true);
-            description.setAlignment(Align.topLeft);
-            description.setPosition(infoBackground.getX() +  w(0.0025f),
-                    infoBackground.getY()  + infoBackground.getHeight() - description.getHeight() - h(0.0025f));
+            infoBackground.layoutTooltip(name, pp, description);
+            addInfoLabel(name);
+            addInfoLabel(pp);
             addInfoLabel(description);
         }
     }

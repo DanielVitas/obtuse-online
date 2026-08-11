@@ -1,20 +1,61 @@
 package com.obtuse.game.gameobjects.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.utils.Align;
 import com.obtuse.game.Obtuse;
 import com.obtuse.game.gameobjects.BasicObject;
 
 public abstract class InfoBackground extends BasicObject {
+    /** Very light grey tooltip body. */
+    public static final Color BG = new Color(0.90f, 0.90f, 0.92f, 1f);
+    /** Dark text, readable on the light body. */
+    public static final Color TEXT = new Color(0.13f, 0.13f, 0.16f, 1f);
 
     public InfoBackground(String name, float defaultFD) {
         super();
         path += "UI/info/" + name + "/";
         addAnimation("default", defaultFD, Animation.PlayMode.LOOP);
         currentlyDisplayed.add(animations.get("default"));
+    }
+
+    /** Height of the title strip (name + stat) at the top of the tooltip. */
+    public float titleHeight() {
+        return getHeight() * 0.22f;
+    }
+
+    /**
+     * Lay out the standard tooltip: name in the title strip (left), a stat (HP/PP) to its right,
+     * and a description filling the body below. Any of stat/description may be null. All dark text.
+     */
+    public void layoutTooltip(Label name, Label stat, Label description) {
+        float x = getX(), y = getY(), w = getWidth(), h = getHeight(), th = titleHeight();
+        float pad = w * 0.02f;
+        name.setColor(TEXT);
+        name.setWidth(w * 0.62f - pad);
+        name.setHeight(th);
+        name.setAlignment(Align.left);
+        name.setPosition(x + pad, y + h - th);
+        if (stat != null) {
+            stat.setColor(TEXT);
+            stat.setWidth(w * 0.34f);
+            stat.setHeight(th);
+            stat.setAlignment(Align.right);
+            stat.setPosition(x + w - w * 0.34f - pad, y + h - th);
+        }
+        if (description != null) {
+            description.setColor(TEXT);
+            description.setWidth(w - 2 * pad);
+            description.setWrap(true);
+            description.setAlignment(Align.topLeft);
+            description.setHeight(h - th - pad);
+            description.setPosition(x + pad, y);
+        }
     }
 
     /**
@@ -54,9 +95,12 @@ public abstract class InfoBackground extends BasicObject {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        // Gold frame around the tooltip window itself.
-        float t = Math.min(getWidth(), getHeight()) * 0.03f;
-        Border.drawRect(batch, getX(), getY(), getWidth(), getHeight(), t, Border.GOLD, parentAlpha);
+        // Solid very-light-grey body (no sprite art), a silver frame around the title strip, and a
+        // silver frame around the whole window. Do NOT call super.draw() — we replace the art.
+        float x = getX(), y = getY(), w = getWidth(), h = getHeight(), th = titleHeight();
+        float t = Math.min(w, h) * 0.02f;
+        Border.fillRect(batch, x, y, w, h, BG, parentAlpha);
+        Border.drawRect(batch, x, y + h - th, w, th, t, Border.SILVER, parentAlpha);
+        Border.drawRect(batch, x, y, w, h, t, Border.SILVER, parentAlpha);
     }
 }

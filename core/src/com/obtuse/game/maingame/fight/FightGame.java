@@ -24,6 +24,7 @@ import com.obtuse.game.maingame.fight.levels.stages.InfoStage;
 import com.obtuse.game.progress.ProgressKeeper;
 import com.obtuse.game.screens.MyScreen;
 
+import java.util.Comparator;
 import java.util.ConcurrentModificationException;
 
 import static com.obtuse.game.Obtuse.h;
@@ -45,22 +46,37 @@ public class FightGame extends GameGame {
 
     public void setup(Fight fight){
         this.fight = fight;
-        turn = new Turn() {
-            @Override
-            public void run() {
-
-            }
-        };
         arenas.clear();
         setLevel(new FightLevel(screen, this));
         level.create();
         //level.stage(2).addActor(new BackgroundBackground(w(0.4f), h(0.075f), w(0.2f), h(0.15f)));
         fight.setup(this);
+        // Everyone on the field, ordered by who acts first this turn (fastest first). Hide them all,
+        // then summon them ONE AT A TIME on the combat thread with their entrance animation. Making
+        // this the fight's `turn` also gates the turn loop — runAll() only starts conduct() once
+        // turn.isAlive() is false — so combat begins after the summons finish.
+        final Array<FightObject> order = new Array<FightObject>();
         for (Array<Holder> holderArray : new Array[]{arenas.get(0).heroHolders, arenas.get(0).enemyHolders, arenas.get(0).summonHolders})
-            for (final Holder holder : holderArray) {
-                if (holder.fightObject != null)
-                    holder.fightObject.summon();
+            for (final Holder holder : holderArray)
+                if (holder.fightObject != null) {
+                    holder.fightObject.setVisible(false);
+                    order.add(holder.fightObject);
+                }
+        order.sort(new Comparator<FightObject>() {
+            @Override
+            public int compare(FightObject a, FightObject b) {
+                return b.speed - a.speed;
             }
+        });
+        turn = new Turn() {
+            @Override
+            public void run() {
+                for (FightObject fightObject : order) {
+                    fightObject.setVisible(true);
+                    Turn.sleep(fightObject.summon());
+                }
+            }
+        };
     }
 
     private void win() {

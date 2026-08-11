@@ -16,12 +16,13 @@ import com.obtuse.game.maingame.GameStage;
 
 public class InventoryStage extends GameStage {
     private static float size = 0.5f;               // item icon size
-    private static float box = 0.85f;               // slot frame — bigger than the icon; items still fit side by side
-    // Inventory grid: 3 columns x 4 rows (= Inventory.maxSize 12). Tall-ish so it fits the portrait
-    // screen; the row Y is derived from the visible world height each time so all 12 slots stay on
-    // screen in landscape too (they used to be fixed world-Y and fell off the top in landscape).
-    private static final float[] gridColumns = {0.55f, 1.8f, 3.05f};
+    // Inventory grid: 3 columns x 4 rows (= Inventory.maxSize 12). Square cells sized from the
+    // visible world height so all 12 fit both the tall portrait and short landscape views; the
+    // slot frames are drawn at the full cell size so they tile exactly edge-to-edge.
+    private static final int gridCols = 3;
     private static final int gridRows = 4;
+    private static final float gridLeftX = 0.35f;   // left edge of the first grid cell
+    private static final float rightSlot = 1f;      // ability/equipment slot cell = their 1.0 pitch (tiles too)
     private static final float[] abilityOrbX = {5.75f, 6.75f, 7.75f, 8.75f};
     private static final float[] equipmentX = {6.25f, 7.25f, 8.25f};
     private Array<Item> created = new Array<Item>();
@@ -47,17 +48,23 @@ public class InventoryStage extends GameStage {
         return Obtuse.cameraWidth / Obtuse.ratio;
     }
 
-    // World-unit Y of each inventory-grid row (item bottom-left). Centred vertically and scaled to
-    // the visible world height so the 4 rows fit both the tall portrait and short landscape views.
-    private float[] gridRowsY() {
-        float vh = visibleHeight();
-        float step = Math.min(vh * 0.22f, 2.2f);
-        float centerY = vh * 0.43f;
-        float half = (gridRows - 1) / 2f;
-        float[] ys = new float[gridRows];
-        for (int j = 0; j < gridRows; j++)
-            ys[j] = centerY + (half - j) * step - size / 2f;
-        return ys;
+    // Square cell size: box = cell pitch so the frames tile edge-to-edge; capped so portrait isn't
+    // huge, and small enough that all 4 rows fit the short landscape view.
+    private float cellSize() {
+        return Math.min(1.25f, visibleHeight() * 0.23f);
+    }
+
+    private float gridBottomY() {
+        return visibleHeight() * 0.43f - gridRows * cellSize() / 2f;
+    }
+
+    private float colLeft(int i) {
+        return gridLeftX + i * cellSize();
+    }
+
+    // Row j counted from the TOP (so items fill top-to-bottom); returns the cell's bottom edge.
+    private float rowBottom(int jFromTop) {
+        return gridBottomY() + (gridRows - 1 - jFromTop) * cellSize();
     }
 
     // Right column (hero on top, then ability-orb row, then equipment row). In portrait the roomy
@@ -83,25 +90,24 @@ public class InventoryStage extends GameStage {
         return abilityRowY() + rightGap();
     }
 
-    // Gold frames around every slot (inventory grid, ability-orb slots, equipment slots) — drawn
-    // whether or not the slot currently holds an item. World-unit coords/thickness (world camera).
+    // Dashed silver frames around every slot (inventory grid, ability-orb slots, equipment slots),
+    // drawn whether or not the slot holds an item. Each frame is a full cell so adjacent frames tile
+    // edge-to-edge. World-unit coords/thickness (world camera).
     public void setupBorders() {
-        float[] ys = gridRowsY();
-        for (float y : ys)
-            for (float x : gridColumns)
-                addSlotBorder(x, y);
+        float cs = cellSize();
+        for (int j = 0; j < gridRows; j++)
+            for (int i = 0; i < gridCols; i++)
+                addCellBorder(colLeft(i), rowBottom(j), cs);
         float abilityY = abilityRowY();
         for (float x : abilityOrbX)
-            addSlotBorder(x, abilityY);
+            addCellBorder(x + size / 2f - rightSlot / 2f, abilityY + size / 2f - rightSlot / 2f, rightSlot);
         float equipmentY = equipmentRowY();
         for (float x : equipmentX)
-            addSlotBorder(x, equipmentY);
+            addCellBorder(x + size / 2f - rightSlot / 2f, equipmentY + size / 2f - rightSlot / 2f, rightSlot);
     }
 
-    // A frame centred on the item cell, a bit bigger than the 0.5 icon.
-    private void addSlotBorder(float itemX, float itemY) {
-        float t = 0.045f;
-        Border border = new Border(itemX + size / 2f - box / 2f, itemY + size / 2f - box / 2f, box, box, t);
+    private void addCellBorder(float x, float y, float cell) {
+        Border border = new Border(x, y, cell, cell, cell * 0.02f, Border.SILVER, true);
         borders.add(border);
         add(border);
     }
@@ -136,17 +142,18 @@ public class InventoryStage extends GameStage {
     }
 
     public void setupInventory() {
-        float[] ys = gridRowsY();
+        float cs = cellSize();
         int i = 0;
         int j = 0;
         for (Item item : Inventory.items) {
-            if (i >= gridColumns.length) {
+            if (i >= gridCols) {
                 i = 0;
                 j++;
             }
-            if (j >= ys.length)
+            if (j >= gridRows)
                 break;
-            item.create(gridColumns[i], ys[j], size, size);
+            // Centre the 0.5 icon inside its cell.
+            item.create(colLeft(i) + cs / 2f - size / 2f, rowBottom(j) + cs / 2f - size / 2f, size, size);
             addItem(item);
             i++;
         }
