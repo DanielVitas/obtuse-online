@@ -110,6 +110,15 @@ public abstract class MyScreen implements Screen {
 
     @Override
     public void show() {
+        // Re-measure against the CURRENT surface every time this screen becomes active.
+        // libGDX only calls resize() on the active screen, so a screen constructed at startup
+        // (FightScreen/InventoryScreen/LootScreen are all built once in Obtuse.create) keeps the
+        // camera it was given at that instant and never sees later resizes while it sits inactive.
+        // On mobile web the canvas is often a transient wrong size at startup (e.g. a 300x150
+        // default → ratio 2.0 → viewportHeight ~5), so those screens froze a landscape-ish camera:
+        // sprites were placed at the correct world-Y (7-13) but fell off the top of a camera that
+        // only showed 0-5. Refreshing on show() re-derives the camera from the live surface.
+        refreshLayout();
         Gdx.input.setInputProcessor(multiplexer);
     }
 

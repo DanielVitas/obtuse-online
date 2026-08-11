@@ -83,10 +83,13 @@ def injectDimsDebug = {
     def block = anchor + '\n' +
         '        <div id="dimsdbg" style="position:fixed;top:0;left:0;z-index:30;background:#000c;' +
         'color:#0f0;font:12px monospace;padding:4px 6px;pointer-events:none;white-space:pre;line-height:1.4"></div>\n' +
-        '        <script>function updDims(){var c=document.getElementById("canvas"),d=document.getElementById("dimsdbg");' +
+        '        <script>var gameLayout="(waiting)";["log","info"].forEach(function(k){var o=console[k];' +
+        'console[k]=function(){var m=Array.prototype.join.call(arguments," ");' +
+        'var idx=m.indexOf("surface");if(idx>=0)gameLayout=m.slice(idx);o.apply(console,arguments);};});' +
+        'function updDims(){var c=document.getElementById("canvas"),d=document.getElementById("dimsdbg");' +
         'if(!d)return;var r=c?(c.width/c.height).toFixed(3):"?";' +
         'd.textContent="win "+window.innerWidth+"x"+window.innerHeight+"  dpr "+(window.devicePixelRatio||1).toFixed(2)+' +
-        '"\\ncanvas "+(c?c.width+"x"+c.height:"?")+"  ratio "+r;}' +
+        '"\\ncanvas "+(c?c.width+"x"+c.height:"?")+"  ratio "+r+"\\ngame "+gameLayout;}' +
         'window.addEventListener("resize",updDims);setInterval(updDims,400);</script>'
     html.text = html.text.replace(anchor, block)
     logger.lifecycle("Injected dims debug readout")
