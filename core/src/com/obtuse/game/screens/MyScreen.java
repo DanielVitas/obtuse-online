@@ -39,6 +39,10 @@ public abstract class MyScreen implements Screen {
     public static Turn dialogInstance;
     /** How many of this screen's cameras were put into world units by fixCamera(). */
     private int worldCameras = 0;
+    // TEMP DIAGNOSTIC (v4): dump fight/inventory sprite actors so we can see, on a real device,
+    // whether they exist and where. Logged for a couple of frames after the screen is shown.
+    public static String currentScreen = "";
+    private int spriteDiag = 0;
 
     public MyScreen(String name) {
         if (name == null)
@@ -119,6 +123,8 @@ public abstract class MyScreen implements Screen {
         // sprites were placed at the correct world-Y (7-13) but fell off the top of a camera that
         // only showed 0-5. Refreshing on show() re-derives the camera from the live surface.
         refreshLayout();
+        currentScreen = name;
+        spriteDiag = 0;
         Gdx.input.setInputProcessor(multiplexer);
     }
 
@@ -151,7 +157,35 @@ public abstract class MyScreen implements Screen {
             // it aborts the whole frame and blacks out the entire screen (this is what made the
             // inventory render as a black screen). Isolate a bad draw to its own stage instead.
             catch (Throwable e) {e.printStackTrace();}
+        spriteDump();
         loop();
+    }
+
+    // TEMP DIAGNOSTIC (v4): for the first few frames after a fight/inventory screen is shown,
+    // log every actor's class, position, size, visibility and alpha. Piped to the on-screen
+    // readout so we can tell on a real device whether the sprites are absent, zero-sized,
+    // transparent, or positioned off the (known-correct) camera.
+    private void spriteDump() {
+        if (spriteDiag >= 2) return;
+        if (!name.equals("FightScreen") && !name.equals("InventoryScreen")) return;
+        for (int i = 0; i < stages.size; i++) {
+            Array<Actor> actors = stage(i).getActors();
+            StringBuilder sb = new StringBuilder("SPRDIAG " + name + " s" + i + " n=" + actors.size);
+            for (int k = 0; k < actors.size && k < 8; k++) {
+                Actor a = actors.get(k);
+                sb.append(" [").append(a.getClass().getSimpleName())
+                        .append(" ").append(r(a.getX())).append(",").append(r(a.getY()))
+                        .append(" ").append(r(a.getWidth())).append("x").append(r(a.getHeight()))
+                        .append(" v").append(a.isVisible() ? 1 : 0)
+                        .append(" a").append(r(a.getColor().a)).append("]");
+            }
+            Gdx.app.log("OBTUSE", sb.toString());
+        }
+        spriteDiag++;
+    }
+
+    private static float r(float v) {
+        return ((int) (v * 10)) / 10f;
     }
 
     /**
