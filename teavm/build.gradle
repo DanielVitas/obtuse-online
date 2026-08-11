@@ -73,6 +73,22 @@ def injectLoadingOverlay = {
     logger.lifecycle("Injected music loading label")
 }
 
+// Bump this every deploy so the user can confirm at a glance (green, top-right) that the newest
+// build is live. Also appended as ?v=<buildVersion> to app.js so a fresh index.html never pairs
+// with a stale cached app.js.
+def buildVersion = 'v14'
+def injectVersionStamp = {
+    def html = new File(webappDir, 'index.html')
+    if (!html.exists() || html.text.contains('id="verstamp"')) return
+    html.text = html.text.replace('src="app.js"', 'src="app.js?' + buildVersion + '"')
+    def anchor = '<body oncontextmenu="return false">'
+    def stamp = anchor + '\n        <div id="verstamp" style="position:fixed;top:2px;right:6px;z-index:31;' +
+        'color:#0f0;font:bold 20px monospace;text-shadow:0 0 3px #000,0 0 3px #000;pointer-events:none">' +
+        buildVersion + '</div>'
+    html.text = html.text.replace(anchor, stamp)
+    logger.lifecycle("Injected version stamp " + buildVersion)
+}
+
 // Build the JS app into teavm/build/dist (release: obfuscated, optimized).
 tasks.register('buildRelease', JavaExec) {
     description = 'Transpile the game to JavaScript into teavm/build/dist'
@@ -80,7 +96,7 @@ tasks.register('buildRelease', JavaExec) {
     dependsOn classes
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectVersionStamp() }
 }
 
 // Same, with debug info + source maps and no obfuscation — slower, but debuggable.
@@ -91,7 +107,7 @@ tasks.register('buildDebug', JavaExec) {
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
     args += ['debug']
-    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay(); injectVersionStamp() }
 }
 
 // Build (debug) then serve the finished webapp at http://localhost:8080. We do NOT use the

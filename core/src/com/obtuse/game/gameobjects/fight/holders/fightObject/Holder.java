@@ -74,11 +74,14 @@ public class Holder {
 
     public void setHealthBarPosition() {
         if (fightObject != null) {
+            // Nudge the bar toward the character: allies (bar on their right) a bit to the LEFT,
+            // enemies (bar on their left) a bit to the RIGHT, so it sits closer to the sprite.
+            float toward = 0.28f;
             if (fightObject.getClass().getSuperclass() == Hero.class ||
                     fightObject.getClass().getSuperclass() == Summon.class)
-                healthBar.create(getX() + getWidth() + healthBar.getWidth() * 0, getY() + getHeight() - 0.2f);
+                healthBar.create(getX() + getWidth() - toward, getY() + getHeight() - 0.2f);
             if (fightObject.getClass().getSuperclass() == Enemy.class)
-                healthBar.create(getX() - healthBar.getWidth(), getY() + getHeight() - 0.2f);
+                healthBar.create(getX() - healthBar.getWidth() + toward, getY() + getHeight() - 0.2f);
             refreshHealthBar();
         }
     }

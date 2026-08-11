@@ -15,7 +15,7 @@ import com.obtuse.game.gameobjects.world.WorldCharacter;
 import com.obtuse.game.progress.ProgressKeeper;
 import com.obtuse.game.screens.LootScreen;
 import com.obtuse.game.screens.MyScreen;
-import com.obtuse.game.screens.dialogs.WorldDialog;
+import com.obtuse.game.screens.dialogs.SpeechBubble;
 
 import static com.obtuse.game.Obtuse.changeScreen;
 
@@ -31,15 +31,15 @@ public class Uros extends WorldCharacter {
         if (ProgressKeeper.done("win","demon"))
             if (ProgressKeeper.done("win","skeletons") && ProgressKeeper.done("win","redSkull"))
                 if (ProgressKeeper.done("quest","monsters1"))
-                    Obtuse.dialog(new WorldDialog("Urke","Please don't hurt me, that's all i had. :'(") {
+                    Obtuse.dialog(new SpeechBubble(this, "Please don't hurt me, that's all i had. :'(", 3.5f) {
                         @Override
                         public void after() {
 
                         }
                     });
                 else
-                    Obtuse.dialog(new WorldDialog("Cefurke","Wow! Thank you random adventurer. I stole this gem. " +
-                            "You can have it. XD") {
+                    Obtuse.dialog(new SpeechBubble(this, "Wow! Thank you random adventurer. I stole this gem. " +
+                            "You can have it. XD", 3.5f) {
                         @Override
                         public void after() {
                             final Choice choice = new Choice();
@@ -55,7 +55,7 @@ public class Uros extends WorldCharacter {
                         }
                     });
             else
-                Obtuse.dialog(new WorldDialog("Urke","Since you killed the Demon, skeletons won't be any problem. :)") {
+                Obtuse.dialog(new SpeechBubble(this, "Since you killed the Demon, skeletons won't be any problem. :)", 3.5f) {
                     @Override
                     public void after() {
 
@@ -63,15 +63,15 @@ public class Uros extends WorldCharacter {
                 });
         else
             if (ProgressKeeper.done("win","skeletons"))
-                Obtuse.dialog(new WorldDialog("Urke","Hmm, if you are struggling you might find " +
-                        "something useful behind the drawer in front of me. ^^") {
+                Obtuse.dialog(new SpeechBubble(this, "Hmm, if you are struggling you might find " +
+                        "something useful behind the drawer in front of me. ^^", 3.5f) {
                     @Override
                     public void after() {
 
                     }
                 });
             else
-                Obtuse.dialog(new WorldDialog("Urke","T_T There are monsters outside. Please get rid of them. ;_;") {
+                Obtuse.dialog(new SpeechBubble(this, "T_T There are monsters outside. Please get rid of them. ;_;", 3.5f) {
                     @Override
                     public void after() {
 
