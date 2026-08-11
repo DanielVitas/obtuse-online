@@ -54,13 +54,13 @@ public class WorldGame extends GameGame {
     private void desktopMove() {
         WorldCharacter m = (WorldCharacter) level.main;
         Vector2 v  = new Vector2(0, 0);
-        if (Gdx.input.isKeyPressed(moveKeys[0]))
+        if (Gdx.input.isKeyPressed(moveKeys[0]) || Gdx.input.isKeyPressed(Input.Keys.DOWN))
             v.y -= 1;
-        if (Gdx.input.isKeyPressed(moveKeys[1]))
+        if (Gdx.input.isKeyPressed(moveKeys[1]) || Gdx.input.isKeyPressed(Input.Keys.RIGHT))
             v.x += 1;
-        if (Gdx.input.isKeyPressed(moveKeys[2]))
+        if (Gdx.input.isKeyPressed(moveKeys[2]) || Gdx.input.isKeyPressed(Input.Keys.LEFT))
             v.x -= 1;
-        if (Gdx.input.isKeyPressed(moveKeys[3]))
+        if (Gdx.input.isKeyPressed(moveKeys[3]) || Gdx.input.isKeyPressed(Input.Keys.UP))
             v.y += 1;
         m.walk(v.nor());
         m.changeDirection(v);
@@ -87,7 +87,7 @@ public class WorldGame extends GameGame {
     }
 
     private void buildTouchControls() {
-        if (Gdx.app.getType() == Application.ApplicationType.Desktop)
+        if (Gdx.app.getType() == Application.ApplicationType.Desktop || webDesktop)
             return;
         Stage ui = screen.stage(2);
         ui.clear();
@@ -160,6 +160,11 @@ public class WorldGame extends GameGame {
      */
     @Override
     protected void runWeb() {
+        if (webDesktop) {
+            // Desktop browser: keyboard to move, mouse to interact (and hover for info).
+            runDesktop();
+            return;
+        }
         if (GameWorld.pause)
             return;
         WorldCharacter m = (WorldCharacter) level.main;

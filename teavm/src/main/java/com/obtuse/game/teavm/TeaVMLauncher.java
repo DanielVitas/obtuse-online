@@ -4,7 +4,9 @@ import com.github.xpenatan.gdx.teavm.backends.web.WebApplication;
 import com.github.xpenatan.gdx.teavm.backends.web.WebApplicationConfiguration;
 import com.obtuse.game.Obtuse;
 import com.obtuse.game.audio.MusicPlayer;
+import com.obtuse.game.maingame.GameGame;
 import com.obtuse.game.maingame.fight.arenas.BossArena;
+import org.teavm.jso.JSBody;
 import com.obtuse.game.maingame.fight.arenas.DuelArena;
 import com.obtuse.game.maingame.fight.arenas.MainArena;
 import com.obtuse.game.maingame.fight.arenas.TripleBossArena;
@@ -21,8 +23,16 @@ import com.obtuse.game.screens.WorldScreen;
  * a fixed size would fight it.
  */
 public class TeaVMLauncher {
+    /** True on a device with a real (mouse/trackpad) pointer — i.e. a desktop browser. */
+    @JSBody(script = "return !!(window.matchMedia && window.matchMedia('(pointer: fine)').matches);")
+    private static native boolean hasFinePointer();
+
     public static void main(String[] args) {
         keepReflectivelyLoadedClasses();
+        // A desktop browser (mouse) uses the desktop input model — keyboard + mouse, with
+        // descriptions shown on hover; a touch device uses the on-screen controls. Set before
+        // the game is created, since GameGame reads it as its screens are constructed.
+        GameGame.webDesktop = hasFinePointer();
         // No music is bundled into the initial preload (see build.gradle's deferAllMusic), so the
         // first load stays small. Every track is fetched on demand and played through Howl by the
         // web backend — including the overworld theme at startup, which is why this path is

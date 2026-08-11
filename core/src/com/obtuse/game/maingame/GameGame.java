@@ -59,15 +59,24 @@ public abstract class GameGame {
     }
 
     /**
-     * The browser is a hybrid: it has both a pointer and a keyboard. By default the web
-     * build reuses the touch/hover input model, so the on-screen controls respond to the
-     * mouse exactly as they do to a finger; individual games (e.g. WorldGame) layer keyboard
-     * input on top in runWeb(). This is kept as its own branch so the Android/Desktop/iOS
-     * paths are untouched. Without it, GameGame.getType() == WebGL matched none of the
-     * branches below and no input was ever wired up.
+     * True when the web build is running on a device with a real mouse (a desktop browser),
+     * set from JS at startup by the :teavm launcher. A desktop browser then uses the full
+     * desktop input model — keyboard plus a mouse that shows an element's description on hover
+     * (no click) and acts on click — while a touch device keeps the on-screen controls. false
+     * on Android/desktop-app (they never consult it; those platforms take their own branches).
+     */
+    public static boolean webDesktop = false;
+
+    /**
+     * The browser is a hybrid. A desktop browser (mouse + keyboard) uses the same input as the
+     * old desktop build — including hover-to-show-description — while a touch device uses the
+     * on-screen controls. Kept as its own branch so the Android/Desktop/iOS paths are untouched.
      */
     protected void webInit() {
-        androidInit();
+        if (webDesktop)
+            desktopInit();
+        else
+            androidInit();
     }
 
     private void setup() {
@@ -147,9 +156,13 @@ public abstract class GameGame {
         runAndroid();
     }
 
-    /** See webInit(). Defaults to the touch handler; games add keyboard input by overriding. */
+    /** See webInit(): desktop browsers run the desktop handler (mouse hover + click + keyboard),
+     *  touch devices run the touch handler. */
     protected void runWeb() {
-        runAndroid();
+        if (webDesktop)
+            runDesktop();
+        else
+            runAndroid();
     }
 
     public void run() {

@@ -40,7 +40,9 @@
       "Bash(javap -p com/github/xpenatan/gdx/teavm/backends/web/assetloader/AssetDownloadImpl.class)",
       "Bash(javap -p com/github/xpenatan/gdx/teavm/backends/web/webaudio/howler/HowlMusic.class)",
       "Bash(perl -0pi -e 's/doLast \\\\{ injectFreetypeScript\\\\\\(\\\\\\) \\\\}/doLast { injectFreetypeScript\\(\\); deferAllMusic\\(\\); injectLoadingOverlay\\(\\) }/g' teavm/build.gradle)",
-      "Bash(perl -0pi -e 's/doLast \\\\{ injectFreetypeScript\\\\\\(\\\\\\); deferAllMusic\\\\\\(\\\\\\); injectLoadingOverlay\\\\\\(\\\\\\) \\\\}/doLast { injectFreetypeScript\\(\\); deferAllMusic\\(\\); injectLoadingOverlay\\(\\); injectRotatePrompt\\(\\) }/g' teavm/build.gradle)"
+      "Bash(perl -0pi -e 's/doLast \\\\{ injectFreetypeScript\\\\\\(\\\\\\); deferAllMusic\\\\\\(\\\\\\); injectLoadingOverlay\\\\\\(\\\\\\) \\\\}/doLast { injectFreetypeScript\\(\\); deferAllMusic\\(\\); injectLoadingOverlay\\(\\); injectRotatePrompt\\(\\) }/g' teavm/build.gradle)",
+      "Bash(sed -n '/protected void webInit/,/^    }/p; /protected void runWeb/,/^    }/p' maingame/GameGame.java)",
+      "Bash(sed -n '/protected void runDesktop/,/^    }/p' maingame/inventory/InventoryGame.java)"
     ]
   }
 }
