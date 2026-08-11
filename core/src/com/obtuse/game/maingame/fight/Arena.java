@@ -14,7 +14,7 @@ import com.obtuse.game.maingame.fight.levels.FightLevel;
 import java.util.Comparator;
 
 public abstract class Arena {
-    private static float[] profilePosition = {0.5f, Obtuse.cameraWidth / Obtuse.ratio - 9f / 16, 9f / 16}; // x, starting y, x gap, y gap
+    private static float[] profilePosition = {0.5f, 0f, 9f / 16}; // x, starting y (derived at runtime), x gap, y gap
     public FightGame fightGame;
     private float[] heroPositions;
     private float[] enemyPositions;
@@ -218,7 +218,8 @@ public abstract class Arena {
 
     private void createProfiles() {
         for (int i = 0; i < fighterOrder.size; i++) {
-            float y = profilePosition[1];
+            // Derived from the CURRENT ratio, not baked in at class load (see profilePosition).
+            float y = Obtuse.cameraWidth / Obtuse.ratio - 9f / 16;
             fighterOrder.get(i).profile.setX(Obtuse.cameraWidth / 2 - fighterOrder.size * profilePosition[2] / 2 +
                     i * profilePosition[2]);
             fighterOrder.get(i).profile.setY(y);

@@ -17,17 +17,12 @@ public class InventoryStage extends GameStage {
     private static float size = 0.5f;
     private static float[] columns = {0.5f, 1.5f, 2.5f, 3.5f};
     private static float[] rows = {6.5f, 5f, 3.5f, 2f, 0.5f};
-    private static float[] abilityOrbLocation = {
-            5.75f, 6f / Obtuse.ratio,
-            6.75f, 6f / Obtuse.ratio,
-            7.75f, 6f / Obtuse.ratio,
-            8.75f, 6f / Obtuse.ratio
-    };
-    private static float[] equipmentLocation = {
-            6.25f, 4.5f / Obtuse.ratio,
-            7.25f, 4.5f / Obtuse.ratio,
-            8.25f, 4.5f / Obtuse.ratio
-    };
+    // Only the X columns are fixed; the Y is derived from the CURRENT aspect ratio each time
+    // (see xLocation/yFromRatio). These used to be static arrays baking in Obtuse.ratio at class
+    // load, so the row locked to whatever orientation the class first loaded in (and was Infinity
+    // if it loaded before the ratio was set) — which put the orbs/equipment off-screen in portrait.
+    private static final float[] abilityOrbX = {5.75f, 6.75f, 7.75f, 8.75f};
+    private static final float[] equipmentX = {6.25f, 7.25f, 8.25f};
     private Array<Item> created = new Array<Item>();
     public Array<SimpleArrow> arrows = new Array<SimpleArrow>();
 
@@ -82,15 +77,17 @@ public class InventoryStage extends GameStage {
     }
 
     public void setupAbilityOrbs(Hero hero) {
+        float y = 6f / Obtuse.ratio;
         for (int i = 0; i < hero.abilityOrbs.size; i++) {
-            hero.abilityOrbs.get(i).create(abilityOrbLocation[2 * i], abilityOrbLocation[2 * i + 1], size, size);
+            hero.abilityOrbs.get(i).create(abilityOrbX[i], y, size, size);
             addItem(hero.abilityOrbs.get(i));
         }
     }
 
     public void setupEquipment(Hero hero) {
+        float y = 4.5f / Obtuse.ratio;
         for (int i = 0; i < hero.equipment.size; i++) {
-            hero.equipment.get(i).create(equipmentLocation[2 * i], equipmentLocation[2 * i + 1], size, size);
+            hero.equipment.get(i).create(equipmentX[i], y, size, size);
             addItem(hero.equipment.get(i));
         }
     }
