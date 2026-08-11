@@ -14,13 +14,19 @@ public class MusicPlayer {
     private static Map<String, FileHandle> fileNames = new HashMap<String, FileHandle>();
     private static Music music;
     public static String playing = "";
+
     /**
-     * Track names that were actually shipped (preloaded) — used by the web build, where not
-     * every music file is bundled to keep the first load small. null means "all tracks are
-     * available" (desktop/Android), so those platforms are unaffected. play() silently skips
-     * a request for a track that is not shipped instead of failing to load it.
+     * Web music backend. On the web no music is bundled into the initial preload (it would make
+     * the first load huge, and this audio backend can't stream); instead each track is fetched
+     * on demand and handed to Howl directly (see the :teavm module). When this is set, all music
+     * playback is delegated to it. null on desktop/Android, which take the direct path below and
+     * are unaffected.
      */
-    public static java.util.Set<String> shippedTracks = null;
+    public interface Backend {
+        /** Fetch the track if needed (caching), stop whatever is playing, and loop this one. */
+        void play(String filePath, float volume);
+    }
+    public static Backend backend = null;
 
     public MusicPlayer() {
         addFileNames();
@@ -31,26 +37,25 @@ public class MusicPlayer {
     }
 
     public static void play(String name, float volume) {
-        // On the web not every track is bundled (see MusicPlayer.shippedTracks). If this one
-        // is not, leave whatever is currently playing alone — DON'T stop it — so the overworld
-        // theme keeps playing through fights instead of cutting to silence. Stopping here also
-        // left `music` referencing a disposed object; the next play() then disposed it a second
-        // time, which froze the game on fight exit. null shippedTracks = all tracks available
-        // (desktop/Android), so this is a no-op there.
-        if (shippedTracks != null && !shippedTracks.contains(name))
+        final FileHandle fh = fileNames.get(name);
+        if (fh == null)
             return;
+        playing = name;
+        if (backend != null) {
+            // Web: the backend downloads on demand and keeps whatever is currently playing until
+            // the new track is ready, so it never cuts to silence mid-transition.
+            backend.play(fh.path(), volume * musicVolume);
+            return;
+        }
         if (music != null) {
             music.stop();
             music.dispose();
             music = null;
         }
-        playing = name;
-        if (fileNames.containsKey(name)) {
-            music = Gdx.audio.newMusic(fileNames.get(name));
-            music.setVolume(volume * musicVolume);
-            music.setLooping(true);
-            music.play();
-        }
+        music = Gdx.audio.newMusic(fh);
+        music.setVolume(volume * musicVolume);
+        music.setLooping(true);
+        music.play();
     }
 
     private static void addFileNames() {

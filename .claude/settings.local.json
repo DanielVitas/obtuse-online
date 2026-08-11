@@ -36,7 +36,10 @@
       "Bash(git add *)",
       "Bash(xargs -0 du -h)",
       "Bash(env WEB_ONLY=1 ./gradlew :teavm:buildRelease --console=plain)",
-      "Bash(git commit -q -m ' *)"
+      "Bash(git commit -q -m ' *)",
+      "Bash(javap -p com/github/xpenatan/gdx/teavm/backends/web/assetloader/AssetDownloadImpl.class)",
+      "Bash(javap -p com/github/xpenatan/gdx/teavm/backends/web/webaudio/howler/HowlMusic.class)",
+      "Bash(perl -0pi -e 's/doLast \\\\{ injectFreetypeScript\\\\\\(\\\\\\) \\\\}/doLast { injectFreetypeScript\\(\\); deferAllMusic\\(\\); injectLoadingOverlay\\(\\) }/g' teavm/build.gradle)"
     ]
   }
 }

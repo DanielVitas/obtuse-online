@@ -43,6 +43,35 @@ def injectFreetypeScript = {
     logger.lifecycle("Injected freetype.js <script> into ${html}")
 }
 
+// The soundtrack is ~62 MB and this audio backend must download a track fully before it can
+// play (no streaming), so preloading it makes the first load slow. Every music file is COPIED
+// into the webapp (so it stays fetchable) but removed from the STARTUP preload here; the game
+// then fetches each track on demand at runtime (WebMusicBackend). Sound effects stay preloaded.
+def deferAllMusic = {
+    def preload = new File(webappDir, 'assets/preload.txt')
+    if (!preload.exists()) return
+    def kept = [], dropped = 0
+    preload.readLines().each { line ->
+        if (line.contains('audio/music/')) dropped++
+        else kept << line
+    }
+    preload.text = kept.join('\n') + '\n'
+    logger.lifecycle("Deferred ${dropped} music track(s) from preload (fetched on demand)")
+}
+
+// A simple overlay shown while a not-yet-cached track downloads (WebMusicBackend toggles its
+// display). Hidden by default; injected here because the backend regenerates index.html.
+def injectLoadingOverlay = {
+    def html = new File(webappDir, 'index.html')
+    if (!html.exists() || html.text.contains('id="music-loading"')) return
+    def anchor = '<body oncontextmenu="return false">'
+    def overlay = anchor + '\n        <div id="music-loading" style="display:none;position:fixed;' +
+        'inset:0;z-index:10;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);' +
+        'color:#fff;font-family:monospace;font-size:20px;letter-spacing:1px;">loading music…</div>'
+    html.text = html.text.replace(anchor, overlay)
+    logger.lifecycle("Injected music loading overlay")
+}
+
 // Build the JS app into teavm/build/dist (release: obfuscated, optimized).
 tasks.register('buildRelease', JavaExec) {
     description = 'Transpile the game to JavaScript into teavm/build/dist'
@@ -50,7 +79,7 @@ tasks.register('buildRelease', JavaExec) {
     dependsOn classes
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
-    doLast { injectFreetypeScript() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
 }
 
 // Same, with debug info + source maps and no obfuscation — slower, but debuggable.
@@ -61,7 +90,7 @@ tasks.register('buildDebug', JavaExec) {
     mainClass.set(project.mainClassName)
     setClasspath(sourceSets.main.runtimeClasspath)
     args += ['debug']
-    doLast { injectFreetypeScript() }
+    doLast { injectFreetypeScript(); deferAllMusic(); injectLoadingOverlay() }
 }
 
 // Build (debug) then serve the finished webapp at http://localhost:8080. We do NOT use the

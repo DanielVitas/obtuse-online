@@ -38,14 +38,11 @@ public class TeaVMBuilder {
                 // Raw art under images/ is packed into atlas/ and loaded from there — except
                 // images/world/ (floor, grass, walls are loaded by path). Drop the rest.
                 if (p.contains("images/") && !p.contains("images/world/")) return false;
-                // Music dominates the preload (~62 MB of MP3s, and this audio backend must
-                // download a track fully before it can play it — no streaming). Ship only the
-                // overworld tracks so the first load is fast; the fight-only tracks are dropped
-                // for now (MusicPlayer skips any track not in MusicPlayer.shippedTracks, set in
-                // TeaVMLauncher). satieGnossienne = overworld area 0 (plays at startup),
-                // verdiDiesIrae = area 1. Sound EFFECTS (audio/sounds) stay — they're small.
-                if (p.contains("audio/music/")
-                        && !p.contains("satieGnossienne") && !p.contains("verdiDiesIrae")) return false;
+                // Music is COPIED (so it can be fetched at runtime) but kept out of the STARTUP
+                // preload — build.gradle strips every audio/music entry from preload.txt, and
+                // WebMusicBackend downloads each track on demand. That keeps the first load small
+                // without dropping the soundtrack. (Sound EFFECTS stay in the preload; they're
+                // small and are read from the FS by the normal SoundPlayer path.)
                 return true;
             }
         };
