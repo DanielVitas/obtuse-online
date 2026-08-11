@@ -126,13 +126,14 @@ public abstract class MyScreen implements Screen {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
-    // One SpriteBatch, created lazily INSIDE render() — i.e. during this screen's live GL frame —
-    // and used to draw EVERY stage, instead of each Stage's own internal batch. On real mobile GL
-    // the per-stage SpriteBatches (created during Obtuse.create()/scene setup, outside any render
-    // frame) drew nothing at all — proven by probes: a batch created inside render renders fine
-    // through the same camera, a stage's own batch does not. Desktop/Android and the desktop-Chrome
-    // emulation tolerated the stage batches, which is why this only ever bit the real phone.
-    private SpriteBatch sharedBatch;
+    // One fresh SpriteBatch PER STAGE, created lazily inside render() — i.e. in this screen's live
+    // GL frame. On real mobile GL the Stage's OWN batch (created during Obtuse.create()/scene
+    // setup, outside any render frame) draws nothing, while a batch created inside render draws
+    // fine through the same camera (proven by on-device probes). We therefore draw each stage's
+    // root through its own render-frame batch instead of stage.draw(). Per-stage (not shared) so a
+    // failure in one stage can never leave a shared batch mid-begin() and black out the others,
+    // and end() is guaranteed in finally. Desktop/Android/emulation were unaffected either way.
+    private SpriteBatch[] frameBatches;
     private static final Comparator<Actor> DEPTH = new Comparator<Actor>() {
         @Override
         public int compare(Actor o1, Actor o2) {
@@ -151,22 +152,27 @@ public abstract class MyScreen implements Screen {
             try {
                 stage.act();
             } catch (NullPointerException e) {e.printStackTrace();}
-        if (sharedBatch == null) sharedBatch = new SpriteBatch();
-        for (int i = 0; i < stages.size; i++)
+        if (frameBatches == null || frameBatches.length != stages.size)
+            frameBatches = new SpriteBatch[stages.size];
+        for (int i = 0; i < stages.size; i++) {
+            SpriteBatch batch = frameBatches[i];
+            if (batch == null) batch = frameBatches[i] = new SpriteBatch();
             try {
                 stage(i).getActors().sort(DEPTH);
                 OrthographicCamera cam = camera(i);
                 cam.update();
-                sharedBatch.setProjectionMatrix(cam.combined);
-                sharedBatch.setColor(1f, 1f, 1f, 1f);
-                sharedBatch.begin();
-                stage(i).getRoot().draw(sharedBatch, 1);
-                sharedBatch.end();
+                batch.setProjectionMatrix(cam.combined);
+                batch.setColor(1f, 1f, 1f, 1f);
+                batch.begin();
+                stage(i).getRoot().draw(batch, 1);
             }
             // On the web (TeaVM) a SpriteBatch draw of a null/undefined TextureRegion throws a JS
-            // TypeError (not an NPE), so catch everything and isolate a bad draw to its own stage
-            // rather than letting it blank the whole frame.
+            // TypeError (not an NPE); catch everything so a bad draw stays isolated to its stage.
             catch (Throwable e) {e.printStackTrace();}
+            finally {
+                try { if (batch.isDrawing()) batch.end(); } catch (Throwable e) {e.printStackTrace();}
+            }
+        }
         spriteDump();
         loop();
     }
