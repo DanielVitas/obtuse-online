@@ -36,6 +36,7 @@ public class FightLevel extends Level {
     public boolean targeting = false;
     public boolean back = false;
     public FightObject choosingCaster;   // whose move menu is open (for damage-modifier previews)
+    public SquareButton cancelButton;    // shown in the Pass slot while choosing a target
 
     public FightLevel(MyScreen screen, FightGame game) {
         super(screen);
@@ -135,6 +136,12 @@ public class FightLevel extends Level {
         if (selectedAbility.ability.targets.size != 0) {
             targeting = true;
             back = false;
+            // Where the moves were: show the move's description; where Pass was: a Cancel button.
+            InfoStage info = (InfoStage) stages.get(2);
+            info.showDescription(selectedAbility.ability.describedFor(caster));
+            info.showCancel();
+            cancelButton = new SquareButton(w(InfoStage.abilityPosition[8]), h(InfoStage.abilityPosition[9]),
+                    w(0.14f), InfoStage.defaultAbilityHeight * 0.55f);
             while (selectedTarget == null) {
                 if (back) {
                     back = false;
@@ -144,6 +151,9 @@ public class FightLevel extends Level {
                 Turn.sleep();
             }
             targeting = false;
+            cancelButton = null;
+            info.clearCancel();
+            info.clearDescription();
         }
     }
 
@@ -167,6 +177,16 @@ public class FightLevel extends Level {
 
     public void gatherInfo(AbilityInstance ability) {
         ((InfoStage) stages.get(2)).setup(ability, choosingCaster);
+    }
+
+    /** Big DD message shown on an enemy's turn: "[name] used [move]: [description]". */
+    public void showEnemyAction(FightObject caster, AbilityInstance ability) {
+        ((InfoStage) stages.get(2)).showDescription(
+                caster.getName() + " used " + ability.getName() + ": " + ability.ability.describedFor(caster));
+    }
+
+    public void hideDescription() {
+        ((InfoStage) stages.get(2)).clearDescription();
     }
 
     public void loseInfo() {

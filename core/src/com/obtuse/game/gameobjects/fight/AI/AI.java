@@ -37,9 +37,17 @@ public abstract class AI {
         return getUsableAbilities(fightObject).size == 0;
     }
 
-    /** Pass (like a hero): 1 unmodifiable self-damage and next-turn priority. */
+    /** Announce the move in the big DD panel, linger ~1s, then run it (damage/animation follow). */
+    protected void perform(FightObject caster, AbilityInstance ability, Holder target, FightLevel level) {
+        level.showEnemyAction(caster, ability);
+        com.obtuse.game.maingame.fight.Turn.sleep(1f);
+        ability.run(caster, target, level);
+        level.hideDescription();
+    }
+
+    /** Pass (like a hero): 1 unmodifiable self-damage and next-turn priority, announced in the DD. */
     protected void pass(FightObject caster, FightLevel level) {
-        new com.obtuse.game.abilities.all.SkipTurn().run(caster, null, level);
+        perform(caster, new AbilityInstance(new com.obtuse.game.abilities.all.SkipTurn()), null, level);
     }
 
     protected boolean timeOut() {

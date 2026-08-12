@@ -54,6 +54,13 @@ public class InfoStage extends GameStage {
         if (pp != null)
             addInfoLabel(pp);
         addInfoLabel(description);
+        // Pin the tooltip to the end of the actor list so the (stable) depth sort keeps it on top of
+        // the area frames from the very first frame — no one-frame flash behind the inventory edge.
+        infoBackground.toFront();
+        name.toFront();
+        if (pp != null)
+            pp.toFront();
+        description.toFront();
     }
 
     public void addInfoLabel(Label label) {

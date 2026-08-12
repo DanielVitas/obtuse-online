@@ -54,6 +54,7 @@ public class Fonts {
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
             fonts.put("fightInfoTableContent", mono.generateFont(parameter));
+            fonts.get("fightInfoTableContent").getData().markupEnabled = true; // coloured damage in the DD
 
             parameter.size = (int) (11 * scale);
             parameter.borderWidth = 1f;

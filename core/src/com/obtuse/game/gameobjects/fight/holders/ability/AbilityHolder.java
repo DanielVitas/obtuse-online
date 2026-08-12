@@ -60,7 +60,7 @@ public class AbilityHolder {
             int ppRemaining = ability.pp - ability.ppUsed;
             boolean empty = ppRemaining <= 0;
             // Out of PP: don't show a number at all (the box is greyed out instead).
-            ppLabel.setText(empty ? "" : toRoman(ppRemaining));
+            ppLabel.setText(empty ? "" : ppRemaining + " PP");
             ppLabel.setColor(com.obtuse.game.gameobjects.UI.Border.ROYAL_BRIGHTGOLD);
             // Small, just below and a little right of the centred move name (not down in the corner).
             float bw = abilityBackground.getWidth(), bh = abilityBackground.getHeight();
@@ -69,17 +69,6 @@ public class AbilityHolder {
             ppLabel.setPosition(this.x + bw * 0.16f, this.y + bh * 0.2f);
             abilityBackground.setDisabled(empty);
         }
-    }
-
-    /** 1..N as Roman numerals; 0 shows as "0" (the box is greyed out anyway). */
-    private static String toRoman(int n) {
-        if (n <= 0) return "0";
-        int[] vals = {10, 9, 5, 4, 1};
-        String[] syms = {"X", "IX", "V", "IV", "I"};
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < vals.length; i++)
-            while (n >= vals[i]) { sb.append(syms[i]); n -= vals[i]; }
-        return sb.toString();
     }
 
     public float getX() {

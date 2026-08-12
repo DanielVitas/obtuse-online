@@ -23,7 +23,7 @@ public class Dummy extends Ability {
         setName("Dummy");
         addTarget(EMPTYENEMYSLOT);
 
-        description = "Summons a Dummy to an empty enemy slot. Upon dying Dummy explodes, dealing " + Integer.toString(damage) +
+        description = "Summons a Dummy to an empty enemy slot. Upon dying Dummy explodes, dealing " + DMG +
         " damage to adjacent characters.";
     }
 
@@ -31,7 +31,8 @@ public class Dummy extends Ability {
     public void cast(FightObject caster, Holder target, FightLevel level) {
         DummyEnemy dummyEnemy = new DummyEnemy();
         caster.postturn.add(new SummonEvent(caster, dummyEnemy, target, level));
-        Arena.triggers.add(new ExplosionDeathTrigger(dummyEnemy, damage, level));
+        // The explosion damage is set (and modified by the caster's equipment) at cast time.
+        Arena.triggers.add(new ExplosionDeathTrigger(dummyEnemy, applyOutgoing(damage, caster), level));
     }
 
     @Override

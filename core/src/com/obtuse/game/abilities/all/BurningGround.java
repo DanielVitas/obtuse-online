@@ -27,7 +27,7 @@ public class BurningGround extends Ability {
         addSuggestedTarget(Ability.ENEMY);
 
         description = "Sets targeted slot on fire. At the end of each turn character standing on it takes " +
-                Integer.toString(damage) + " damage.";
+                DMG + " damage.";
     }
 
     @Override

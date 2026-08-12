@@ -19,7 +19,7 @@ public class CompletelyRandomAI extends AI {
                 pass(caster, level);   // no PP left → Pass instead of skipping for free
             return;
         }
-        ability.run(caster, target, level);
+        perform(caster, ability, target, level);   // DD message + 1s linger, then the move runs
     }
 
     private void slowChooseAbilityAndTarget(Arena arena, FightObject caster) {

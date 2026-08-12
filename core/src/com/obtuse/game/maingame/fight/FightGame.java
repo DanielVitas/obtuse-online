@@ -240,6 +240,13 @@ public class FightGame extends GameGame {
                 }
             else
                 touch:{
+                    unprojectTouch(2);
+                    if (((FightLevel) level).cancelButton != null
+                            && ((FightLevel) level).cancelButton.check(touchPoint.x, touchPoint.y)) {
+                        if (touchReleased)
+                            back();
+                        break touch;
+                    }
                     unprojectTouch(0);
                     for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                         if (button.check(touchPoint.x, touchPoint.y)) {
@@ -316,6 +323,13 @@ public class FightGame extends GameGame {
                     }
                 else
                     touch:{
+                        camera(2).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+                        if (((FightLevel) level).cancelButton != null
+                                && ((FightLevel) level).cancelButton.check(touchPoint.x, touchPoint.y)) {
+                            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+                                back();
+                            break touch;
+                        }
                         camera(0).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
                         for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                             if (button.check(touchPoint.x, touchPoint.y)) {

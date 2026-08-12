@@ -39,6 +39,9 @@ public class InventoryLevel extends Level {
         if (page >= inv.pageCount())
             page = Math.max(0, inv.pageCount() - 1);
         inv.setup(hero, page);
+        // Rebuild the hero's name + HP/SPD every time so equipping/unequipping updates the stats.
+        ((InfoStage) stages.get(2)).clearAdditionalLabels();
+        ((InfoStage) stages.get(2)).addHeroInfo(hero);
         ((InfoStage) stages.get(2)).setItemLabels(hero, inv);
         ((InfoStage) stages.get(2)).setupAreaTitles(inv);
         setInventoryButtons();
@@ -55,7 +58,6 @@ public class InventoryLevel extends Level {
     }
 
     public void changeHero(int indexChange) {
-        ((InfoStage) stages.get(2)).clearAdditionalLabels();
         if (hero != null)
             hero.remove();
         index += indexChange;
@@ -63,8 +65,7 @@ public class InventoryLevel extends Level {
             index += Party.party.size;
         this.hero = Party.party.get(index % Party.party.size);
         ((InventoryStage) stages.get(1)).makeHero(hero);
-        ((InfoStage) stages.get(2)).addHeroInfo(hero);
-        setup();
+        setup(); // setup() rebuilds the hero name + HP/SPD (needs makeHero to have positioned the hero)
     }
 
     /** Returns true only if the item was actually equipped (slots weren't full). */

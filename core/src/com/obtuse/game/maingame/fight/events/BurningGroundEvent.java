@@ -19,7 +19,9 @@ public class BurningGroundEvent extends Event {
 
     @Override
     protected float run() {
-        target.burning += damage;
+        // Modify by the caster's equipment at accumulation time (a "healing" setup makes it negative);
+        // the end-phase burn Damage is dealer-less and so unmodifiable, hence we bake it in here.
+        target.burning += com.obtuse.game.abilities.Ability.applyOutgoing(damage, caster);
         return target.burn();
     }
 }

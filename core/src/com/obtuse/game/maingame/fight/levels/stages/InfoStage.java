@@ -50,9 +50,62 @@ public class InfoStage extends GameStage {
     public Array<Label> abilitySelectLabels = new Array<Label>();
     public Array<AbilityBackground> abilityBackgrounds = new Array<AbilityBackground>();
     private InfoBackground infoBackground;
+    // The big "Description Display" panel that fills the 4-move area (shown while targeting and on the
+    // enemy's turn), plus a Cancel button that replaces Pass while choosing a target.
+    private GeneralInfoBackground ddBackground;
+    private Label ddLabel;
+    private GeneralInfoBackground cancelBackground;
+    private Label cancelLabel;
 
     public InfoStage(Stage stage) {
         super(stage);
+    }
+
+    // World rect (screen pixels) of the 2x2 move block, used for the big description panel.
+    private static float ddX() { return w(abilityPosition[0]); }
+    private static float ddY() { return h(abilityPosition[5]); }
+    private static float ddW() { return w(abilityPosition[2]) + defaultAbilityWidth - ddX(); }
+    private static float ddH() { return h(abilityPosition[1]) + defaultAbilityHeight - ddY(); }
+
+    /** Show the big description panel (over the 4-move area) with wrapped text. */
+    public void showDescription(String text) {
+        clearDescription();
+        float x = ddX(), y = ddY(), bw = ddW(), bh = ddH();
+        ddBackground = new GeneralInfoBackground();
+        ddBackground.create(x, y, bw, bh);
+        add(ddBackground);
+        float pad = bw * 0.05f;
+        ddLabel = new Label(text, Fonts.get("fightInfoTableContent"));
+        ddLabel.setColor(com.obtuse.game.gameobjects.UI.Border.ROYAL_TEXT);
+        ddLabel.setWrap(true);
+        ddLabel.setAlignment(Align.topLeft);
+        ddLabel.setBounds(x + pad, y + pad, bw - 2 * pad, bh - 2 * pad);
+        add(ddLabel);
+    }
+
+    public void clearDescription() {
+        if (ddBackground != null) { ddBackground.remove(); ddBackground = null; }
+        if (ddLabel != null) { ddLabel.remove(); ddLabel = null; }
+    }
+
+    /** Cancel button in the Pass slot (bottom-left), shown while choosing a target. */
+    public void showCancel() {
+        clearCancel();
+        float x = w(abilityPosition[8]), y = h(abilityPosition[9]);
+        float bw = w(0.14f), bh = defaultAbilityHeight * 0.55f;
+        cancelBackground = new GeneralInfoBackground();
+        cancelBackground.create(x, y, bw, bh);
+        add(cancelBackground);
+        cancelLabel = new Label("Cancel", Fonts.get("fightInfoTable"));
+        cancelLabel.setColor(com.obtuse.game.gameobjects.UI.Border.ROYAL_TEXT);
+        cancelLabel.setBounds(x, y, bw, bh);
+        cancelLabel.setAlignment(Align.center);
+        add(cancelLabel);
+    }
+
+    public void clearCancel() {
+        if (cancelBackground != null) { cancelBackground.remove(); cancelBackground = null; }
+        if (cancelLabel != null) { cancelLabel.remove(); cancelLabel = null; }
     }
 
     public void choice(FightObject caster) {

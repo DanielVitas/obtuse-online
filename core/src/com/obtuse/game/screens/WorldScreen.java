@@ -37,17 +37,31 @@ public class WorldScreen extends MyScreen {
 
     @Override
     public void render(float delta) {
+        // Snap the camera onto the player BEFORE the draw so returning from a fight/inventory never
+        // shows a frame of the world at the recentered/default camera spot. level.run() (in loop())
+        // also snaps, but that happens AFTER the draw, so the first frame back would otherwise be off.
+        centerCameraOnPlayer();
         super.render(delta);
         //debugRenderer.render(GameWorld.world, new Matrix4(camera(0).combined));
         GameWorld.step();
     }
 
     @Override
+    public void refreshLayout() {
+        super.refreshLayout();
+        // fixCamera() (in super) recenters the camera; put it back on the player so a first-frame
+        // refreshLayout() after returning to the world doesn't cause a one-frame flash.
+        centerCameraOnPlayer();
+    }
+
+    @Override
     public void show() {
         super.show();
         GameWorld.pause = false;
-        // Put the camera on the player before the first frame is drawn (refreshLayout() in
-        // super.show() recentered it), else there's a one-frame flash at the recentered spot.
+        centerCameraOnPlayer();
+    }
+
+    private void centerCameraOnPlayer() {
         if (gameGame != null && gameGame.level instanceof com.obtuse.game.maingame.world.WorldLevel)
             ((com.obtuse.game.maingame.world.WorldLevel) gameGame.level).centerCamera();
     }
