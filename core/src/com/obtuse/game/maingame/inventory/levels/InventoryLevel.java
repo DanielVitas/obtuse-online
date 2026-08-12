@@ -22,8 +22,10 @@ public class InventoryLevel extends Level {
     public Array<GameButton> inventoryButtons = new Array<GameButton>();
     public Array<GameButton> heroButtons = new Array<GameButton>();
     public Array<GameButton> arrowButtons = new Array<GameButton>();
+    public Array<GameButton> pageButtons = new Array<GameButton>();
     public Hero hero;
     public int index = 0;
+    public int page = 0;
 
     public InventoryLevel(MyScreen screen) {
         super(screen);
@@ -33,12 +35,23 @@ public class InventoryLevel extends Level {
     }
 
     public void setup() {
-        ((InventoryStage) stages.get(1)).setup(hero);
-        ((InfoStage) stages.get(2)).setItemLabels(hero);
-        ((InfoStage) stages.get(2)).setupAreaTitles((InventoryStage) stages.get(1));
+        InventoryStage inv = (InventoryStage) stages.get(1);
+        if (page >= inv.pageCount())
+            page = Math.max(0, inv.pageCount() - 1);
+        inv.setup(hero, page);
+        ((InfoStage) stages.get(2)).setItemLabels(hero, inv);
+        ((InfoStage) stages.get(2)).setupAreaTitles(inv);
         setInventoryButtons();
         setHeroButtons();
         setArrowButtons();
+        setPageButtons();
+    }
+
+    // Flip the inventory grid to the previous/next page of items (wraps around).
+    public void changePage(int delta) {
+        int count = ((InventoryStage) stages.get(1)).pageCount();
+        page = ((page + delta) % count + count) % count;
+        setup();
     }
 
     public void changeHero(int indexChange) {
@@ -50,8 +63,7 @@ public class InventoryLevel extends Level {
             index += Party.party.size;
         this.hero = Party.party.get(index % Party.party.size);
         ((InventoryStage) stages.get(1)).makeHero(hero);
-        ((InfoStage) stages.get(2)).addHeroName(hero);
-        ((InfoStage) stages.get(2)).addHeroStats(hero, (InventoryStage) stages.get(1));
+        ((InfoStage) stages.get(2)).addHeroInfo(hero);
         setup();
     }
 
@@ -71,17 +83,16 @@ public class InventoryLevel extends Level {
     }
 
     public void unequip(int index) {
-        if (Inventory.items.size < Inventory.maxSize) {
-            Inventory.add(getHeroItem(index));
-            if (index < hero.abilityOrbs.size)
-                hero.abilityOrbs.removeIndex(index);
-            else
-                hero.equipment.removeIndex(index - hero.abilityOrbs.size);
-        }
+        // No capacity check: the inventory paginates, so it can hold every item.
+        Inventory.add(getHeroItem(index));
+        if (index < hero.abilityOrbs.size)
+            hero.abilityOrbs.removeIndex(index);
+        else
+            hero.equipment.removeIndex(index - hero.abilityOrbs.size);
     }
 
     public void gatherInfo(Item item) {
-        ((InfoStage) stages.get(2)).setup(item);
+        ((InfoStage) stages.get(2)).setup(item, hero);
     }
 
     public void loseInfo() {
@@ -103,8 +114,19 @@ public class InventoryLevel extends Level {
 
     public void setInventoryButtons() {
         inventoryButtons.clear();
-        for (Item item : Inventory.items)
+        for (Item item : ((InventoryStage) stages.get(1)).pageItems)
             addButton(inventoryButtons, item);
+    }
+
+    public void setPageButtons() {
+        pageButtons.clear();
+        for (SimpleArrow arrow : ((InventoryStage) stages.get(1)).pageArrows)
+            pageButtons.add(new SquareButton(arrow.getX(), arrow.getY(), arrow.getWidth(), arrow.getHeight()));
+    }
+
+    // The actual item behind inventory-grid button i (index into the current page).
+    public Item getPageItem(int i) {
+        return ((InventoryStage) stages.get(1)).pageItems.get(i);
     }
 
     public void setHeroButtons() {

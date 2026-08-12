@@ -35,6 +35,7 @@ public class FightLevel extends Level {
     public Holder selectedTarget;
     public boolean targeting = false;
     public boolean back = false;
+    public FightObject choosingCaster;   // whose move menu is open (for damage-modifier previews)
 
     public FightLevel(MyScreen screen, FightGame game) {
         super(screen);
@@ -102,6 +103,7 @@ public class FightLevel extends Level {
     }
 
     private void chooseAbility(FightObject caster) {
+        choosingCaster = caster;
         InfoStage info = (InfoStage) stages.get(2);
         info.choice(caster);
         // The box + hit-area come from the box origin (abilityPosition), NOT the name label —
@@ -164,7 +166,7 @@ public class FightLevel extends Level {
     }
 
     public void gatherInfo(AbilityInstance ability) {
-        ((InfoStage) stages.get(2)).setup(ability);
+        ((InfoStage) stages.get(2)).setup(ability, choosingCaster);
     }
 
     public void loseInfo() {

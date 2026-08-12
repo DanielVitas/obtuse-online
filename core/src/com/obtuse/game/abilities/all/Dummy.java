@@ -13,6 +13,11 @@ import com.obtuse.game.maingame.fight.triggers.ExplosionDeathTrigger;
 public class Dummy extends Ability {
     public int damage = 1;
 
+    @Override
+    public int getBaseDamage() {
+        return damage;
+    }
+
     public Dummy() {
         super("dummy", 3);
         setName("Dummy");

@@ -139,4 +139,46 @@ public  abstract class Ability {
     public String getName() {
         return displayName;
     }
+
+    /**
+     * Base outgoing damage this ability deals through Damage events, or -1 if it deals none. Damaging
+     * abilities override this so tooltips can preview the equipment-modified number. Purely defensive
+     * numbers (e.g. Guard's damageGuarded) do NOT override — they aren't outgoing damage.
+     */
+    public int getBaseDamage() {
+        return -1;
+    }
+
+    /** getBaseDamage() run through the caster's outgoing equipment modifiers (for tooltips). */
+    public int modifiedDamage(FightObject caster) {
+        int d = getBaseDamage();
+        if (d < 0 || caster == null)
+            return d;
+        // Mirror the runtime trigger order: equipment triggers are inserted at index 0 as each piece
+        // is set up, so the LAST-equipped fires FIRST — apply the list in reverse.
+        for (int i = caster.equipment.size - 1; i >= 0; i--)
+            d = caster.equipment.get(i).previewOutgoingDamage(d);
+        return d;
+    }
+
+    /**
+     * The description with its damage number recomputed for {@code caster}'s equipment and coloured
+     * (red = more damage, green = less). Uses libGDX colour markup, so the description font must have
+     * markup enabled. Falls back to the plain description when nothing changes or no number is found.
+     */
+    public String describedFor(FightObject caster) {
+        int base = getBaseDamage();
+        if (base < 0)
+            return description;
+        int mod = modifiedDamage(caster);
+        if (mod == base)
+            return description;
+        String token = "Deals " + base;
+        int idx = description.indexOf(token);
+        if (idx < 0)
+            return description;
+        String colour = mod > base ? "[#ff6b6b]" : "[#7ddc7d]"; // more = red, less = green
+        return description.substring(0, idx) + "Deals " + colour + mod + "[]"
+                + description.substring(idx + token.length());
+    }
 }

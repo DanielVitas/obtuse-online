@@ -38,13 +38,17 @@ public class InfoStage extends GameStage {
         add(infoBackground);
     }
 
-    public void setup(Item item) {
+    public void setup(Item item, Hero hero) {
         createGeneralBackground();
         Label name = new Label(item.getName(), Fonts.get("inventoryInfoTableTitle"));
         Label pp = null;
-        if (item instanceof AbilityOrb)
+        String desc = item.getDescription();
+        if (item instanceof AbilityOrb) {
             pp = new Label(((AbilityOrb) item).ability.pp + " PP", Fonts.get("inventoryInfoTableContent"));
-        Label description = new Label(item.getDescription(), Fonts.get("inventoryInfoTableDescription"));
+            // Damage recomputed for the viewed hero's equipment (coloured if changed).
+            desc = ((AbilityOrb) item).ability.describedFor(hero);
+        }
+        Label description = new Label(desc, Fonts.get("inventoryInfoTableDescription"));
         infoBackground.buildTooltip(stage, name, pp, null, description);
         addInfoLabel(name);
         if (pp != null)
@@ -103,11 +107,27 @@ public class InfoStage extends GameStage {
         areaFrames.clear();
     }
 
-    public void setItemLabels(Hero hero) {
+    public void setItemLabels(Hero hero, InventoryStage inv) {
         clearItemLabels();
-        addItemLabels(Inventory.items);
+        addItemLabels(inv.pageItems);          // only the items on the current grid page
         addItemLabels(hero.abilityOrbs);
         addItemLabels(hero.equipment);
+        addPageLabel(inv);
+    }
+
+    // "page X / N" centred under the grid, between the page arrows (only when there are >1 pages).
+    private void addPageLabel(InventoryStage inv) {
+        int count = inv.pageCount();
+        if (count <= 1)
+            return;
+        Label page = new Label((inv.page + 1) + " / " + count, Fonts.get("inventoryInfoTableContent"));
+        page.setColor(Border.ROYAL_TEXT);
+        page.setAlignment(Align.center);
+        page.pack();
+        page.setPosition(inv.pageLabelCenterX() / cameraWidth * w(1) - page.getWidth() / 2,
+                inv.pageLabelY() / cameraWidth * ratio * h(1));
+        itemLabels.add(page);
+        add(page);
     }
 
     public void clearItemLabels() {
@@ -122,30 +142,27 @@ public class InfoStage extends GameStage {
         additionalLabels.clear();
     }
 
-    // Name tag centred above the hero's head.
-    public void addHeroName(Hero hero) {
+    // Name centred BELOW the hero, with HP + SPD on the line below the name.
+    public void addHeroInfo(Hero hero) {
+        float cx = (hero.getX() + hero.getWidth() / 2f) / cameraWidth * w(1);
+        float feetY = hero.getY() / cameraWidth * ratio * h(1);
+
         Label name = new Label(hero.getName(), Fonts.get("fightInfoTable"));
         name.setColor(Border.ROYAL_TEXT);
-        name.setWidth(w(0.25f));
-        name.setWrap(true);
         name.setAlignment(Align.center);
-        float cx = (hero.getX() + hero.getWidth() / 2f) / cameraWidth * w(1);
-        float topY = (hero.getY() + hero.getHeight()) / cameraWidth * ratio * h(1);
-        name.setPosition(cx - name.getWidth() / 2, topY + h(0.006f));
+        name.pack();
+        float nameY = feetY - h(0.01f) - name.getHeight();
+        name.setPosition(cx - name.getWidth() / 2, nameY);
         additionalLabels.add(name);
         add(name);
-    }
 
-    // HP + SPD for the shown hero, written between the hero and the Moves box.
-    public void addHeroStats(Hero hero, InventoryStage inv) {
-        Label stats = new Label(hero.hp + " HP    " + hero.speed + " SPD",
+        Label stats = new Label(hero.hp + " HP   " + hero.speed + " SPD",
                 Fonts.get("inventoryInfoTableContent"));
         stats.setColor(Border.ROYAL_TEXT);
-        float sw = w(0.34f);
-        stats.setWidth(sw);
         stats.setAlignment(Align.center);
-        stats.setPosition(inv.heroCenterX() / cameraWidth * w(1) - sw / 2,
-                inv.statsRowY() / cameraWidth * ratio * h(1));
+        stats.pack();
+        float statsY = nameY - h(0.004f) - stats.getHeight();
+        stats.setPosition(cx - stats.getWidth() / 2, statsY);
         additionalLabels.add(stats);
         add(stats);
     }

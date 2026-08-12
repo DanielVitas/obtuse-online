@@ -49,6 +49,8 @@ public class Obtuse extends Game {
 		Party.party.add(new Wizard());
 		Party.party.add(new MageKnight());
 
+		com.obtuse.game.gameobjects.items.Inventory.giveAllItems();
+
 		changeScreen("WorldScreen");
 	}
 

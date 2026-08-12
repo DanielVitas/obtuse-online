@@ -111,6 +111,13 @@ public class InventoryGame extends GameGame {
         }
     }
 
+    private void clickedPage(SimpleArrow arrow, int index) {
+        if (allow()) {
+            wait(arrow.play("clicked"));
+            ((InventoryLevel) level).changePage(index == 0 ? -1 : 1);
+        }
+    }
+
     private void hovered(SimpleArrow arrow) {
         if (selectedArrow != arrow) {
             selectedArrow = arrow;
@@ -194,9 +201,9 @@ public class InventoryGame extends GameGame {
                 GameButton button = ((InventoryLevel) level).inventoryButtons.get(i);
                 if (button.check(touchPoint.x, touchPoint.y)) {
                     if (touchReleased)
-                        equip(Inventory.items.get(i));
+                        equip(((InventoryLevel) level).getPageItem(i));
                     else
-                        hovered(Inventory.items.get(i));
+                        hovered(((InventoryLevel) level).getPageItem(i));
                     break touch;
                 }
             }
@@ -207,6 +214,16 @@ public class InventoryGame extends GameGame {
                         clicked(((InventoryStage) ((InventoryLevel) level).stages.get(1)).arrows.get(i), i);
                     else
                         hovered(((InventoryStage) ((InventoryLevel) level).stages.get(1)).arrows.get(i));
+                    break touch;
+                }
+            }
+            for (int i = 0; i < ((InventoryLevel) level).pageButtons.size; i++) {
+                GameButton button = ((InventoryLevel) level).pageButtons.get(i);
+                if (button.check(touchPoint.x, touchPoint.y)) {
+                    if (touchReleased)
+                        clickedPage(((InventoryStage) ((InventoryLevel) level).stages.get(1)).pageArrows.get(i), i);
+                    else
+                        hovered(((InventoryStage) ((InventoryLevel) level).stages.get(1)).pageArrows.get(i));
                     break touch;
                 }
             }
@@ -247,11 +264,11 @@ public class InventoryGame extends GameGame {
                     GameButton button = ((InventoryLevel) level).inventoryButtons.get(i);
                     if (button.check(touchPoint.x, touchPoint.y)) {
                         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
-                            equip(Inventory.items.get(i));
+                            equip(((InventoryLevel) level).getPageItem(i));
                         else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT))
-                            equip(Inventory.items.get(i));
+                            equip(((InventoryLevel) level).getPageItem(i));
                         else
-                            hovered(Inventory.items.get(i));
+                            hovered(((InventoryLevel) level).getPageItem(i));
                         break touch;
                     }
                 }
@@ -262,6 +279,16 @@ public class InventoryGame extends GameGame {
                             clicked(((InventoryStage) ((InventoryLevel) level).stages.get(1)).arrows.get(i), i);
                         else
                             hovered(((InventoryStage) ((InventoryLevel) level).stages.get(1)).arrows.get(i));
+                        break touch;
+                    }
+                }
+                for (int i = 0; i < ((InventoryLevel) level).pageButtons.size; i++) {
+                    GameButton button = ((InventoryLevel) level).pageButtons.get(i);
+                    if (button.check(touchPoint.x, touchPoint.y)) {
+                        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+                            clickedPage(((InventoryStage) ((InventoryLevel) level).stages.get(1)).pageArrows.get(i), i);
+                        else
+                            hovered(((InventoryStage) ((InventoryLevel) level).stages.get(1)).pageArrows.get(i));
                         break touch;
                     }
                 }

@@ -13,6 +13,11 @@ import com.obtuse.game.maingame.fight.levels.FightLevel;
 
 public class Thunderstrike extends Ability {
     public int damage = 1;
+
+    @Override
+    public int getBaseDamage() {
+        return damage;
+    }
     public int stunTreshold = 1;
 
     public Thunderstrike() {

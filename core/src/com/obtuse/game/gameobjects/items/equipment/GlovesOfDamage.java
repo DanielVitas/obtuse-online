@@ -17,6 +17,11 @@ public class GlovesOfDamage extends Equipment {
     }
 
     @Override
+    public int previewOutgoingDamage(int d) {
+        return d + damage;
+    }
+
+    @Override
     public void setup(final FightObject fightObject) {
         Arena.triggers.insert(0, new Trigger() {
             @Override

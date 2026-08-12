@@ -13,6 +13,11 @@ import com.obtuse.game.maingame.fight.levels.FightLevel;
 public class BurningGround extends Ability {
     public int damage = 1;
 
+    @Override
+    public int getBaseDamage() {
+        return damage;
+    }
+
     public BurningGround() {
         super("burningGround", 3);
         setName("Burning Ground");

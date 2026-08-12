@@ -13,6 +13,11 @@ import com.obtuse.game.maingame.fight.levels.FightLevel;
 public class DelayedHit extends Ability {
     public int damage = 2;
 
+    @Override
+    public int getBaseDamage() {
+        return damage;
+    }
+
     public DelayedHit() {
         super("delayedHit", 3);
         setName("Delayed Hit");

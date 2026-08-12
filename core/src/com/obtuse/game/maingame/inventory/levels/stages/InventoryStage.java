@@ -26,18 +26,33 @@ public class InventoryStage extends GameStage {
     private static final float[] equipmentX = {6.25f, 7.25f, 8.25f};
     private Array<Item> created = new Array<Item>();
     public Array<SimpleArrow> arrows = new Array<SimpleArrow>();
+    // Page navigation: the inventory holds every item, shown 12 (one grid) at a time.
+    public Array<SimpleArrow> pageArrows = new Array<SimpleArrow>();
+    public Array<Item> pageItems = new Array<Item>();   // the items on the currently shown page
+    public int page = 0;
 
     public InventoryStage(Stage stage) {
         super(stage);
     }
 
-    public void setup(Hero hero) {
+    private static int perPage() {
+        return gridCols * gridRows;
+    }
+
+    public int pageCount() {
+        return Math.max(1, (Inventory.items.size + perPage() - 1) / perPage());
+    }
+
+    public void setup(Hero hero, int page) {
+        this.page = page;
         clearItems();
         clearArrows();
-        setupInventory();
+        clearPageArrows();
+        setupInventory(page);
         setupAbilityOrbs(hero);
         setupEquipment(hero);
         makeArrows();
+        makePageArrows();
     }
 
     private float visibleHeight() {
@@ -72,40 +87,24 @@ public class InventoryStage extends GameStage {
     // const/ratio spacing the layout was designed for is kept; in landscape the view is short, so
     // those rows collapse into each other — there we stack them from the bottom with a minimum gap
     // (bigger than a slot box) so nothing overlaps and the hero stays on screen.
+    // Items row sits low; Moves a good gap above it; the hero higher still, leaving room BELOW the
+    // hero for its name + HP/SPD line. Portrait has plenty of height so the rows are spread out;
+    // landscape is short, so the gaps shrink to whatever still fits on screen without overlap.
     private float equipmentRowY() {
-        if (Obtuse.ratio < 1f) return 4.5f / Obtuse.ratio;
-        // High enough off the bottom that the (now taller) Items box stays fully on screen.
-        return Math.max(1.15f, visibleHeight() * 0.14f);
-    }
-
-    // A generous vertical gap between the Moves box and the Items box below it.
-    private float movesItemsGap() {
-        return Math.max(2.9f, visibleHeight() * 0.32f);
-    }
-
-    // Room above the Moves box for the hero plus its HP/SPD stat line.
-    private float heroGap() {
-        return Math.max(1.9f, visibleHeight() * 0.22f);
-    }
-
-    // The hero's HP/SPD line, set just above the Moves box (low, in the gap under the hero).
-    public float statsRowY() {
-        float[] moves = movesArea();
-        return moves[1] + moves[3] + 0.3f;
-    }
-
-    public float heroCenterX() {
-        return 7.5f;
+        if (Obtuse.ratio < 1f) return 2.6f / Obtuse.ratio;
+        return Math.max(1.0f, visibleHeight() * 0.06f);
     }
 
     private float abilityRowY() {
-        if (Obtuse.ratio < 1f) return 6f / Obtuse.ratio;
-        return equipmentRowY() + movesItemsGap();
+        if (Obtuse.ratio < 1f) return 5.4f / Obtuse.ratio;   // ~2.8 gap above Items
+        // Landscape is short: keep the gaps just big enough that the boxes don't overlap and the
+        // hero row still fits on screen.
+        return equipmentRowY() + Math.max(1.4f, visibleHeight() * 0.2f);
     }
 
     private float heroRowY() {
-        if (Obtuse.ratio < 1f) return 7.5f / Obtuse.ratio;
-        return abilityRowY() + heroGap();
+        if (Obtuse.ratio < 1f) return 7.9f / Obtuse.ratio;   // ~2.5 gap above Moves for name + HP/SPD
+        return abilityRowY() + Math.max(1.4f, visibleHeight() * 0.2f);
     }
 
     // World-unit rects [x, y, w, h] of the three grouped areas: the inventory grid, the ability-orb
@@ -116,14 +115,19 @@ public class InventoryStage extends GameStage {
     }
 
     // Extra room below the icon row so the item name (drawn under the icon) fits inside the frame.
+    // Portrait has the height for a roomy box; landscape is short, so the box is shorter there.
+    private float areaPadBottom() {
+        return Obtuse.ratio < 1f ? 0.95f : 0.5f;
+    }
+
     public float[] movesArea() {
-        float padX = 0.24f, padTop = 0.24f, padBottom = 0.95f;
+        float padX = 0.24f, padTop = 0.24f, padBottom = areaPadBottom();
         float left = abilityOrbX[0], right = abilityOrbX[abilityOrbX.length - 1] + size, y = abilityRowY();
         return new float[]{left - padX, y - padBottom, (right - left) + 2 * padX, size + padTop + padBottom};
     }
 
     public float[] itemsArea() {
-        float padX = 0.24f, padTop = 0.24f, padBottom = 0.95f;
+        float padX = 0.24f, padTop = 0.24f, padBottom = areaPadBottom();
         float left = equipmentX[0], right = equipmentX[equipmentX.length - 1] + size, y = equipmentRowY();
         return new float[]{left - padX, y - padBottom, (right - left) + 2 * padX, size + padTop + padBottom};
     }
@@ -146,27 +150,57 @@ public class InventoryStage extends GameStage {
         add(arrow);
     }
 
+    // Prev/next page arrows below the grid (only when there is more than one page).
+    public void makePageArrows() {
+        if (pageCount() <= 1)
+            return;
+        float y = gridBottomY() - 0.85f;
+        float gridRight = gridLeftX + gridCols * cellW();
+        addPageArrow(new LeftArrow(), gridLeftX, y, 0.45f, 0.6f);
+        addPageArrow(new RightArrow(), gridRight - 0.45f, y, 0.45f, 0.6f);
+    }
+
+    private void addPageArrow(SimpleArrow arrow, float x, float y, float width, float height) {
+        arrow.create(x, y, width, height);
+        pageArrows.add(arrow);
+        add(arrow);
+    }
+
+    public void clearPageArrows() {
+        for (SimpleArrow arrow : pageArrows)
+            arrow.remove();
+        pageArrows.clear();
+    }
+
+    // World point centred below the grid, where the "page X / N" label goes.
+    public float pageLabelCenterX() {
+        return gridLeftX + gridCols * cellW() / 2f;
+    }
+
+    public float pageLabelY() {
+        return gridBottomY() - 0.7f;
+    }
+
     public void makeHero(Hero hero) {
         hero.create(7.5f - hero.getWidth() / 2, heroRowY());
         hero.play("summon");
         add(hero);
     }
 
-    public void setupInventory() {
+    public void setupInventory(int page) {
+        pageItems.clear();
         float cw = cellW(), ch = cellH();
-        int i = 0;
-        int j = 0;
-        for (Item item : Inventory.items) {
-            if (i >= gridCols) {
-                i = 0;
-                j++;
-            }
-            if (j >= gridRows)
+        int start = page * perPage();
+        for (int k = 0; k < perPage(); k++) {
+            int idx = start + k;
+            if (idx >= Inventory.items.size)
                 break;
+            Item item = Inventory.items.get(idx);
+            int i = k % gridCols, j = k / gridCols;
             // Icon in the upper part of the cell; its name label sits below it, inside the frame.
             item.create(colLeft(i) + (cw - size) / 2f, rowBottom(j) + ch - size - ch * 0.12f, size, size);
             addItem(item);
-            i++;
+            pageItems.add(item);
         }
     }
 

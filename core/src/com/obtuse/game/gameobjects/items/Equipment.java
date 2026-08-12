@@ -13,4 +13,12 @@ public abstract class Equipment extends Item {
     }
 
     public abstract void setup(FightObject fightObject);
+
+    /**
+     * Preview how this equipment changes OUTGOING damage the wearer deals (for tooltips), mirroring
+     * the runtime Damage trigger. Default: no change. Only outgoing modifiers override this.
+     */
+    public int previewOutgoingDamage(int damage) {
+        return damage;
+    }
 }

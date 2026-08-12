@@ -129,13 +129,15 @@ public class InfoStage extends GameStage {
             addInfoLabel(description);
     }
 
-    public void setup(AbilityInstance ability) {
+    public void setup(AbilityInstance ability, FightObject caster) {
         if (!(ability.ability instanceof SkipTurn)) {
             createGeneralBackground();
             Label name = new Label(ability.getName(), Fonts.get("fightInfoTableTitle"));
             Label pp = new Label((ability.pp - ability.ppUsed) + " /" + ability.pp + " PP",
                     Fonts.get("fightInfoTableContent"));
-            Label description = new Label(ability.getDescription(), Fonts.get("fightInfoTableDescription"));
+            // Description with the damage recomputed for the caster's equipment (coloured if changed).
+            Label description = new Label(ability.ability.describedFor(caster),
+                    Fonts.get("fightInfoTableDescription"));
             infoBackground.buildTooltip(stage, name, pp, null, description);
             addInfoLabel(name);
             addInfoLabel(pp);

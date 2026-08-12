@@ -41,8 +41,8 @@ public class SpeechBubbleBackground extends Actor {
         float fx = (wc.x - (cam.position.x - cam.viewportWidth / 2f)) / cam.viewportWidth;
         float fy = (headWorldY - (cam.position.y - cam.viewportHeight / 2f)) / cam.viewportHeight;
         float bw = getWidth(), bh = getHeight();
-        float bx = fx * Obtuse.width - bw / 2f;                 // centred exactly above the speaker
-        float by = fy * Obtuse.height + Obtuse.height * 0.02f;  // tail tip just above their head
+        float bx = fx * Obtuse.width - bw / 2f + bw * 0.32f;    // offset to the right of the speaker
+        float by = fy * Obtuse.height + Obtuse.height * 0.06f;  // and slightly higher above the head
         bx = Math.max(Obtuse.width * 0.01f, Math.min(bx, Obtuse.width - bw - Obtuse.width * 0.01f));
         by = Math.min(by, Obtuse.height - bh - Obtuse.height * 0.01f);
         setPosition(bx, by);

@@ -30,7 +30,9 @@ public class Fonts {
         // Absolute pixel sizes that suited a 520px window are unreadable on a 1080px
         // phone, so every size below is scaled by how much taller the surface really is.
         generatedHeight = Gdx.graphics.getHeight();
-        scale = 1.3f * Math.max(1f, generatedHeight / designHeight);
+        // Overall UI text scale. Kept deliberately small — every box/tooltip reads better with
+        // compact type than the chunky 2018 sizes.
+        scale = 1.0f * Math.max(1f, generatedHeight / designHeight);
         try {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/000webfont.ttf"));
             // The royal-gold "box" UI (tooltips, move/inventory/loot boxes) uses the clean monospace
@@ -57,6 +59,7 @@ public class Fonts {
             parameter.borderWidth = 1f;
             parameter.color = Color.WHITE;
             fonts.put("fightInfoTableDescription", mono.generateFont(parameter));
+            fonts.get("fightInfoTableDescription").getData().markupEnabled = true; // coloured damage
 
             parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1;
@@ -72,13 +75,14 @@ public class Fonts {
             parameter.borderWidth = 1f;
             parameter.color = Color.WHITE;
             fonts.put("inventoryInfoTableDescription", mono.generateFont(parameter));
+            fonts.get("inventoryInfoTableDescription").getData().markupEnabled = true; // coloured damage
 
             parameter.size = (int) (18 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
             fonts.put("lootDescription", mono.generateFont(parameter));
 
-            parameter.size = (int) (16 * scale);
+            parameter.size = (int) (9 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
             fonts.put("pp", mono.generateFont(parameter));
@@ -88,7 +92,7 @@ public class Fonts {
             parameter.color = Color.WHITE;
             fonts.put("damage", generator.generateFont(parameter));
 
-            parameter.size = (int) (9 * scale);
+            parameter.size = (int) (7 * scale);
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
             fonts.put("inventoryName", mono.generateFont(parameter));
