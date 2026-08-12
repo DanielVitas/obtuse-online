@@ -46,7 +46,10 @@ public class FightLevel extends Level {
         add(new InfoStage(stage(2)));
     }
 
+    public Arena currentArena;   // the arena on screen now, so a resize can re-lay-it-out
+
     public void switchArena(Arena arena) {
+        currentArena = arena;
         for (Holder holder : buttonMap.values()) {
             removeHolder(holder);
         }

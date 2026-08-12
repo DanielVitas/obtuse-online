@@ -207,6 +207,14 @@ public class FightGame extends GameGame {
     }
 
     @Override
+    public void layoutChanged() {
+        // The arena reflows via its world camera, but the screen-space HP labels / health bars are
+        // positioned from the surface size at creation, so on a resize re-lay-out the current arena.
+        if (level != null && ((FightLevel) level).currentArena != null)
+            ((FightLevel) level).switchArena(((FightLevel) level).currentArena);
+    }
+
+    @Override
     protected void runAndroid() {
         pollTouch();
         if (wait)
