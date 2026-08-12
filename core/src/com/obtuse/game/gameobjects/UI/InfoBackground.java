@@ -48,41 +48,50 @@ public abstract class InfoBackground extends BasicObject {
      * Any of inlineStat/belowStat/description may be null. Call BEFORE adding the labels to the stage.
      */
     public void buildTooltip(Stage stage, Label name, Label inlineStat, Label belowStat, Label description) {
-        name.setColor(NAME);
-        name.setWrap(false);
-        name.pack();
-        float titleH = name.getHeight();
-        if (inlineStat != null) {
-            inlineStat.setColor(TEXT);
-            inlineStat.setWrap(false);
-            inlineStat.pack();
-            titleH = Math.max(titleH, inlineStat.getHeight());
-        }
-        float belowH = 0;
-        if (belowStat != null) {
-            belowStat.setColor(TEXT);
-            belowStat.setWrap(false);
-            belowStat.pack();
-            belowH = belowStat.getHeight();
-        }
+        prep(name, NAME);
+        prep(inlineStat, TEXT);
+        prep(belowStat, TEXT);
 
-        // Grow the box just enough for the title line (name + inline stat) if needed.
-        float padGuess = getWidth() * 0.11f;
-        float titleNeeded = padGuess * 2 + name.getWidth()
-                + (inlineStat != null ? padGuess * 2 + inlineStat.getWidth() : 0);
-        float w = Math.max(getWidth(), titleNeeded);
+        // Absolute padding (a fraction of the SURFACE, not the box) so it reads the same at any box
+        // size. The box grows to fit the widest single line but never gets wider than the screen.
+        float pad = Obtuse.width * 0.022f;
+        float gap = pad * 0.7f;
+        float maxW = Obtuse.width * 0.9f;
+
+        float titleLineW = width(name) + (inlineStat != null ? gap + width(inlineStat) : 0);
+        float longest = Math.max(titleLineW, belowStat != null ? width(belowStat) : 0);
+        float w = Math.min(maxW, Math.max(getWidth(), longest + 2 * pad));
         setWidth(w);
-        float pad = w * 0.11f;
         float innerW = w - 2 * pad;
-        float gap = pad * 0.5f;
+
+        // If a single line is still too wide (box capped at the screen), shrink that line's font.
+        if (titleLineW > innerW && titleLineW > 0) {
+            float s = innerW / titleLineW;
+            scale(name, s);
+            scale(inlineStat, s);
+        }
+        fitWidth(belowStat, innerW);
+
+        float titleH = height(name);
+        if (inlineStat != null) titleH = Math.max(titleH, height(inlineStat));
+        float belowH = belowStat != null ? height(belowStat) : 0;
 
         float descH = 0;
         if (description != null) {
             description.setColor(TEXT);
-            description.setWidth(innerW);
+            description.setFontScale(1f);
             description.setWrap(true);
             description.setAlignment(Align.topLeft);
+            description.setWidth(innerW);
             descH = description.getPrefHeight();
+            // If the whole box would be taller than the screen, shrink the description to fit.
+            float maxH = Obtuse.height * 0.92f;
+            float fixedH = 2 * pad + titleH + (belowStat != null ? gap + belowH : 0) + gap;
+            if (fixedH + descH > maxH && descH > 0) {
+                description.setFontScale(Math.max(0.5f, (maxH - fixedH) / descH));
+                description.setWidth(innerW);
+                descH = description.getPrefHeight();
+            }
             description.setHeight(descH);
         }
 
@@ -95,11 +104,11 @@ public abstract class InfoBackground extends BasicObject {
 
         float x = getX(), y = getY(), top = y + h;
         float nameY = top - pad - titleH;
-        name.setPosition(x + pad, nameY + (titleH - name.getHeight()) / 2f);
+        name.setPosition(x + pad, nameY + (titleH - height(name)) / 2f);
 
         if (inlineStat != null)
-            inlineStat.setPosition(x + w - pad - inlineStat.getWidth(),
-                    nameY + (titleH - inlineStat.getHeight()) / 2f);
+            inlineStat.setPosition(x + w - pad - width(inlineStat),
+                    nameY + (titleH - height(inlineStat)) / 2f);
 
         float cursorY = nameY;
         if (belowStat != null) {
@@ -108,6 +117,38 @@ public abstract class InfoBackground extends BasicObject {
         }
         if (description != null)
             description.setPosition(x + pad, cursorY - gap - descH);
+    }
+
+    private static void prep(Label label, Color colour) {
+        if (label == null) return;
+        label.setColor(colour);
+        label.setWrap(false);
+        label.setFontScale(1f);
+        label.pack();
+    }
+
+    private static float width(Label label) {
+        return label == null ? 0 : label.getWidth();
+    }
+
+    private static float height(Label label) {
+        return label == null ? 0 : label.getHeight();
+    }
+
+    private static void scale(Label label, float s) {
+        if (label == null) return;
+        label.setFontScale(label.getFontScaleX() * s);
+        label.pack();
+    }
+
+    /** Shrink a single-line label's font so its width fits maxWidth. */
+    private static void fitWidth(Label label, float maxWidth) {
+        if (label == null) return;
+        label.pack();
+        if (label.getWidth() > maxWidth && label.getWidth() > 0) {
+            label.setFontScale(maxWidth / label.getWidth());
+            label.pack();
+        }
     }
 
     public void create(float x, float y, float width, float height) {

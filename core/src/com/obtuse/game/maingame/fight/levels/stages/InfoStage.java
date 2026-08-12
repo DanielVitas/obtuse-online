@@ -67,19 +67,23 @@ public class InfoStage extends GameStage {
     private static float ddW() { return w(abilityPosition[2]) + defaultAbilityWidth - ddX(); }
     private static float ddH() { return h(abilityPosition[1]) + defaultAbilityHeight - ddY(); }
 
-    /** Show the big description panel (over the 4-move area) with wrapped text. */
+    /** Show the big description panel (over the 4-move area) with wrapped text that always fits. */
     public void showDescription(String text) {
         clearDescription();
         float x = ddX(), y = ddY(), bw = ddW(), bh = ddH();
         ddBackground = new GeneralInfoBackground();
         ddBackground.create(x, y, bw, bh);
         add(ddBackground);
-        float pad = bw * 0.05f;
+        float pad = bw * 0.05f, innerW = bw - 2 * pad, innerH = bh - 2 * pad;
         ddLabel = new Label(text, Fonts.get("fightInfoTableContent"));
         ddLabel.setColor(com.obtuse.game.gameobjects.UI.Border.ROYAL_TEXT);
         ddLabel.setWrap(true);
         ddLabel.setAlignment(Align.topLeft);
-        ddLabel.setBounds(x + pad, y + pad, bw - 2 * pad, bh - 2 * pad);
+        ddLabel.setWidth(innerW);
+        float ph = ddLabel.getPrefHeight();
+        if (ph > innerH && ph > 0)             // shrink the font so long descriptions still fit
+            ddLabel.setFontScale(Math.max(0.4f, innerH / ph));
+        ddLabel.setBounds(x + pad, y + pad, innerW, innerH);
         add(ddLabel);
     }
 
