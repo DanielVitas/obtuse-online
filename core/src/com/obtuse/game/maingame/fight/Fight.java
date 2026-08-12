@@ -53,6 +53,7 @@ public abstract class Fight {
             e.printStackTrace();
         }
 
+        fightGame.mainArena = fightGame.arenas.get(0);
         ((FightLevel) fightGame.level).switchArena(fightGame.arenas.get(0));
         for (Hero hero : fightGame.allHeroes)
             hero.setupEquipment();

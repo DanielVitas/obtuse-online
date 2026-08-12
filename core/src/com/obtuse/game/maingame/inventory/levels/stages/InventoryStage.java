@@ -59,19 +59,36 @@ public class InventoryStage extends GameStage {
         return Obtuse.cameraWidth / Obtuse.ratio;
     }
 
+    // Bands (world units) kept clear so nothing is pushed off the short landscape view: the area
+    // title sits in the top band, the page arrows + "page X / N" label in the bottom band. Making
+    // these explicit is what stops the grid (and its arrows) sliding off the bottom on wide screens.
+    private float topBand() {
+        return 0.9f;
+    }
+
+    private float bottomBand() {
+        return pageCount() > 1 ? 1.6f : 0.5f;
+    }
+
     // Cells are TALLER than they are wide so the item name fits under the icon inside the frame.
     // Width is fixed (3 columns fit the left third); height is capped for portrait and shrunk so
-    // all 4 rows still fit the short landscape view. Frames are a full cell so they tile edge-to-edge.
+    // all 4 rows still fit between the two reserved bands. Frames are a full cell so they tile.
     private float cellW() {
         return 1.15f;
     }
 
-    private float cellH() {
-        return Math.min(1.55f, visibleHeight() * 0.9f / gridRows);
+    private float gridSpan() {
+        return visibleHeight() - topBand() - bottomBand();
     }
 
+    private float cellH() {
+        return Math.min(1.55f, Math.max(0.6f, gridSpan() / gridRows));
+    }
+
+    // Centre the grid in the space between the two bands, but never let it dip into the bottom band
+    // (where the arrows live) — so the arrows at gridBottomY - 0.85 always stay on screen.
     private float gridBottomY() {
-        return visibleHeight() * 0.43f - gridRows * cellH() / 2f;
+        return bottomBand() + Math.max(0f, (gridSpan() - gridRows * cellH()) / 2f);
     }
 
     private float colLeft(int i) {
@@ -95,16 +112,23 @@ public class InventoryStage extends GameStage {
         return Math.max(1.0f, visibleHeight() * 0.06f);
     }
 
+    // The gap between the three right-column rows (Items -> Moves -> Hero). Roomy by default, but
+    // capped so the hero (top row) plus its sprite always fit under the top edge on a short view —
+    // this is what stops the hero/rows running off the top of a wide screen.
+    private float rightRowGap() {
+        float roomy = Math.max(1.4f, visibleHeight() * 0.2f);
+        float fits = (visibleHeight() - 1.35f - equipmentRowY()) / 2f;   // two gaps below the hero baseline
+        return Math.max(0.9f, Math.min(roomy, fits));
+    }
+
     private float abilityRowY() {
         if (Obtuse.ratio < 1f) return 5.4f / Obtuse.ratio;   // ~2.8 gap above Items
-        // Landscape is short: keep the gaps just big enough that the boxes don't overlap and the
-        // hero row still fits on screen.
-        return equipmentRowY() + Math.max(1.4f, visibleHeight() * 0.2f);
+        return equipmentRowY() + rightRowGap();
     }
 
     private float heroRowY() {
         if (Obtuse.ratio < 1f) return 7.9f / Obtuse.ratio;   // ~2.5 gap above Moves for name + HP/SPD
-        return abilityRowY() + Math.max(1.4f, visibleHeight() * 0.2f);
+        return abilityRowY() + rightRowGap();
     }
 
     // World-unit rects [x, y, w, h] of the three grouped areas: the inventory grid, the ability-orb

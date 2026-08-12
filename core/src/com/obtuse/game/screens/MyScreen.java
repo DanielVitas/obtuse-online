@@ -143,7 +143,11 @@ public abstract class MyScreen implements Screen {
         for (Stage stage : stages)
             try {
                 stage.act();
-            } catch (NullPointerException e) {e.printStackTrace();}
+            }
+            // On the web (TeaVM) a null/undefined texture access throws a JS TypeError, not an NPE, so
+            // catch everything — otherwise one bad actor's act() escapes uncaught and blanks the whole
+            // screen (e.g. the inventory on certain surface heights).
+            catch (Throwable e) {e.printStackTrace();}
         if (frameBatches == null || frameBatches.length != stages.size)
             frameBatches = new SpriteBatch[stages.size];
         for (int i = 0; i < stages.size; i++) {

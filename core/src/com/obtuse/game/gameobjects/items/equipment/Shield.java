@@ -16,6 +16,13 @@ public class Shield extends Equipment {
         description = "Takes " + Integer.toString(damage) + " less damage.";
     }
 
+    // So a Shield to the LEFT of a Health Potion also modifies its heal (heal is negative damage, so
+    // "takes 1 less damage" makes the heal bigger). Mirrors the trigger below (damage -= damage).
+    @Override
+    public int previewOutgoingDamage(int d) {
+        return d - damage;
+    }
+
     @Override
     public void setup(final FightObject fightObject) {
         Arena.triggers.insert(0, new Trigger() {

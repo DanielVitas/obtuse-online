@@ -5,8 +5,10 @@ import com.obtuse.game.maingame.fight.Event;
 
 /**
  * A heal-over-time (the mirror of {@link PoisonEvent}): each turn it deals negative damage to the
- * taker. Because it routes through a {@link Damage} whose dealer is the caster, it is modified by
- * the caster's equipment exactly like poison — a Divine Orb turns it back into damage, etc.
+ * taker. The Health Potion already bakes in the effect of the equipment to its LEFT (see
+ * HealthPotion.modifiedDamage), so this routes the Damage WITHOUT the trigger pass — that way no
+ * runtime modifier (an outgoing one via the dealer, or an incoming one like Shield via the taker)
+ * touches it again, and the heal matches the tooltip exactly regardless of equip order.
  */
 public class HealEvent extends Event {
     public int damage;
@@ -24,7 +26,7 @@ public class HealEvent extends Event {
 
     @Override
     public float run() {
-        addSubEvent(new Damage(damage, dealer, taker));
+        addSubEventNoTrigger(new Damage(damage, dealer, taker));
         return 0;
     }
 }

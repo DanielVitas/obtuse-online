@@ -212,9 +212,16 @@ public class FightLevel extends Level {
         ((InfoStage) stages.get(2)).setup(ability, choosingCaster);
     }
 
-    /** Big DD message shown on an enemy's turn: "[name] used [move]." (no description). */
-    public void showEnemyAction(FightObject caster, AbilityInstance ability) {
-        ((InfoStage) stages.get(2)).showDescription(caster.getName() + " used " + ability.getName() + ".");
+    /**
+     * Big DD message shown on an enemy's turn: "[name] used [move] on [target]." when the move has a
+     * target (an empty slot reads "empty slot"), otherwise just "[name] used [move].".
+     */
+    public void showEnemyAction(FightObject caster, AbilityInstance ability, Holder target) {
+        String message = caster.getName() + " used " + ability.getName();
+        if (target != null)
+            message += " on " + (target.fightObject != null ? target.fightObject.getName() : "empty slot");
+        message += ".";
+        ((InfoStage) stages.get(2)).showDescription(message);
     }
 
     public void hideDescription() {

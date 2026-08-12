@@ -39,11 +39,24 @@ public class DuelArena extends Arena {
     protected boolean end() {
         boolean e = super.end();
         if (!e && !finishedFirst) {
+            playReturnAnimation();   // teleport the duellists out (mirror of the cast) before they rejoin the main arena
             originalArena.addNext(heroes.get(0));
             originalArena.addNext(enemies.get(0));
             finishedFirst = true;
         }
         return e;
+    }
+
+    /** Replay the Duel teleport on the duellists, still in the duel arena, before they return to main. */
+    private void playReturnAnimation() {
+        com.obtuse.game.abilities.all.Duel duel = new com.obtuse.game.abilities.all.Duel();
+        com.obtuse.game.audio.SoundPlayer.play("fight/abilities/duel/teleportation");
+        float wait = 0;
+        for (FightObject fighter : new FightObject[]{heroes.get(0), enemies.get(0)})
+            if (fighter != null)
+                wait = Math.max(wait, duel.play(fighter, "teleportation"));
+        if (wait > 0)
+            com.obtuse.game.maingame.fight.Turn.sleep(wait);
     }
 
     @Override

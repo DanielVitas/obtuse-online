@@ -39,7 +39,7 @@ public abstract class AI {
 
     /** Announce the move in the big DD panel, linger ~1s, then run it (damage/animation follow). */
     protected void perform(FightObject caster, AbilityInstance ability, Holder target, FightLevel level) {
-        level.showEnemyAction(caster, ability);
+        level.showEnemyAction(caster, ability, target);
         com.obtuse.game.maingame.fight.Turn.sleep(1f);
         ability.run(caster, target, level);
         level.hideDescription();

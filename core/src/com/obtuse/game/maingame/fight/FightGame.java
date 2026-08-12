@@ -32,6 +32,7 @@ import static com.obtuse.game.Obtuse.w;
 public class FightGame extends GameGame {
     private Turn turn;
     public Array<Arena> arenas = new Array<Arena>();
+    public Arena mainArena;   // the primary arena, so the fight can show it one last time before ending
     public Array<Hero> allHeroes = new Array<Hero>();
     public Array<Enemy> allEnemies = new Array<Enemy>();
     public AbilityHolder selectedAbilityHolder;
@@ -108,13 +109,27 @@ public class FightGame extends GameGame {
             for (Hero hero : allHeroes)
                 if (hero.alive())
                     break lose;
+            showMainArenaBeforeEnd();
             lose();
         }
         win : {
             for (Enemy enemy : allEnemies)
                 if (enemy.alive())
                     break win;
+            showMainArenaBeforeEnd();
             win();
+        }
+    }
+
+    /**
+     * If the fight is ending while a secondary (duel) arena is on screen — e.g. the last enemy died
+     * in a duel — switch back to the main arena and hold for a second so the player sees the final
+     * board before the win/lose resolves.
+     */
+    private void showMainArenaBeforeEnd() {
+        if (mainArena != null && level != null && ((FightLevel) level).currentArena != mainArena) {
+            ((FightLevel) level).switchArena(mainArena);
+            Turn.sleep(1f);
         }
     }
 
