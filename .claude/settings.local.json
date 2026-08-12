@@ -60,7 +60,8 @@
       "Bash(perl -0pi -e 's/di < 5;/di < 13;/' core/src/com/obtuse/game/Obtuse.java)",
       "Bash(perl -0pi -e 's{\\\\t\\\\tfor \\\\\\(int di = 0; di < 13;.*?FireBallOrb\\\\\\(\\\\\\)\\\\\\);}{\\\\t\\\\t{ com.badlogic.gdx.utils.Array<com.obtuse.game.gameobjects.items.Item> di = com.obtuse.game.gameobjects.items.Inventory.items;\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.GlovesOfDamage\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.HealingStaff\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.Shield\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.DivineOrb\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.BloodChalice\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.BootsOfSpeed\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.Seashell\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.SummoningHorn\\(\\)\\);\\\\n\\\\t\\\\tdi.add\\(new com.obtuse.game.gameobjects.items.equipment.CrownOfThorns\\(\\)\\); }}s' core/src/com/obtuse/game/Obtuse.java)",
       "Bash(awk '/createSkip/{p=1} p{print NR\": \"$0} p&&/^    }/{c++; if\\(c>=1 && /^    }/\\){exit}}' core/src/com/obtuse/game/maingame/fight/levels/FightLevel.java)",
-      "Bash(awk '{printf \"%d: %s\\\\n\", $1+94, substr\\($0, index\\($0,$2\\)\\)}')"
+      "Bash(awk '{printf \"%d: %s\\\\n\", $1+94, substr\\($0, index\\($0,$2\\)\\)}')",
+      "Bash(python3 -c \"import PIL; print\\('PIL', PIL.__version__\\)\")"
     ]
   }
 }
