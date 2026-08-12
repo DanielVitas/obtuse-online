@@ -51,6 +51,8 @@ public abstract class FightObject extends BasicObject {
     private boolean isDead = false;
     protected boolean isStunned = false;
     public AbilityInstance lastUsed;
+    // Set when this fighter Passed; the NEXT turn's ordering puts passers first (see Arena.order()).
+    public boolean passed = false;
 
     public FightObject(float defaultFD, float summonFD, float castFD, float hurtFD, float deathFD,
                        float stunnedFD, float unstunnedFD, float deathStunnedFD, String hurtSound, String deathSound,
@@ -88,15 +90,19 @@ public abstract class FightObject extends BasicObject {
     public Array<Status> getStatuses() {
         PoisonStatus poisonStatus = new PoisonStatus();
         Array<Status> statuses = new Array<Status>(this.statuses);
-        int poisonStacks = 0;
+        // Show the TOTAL damage the next poison tick will deal, not the number of stacks: each
+        // PoisonEvent's damage run through ITS caster's equipment (so a "healing" poison shows a
+        // negative total), summed across every instance (possibly from different casters).
+        int poisonDamage = 0;
         for (Array<Event> events : new Array[]{preturn, postturn})
             for (Event event : events)
                 if (event instanceof PoisonEvent) {
-                    poisonStacks ++;
+                    PoisonEvent pe = (PoisonEvent) event;
+                    poisonDamage += com.obtuse.game.abilities.Ability.applyOutgoing(pe.damage, pe.dealer);
                     if (!statuses.contains(poisonStatus, true))
                         statuses.add(poisonStatus);
                 }
-        poisonStatus.damage = Integer.toString(poisonStacks);
+        poisonStatus.damage = Integer.toString(poisonDamage);
         return statuses;
     }
 
@@ -214,6 +220,7 @@ public abstract class FightObject extends BasicObject {
         abilities.clear();
         statuses.clear();
         lastUsed = null;
+        passed = false;
         hp = originalHP;
         damageTaken = 0;
         isDead = false;

@@ -12,6 +12,11 @@ import com.obtuse.game.maingame.fight.levels.FightLevel;
 public class TabulaRasa extends Ability {
     public int damage = 0;
 
+    @Override
+    public int getBaseDamage() {
+        return damage;
+    }
+
     public TabulaRasa() {
         super("tabulaRasa", 6);
         setName("Tabula Rasa");
@@ -20,7 +25,7 @@ public class TabulaRasa extends Ability {
         addTarget(SUMMON);
         addSuggestedTarget(ENEMY);
 
-        description = "Deals " + Integer.toString(damage) + " damage to the targeted character.";
+        description = "Deals " + DMG + " damage to the targeted character.";
     }
 
     @Override

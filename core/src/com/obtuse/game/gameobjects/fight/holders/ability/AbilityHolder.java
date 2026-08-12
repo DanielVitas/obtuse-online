@@ -62,11 +62,11 @@ public class AbilityHolder {
             // Out of PP: don't show a number at all (the box is greyed out instead).
             ppLabel.setText(empty ? "" : toRoman(ppRemaining));
             ppLabel.setColor(com.obtuse.game.gameobjects.UI.Border.ROYAL_BRIGHTGOLD);
-            // Small, in the lower-right — below the centred move name.
+            // Small, just below and a little right of the centred move name (not down in the corner).
             float bw = abilityBackground.getWidth(), bh = abilityBackground.getHeight();
-            ppLabel.setSize(bw * 0.42f, bh * 0.26f);
-            ppLabel.setAlignment(Align.right);
-            ppLabel.setPosition(this.x + bw * 0.55f, this.y + bh * 0.07f);
+            ppLabel.setSize(bw * 0.5f, bh * 0.26f);
+            ppLabel.setAlignment(Align.center);
+            ppLabel.setPosition(this.x + bw * 0.16f, this.y + bh * 0.2f);
             abilityBackground.setDisabled(empty);
         }
     }

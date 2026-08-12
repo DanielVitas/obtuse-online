@@ -38,6 +38,6 @@ public class AbilityInstance {
     }
 
     public String getDescription() {
-        return ability.description;
+        return ability.getDescription();
     }
 }

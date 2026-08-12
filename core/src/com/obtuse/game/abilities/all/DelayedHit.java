@@ -28,7 +28,7 @@ public class DelayedHit extends Ability {
         addAnimation("mark", 0.2f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
 
-        description = "On casters next turn deals " + Integer.toString(damage) + " damage to any character standing " +
+        description = "On casters next turn deals " + DMG + " damage to any character standing " +
                 "on targeted slot.";
     }
 

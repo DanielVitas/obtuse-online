@@ -14,7 +14,7 @@ public abstract class AbilityOrb extends Item {
         super();
         path += "abilityOrbs/" + name + "/";
         this.ability = ability;
-        description = ability.description;
+        description = ability.getDescription();
         setName(ability.getName());
         addAnimation("default", defaultFD, Animation.PlayMode.LOOP);
         currentlyDisplayed.add(animations.get("default"));

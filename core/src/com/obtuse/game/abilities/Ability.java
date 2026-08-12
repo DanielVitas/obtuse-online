@@ -151,34 +151,52 @@ public  abstract class Ability {
 
     /** getBaseDamage() run through the caster's outgoing equipment modifiers (for tooltips). */
     public int modifiedDamage(FightObject caster) {
-        int d = getBaseDamage();
-        if (d < 0 || caster == null)
+        int base = getBaseDamage();
+        if (base < 0 || caster == null)
+            return base;
+        return applyOutgoing(base, caster);
+    }
+
+    /** Apply a caster's outgoing equipment modifiers to a damage value, in EQUIP order (left to
+     *  right, index 0 first) — the same order the runtime applies them. */
+    public static int applyOutgoing(int base, FightObject caster) {
+        int d = base;
+        if (caster == null)
             return d;
-        // Mirror the runtime trigger order: equipment triggers are inserted at index 0 as each piece
-        // is set up, so the LAST-equipped fires FIRST — apply the list in reverse.
-        for (int i = caster.equipment.size - 1; i >= 0; i--)
+        for (int i = 0; i < caster.equipment.size; i++)
             d = caster.equipment.get(i).previewOutgoingDamage(d);
         return d;
     }
 
     /**
+     * Placeholder standing in for the ability's damage number inside {@link #description}. Damaging
+     * abilities put this where the number goes (e.g. {@code "Deals " + DMG + " damage"}); it is
+     * resolved to the actual number by {@link #getDescription()} / {@link #describedFor(FightObject)}.
+     */
+    public static final String DMG = "{D}";
+
+    /** The description with its damage placeholder filled in with the base number (no colour). */
+    public String getDescription() {
+        if (!description.contains(DMG))
+            return description;
+        return description.replace(DMG, Integer.toString(getBaseDamage()));
+    }
+
+    /**
      * The description with its damage number recomputed for {@code caster}'s equipment and coloured
      * (red = more damage, green = less). Uses libGDX colour markup, so the description font must have
-     * markup enabled. Falls back to the plain description when nothing changes or no number is found.
+     * markup enabled. Plain (base, no colour) when nothing changes or there is no damage number.
      */
     public String describedFor(FightObject caster) {
+        if (!description.contains(DMG))
+            return description;
         int base = getBaseDamage();
-        if (base < 0)
-            return description;
-        int mod = modifiedDamage(caster);
-        if (mod == base)
-            return description;
-        String token = "Deals " + base;
-        int idx = description.indexOf(token);
-        if (idx < 0)
-            return description;
-        String colour = mod > base ? "[#ff6b6b]" : "[#7ddc7d]"; // more = red, less = green
-        return description.substring(0, idx) + "Deals " + colour + mod + "[]"
-                + description.substring(idx + token.length());
+        int mod = applyOutgoing(base, caster);
+        String shown;
+        if (caster == null || mod == base)
+            shown = Integer.toString(base);
+        else
+            shown = (mod > base ? "[#ff6b6b]" : "[#7ddc7d]") + mod + "[]"; // more = red, less = green
+        return description.replace(DMG, shown);
     }
 }

@@ -67,7 +67,9 @@ public class InventoryLevel extends Level {
         setup();
     }
 
-    public void equip(Item item) {
+    /** Returns true only if the item was actually equipped (slots weren't full). */
+    public boolean equip(Item item) {
+        boolean changed = false;
         e : {
             if (item instanceof AbilityOrb) {
                 if (hero.abilityOrbs.size >= 4)
@@ -79,7 +81,9 @@ public class InventoryLevel extends Level {
                 hero.equipment.add((Equipment) item);
             }
             Inventory.items.removeValue(item, true);
+            changed = true;
         }
+        return changed;
     }
 
     public void unequip(int index) {

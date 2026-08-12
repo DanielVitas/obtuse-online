@@ -70,6 +70,7 @@ public class Fonts {
             parameter.borderWidth = 1;
             parameter.color = Color.WHITE;
             fonts.put("inventoryInfoTableContent", mono.generateFont(parameter));
+            fonts.get("inventoryInfoTableContent").getData().markupEnabled = true; // coloured HP/SPD
 
             parameter.size = (int) (13 * scale);
             parameter.borderWidth = 1f;

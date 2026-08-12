@@ -21,6 +21,11 @@ public class CrownOfThorns extends Equipment {
     }
 
     @Override
+    public int previewMaxHp(int hp) {
+        return hp - hpPenalty;
+    }
+
+    @Override
     public void setup(final FightObject fightObject) {
         Arena.triggers.insert(0, new Trigger() {
             @Override

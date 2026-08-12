@@ -14,13 +14,17 @@ public class SkipTurn extends Ability {
 
     public SkipTurn() {
         super("skipTurn", 0);
-        setName("Skip Turn");
+        setName("Pass");
+        description = "Lose 1 life, but act first the next turn.";
     }
 
     @Override
     public void cast(FightObject caster, Holder target, FightLevel level) {
-        Damage dmg = new Damage(damage, caster, caster);
+        // 1 unmodifiable self-damage (dealer == null, so no equipment trigger can change it)...
+        Damage dmg = new Damage(damage, null, caster);
         dmg.preform();
+        // ...and gain next-turn priority: the ordering puts passers first (see Arena.order()).
+        caster.passed = true;
     }
 
     @Override

@@ -32,6 +32,16 @@ public abstract class AI {
         return usableAbilities;
     }
 
+    /** True when the fighter has no ability with PP left — it must Pass rather than act. */
+    protected boolean outOfPP(FightObject fightObject) {
+        return getUsableAbilities(fightObject).size == 0;
+    }
+
+    /** Pass (like a hero): 1 unmodifiable self-damage and next-turn priority. */
+    protected void pass(FightObject caster, FightLevel level) {
+        new com.obtuse.game.abilities.all.SkipTurn().run(caster, null, level);
+    }
+
     protected boolean timeOut() {
         return System.currentTimeMillis() - timeInitiated > outTime;
     }

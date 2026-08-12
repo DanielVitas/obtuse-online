@@ -71,7 +71,7 @@ public class InfoStage extends GameStage {
 
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
-        infoBackground.create(0, 0, w(0.27f), h(0.1f)); // narrower base so long text grows taller, not wider
+        infoBackground.create(0, 0, w(0.32f), h(0.1f)); // base width; buildTooltip grows it taller for long text
         add(infoBackground);
     }
 
@@ -130,19 +130,20 @@ public class InfoStage extends GameStage {
     }
 
     public void setup(AbilityInstance ability, FightObject caster) {
-        if (!(ability.ability instanceof SkipTurn)) {
-            createGeneralBackground();
-            Label name = new Label(ability.getName(), Fonts.get("fightInfoTableTitle"));
-            Label pp = new Label((ability.pp - ability.ppUsed) + " /" + ability.pp + " PP",
-                    Fonts.get("fightInfoTableContent"));
-            // Description with the damage recomputed for the caster's equipment (coloured if changed).
-            Label description = new Label(ability.ability.describedFor(caster),
-                    Fonts.get("fightInfoTableDescription"));
-            infoBackground.buildTooltip(stage, name, pp, null, description);
-            addInfoLabel(name);
+        createGeneralBackground();
+        Label name = new Label(ability.getName(), Fonts.get("fightInfoTableTitle"));
+        // Pass (SkipTurn) has no PP line; regular abilities show remaining PP.
+        Label pp = (ability.ability instanceof SkipTurn) ? null
+                : new Label((ability.pp - ability.ppUsed) + " /" + ability.pp + " PP",
+                        Fonts.get("fightInfoTableContent"));
+        // Description with the damage recomputed for the caster's equipment (coloured if changed).
+        Label description = new Label(ability.ability.describedFor(caster),
+                Fonts.get("fightInfoTableDescription"));
+        infoBackground.buildTooltip(stage, name, pp, null, description);
+        addInfoLabel(name);
+        if (pp != null)
             addInfoLabel(pp);
-            addInfoLabel(description);
-        }
+        addInfoLabel(description);
     }
 
     public void addHPLabel(Holder holder) {

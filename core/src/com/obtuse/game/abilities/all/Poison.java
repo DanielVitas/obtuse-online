@@ -28,7 +28,7 @@ public class Poison extends Ability {
         addSuggestedTarget(ENEMY);
         addAnimation("poison", 0.1f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
-        description = "Deals " + Integer.toString(damage) + " damage at the beginning of targets turn for " +
+        description = "Deals " + DMG + " damage at the beginning of targets turn for " +
                 Integer.toString(duration) + " turns.";
     }
 

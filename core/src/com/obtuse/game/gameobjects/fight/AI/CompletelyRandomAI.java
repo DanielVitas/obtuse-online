@@ -14,8 +14,11 @@ public class CompletelyRandomAI extends AI {
     @Override
     public void decide(Arena arena, FightObject caster, FightLevel level) {
         slowChooseAbilityAndTarget(arena, caster);
-        if (ability == null)
+        if (ability == null) {
+            if (outOfPP(caster))
+                pass(caster, level);   // no PP left → Pass instead of skipping for free
             return;
+        }
         ability.run(caster, target, level);
     }
 

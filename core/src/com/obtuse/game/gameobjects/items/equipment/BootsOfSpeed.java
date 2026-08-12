@@ -13,6 +13,11 @@ public class BootsOfSpeed extends Equipment {
     }
 
     @Override
+    public int previewSpeed(int s) {
+        return s + speed;
+    }
+
+    @Override
     public void setup(FightObject fightObject) {
         fightObject.speed += speed;
     }

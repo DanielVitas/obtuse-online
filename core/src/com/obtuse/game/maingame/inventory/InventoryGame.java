@@ -87,10 +87,11 @@ public class InventoryGame extends GameGame {
     }
 
     private void equip(Item item) {
-        if (allow()) {
-            ((InventoryLevel) level).equip(item);
-            ((InventoryLevel) level).setup();
-        }
+        if (allow())
+            // Only rebuild on a real change; otherwise the rebuilt area frames would redraw over the
+            // still-open tooltip (the click-with-full-slots case).
+            if (((InventoryLevel) level).equip(item))
+                ((InventoryLevel) level).setup();
     }
 
     private void hovered(Item item) {

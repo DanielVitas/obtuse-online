@@ -27,7 +27,7 @@ public class FireBall extends Ability {
         addSuggestedTarget(ENEMY);
         addAnimation("explosion", 0.05f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
-        description = "Deals " + Integer.toString(damage) + " damage to the targeted character.";
+        description = "Deals " + DMG + " damage to the targeted character.";
     }
 
     @Override

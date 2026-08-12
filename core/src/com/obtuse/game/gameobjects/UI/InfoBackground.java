@@ -67,12 +67,12 @@ public abstract class InfoBackground extends BasicObject {
         }
 
         // Grow the box just enough for the title line (name + inline stat) if needed.
-        float padGuess = getWidth() * 0.08f;
+        float padGuess = getWidth() * 0.11f;
         float titleNeeded = padGuess * 2 + name.getWidth()
                 + (inlineStat != null ? padGuess * 2 + inlineStat.getWidth() : 0);
         float w = Math.max(getWidth(), titleNeeded);
         setWidth(w);
-        float pad = w * 0.08f;
+        float pad = w * 0.11f;
         float innerW = w - 2 * pad;
         float gap = pad * 0.5f;
 

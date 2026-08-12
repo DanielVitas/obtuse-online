@@ -21,4 +21,14 @@ public abstract class Equipment extends Item {
     public int previewOutgoingDamage(int damage) {
         return damage;
     }
+
+    /** Preview how this equipment changes the wearer's speed (for the inventory). Default: no change. */
+    public int previewSpeed(int speed) {
+        return speed;
+    }
+
+    /** Preview how this equipment changes the wearer's max HP (for the inventory). Default: no change. */
+    public int previewMaxHp(int hp) {
+        return hp;
+    }
 }

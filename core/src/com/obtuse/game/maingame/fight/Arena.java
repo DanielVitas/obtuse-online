@@ -285,6 +285,17 @@ public abstract class Arena {
                 return o2.speed - o1.speed;
             }
         });
+        // Fighters who Passed last turn go first — still speed-ordered among themselves. Array.sort is
+        // stable, so this secondary sort keeps the speed order within the passed / not-passed groups.
+        fighterOrder.sort(new Comparator<FightObject>() {
+            @Override
+            public int compare(FightObject o1, FightObject o2) {
+                return (o2.passed ? 1 : 0) - (o1.passed ? 1 : 0);
+            }
+        });
+        // The Pass priority lasts exactly one turn: consume the flag now that the order is set.
+        for (FightObject object : fighterOrder)
+            object.passed = false;
     }
 
     public void clear() {

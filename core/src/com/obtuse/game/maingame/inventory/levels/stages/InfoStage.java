@@ -34,7 +34,7 @@ public class InfoStage extends GameStage {
 
     private void createGeneralBackground() {
         infoBackground = new GeneralInfoBackground();
-        infoBackground.create(0, 0, w(0.27f), h(0.1f)); // narrower base so long text grows taller, not wider
+        infoBackground.create(0, 0, w(0.32f), h(0.1f)); // base width; buildTooltip grows it taller for long text
         add(infoBackground);
     }
 
@@ -156,7 +156,13 @@ public class InfoStage extends GameStage {
         additionalLabels.add(name);
         add(name);
 
-        Label stats = new Label(hero.hp + " HP   " + hero.speed + " SPD",
+        // HP/SPD with the hero's equipment factored in — green if a piece buffs it, red if it costs.
+        int effHp = hero.hp, effSpd = hero.speed;
+        for (com.obtuse.game.gameobjects.items.Equipment eq : hero.equipment) {
+            effHp = eq.previewMaxHp(effHp);
+            effSpd = eq.previewSpeed(effSpd);
+        }
+        Label stats = new Label(colouredStat(effHp, hero.hp) + " HP   " + colouredStat(effSpd, hero.speed) + " SPD",
                 Fonts.get("inventoryInfoTableContent"));
         stats.setColor(Border.ROYAL_TEXT);
         stats.setAlignment(Align.center);
@@ -165,6 +171,13 @@ public class InfoStage extends GameStage {
         stats.setPosition(cx - stats.getWidth() / 2, statsY);
         additionalLabels.add(stats);
         add(stats);
+    }
+
+    // A stat number, coloured green if higher than base (a buff) or red if lower (a penalty).
+    private static String colouredStat(int value, int base) {
+        if (value > base) return "[#7ddc7d]" + value + "[]";
+        if (value < base) return "[#ff6b6b]" + value + "[]";
+        return Integer.toString(value);
     }
 
     private void addItemLabels(Array items) {
