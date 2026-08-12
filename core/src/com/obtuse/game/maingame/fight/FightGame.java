@@ -215,10 +215,14 @@ public class FightGame extends GameGame {
 
     @Override
     public void layoutChanged() {
-        // The arena reflows via its world camera, but the screen-space HP labels / health bars are
-        // positioned from the surface size at creation, so on a resize re-lay-out the current arena.
-        if (level != null && ((FightLevel) level).currentArena != null)
-            ((FightLevel) level).switchArena(((FightLevel) level).currentArena);
+        // On a resize the slot/fighter/turn-order positions (all relative to the viewport height) are
+        // stale, so recompute them for the new ratio and re-add the holders at the new spots. Without
+        // relayout() the fighters keep their old-ratio Y and, on a wider/shorter surface, fall off.
+        if (level != null && ((FightLevel) level).currentArena != null) {
+            Arena arena = ((FightLevel) level).currentArena;
+            arena.relayout();
+            ((FightLevel) level).switchArena(arena);
+        }
     }
 
     @Override

@@ -68,6 +68,15 @@ public class InfoStage extends GameStage {
         add(label);
     }
 
+    /** Pull the open tooltip back to the front. Called after a rebuild (e.g. equipping) re-adds the
+     *  area frames, so the tooltip is never drawn UNDER the frames for even a single frame. */
+    public void frontTooltip() {
+        if (infoBackground != null)
+            infoBackground.toFront();
+        for (Label label : infoLabels)
+            label.toFront();
+    }
+
     public void clearInfoLabels() {
         for (Label label : infoLabels)
             label.addAction(Actions.removeActor());

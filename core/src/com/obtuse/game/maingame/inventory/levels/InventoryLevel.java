@@ -48,6 +48,8 @@ public class InventoryLevel extends Level {
         setHeroButtons();
         setArrowButtons();
         setPageButtons();
+        // The rebuild above re-added the area frames; keep the open tooltip on top with no glitch frame.
+        ((InfoStage) stages.get(2)).frontTooltip();
     }
 
     // Flip the inventory grid to the previous/next page of items (wraps around).

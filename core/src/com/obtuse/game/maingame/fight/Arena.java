@@ -240,6 +240,33 @@ public abstract class Arena {
         }
     }
 
+    /**
+     * Re-derive the slot/fighter and turn-order positions for the CURRENT surface ratio. The layouts
+     * (setHeroPositions etc.) and the profile row are all relative to the viewport height
+     * (cameraWidth/ratio), but were computed once at construction — so on a window resize the callers
+     * (FightGame.layoutChanged) recompute them here, then re-add the holders at the new spots.
+     */
+    public void relayout() {
+        heroPositions = setHeroPositions();
+        enemyPositions = setEnemyPositions();
+        summonPositions = setSummonPositions();
+        applyHolderPositions(heroHolders, heroPositions);
+        applyHolderPositions(enemyHolders, enemyPositions);
+        applyHolderPositions(summonHolders, summonPositions);
+        for (int i = 0; i < fighterOrder.size; i++) {
+            fighterOrder.get(i).profile.setX(Obtuse.cameraWidth / 2 - fighterOrder.size * profilePosition[2] / 2
+                    + i * profilePosition[2]);
+            fighterOrder.get(i).profile.setY(Obtuse.cameraWidth / Obtuse.ratio - 9f / 16);
+        }
+    }
+
+    private void applyHolderPositions(Array<Holder> holders, float[] positions) {
+        for (int i = 0; i < holders.size && 2 * i + 1 < positions.length; i++) {
+            holders.get(i).x = positions[2 * i];
+            holders.get(i).y = positions[2 * i + 1];
+        }
+    }
+
     private void deleteProfiles() {
         for (FightObject fightObject : fighterOrder)
             //fightObject.profile.addAction(Actions.removeActor());
