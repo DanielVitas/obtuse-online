@@ -76,7 +76,7 @@ def injectLoadingOverlay = {
 // Bump this every deploy so the user can confirm at a glance (green, top-right) that the newest
 // build is live. Also appended as ?v=<buildVersion> to app.js so a fresh index.html never pairs
 // with a stale cached app.js.
-def buildVersion = 'v21'
+def buildVersion = 'v22'
 def injectVersionStamp = {
     def html = new File(webappDir, 'index.html')
     if (!html.exists() || html.text.contains('id="verstamp"')) return

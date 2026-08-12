@@ -30,9 +30,11 @@ public class Fonts {
         // Absolute pixel sizes that suited a 520px window are unreadable on a 1080px
         // phone, so every size below is scaled by how much taller the surface really is.
         generatedHeight = Gdx.graphics.getHeight();
-        // Overall UI text scale. Kept deliberately small — every box/tooltip reads better with
-        // compact type than the chunky 2018 sizes.
-        scale = 1.0f * Math.max(1f, generatedHeight / designHeight);
+        // Every size below is a fraction of how tall the surface is relative to the 2018 design
+        // window (520px). Scale LINEARLY with the surface — no floor at 1 — so the text is the same
+        // proportion of the screen everywhere; the old max(1, ...) kept full 520-px sizes on shorter
+        // surfaces, which is why the text looked too big on smaller screens.
+        scale = generatedHeight / designHeight;
         try {
             FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("fonts/000webfont.ttf"));
             // The royal-gold "box" UI (tooltips, move/inventory/loot boxes) uses the clean monospace
