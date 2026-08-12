@@ -222,6 +222,9 @@ public class FightGame extends GameGame {
             Arena arena = ((FightLevel) level).currentArena;
             arena.relayout();
             ((FightLevel) level).switchArena(arena);
+            // The move boxes / targeting panel live on the screen-space InfoStage and don't move with the
+            // arena; flag their wait loops (on the Turn thread) to rebuild them at the new size.
+            ((FightLevel) level).relayoutFightUI = true;
         }
     }
 

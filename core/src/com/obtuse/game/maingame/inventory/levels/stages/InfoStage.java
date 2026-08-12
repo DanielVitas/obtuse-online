@@ -47,6 +47,9 @@ public class InfoStage extends GameStage {
             pp = new Label(((AbilityOrb) item).ability.pp + " PP", Fonts.get("inventoryInfoTableContent"));
             // Damage recomputed for the viewed hero's equipment (coloured if changed).
             desc = ((AbilityOrb) item).ability.describedFor(hero);
+        } else if (item instanceof com.obtuse.game.gameobjects.items.equipment.HealthPotion) {
+            // Heal recomputed for the equipment to its left on the viewed hero (coloured if changed).
+            desc = ((com.obtuse.game.gameobjects.items.equipment.HealthPotion) item).describedFor(hero);
         }
         Label description = new Label(desc, Fonts.get("inventoryInfoTableDescription"));
         infoBackground.buildTooltip(stage, name, pp, null, description);

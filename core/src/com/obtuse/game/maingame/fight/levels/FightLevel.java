@@ -37,6 +37,9 @@ public class FightLevel extends Level {
     public boolean back = false;
     public FightObject choosingCaster;   // whose move menu is open (for damage-modifier previews)
     public SquareButton cancelButton;    // shown in the Pass slot while choosing a target
+    // Set by FightGame.layoutChanged (render thread) on a resize; the move-select / targeting wait loops
+    // (Turn thread) pick it up and rebuild their UI at the new size — so scene2d is only touched on the Turn thread.
+    public volatile boolean relayoutFightUI = false;
 
     public FightLevel(MyScreen screen, FightGame game) {
         super(screen);
@@ -108,11 +111,27 @@ public class FightLevel extends Level {
 
     private void chooseAbility(FightObject caster) {
         choosingCaster = caster;
+        relayoutFightUI = false;   // built fresh below at the current size; ignore any flag from an earlier turn
+        buildAbilityBoxes(caster);
+
+        while (selectedAbility == null) {
+            if (relayoutFightUI) {   // a resize came in: tear the boxes down and rebuild at the new size
+                relayoutFightUI = false;
+                clearAbilityBoxes();
+                buildAbilityBoxes(caster);
+            }
+            Turn.sleep();
+        }
+        clearAbilityBoxes();
+    }
+
+    /** Build the 4 move boxes + PP + the Pass button at the current size. */
+    private void buildAbilityBoxes(FightObject caster) {
         InfoStage info = (InfoStage) stages.get(2);
         info.choice(caster);
         // The box + hit-area come from the box origin (abilityPosition), NOT the name label —
         // the name is now inset/top-aligned inside the box, so its bounds no longer match the box.
-        for (int i = 0; i < info.abilitySelectLabels.size; i++) {
+        for (int i = 0; i < info.abilitySelectLabels.size && i < caster.abilities.size; i++) {
             float bx = w(InfoStage.abilityPosition[2 * i]), by = h(InfoStage.abilityPosition[2 * i + 1]);
             AbilityInstance ability = caster.abilities.get(i);
             AbilityHolder abilityHolder = new AbilityHolder(bx, by,
@@ -126,12 +145,15 @@ public class FightLevel extends Level {
         }
         createSkip();
         game.loseInfo();
-        ((InfoStage) stages.get(2)).installAbilitySelectLabels();
+        info.installAbilitySelectLabels();
+    }
 
-        while (selectedAbility == null)
-            Turn.sleep();
+    /** Remove every actor built by buildAbilityBoxes so it can be rebuilt (resize) or dismissed. */
+    private void clearAbilityBoxes() {
         for (AbilityHolder abilityHolder : abilityMap.values())
             abilityHolder.ppLabel.remove();
+        abilityMap.clear();
+        ((InfoStage) stages.get(2)).clearAbilitySelectLabels();
     }
 
     private void chooseTarget(FightObject caster) {
@@ -139,6 +161,7 @@ public class FightLevel extends Level {
         if (selectedAbility.ability.targets.size != 0) {
             targeting = true;
             back = false;
+            relayoutFightUI = false;   // built fresh below at the current size
             // Where the moves were: show the move's description; where Pass was: a Cancel button.
             InfoStage info = (InfoStage) stages.get(2);
             info.showDescription(selectedAbility.ability.describedFor(caster));
@@ -150,6 +173,13 @@ public class FightLevel extends Level {
                     back = false;
                     selectedAbility = null;
                     break;
+                }
+                if (relayoutFightUI) {   // a resize came in: rebuild the description panel + Cancel at the new size
+                    relayoutFightUI = false;
+                    info.showDescription(selectedAbility.ability.describedFor(caster));
+                    info.showCancel();
+                    cancelButton = new SquareButton(w(InfoStage.abilityPosition[8]), h(InfoStage.abilityPosition[9]),
+                            w(0.14f), InfoStage.defaultAbilityHeight * 0.55f);
                 }
                 Turn.sleep();
             }
