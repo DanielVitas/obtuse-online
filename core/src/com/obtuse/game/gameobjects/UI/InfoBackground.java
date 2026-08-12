@@ -52,10 +52,11 @@ public abstract class InfoBackground extends BasicObject {
         prep(inlineStat, TEXT);
         prep(belowStat, TEXT);
 
-        // Absolute padding (a fraction of the SURFACE, not the box) so it reads the same at any box
-        // size. The box grows to fit the widest single line but never gets wider than the screen.
-        float pad = Obtuse.width * 0.022f;
-        float gap = pad * 0.7f;
+        // Padding proportional to the TEXT height (not the surface width) so the tooltip keeps the
+        // same look at any screen size or aspect ratio — the font scales with height, so the padding
+        // must too, otherwise a wide/short screen gives huge padding around tiny text and vice versa.
+        float pad = Math.max(3f, height(name) * 0.55f);
+        float gap = pad * 0.6f;
         float maxW = Obtuse.width * 0.9f;
 
         float titleLineW = width(name) + (inlineStat != null ? gap + width(inlineStat) : 0);

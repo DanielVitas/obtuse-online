@@ -103,6 +103,21 @@ public abstract class FightObject extends BasicObject {
                         statuses.add(poisonStatus);
                 }
         poisonStatus.damage = Integer.toString(poisonDamage);
+        // Regeneration (Health Potion) is the mirror: sum the modified heal-per-tick across every
+        // HealEvent (each dealt by its caster, so its equipment applies). Shown as a positive heal.
+        com.obtuse.game.gameobjects.fight.buffs.RegenStatus regenStatus =
+                new com.obtuse.game.gameobjects.fight.buffs.RegenStatus();
+        int regen = 0;
+        for (Array<Event> events : new Array[]{preturn, postturn})
+            for (Event event : events)
+                if (event instanceof com.obtuse.game.maingame.fight.events.HealEvent) {
+                    com.obtuse.game.maingame.fight.events.HealEvent he =
+                            (com.obtuse.game.maingame.fight.events.HealEvent) event;
+                    regen += -com.obtuse.game.abilities.Ability.applyOutgoing(he.damage, he.dealer);
+                    if (!statuses.contains(regenStatus, true))
+                        statuses.add(regenStatus);
+                }
+        regenStatus.amount = Integer.toString(regen);
         return statuses;
     }
 

@@ -37,6 +37,7 @@ public abstract class Inventory {
         items.add(new EchoOrb());
         items.add(new StealOrb());
         items.add(new FlamingSwordOrb());
+        items.add(new HealthPotionOrb());
         // Equipment.
         items.add(new GlovesOfDamage());
         items.add(new HealingStaff());
