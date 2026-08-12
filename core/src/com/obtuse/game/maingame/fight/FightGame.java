@@ -37,6 +37,9 @@ public class FightGame extends GameGame {
     public AbilityHolder selectedAbilityHolder;
     public Holder selectedHolder;
     private boolean wait = false;
+    // After Cancel is clicked the Pass button appears in the SAME spot; suppress input until the
+    // pointer is released so the one press/hold can't also register a click on that Pass button.
+    private boolean suppressUntilRelease = false;
     private Fight fight;
     private final Array<FightObject> summonOrder = new Array<FightObject>();
     private boolean needSummon = false;
@@ -173,6 +176,9 @@ public class FightGame extends GameGame {
                 selectedHolder.slot.play("targeted",0);
             else
                 selectedHolder.slot.play("hovered",0);
+            // Highlight the fighter in the top turn-order bar, same as hovering before move select.
+            if (selectedHolder.fightObject != null)
+                selectedHolder.fightObject.profile.hover();
         }
     }
 
@@ -194,6 +200,7 @@ public class FightGame extends GameGame {
 
     public void back() {
         ((FightLevel) level).back = true;
+        suppressUntilRelease = true;
     }
 
     @Override
@@ -221,8 +228,11 @@ public class FightGame extends GameGame {
             return;
         if (!touching()) {
             loseInfo();
+            suppressUntilRelease = false;   // the finger is up: allow clicks again
             return;
         }
+        if (suppressUntilRelease)
+            return;                          // same hold that hit Cancel — don't let it click Pass
         try {
             if (!((FightLevel) level).targeting)
                 touch:{
@@ -253,8 +263,11 @@ public class FightGame extends GameGame {
                             && ((FightLevel) level).cancelButton.check(touchPoint.x, touchPoint.y)) {
                         if (touchReleased)
                             back();
+                        else
+                            ((InfoStage) level.stages.get(2)).hoverCancel(true);
                         break touch;
                     }
+                    ((InfoStage) level.stages.get(2)).hoverCancel(false);
                     unprojectTouch(0);
                     for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                         if (button.check(touchPoint.x, touchPoint.y)) {
@@ -303,7 +316,9 @@ public class FightGame extends GameGame {
     protected void runDesktop() {
         super.runDesktop();
         bindingList.keyBindings("fight");
-        if (!wait)
+        if (!Gdx.input.isButtonPressed(Input.Buttons.LEFT))
+            suppressUntilRelease = false;   // the mouse button is up: allow clicks again
+        if (!wait && !suppressUntilRelease)  // same held press that hit Cancel can't also click Pass
             try {
                 if (!((FightLevel) level).targeting)
                     touch:{
@@ -336,8 +351,11 @@ public class FightGame extends GameGame {
                                 && ((FightLevel) level).cancelButton.check(touchPoint.x, touchPoint.y)) {
                             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
                                 back();
+                            else
+                                ((InfoStage) level.stages.get(2)).hoverCancel(true);
                             break touch;
                         }
+                        ((InfoStage) level.stages.get(2)).hoverCancel(false);
                         camera(0).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
                         for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                             if (button.check(touchPoint.x, touchPoint.y)) {

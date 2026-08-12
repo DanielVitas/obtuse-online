@@ -4693,10 +4693,10 @@ world/static/foreground/walls/wooden/wall
   orig: 2, 16
   offset: 0, 0
   index: -1
-items/abilityOrbs/healthPotion/default/main
+items/equipment/healthPotion/default/main
   rotate: false
-  xy: 222, 822
+  xy: 88, 720
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
-  index: 1
+  index: -1

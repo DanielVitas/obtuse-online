@@ -16,6 +16,11 @@ public class AbilityBackground extends BasicObject {
         this.disabled = disabled;
     }
 
+    /** Set the hover highlight directly (idempotent — safe to call every frame). */
+    public void setHovered(boolean hovered) {
+        state = hovered ? 1 : 0;
+    }
+
     public AbilityBackground(String name, float defaultFD, float hoveredFD, float selectedFD) {
         path += "UI/abilities/backgrounds/" + name + "/";
         addAnimation("default", defaultFD, Animation.PlayMode.LOOP);

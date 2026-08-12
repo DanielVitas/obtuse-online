@@ -54,7 +54,7 @@ public class InfoStage extends GameStage {
     // enemy's turn), plus a Cancel button that replaces Pass while choosing a target.
     private GeneralInfoBackground ddBackground;
     private Label ddLabel;
-    private GeneralInfoBackground cancelBackground;
+    private AbilityBackground cancelBackground;   // an ability-style box so it can highlight on hover
     private Label cancelLabel;
 
     public InfoStage(Stage stage) {
@@ -97,7 +97,7 @@ public class InfoStage extends GameStage {
         clearCancel();
         float x = w(abilityPosition[8]), y = h(abilityPosition[9]);
         float bw = w(0.14f), bh = defaultAbilityHeight * 0.55f;
-        cancelBackground = new GeneralInfoBackground();
+        cancelBackground = new com.obtuse.game.gameobjects.fight.holders.ability.backgrounds.BasicAbilityBackground(bw, bh);
         cancelBackground.create(x, y, bw, bh);
         add(cancelBackground);
         cancelLabel = new Label("Cancel", Fonts.get("fightInfoTable"));
@@ -105,6 +105,12 @@ public class InfoStage extends GameStage {
         cancelLabel.setBounds(x, y, bw, bh);
         cancelLabel.setAlignment(Align.center);
         add(cancelLabel);
+    }
+
+    /** Highlight the Cancel button like the move/Pass boxes when it is hovered. */
+    public void hoverCancel(boolean hovered) {
+        if (cancelBackground != null)
+            cancelBackground.setHovered(hovered);
     }
 
     public void clearCancel() {
