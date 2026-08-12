@@ -62,7 +62,10 @@
       "Bash(awk '/createSkip/{p=1} p{print NR\": \"$0} p&&/^    }/{c++; if\\(c>=1 && /^    }/\\){exit}}' core/src/com/obtuse/game/maingame/fight/levels/FightLevel.java)",
       "Bash(awk '{printf \"%d: %s\\\\n\", $1+94, substr\\($0, index\\($0,$2\\)\\)}')",
       "Bash(python3 -c \"import PIL; print\\('PIL', PIL.__version__\\)\")",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(cp core/src/com/obtuse/game/maingame/inventory/levels/stages/InventoryStage.java /tmp/InventoryStage.bak)",
+      "Bash(cp core/src/com/obtuse/game/maingame/inventory/levels/stages/InfoStage.java /tmp/InfoStage.bak)",
+      "Bash(cd \"/Users/daniel/Documents/claude-folder/18 obtuse android\" && cp /tmp/InventoryStage.bak core/src/com/obtuse/game/maingame/inventory/levels/stages/InventoryStage.java && echo \"=== full git status \\(no filter\\) ===\" && git status --short && echo \"=== is inventory InfoStage HealthPotion committed? check HEAD ===\" && git show HEAD:core/src/com/obtuse/game/maingame/inventory/levels/stages/InfoStage.java | grep -c \"HealthPotion\" )"
     ]
   }
 }
