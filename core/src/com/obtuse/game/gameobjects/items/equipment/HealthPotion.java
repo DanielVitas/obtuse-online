@@ -26,7 +26,7 @@ public class HealthPotion extends Equipment {
             idx = wearer.equipment.size;   // not equipped (grid): treat as appended — all current gear is to its left
         int d = -heal;                     // base: -1 damage == heal 1
         for (int i = 0; i < idx; i++)
-            d = wearer.equipment.get(i).previewOutgoingDamage(d);
+            d = wearer.equipment.get(i).previewForHealthPotion(d);
         return d;
     }
 

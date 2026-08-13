@@ -235,11 +235,17 @@ public abstract class Arena {
      */
     private Array<FightObject> profileFighters() {
         Array<FightObject> all = new Array<FightObject>();
+        // INDEXED loops, not for-each: fightGame.arenas is already being iterated by FightGame.runAll
+        // with libGDX's pooled iterator, and a nested for-each over the same array invalidates the
+        // outer one ("#iterator() cannot be used nested") — which aborts runAll before the duel arena
+        // conducts, so the duellists never got a turn.
         if (fightGame != null)
-            for (Arena arena : fightGame.arenas)
-                for (FightObject fo : arena.fighterOrder)
-                    if (!all.contains(fo, true))
-                        all.add(fo);
+            for (int a = 0; a < fightGame.arenas.size; a++) {
+                Array<FightObject> order = fightGame.arenas.get(a).fighterOrder;
+                for (int f = 0; f < order.size; f++)
+                    if (!all.contains(order.get(f), true))
+                        all.add(order.get(f));
+            }
         if (all.size == 0)
             all.addAll(fighterOrder);
         return all;

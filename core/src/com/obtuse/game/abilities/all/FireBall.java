@@ -26,6 +26,9 @@ public class FireBall extends Ability {
         addTarget(SUMMON);
         addSuggestedTarget(ENEMY);
         addAnimation("explosion", 0.05f, Animation.PlayMode.NORMAL,1f,1f,0,0);
+        // A few fire pixels linger over the CASTER while their cast animation plays — reuses the slot
+        // "burning" flames so no new art is needed.
+        addAnimationFrom("ember", "fight/slots/basic/burning", 0.13f, Animation.PlayMode.LOOP, 0.9f, 0.9f, 0, 0);
 
         description = "Deals " + DMG + " damage to the targeted character.";
     }
@@ -38,6 +41,7 @@ public class FireBall extends Ability {
     @Override
     public void animate(FightObject caster, Holder target, FightLevel level) {
         SoundPlayer.play("fight/abilities/fireCast");
+        play(caster, "ember");             // embers linger over the caster during the cast (non-blocking overlay)
         super.animate(caster, target, level);
         SoundPlayer.play("fight/abilities/fireball/explosion");
         Turn.sleep(play(target.fightObject, "explosion"));

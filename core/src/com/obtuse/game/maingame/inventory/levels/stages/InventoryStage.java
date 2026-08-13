@@ -18,8 +18,10 @@ public class InventoryStage extends GameStage {
     // Inventory grid: 3 columns x 4 rows (= Inventory.maxSize 12). Square cells sized from the
     // visible world height so all 12 fit both the tall portrait and short landscape views; the
     // slot frames are drawn at the full cell size so they tile exactly edge-to-edge.
-    private static final int gridCols = 3;
-    private static final int gridRows = 4;
+    // Grid shape flips with the aspect ratio: 3 wide x 4 tall on tall/normal surfaces, 4 wide x 3 tall
+    // on wide/short ones (same 12 cells, but the shorter grid leaves room for everything vertically).
+    private int gridCols() { return Obtuse.ratio > 1.3f ? 4 : 3; }
+    private int gridRows() { return Obtuse.ratio > 1.3f ? 3 : 4; }
     private static final float gridLeftX = 0.35f;   // left edge of the first grid cell
     private static final float rightSlot = 1f;      // ability/equipment slot cell = their 1.0 pitch (tiles too)
     private static final float[] abilityOrbX = {5.75f, 6.75f, 7.75f, 8.75f};
@@ -35,8 +37,8 @@ public class InventoryStage extends GameStage {
         super(stage);
     }
 
-    private static int perPage() {
-        return gridCols * gridRows;
+    private int perPage() {
+        return gridCols() * gridRows();
     }
 
     public int pageCount() {
@@ -82,13 +84,13 @@ public class InventoryStage extends GameStage {
     }
 
     private float cellH() {
-        return Math.min(1.55f, Math.max(0.6f, gridSpan() / gridRows));
+        return Math.min(1.55f, Math.max(0.6f, gridSpan() / gridRows()));
     }
 
     // Centre the grid in the space between the two bands, but never let it dip into the bottom band
     // (where the arrows live) — so the arrows at gridBottomY - 0.85 always stay on screen.
     private float gridBottomY() {
-        return bottomBand() + Math.max(0f, (gridSpan() - gridRows * cellH()) / 2f);
+        return bottomBand() + Math.max(0f, (gridSpan() - gridRows() * cellH()) / 2f);
     }
 
     private float colLeft(int i) {
@@ -97,7 +99,7 @@ public class InventoryStage extends GameStage {
 
     // Row j counted from the TOP (so items fill top-to-bottom); returns the cell's bottom edge.
     private float rowBottom(int jFromTop) {
-        return gridBottomY() + (gridRows - 1 - jFromTop) * cellH();
+        return gridBottomY() + (gridRows() - 1 - jFromTop) * cellH();
     }
 
     // Right column (hero on top, then ability-orb row, then equipment row). In portrait the roomy
@@ -135,7 +137,7 @@ public class InventoryStage extends GameStage {
     // ("Moves") row, and the equipment ("Items") row. The InfoStage reads these to place titles.
     public float[] gridArea() {
         float pad = 0.14f;
-        return new float[]{gridLeftX - pad, gridBottomY() - pad, gridCols * cellW() + 2 * pad, gridRows * cellH() + 2 * pad};
+        return new float[]{gridLeftX - pad, gridBottomY() - pad, gridCols() * cellW() + 2 * pad, gridRows() * cellH() + 2 * pad};
     }
 
     // Extra room below the icon row so the item name (drawn under the icon) fits inside the frame.
@@ -179,7 +181,7 @@ public class InventoryStage extends GameStage {
         if (pageCount() <= 1)
             return;
         float y = gridBottomY() - 0.85f;
-        float gridRight = gridLeftX + gridCols * cellW();
+        float gridRight = gridLeftX + gridCols() * cellW();
         addPageArrow(new LeftArrow(), gridLeftX, y, 0.45f, 0.6f);
         addPageArrow(new RightArrow(), gridRight - 0.45f, y, 0.45f, 0.6f);
     }
@@ -198,7 +200,7 @@ public class InventoryStage extends GameStage {
 
     // World point centred below the grid, where the "page X / N" label goes.
     public float pageLabelCenterX() {
-        return gridLeftX + gridCols * cellW() / 2f;
+        return gridLeftX + gridCols() * cellW() / 2f;
     }
 
     public float pageLabelY() {
@@ -220,7 +222,7 @@ public class InventoryStage extends GameStage {
             if (idx >= Inventory.items.size)
                 break;
             Item item = Inventory.items.get(idx);
-            int i = k % gridCols, j = k / gridCols;
+            int i = k % gridCols(), j = k / gridCols();
             // Icon in the upper part of the cell; its name label sits below it, inside the frame.
             item.create(colLeft(i) + (cw - size) / 2f, rowBottom(j) + ch - size - ch * 0.12f, size, size);
             addItem(item);

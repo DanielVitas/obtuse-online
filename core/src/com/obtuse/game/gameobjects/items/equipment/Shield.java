@@ -16,10 +16,11 @@ public class Shield extends Equipment {
         description = "Takes " + Integer.toString(damage) + " less damage.";
     }
 
-    // So a Shield to the LEFT of a Health Potion also modifies its heal (heal is negative damage, so
-    // "takes 1 less damage" makes the heal bigger). Mirrors the trigger below (damage -= damage).
+    // Shield is an INCOMING reducer, so it must NOT change the wearer's outgoing ability damage
+    // (previewOutgoingDamage stays the identity default). It only modifies a Health Potion to its
+    // right: a heal is negative damage, so "takes 1 less damage" makes the heal bigger.
     @Override
-    public int previewOutgoingDamage(int d) {
+    public int previewForHealthPotion(int d) {
         return d - damage;
     }
 

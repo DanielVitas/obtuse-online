@@ -22,6 +22,16 @@ public abstract class Equipment extends Item {
         return damage;
     }
 
+    /**
+     * Preview how this equipment changes a Health Potion heal it sits to the LEFT of. Defaults to the
+     * outgoing-damage change (so Divine Orb / Gloves / Healing Staff carry over automatically); an
+     * INCOMING modifier like Shield overrides this WITHOUT touching {@link #previewOutgoingDamage},
+     * so it affects the potion's heal but not the tooltips of the wearer's damaging abilities.
+     */
+    public int previewForHealthPotion(int damage) {
+        return previewOutgoingDamage(damage);
+    }
+
     /** Preview how this equipment changes the wearer's speed (for the inventory). Default: no change. */
     public int previewSpeed(int speed) {
         return speed;

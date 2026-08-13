@@ -43,8 +43,16 @@ public  abstract class Ability {
 
     protected void addAnimation(String animationName, float frameDuration, Animation.PlayMode playMode, float width,
                                 float height, float additionalX, float additionalY) {
+        addAnimationFrom(animationName, path + animationName, frameDuration, playMode, width, height, additionalX, additionalY);
+    }
+
+    /** Like addAnimation, but the frames come from an explicit atlas region (so an ability can reuse
+     * another effect's art — e.g. Fire Ball borrowing the slot "burning" flames for its cast ember). */
+    protected void addAnimationFrom(String animationName, String regionPath, float frameDuration,
+                                    Animation.PlayMode playMode, float width, float height,
+                                    float additionalX, float additionalY) {
         animations.put(animationName, new AnimationDrawable(new Animation<TextureRegion>(frameDuration,
-                Obtuse.textureAtlas.findRegions(path + animationName + "/main"), playMode),
+                Obtuse.textureAtlas.findRegions(regionPath + "/main"), playMode),
                 width, height, additionalX, additionalY));
     }
 

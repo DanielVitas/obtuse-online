@@ -41,8 +41,8 @@ public class SpeechBubbleBackground extends Actor {
         float fx = (wc.x - (cam.position.x - cam.viewportWidth / 2f)) / cam.viewportWidth;
         float fy = (headWorldY - (cam.position.y - cam.viewportHeight / 2f)) / cam.viewportHeight;
         float bw = getWidth(), bh = getHeight();
-        float bx = fx * Obtuse.width - bw / 2f + bw * 0.32f;    // offset to the right of the speaker
-        float by = fy * Obtuse.height + Obtuse.height * 0.06f;  // and slightly higher above the head
+        float bx = fx * Obtuse.width - bw / 2f;                 // centred above the speaker so the tail points at their head
+        float by = fy * Obtuse.height + Obtuse.height * 0.06f;  // sitting a little above the head
         // No screen clamping: the bubble is anchored to the speaker's WORLD spot, so it scrolls off
         // with them when the player walks away rather than sticking to the edge and following the player.
         setPosition(bx, by);

@@ -218,8 +218,16 @@ public class FightLevel extends Level {
      */
     public void showEnemyAction(FightObject caster, AbilityInstance ability, Holder target) {
         String message = caster.getName() + " used " + ability.getName();
-        if (target != null)
-            message += " on " + (target.fightObject != null ? target.fightObject.getName() : "empty slot");
+        if (target != null) {
+            String targetName;
+            if (target.fightObject == caster)
+                targetName = "themself";
+            else if (target.fightObject != null)
+                targetName = target.fightObject.getName();
+            else
+                targetName = "empty slot";
+            message += " on " + targetName;
+        }
         message += ".";
         ((InfoStage) stages.get(2)).showDescription(message);
     }
