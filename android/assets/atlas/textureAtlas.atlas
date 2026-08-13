@@ -1,5 +1,5 @@
 textureAtlas.png
-size: 840, 840
+size: 840, 872
 format: RGBA8888
 filter: MipMap,MipMap
 repeat: none
@@ -4700,31 +4700,87 @@ items/equipment/healthPotion/default/main
   orig: 16, 16
   offset: 0, 0
   index: -1
+fight/abilities/fireBall/ember/main
+  rotate: false
+  xy: 2, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/fireBall/ember/main
+  rotate: false
+  xy: 20, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/fireBall/ember/main
+  rotate: false
+  xy: 38, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/fireBall/ember/main
+  rotate: false
+  xy: 56, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/abilities/fireBall/ember/main
+  rotate: false
+  xy: 74, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/abilities/fireBall/ember/main
+  rotate: false
+  xy: 92, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
 fight/abilities/swap/gust/main
   rotate: false
-  xy: 224, 820
+  xy: 110, 848
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 0
 fight/abilities/swap/gust/main
   rotate: false
-  xy: 244, 820
+  xy: 128, 848
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 1
 fight/abilities/swap/gust/main
   rotate: false
-  xy: 264, 820
+  xy: 146, 848
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 2
 fight/abilities/swap/gust/main
   rotate: false
-  xy: 284, 820
+  xy: 164, 848
   size: 16, 16
   orig: 16, 16
   offset: 0, 0
   index: 3
+fight/abilities/swap/gust/main
+  rotate: false
+  xy: 182, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/abilities/swap/gust/main
+  rotate: false
+  xy: 200, 848
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5

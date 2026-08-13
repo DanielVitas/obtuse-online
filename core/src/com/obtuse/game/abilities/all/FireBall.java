@@ -26,9 +26,8 @@ public class FireBall extends Ability {
         addTarget(SUMMON);
         addSuggestedTarget(ENEMY);
         addAnimation("explosion", 0.05f, Animation.PlayMode.NORMAL,1f,1f,0,0);
-        // A few fire pixels linger over the CASTER while their cast animation plays — reuses the slot
-        // "burning" flames so no new art is needed.
-        addAnimationFrom("ember", "fight/slots/basic/burning", 0.13f, Animation.PlayMode.LOOP, 0.9f, 0.9f, 0, 0);
+        // Ember-coloured sparks BURST outward from the caster while the cast plays (radial burst).
+        addAnimation("ember", 0.06f, Animation.PlayMode.NORMAL, 0.9f, 0.9f, 0, 0);
 
         description = "Deals " + DMG + " damage to the targeted character.";
     }

@@ -251,18 +251,43 @@ public abstract class Arena {
         return all;
     }
 
-    private void positionProfile(FightObject fighter, int i, int count) {
-        // Derived from the CURRENT ratio, not baked in at class load (see profilePosition).
-        fighter.profile.setX(Obtuse.cameraWidth / 2 - count * profilePosition[2] / 2 + i * profilePosition[2]);
-        fighter.profile.setY(Obtuse.cameraWidth / Obtuse.ratio - 9f / 16);
+    private static final float PROFILE_GROUP_GAP = 0.5f; // gap between arena groups, as a fraction of profile spacing
+
+    /**
+     * Position every profile along the turn bar, centred, with a small gap BETWEEN each arena's
+     * group — so during a duel the main-arena fighters and the duel-arena fighters read as two
+     * clusters rather than one continuous run. (A fighter lives in exactly one arena's fighterOrder.)
+     */
+    private void layoutProfiles() {
+        float spacing = profilePosition[2];
+        float gap = spacing * PROFILE_GROUP_GAP;
+        float y = Obtuse.cameraWidth / Obtuse.ratio - 9f / 16; // from the CURRENT ratio, not baked at class load
+        Array<Array<FightObject>> groups = new Array<Array<FightObject>>();
+        int total = 0;
+        if (fightGame != null)
+            for (int a = 0; a < fightGame.arenas.size; a++) {
+                Array<FightObject> order = fightGame.arenas.get(a).fighterOrder;
+                if (order.size > 0) { groups.add(order); total += order.size; }
+            }
+        if (groups.size == 0) { groups.add(fighterOrder); total = fighterOrder.size; }
+        float totalWidth = total * spacing + (groups.size - 1) * gap;
+        float x = Obtuse.cameraWidth / 2 - totalWidth / 2;
+        for (int g = 0; g < groups.size; g++) {
+            Array<FightObject> group = groups.get(g);
+            for (int i = 0; i < group.size; i++) {
+                group.get(i).profile.setX(x);
+                group.get(i).profile.setY(y);
+                x += spacing;
+            }
+            x += gap;
+        }
     }
 
     private void createProfiles() {
+        layoutProfiles();
         Array<FightObject> profiles = profileFighters();
-        for (int i = 0; i < profiles.size; i++) {
-            positionProfile(profiles.get(i), i, profiles.size);
+        for (int i = 0; i < profiles.size; i++)
             fightGame.level.stage(0).addActor(profiles.get(i).profile);
-        }
     }
 
     /**
@@ -278,9 +303,7 @@ public abstract class Arena {
         applyHolderPositions(heroHolders, heroPositions);
         applyHolderPositions(enemyHolders, enemyPositions);
         applyHolderPositions(summonHolders, summonPositions);
-        Array<FightObject> profiles = profileFighters();
-        for (int i = 0; i < profiles.size; i++)
-            positionProfile(profiles.get(i), i, profiles.size);
+        layoutProfiles();
     }
 
     private void applyHolderPositions(Array<Holder> holders, float[] positions) {
