@@ -253,6 +253,12 @@ public abstract class FightObject extends BasicObject {
     protected abstract void turn(Arena arena, FightLevel level);
 
     public void takeTurn(Arena arena, FightLevel level) {
+        // A non-move summon (e.g. a Dummy) has no moves at all: its turn just runs the surrounding effect
+        // phases (poison / burning / regeneration, applied by conduct()) and then ends — it neither acts
+        // nor Passes (Pass would deal it self-damage and grant next-turn priority, which it shouldn't get).
+        // Heroes are excluded: the player keeps control of a hero even if it somehow has no moves.
+        if (abilities.size == 0 && !(this instanceof Hero))
+            return;
         if (getBuff(Stunned.class) == null)
             turn(arena, level);
         else {

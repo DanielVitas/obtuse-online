@@ -128,8 +128,9 @@ public class Holder {
     public void createAndAdd(Group group) {
         slot.create(x, y - slot.getHeight() / 2);
         group.addActor(slot);
-        // Empty summon slots (type 2) start hidden — tickSummonSlots reveals them when occupied or aimed at.
-        if (type == 2 && (fightObject == null || !fightObject.alive()))
+        // Empty summon slots (type 2) start hidden — tickSummonSlots reveals them when occupied, burning
+        // (or otherwise affected), or aimed at. Keep a burning slot visible from the start (no flicker).
+        if (type == 2 && (fightObject == null || !fightObject.alive()) && burning == 0)
             slot.setVisible(false);
         if (fightObject != null) {
             fightObject.create(x + slot.getWidth() / 2 - fightObject.getWidth() / 2, y);
