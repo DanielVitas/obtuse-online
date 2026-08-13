@@ -127,7 +127,14 @@ public class FightGame extends GameGame {
      * board before the win/lose resolves.
      */
     private void showMainArenaBeforeEnd() {
-        if (mainArena != null && level != null && ((FightLevel) level).currentArena != mainArena) {
+        if (mainArena == null || level == null)
+            return;
+        // Ending during / just after a duel: rebuild the main arena (so the returned duellists are drawn
+        // settled at their spots) and hold a beat so the player sees the final board before win/lose
+        // resolves. A duel returns the survivors to main and switches the view back itself, which used to
+        // make the currentArena != main guard skip this hold — so also trigger when a duel was involved.
+        boolean duelInvolved = mainArena.dependOnArenas.size > 0;
+        if (((FightLevel) level).currentArena != mainArena || duelInvolved) {
             ((FightLevel) level).switchArena(mainArena);
             Turn.sleep(1f);
         }

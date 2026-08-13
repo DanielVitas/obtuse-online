@@ -97,7 +97,7 @@ public class FightLevel extends Level {
                 public void draw(com.badlogic.gdx.graphics.g2d.Batch batch, float parentAlpha) {
                     com.badlogic.gdx.graphics.Color c = batch.getColor();
                     float r = c.r, g = c.g, b = c.b, a = c.a;
-                    batch.setColor(r, g, b, a * 0.3f);   // the distant arena is heavily faded
+                    batch.setColor(r, g, b, a * 0.5f);   // the distant arena is faded (but still readable)
                     super.draw(batch, parentAlpha);
                     batch.setColor(r, g, b, a);
                 }
@@ -113,9 +113,8 @@ public class FightLevel extends Level {
             tgtZoom = 1f; tgtPx = vw / 2; tgtPy = vh / 2;
         } else {                           // duel running: same 0.75 scale either way, mirrored left/right
             tgtZoom = 1f / 0.75f;
-            float dx = 0.09f * vw * tgtZoom;              // nudge magnitude (same both ways)
-            tgtPx = duelActive ? vw / 2 - dx             // duel active: content RIGHT (main PIP sits top-left)
-                               : vw / 2 + dx;            // main active: content LEFT (duel PIP sits top-right)
+            tgtPx = duelActive ? vw / 2 - 0.15f * vw * tgtZoom   // duel active: content further RIGHT (PIP top-left)
+                               : vw / 2 + 0.09f * vw * tgtZoom;  // main active: content LEFT (duel PIP top-right)
             tgtPy = vh / 2;
         }
         if (!duelViewInit) {               // first time: snap to the target (nothing to ease from yet)
