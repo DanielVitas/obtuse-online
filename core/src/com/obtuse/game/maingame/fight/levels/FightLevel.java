@@ -66,17 +66,21 @@ public class FightLevel extends Level {
     }
 
     private com.badlogic.gdx.scenes.scene2d.Group pipGroup;
+    // Smooth transition when the active arena changes: updateDuelView sets the TARGET camera; the live
+    // camera eases toward it each frame in tickDuelView().
+    private float curZoom = 1f, curPx, curPy, tgtZoom = 1f, tgtPx, tgtPy;
+    private boolean duelViewInit = false;
 
     /**
      * Duel "distant arena" view. Zoom/shift the ACTIVE arena via its own world camera (so input, which
      * unprojects through the same camera, stays aligned), and render the OTHER arena small, faded and
      * in a corner (top-right when the main arena is active, top-left when the duel arena is). With no
-     * duel running this restores the normal camera and clears the corner, so ordinary fights are
-     * unchanged. Called after every switchArena and (via it) on resize.
+     * duel running this targets the normal camera and clears the corner, so ordinary fights are
+     * unchanged. Sets only the TARGET — tickDuelView() eases the camera to it. Called after every
+     * switchArena and (via it) on resize.
      */
     public void updateDuelView(Arena activeArena) {
         float vw = com.obtuse.game.Obtuse.cameraWidth, vh = vw / com.obtuse.game.Obtuse.ratio;
-        com.badlogic.gdx.graphics.OrthographicCamera cam = camera(1);
         // The other live arena. INDEXED loop: game.arenas is iterated elsewhere by libGDX's pooled
         // iterator, and a nested for-each would invalidate it (see the duel turn-order fix).
         Arena other = null;
@@ -93,33 +97,46 @@ public class FightLevel extends Level {
         if (pipGroup.getParent() == null)
             stage(0).addActor(pipGroup);   // world background stage, so the PIP isn't zoomed by cam(1)
 
-        if (other == null) {               // no duel: normal camera, empty corner
-            cam.zoom = 1f;
-            cam.position.set(vw / 2, vh / 2, 0);
-            return;
-        }
         boolean duelActive = activeArena instanceof com.obtuse.game.maingame.fight.arenas.DuelArena;
-        if (duelActive) {                  // duel fills the screen, nudged right + lower
-            cam.zoom = 1f;
-            cam.position.set(vw / 2 - 0.24f * vw, vh / 2 + 0.12f * vh, 0);
+        if (other == null) {               // no duel: normal camera target
+            tgtZoom = 1f; tgtPx = vw / 2; tgtPy = vh / 2;
+        } else if (duelActive) {           // duel fills the screen, nudged right + lower
+            tgtZoom = 1f; tgtPx = vw / 2 - 0.24f * vw; tgtPy = vh / 2 + 0.12f * vh;
         } else {                           // main at 0.8, nudged left
-            cam.zoom = 1f / 0.8f;
-            cam.position.set(vw / 2 + 0.09f * vw * cam.zoom, vh / 2, 0);
+            tgtZoom = 1f / 0.8f; tgtPx = vw / 2 + 0.09f * vw * tgtZoom; tgtPy = vh / 2;
         }
-        // the OTHER arena, small and faded in the corner
-        for (Array<Holder> hs : new Array[]{other.heroHolders, other.enemyHolders, other.summonHolders})
-            for (int i = 0; i < hs.size; i++)
-                hs.get(i).createAndAdd(pipGroup);
-        pipGroup.setColor(1f, 1f, 1f, 0.5f);
-        if (duelActive) {                  // distant MAIN arena, top-left, 0.5
-            pipGroup.setOrigin(0, vh);
-            pipGroup.setScale(0.5f);
-            pipGroup.setPosition(0.05f * vw, -0.05f * vh);
-        } else {                           // distant DUEL arena, top-right, 0.4
-            pipGroup.setOrigin(vw, vh);
-            pipGroup.setScale(0.4f);
-            pipGroup.setPosition(-0.1f, -0.05f * vh);
+        if (!duelViewInit) {               // first time: snap to the target (nothing to ease from yet)
+            curZoom = tgtZoom; curPx = tgtPx; curPy = tgtPy; duelViewInit = true;
         }
+        if (other != null) {               // the OTHER arena, small and faded in the corner
+            for (Array<Holder> hs : new Array[]{other.heroHolders, other.enemyHolders, other.summonHolders})
+                for (int i = 0; i < hs.size; i++)
+                    hs.get(i).createAndAdd(pipGroup);
+            pipGroup.setColor(1f, 1f, 1f, 0.5f);
+            if (duelActive) {              // distant MAIN arena, top-left, 0.5
+                pipGroup.setOrigin(0, vh);
+                pipGroup.setScale(0.5f);
+                pipGroup.setPosition(0.05f * vw, -0.05f * vh);
+            } else {                       // distant DUEL arena, top-right, 0.4
+                pipGroup.setOrigin(vw, vh);
+                pipGroup.setScale(0.4f);
+                pipGroup.setPosition(-0.1f, -0.05f * vh);
+            }
+        }
+    }
+
+    /** Ease the live arena camera (camera 1) toward the target from updateDuelView — the smooth
+     *  transition when the turn moves between the main and duel arenas. Called every frame. */
+    public void tickDuelView() {
+        if (!duelViewInit) return;
+        float delta = com.badlogic.gdx.Gdx.graphics.getDeltaTime();
+        float a = 1f - (float) Math.exp(-delta * 10f);   // ~0.3s ease, frame-rate independent
+        curZoom += (tgtZoom - curZoom) * a;
+        curPx += (tgtPx - curPx) * a;
+        curPy += (tgtPy - curPy) * a;
+        com.badlogic.gdx.graphics.OrthographicCamera cam = camera(1);
+        cam.zoom = curZoom;
+        cam.position.set(curPx, curPy, 0);
     }
 
     public void removeHolderInfo(Holder holder) {

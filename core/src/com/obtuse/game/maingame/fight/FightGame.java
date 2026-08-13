@@ -267,7 +267,7 @@ public class FightGame extends GameGame {
                                 hovered(((FightLevel) level).abilityMap.get(button));
                             break touch;
                         }
-                    unprojectTouch(0);
+                    unprojectTouch(1);
                     for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                         if (button.check(touchPoint.x, touchPoint.y)) {
                             if (touchReleased)
@@ -290,7 +290,7 @@ public class FightGame extends GameGame {
                         break touch;
                     }
                     ((InfoStage) level.stages.get(2)).hoverCancel(false);
-                    unprojectTouch(0);
+                    unprojectTouch(1);
                     for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                         if (button.check(touchPoint.x, touchPoint.y)) {
                             if (touchReleased)
@@ -355,7 +355,7 @@ public class FightGame extends GameGame {
                                     hovered(((FightLevel) level).abilityMap.get(button));
                                 break touch;
                             }
-                        camera(0).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+                        camera(1).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
                         for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                             if (button.check(touchPoint.x, touchPoint.y)) {
                                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))
@@ -378,7 +378,7 @@ public class FightGame extends GameGame {
                             break touch;
                         }
                         ((InfoStage) level.stages.get(2)).hoverCancel(false);
-                        camera(0).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
+                        camera(1).unproject(touchPoint.set(Gdx.input.getX(), Gdx.input.getY(), 0));
                         for (GameButton button : ((FightLevel) level).buttonMap.keySet())
                             if (button.check(touchPoint.x, touchPoint.y)) {
                                 if (Gdx.input.isButtonPressed(Input.Buttons.LEFT))

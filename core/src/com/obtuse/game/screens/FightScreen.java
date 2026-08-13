@@ -33,6 +33,8 @@ public class FightScreen extends MyScreen {
 
     @Override
     protected void loop() {
+        if (gameGame != null && gameGame.level instanceof com.obtuse.game.maingame.fight.levels.FightLevel)
+            ((com.obtuse.game.maingame.fight.levels.FightLevel) gameGame.level).tickDuelView();
         gameGame.run();
     }
 }
