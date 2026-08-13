@@ -41,7 +41,7 @@ public class GuardTrigger extends Trigger {
 
     @Override
     public void run(Event event) {
-        Damage damage = new Damage(this.damage, caster, caster);
+        Damage damage = new Damage(this.damage, caster, caster).cause("fell shielding an ally.");
         Turn.sleep(damage.run());
     }
 }

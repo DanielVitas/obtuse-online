@@ -26,7 +26,7 @@ public class PoisonEvent extends Event {
 
     @Override
     public float run() {
-        addSubEvent(new Damage(damage, dealer, taker));
+        addSubEvent(new Damage(damage, dealer, taker).cause("succumbed to poison."));
         return 0;
     }
 }

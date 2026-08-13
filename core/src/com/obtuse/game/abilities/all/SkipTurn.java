@@ -21,7 +21,7 @@ public class SkipTurn extends Ability {
     @Override
     public void cast(FightObject caster, Holder target, FightLevel level) {
         // 1 unmodifiable self-damage (dealer == null, so no equipment trigger can change it)...
-        Damage dmg = new Damage(damage, null, caster);
+        Damage dmg = new Damage(damage, null, caster).cause("gave their all.");
         dmg.preform();
         // ...and gain next-turn priority: the ordering puts passers first (see Arena.order()).
         caster.passed = true;

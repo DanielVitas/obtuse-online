@@ -23,7 +23,7 @@ public class BloodChalice extends Equipment {
             public boolean check(Event event) {
                 if (event instanceof DamageDealt)
                     if (((DamageDealt) event).dealer == fightObject)
-                        event.addSubEvent(new Damage(-((DamageDealt) event).damage,null, fightObject));
+                        event.addSubEvent(new Damage(-((DamageDealt) event).damage,null, fightObject).cause("was drained."));
                 return false;
             }
 

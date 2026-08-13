@@ -23,7 +23,7 @@ public class BloodSacrificeEvent extends Event {
             for (Holder holder : holderArray)
                     if (holder.fightObject != null)
                         if (holder.fightObject != caster)
-                            addSubEventNoTrigger(new Damage(damage, caster, holder.fightObject));
+                            addSubEventNoTrigger(new Damage(damage, caster, holder.fightObject).cause("was sacrificed."));
     }
 
     @Override
@@ -33,7 +33,7 @@ public class BloodSacrificeEvent extends Event {
             if (event instanceof Damage)
                 if (((Damage) event).taker.alive())
                     totalDamageDealt += ((Damage) event).damage;
-        caster.preturn.add(new Damage(totalDamageDealt, caster, caster));
+        caster.preturn.add(new Damage(totalDamageDealt, caster, caster).cause("was sacrificed."));
         return 0;
     }
 }

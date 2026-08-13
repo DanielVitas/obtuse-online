@@ -14,12 +14,19 @@ public class Damage extends Event {
     public int damage;
     public FightObject dealer;
     public FightObject taker;
+    public String deathVerb;   // the cause-of-death phrase shown if this damage is fatal (null = generic)
 
     public Damage(int damage, FightObject dealer, FightObject taker) {
         super(0,1);
         this.damage = damage;
         this.dealer = dealer;
         this.taker = taker;
+    }
+
+    /** Tag what this damage IS, so a lethal blow can announce e.g. "[name] was incinerated!". */
+    public Damage cause(String deathVerb) {
+        this.deathVerb = deathVerb;
+        return this;
     }
 
     private void damageText() {
@@ -53,7 +60,7 @@ public class Damage extends Event {
         if (taker.hp > taker.damageTaken) {
             damageText();
             if (taker.hp - taker.damageTaken <= damage)
-                addSubEvent(new DeathEvent(dealer, taker));
+                addSubEvent(new DeathEvent(dealer, taker, deathVerb));
         }
         return taker.damage(damage);
     }

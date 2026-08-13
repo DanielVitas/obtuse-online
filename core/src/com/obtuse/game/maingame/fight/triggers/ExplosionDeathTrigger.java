@@ -32,7 +32,7 @@ public class ExplosionDeathTrigger extends Trigger {
         for (Holder holder : caster.holder.adjacent)
             if (holder.fightObject != null)
                 if (holder.fightObject.alive()) {
-                    Damage damage = new Damage(this.damage, caster, holder.fightObject);
+                    Damage damage = new Damage(this.damage, caster, holder.fightObject).cause("was caught in the blast.");
                     event.addSubEvent(damage,0);
                 }
         remove();

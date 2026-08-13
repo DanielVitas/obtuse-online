@@ -101,9 +101,9 @@ public class FightLevel extends Level {
         if (other == null) {               // no duel: normal camera target
             tgtZoom = 1f; tgtPx = vw / 2; tgtPy = vh / 2;
         } else if (duelActive) {           // duel fills the screen, nudged right + slightly lower
-            tgtZoom = 1f; tgtPx = vw / 2 - 0.24f * vw; tgtPy = vh / 2 + 0.04f * vh;
-        } else {                           // main at 0.8, nudged left
-            tgtZoom = 1f / 0.8f; tgtPx = vw / 2 + 0.09f * vw * tgtZoom; tgtPy = vh / 2;
+            tgtZoom = 1f; tgtPx = vw / 2 - 0.15f * vw; tgtPy = vh / 2 + 0.04f * vh;
+        } else {                           // main at 0.75, nudged left
+            tgtZoom = 1f / 0.75f; tgtPx = vw / 2 + 0.09f * vw * tgtZoom; tgtPy = vh / 2;
         }
         if (!duelViewInit) {               // first time: snap to the target (nothing to ease from yet)
             curZoom = tgtZoom; curPx = tgtPx; curPy = tgtPy; duelViewInit = true;
@@ -112,7 +112,7 @@ public class FightLevel extends Level {
             for (Array<Holder> hs : new Array[]{other.heroHolders, other.enemyHolders, other.summonHolders})
                 for (int i = 0; i < hs.size; i++)
                     hs.get(i).createAndAdd(pipGroup);
-            pipGroup.setColor(1f, 1f, 1f, 0.5f);
+            pipGroup.setColor(1f, 1f, 1f, 0.3f);   // the distant arena is heavily faded
             if (duelActive) {              // distant MAIN arena, top-left, 0.5
                 pipGroup.setOrigin(0, vh);
                 pipGroup.setScale(0.5f);
@@ -309,6 +309,14 @@ public class FightLevel extends Level {
 
     public void hideDescription() {
         ((InfoStage) stages.get(2)).clearDescription();
+    }
+
+    /** A brief "[name] perished!"-style death message in the DD panel; cleared after half a second. */
+    public void showDeath(String message) {
+        ((InfoStage) stages.get(2)).showDescription(message);
+        com.badlogic.gdx.utils.Timer.schedule(new com.badlogic.gdx.utils.Timer.Task() {
+            @Override public void run() { ((InfoStage) stages.get(2)).clearDescription(); }
+        }, 0.5f);
     }
 
     public void loseInfo() {

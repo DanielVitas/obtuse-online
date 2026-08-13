@@ -207,7 +207,7 @@ public abstract class Arena {
             for (Holder holder : holderArray)
                 if (holder.burning != 0)
                     if (holder.fightObject != null)
-                        endPhaseEvents.add(new Damage(holder.burning, null, holder.fightObject));
+                        endPhaseEvents.add(new Damage(holder.burning, null, holder.fightObject).cause("burned away."));
     }
 
     private void fighterTurn(FightObject fightObject, Holder holder) {

@@ -25,7 +25,7 @@ public class DamageSlot extends Event {
     @Override
     public float run() {
         if (taker.fightObject != null) {
-            Damage damageEvent = new Damage(damage, dealer, taker.fightObject);
+            Damage damageEvent = new Damage(damage, dealer, taker.fightObject).cause("never saw it coming.");
             addSubEvent(damageEvent);
         }
         return 0;

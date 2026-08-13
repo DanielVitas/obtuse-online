@@ -26,7 +26,7 @@ public class HealEvent extends Event {
 
     @Override
     public float run() {
-        addSubEventNoTrigger(new Damage(damage, dealer, taker));
+        addSubEventNoTrigger(new Damage(damage, dealer, taker).cause("rotted away."));
         return 0;
     }
 }

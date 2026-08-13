@@ -20,10 +20,10 @@ public class ThunderstrikeEvent extends Event {
         this.target = target;
         this.level = level;
         if (target.fightObject != null)
-            addSubEventNoTrigger(new Damage(damage, caster, target.fightObject));
+            addSubEventNoTrigger(new Damage(damage, caster, target.fightObject).cause("was struck down!"));
         for (Holder holder : target.adjacent)
             if (holder.fightObject != null)
-                addSubEventNoTrigger(new Damage(damage, caster, holder.fightObject));
+                addSubEventNoTrigger(new Damage(damage, caster, holder.fightObject).cause("was struck down!"));
     }
 
     @Override

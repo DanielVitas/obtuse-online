@@ -35,7 +35,7 @@ public class FireBall extends Ability {
 
     @Override
     public void cast(FightObject caster, Holder target, FightLevel level) {
-        caster.postturn.add(new Damage(damage, caster, target.fightObject));
+        caster.postturn.add(new Damage(damage, caster, target.fightObject).cause("was incinerated!"));
     }
 
     @Override
