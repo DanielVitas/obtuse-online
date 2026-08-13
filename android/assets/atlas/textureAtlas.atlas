@@ -4700,3 +4700,31 @@ items/equipment/healthPotion/default/main
   orig: 16, 16
   offset: 0, 0
   index: -1
+fight/abilities/swap/gust/main
+  rotate: false
+  xy: 224, 820
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 0
+fight/abilities/swap/gust/main
+  rotate: false
+  xy: 244, 820
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/abilities/swap/gust/main
+  rotate: false
+  xy: 264, 820
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/abilities/swap/gust/main
+  rotate: false
+  xy: 284, 820
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
