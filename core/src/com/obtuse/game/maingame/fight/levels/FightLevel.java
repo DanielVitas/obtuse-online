@@ -139,6 +139,37 @@ public class FightLevel extends Level {
         cam.position.set(curPx, curPy, 0);
     }
 
+    /**
+     * A summon slot has no business showing before there's a summon: an EMPTY summon slot stays hidden,
+     * and only appears (fully) once something is placed on it. The one exception is while the player is
+     * targeting an ability that can be aimed at that empty slot (e.g. a Summon move) — then it shows,
+     * but faded, so it can be picked. The slot's button stays live regardless, so an enemy summon (or an
+     * ability of ours) can still drop a creature onto a slot the player never sees. Driven per-frame from
+     * FightScreen.loop, mirroring tickDuelView (indexed loop — game.arenas is a pooled-iterator list).
+     */
+    public void tickSummonSlots() {
+        for (int a = 0; a < game.arenas.size; a++) {
+            Arena ar = game.arenas.get(a);
+            for (int i = 0; i < ar.summonHolders.size; i++) {
+                Holder h = ar.summonHolders.get(i);
+                if (h == null || h.slot == null)
+                    continue;
+                boolean occupied = h.fightObject != null && h.fightObject.alive();
+                boolean targetable = targeting && selectedAbility != null && currentArena == ar
+                        && selectedAbility.ability.validTarget(h);
+                if (occupied || h.burning != 0) {
+                    h.slot.setVisible(true);
+                    h.slot.slotAlpha = 1f;
+                } else if (targetable) {
+                    h.slot.setVisible(true);
+                    h.slot.slotAlpha = 0.45f;   // shown only to aim at, so kept clearly faint
+                } else {
+                    h.slot.setVisible(false);
+                }
+            }
+        }
+    }
+
     public void removeHolderInfo(Holder holder) {
         if (holder.hpLabel != null)
             holder.hpLabel.remove();

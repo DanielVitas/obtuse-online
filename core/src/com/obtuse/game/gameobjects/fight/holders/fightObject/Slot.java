@@ -1,12 +1,31 @@
 package com.obtuse.game.gameobjects.fight.holders.fightObject;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.obtuse.game.gameobjects.BasicObject;
 
 import static java.lang.Math.pow;
 
 public abstract class Slot extends BasicObject {
     public Holder holder;
+
+    // <1 draws the slot faded. Used for an empty summon slot that's only shown while the player is
+    // targeting an ability that can be aimed at it (see FightLevel.tickSummonSlots).
+    public float slotAlpha = 1f;
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        if (slotAlpha >= 1f) {
+            super.draw(batch, parentAlpha);
+            return;
+        }
+        Color c = batch.getColor();
+        float r = c.r, g = c.g, b = c.b, a = c.a;
+        batch.setColor(r, g, b, a * slotAlpha);
+        super.draw(batch, parentAlpha);
+        batch.setColor(r, g, b, a);
+    }
 
     public Slot(String name, float defaultFD, float hoveredFD, float targetedFD, float onTurnFD, float burningFD) {
         path += "fight/slots/" + name + "/";
