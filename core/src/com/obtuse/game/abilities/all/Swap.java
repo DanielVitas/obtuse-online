@@ -18,7 +18,7 @@ public class Swap extends Ability {
         addSuggestedTarget(HEROSLOT);
         addAnimation("gust", 0.1f, Animation.PlayMode.NORMAL, 1f, 1f, 0, 0);
 
-        description = "Teleports caster to the targeted hero slot and any character standing there to the casters.";
+        description = "Teleports the caster to the targeted hero slot, and any character standing there to the caster's slot.";
     }
 
     @Override

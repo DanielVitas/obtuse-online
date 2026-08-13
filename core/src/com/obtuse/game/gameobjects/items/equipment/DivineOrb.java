@@ -12,7 +12,7 @@ public class DivineOrb extends Equipment {
     public DivineOrb() {
         super("divineOrb", 1f);
         setName("Divine Orb");
-        description = "Reverses the damage dealt (healing becomes damage and damage healing).";
+        description = "Reverses the damage dealt (healing becomes damage and damage becomes healing).";
     }
 
     @Override

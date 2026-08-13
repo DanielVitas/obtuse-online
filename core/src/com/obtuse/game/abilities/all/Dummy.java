@@ -23,7 +23,7 @@ public class Dummy extends Ability {
         setName("Dummy");
         addTarget(EMPTYENEMYSLOT);
 
-        description = "Summons a Dummy to an empty enemy slot. Upon dying Dummy explodes, dealing " + DMG +
+        description = "Summons a Dummy to an empty enemy slot. Upon dying, the Dummy explodes, dealing " + DMG +
         " damage to adjacent characters.";
     }
 

@@ -26,7 +26,7 @@ public class BloodSacrifice extends Ability {
         addAnimation("blood", 0.05f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
         description = "Deals " + DMG + " damage to all characters in the arena except the caster." +
-                " On casters next turn deals damage equal to the total damage dealt by this effect to the caster.";
+                " On the caster's next turn deals damage equal to the total damage dealt by this effect to the caster.";
     }
 
     @Override

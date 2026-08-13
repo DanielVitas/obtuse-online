@@ -23,7 +23,7 @@ public class SpeedSwitch extends Ability {
         addAnimation("up", 0.1f, Animation.PlayMode.NORMAL,1f,1f,0,0);
         addAnimation("down", 0.1f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
-        description = "Switches speed between caster and target.";
+        description = "Switches speed between the caster and target.";
     }
 
     @Override

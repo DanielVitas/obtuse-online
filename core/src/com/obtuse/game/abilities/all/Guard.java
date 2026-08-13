@@ -22,7 +22,7 @@ public class Guard extends Ability {
         addSuggestedTarget(HERO);
         addSuggestedTarget(SUMMON);
 
-        description = "Reduces damage taken by target by " + Integer.toString(damageGuarded) + " and damages the caster " +
+        description = "Reduces damage taken by the target by " + Integer.toString(damageGuarded) + ", damaging the caster " +
                 "instead.";
     }
 

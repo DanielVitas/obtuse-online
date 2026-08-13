@@ -19,7 +19,7 @@ public abstract class Summon extends Ability {
         addTarget(EMPTYSUMMONSLOT);
         addSuggestedTarget(EMPTYHEROSLOT);
 
-        description = "Summons " + name + " to targeted empty slot.";
+        description = "Summons " + name + " to the targeted empty slot.";
     }
 
     public abstract FightObject summonedCreature();

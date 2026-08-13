@@ -17,7 +17,7 @@ public class CrownOfThorns extends Equipment {
     public CrownOfThorns() {
         super("crownOfThorns",1f);
         setName("Crown of Thorns");
-        description = "Wearer has " + Integer.toString(hpPenalty) + " less HP. Upon death restores PP to the whole party.";
+        description = "Wearer has " + Integer.toString(hpPenalty) + " less HP. Upon death, restores PP to the whole party.";
     }
 
     @Override

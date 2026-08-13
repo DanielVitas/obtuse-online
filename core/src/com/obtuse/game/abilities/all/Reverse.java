@@ -17,7 +17,7 @@ public class Reverse extends Ability {
         super("speedReverse", 2);
         setName("Reverse");
 
-        description = "Switches speed between all characters so that order is reversed.";
+        description = "Switches speed between all characters so that the order is reversed.";
     }
 
     @Override

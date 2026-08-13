@@ -22,7 +22,7 @@ public class Steal extends Ability {
         addAnimation("coins", 0.1f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
 
-        description = "Steals last ability target used.";
+        description = "Steals the last ability the target used.";
     }
 
     @Override

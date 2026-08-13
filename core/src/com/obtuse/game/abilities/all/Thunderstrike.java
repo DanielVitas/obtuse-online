@@ -29,8 +29,8 @@ public class Thunderstrike extends Ability {
         addSuggestedTarget(ENEMY);
         addAnimation("lightning", 0.05f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
-        description = "Deals " + DMG + " damage to any characters standing on the slot and adjacent " +
-                "slots. If total damage dealt is lower or equal to " + Integer.toString(stunTreshold) + " all affected " +
+        description = "Deals " + DMG + " damage to all characters standing on the slot and adjacent " +
+                "slots. If the total damage dealt is less than or equal to " + Integer.toString(stunTreshold) + ", all affected " +
                 "characters are stunned.";
     }
 

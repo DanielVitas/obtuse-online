@@ -19,7 +19,7 @@ public class Echo extends Ability {
         addSuggestedTarget(HERO);
         addSuggestedTarget(SUMMON);
 
-        description = "Next ability target uses is done twice.";
+        description = "The next ability the target uses happens twice.";
     }
 
     @Override

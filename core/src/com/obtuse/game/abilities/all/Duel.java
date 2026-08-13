@@ -20,7 +20,7 @@ public class Duel extends Ability {
         addAnimation("teleportation", 0.1f, Animation.PlayMode.NORMAL,1f,1f,0,0);
 
         description = "Teleports user and the target to a separate arena with only two slots. Now you must battle in " +
-                "both primary and duel arena simultaneously. Upon either caster or target dying they both return.";
+                "both the primary and duel arenas simultaneously. When either the caster or target dies, they both return.";
     }
 
     @Override

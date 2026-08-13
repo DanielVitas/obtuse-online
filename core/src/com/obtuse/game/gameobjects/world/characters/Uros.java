@@ -31,14 +31,14 @@ public class Uros extends WorldCharacter {
         if (ProgressKeeper.done("win","demon"))
             if (ProgressKeeper.done("win","skeletons") && ProgressKeeper.done("win","redSkull"))
                 if (ProgressKeeper.done("quest","monsters1"))
-                    Obtuse.dialog(new SpeechBubble(this, "Please don't hurt me, that's all i had. :'(", 3.5f) {
+                    Obtuse.dialog(new SpeechBubble(this, "Please don't hurt me, that's all I have. :'(", 3.5f) {
                         @Override
                         public void after() {
 
                         }
                     });
                 else
-                    Obtuse.dialog(new SpeechBubble(this, "Wow! Thank you random adventurer. I stole this gem. " +
+                    Obtuse.dialog(new SpeechBubble(this, "Wow! Thank you, random adventurer. I stole this gem. " +
                             "You can have it. XD", 3.5f) {
                         @Override
                         public void after() {
@@ -63,7 +63,7 @@ public class Uros extends WorldCharacter {
                 });
         else
             if (ProgressKeeper.done("win","skeletons"))
-                Obtuse.dialog(new SpeechBubble(this, "Hmm, if you are struggling you might find " +
+                Obtuse.dialog(new SpeechBubble(this, "Hmm, if you are struggling, you might find " +
                         "something useful behind the drawer in front of me. ^^", 3.5f) {
                     @Override
                     public void after() {

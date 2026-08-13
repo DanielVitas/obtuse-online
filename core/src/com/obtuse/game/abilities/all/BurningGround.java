@@ -26,7 +26,7 @@ public class BurningGround extends Ability {
         addTarget(SUMMONSLOT);
         addSuggestedTarget(Ability.ENEMY);
 
-        description = "Sets targeted slot on fire. At the end of each turn character standing on it takes " +
+        description = "Sets targeted slot on fire. At the end of each turn, the character standing on it takes " +
                 DMG + " damage.";
     }
 
