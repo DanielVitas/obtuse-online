@@ -70,6 +70,7 @@ public class FightLevel extends Level {
     // camera eases toward it each frame in tickDuelView().
     private float curZoom = 1f, curPx, curPy, tgtZoom = 1f, tgtPx, tgtPy;
     private boolean duelViewInit = false;
+    private boolean pipWasActive = false;   // a corner arena was shown last frame (so we can snap when a duel ends)
 
     /**
      * Duel "distant arena" view. Zoom/shift the ACTIVE arena via its own world camera (so input, which
@@ -120,6 +121,12 @@ public class FightLevel extends Level {
         if (!duelViewInit) {               // first time: snap to the target (nothing to ease from yet)
             curZoom = tgtZoom; curPx = tgtPx; curPy = tgtPy; duelViewInit = true;
         }
+        // A duel just ended (the corner arena went away): SNAP straight to the full main view instead of
+        // easing, so the duellists returning to the main arena are on screen at once, not glided into view.
+        if (pipWasActive && other == null) {
+            curZoom = tgtZoom; curPx = tgtPx; curPy = tgtPy;
+        }
+        pipWasActive = other != null;
         if (other != null) {               // the OTHER arena, small and faded in the corner
             for (Array<Holder> hs : new Array[]{other.heroHolders, other.enemyHolders, other.summonHolders})
                 for (int i = 0; i < hs.size; i++)

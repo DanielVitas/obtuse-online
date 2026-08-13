@@ -22,8 +22,9 @@ public class Dummy extends Ability {
         super("dummy", 3);
         setName("Dummy");
         addTarget(EMPTYENEMYSLOT);
+        addTarget(EMPTYSUMMONSLOT);   // can also be dropped onto an (allied) summon slot
 
-        description = "Summons a Dummy to an empty enemy slot. Upon dying, the Dummy explodes, dealing " + DMG +
+        description = "Summons a Dummy to an empty enemy or summon slot. Upon dying, the Dummy explodes, dealing " + DMG +
         " damage to adjacent characters.";
     }
 
