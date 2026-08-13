@@ -33,15 +33,18 @@ public class SpeechBubbleBackground extends Actor {
     }
 
     private void reposition() {
-        if (speaker == null || speaker.body == null || speaker.body.body == null)
+        if (speaker == null || cam == null)
             return;
-        Vector2 wc = speaker.body.body.getWorldCenter();
-        // Aim the tail tip just above the speaker's HEAD (top of the sprite), not their centre.
-        float headWorldY = wc.y + (speaker.getHeight() > 0 ? speaker.getHeight() * 0.5f : 0.5f);
-        float fx = (wc.x - (cam.position.x - cam.viewportWidth / 2f)) / cam.viewportWidth;
+        // Centre on the SPEAKER SPRITE's own bounds — getX()/getY() are its bottom-left corner and
+        // getWidth()/getHeight() its size, so the horizontal centre is getX()+width/2 and the head is
+        // the sprite's top. (The physics body centre used before is offset from the sprite, which is
+        // exactly why the bubble sat to the left.)
+        float centreWorldX = speaker.getX() + speaker.getWidth() / 2f;
+        float headWorldY = speaker.getY() + speaker.getHeight();
+        float fx = (centreWorldX - (cam.position.x - cam.viewportWidth / 2f)) / cam.viewportWidth;
         float fy = (headWorldY - (cam.position.y - cam.viewportHeight / 2f)) / cam.viewportHeight;
         float bw = getWidth(), bh = getHeight();
-        float bx = fx * Obtuse.width - bw / 2f;                 // centred above the speaker so the tail points at their head
+        float bx = fx * Obtuse.width - bw / 2f;                 // tail (bubble centre) points at the sprite's centre
         float by = fy * Obtuse.height + Obtuse.height * 0.06f;  // sitting a little above the head
         // No screen clamping: the bubble is anchored to the speaker's WORLD spot, so it scrolls off
         // with them when the player walks away rather than sticking to the edge and following the player.
