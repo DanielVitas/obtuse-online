@@ -86,8 +86,8 @@ public class FightLevel extends Level {
         Arena other = null;
         for (int a = 0; a < game.arenas.size; a++) {
             Arena ar = game.arenas.get(a);
-            if (ar != activeArena && ar.heroes.size + ar.enemies.size > 0)
-                other = ar;
+            if (ar != activeArena && !ar.isFinished() && ar.heroes.size + ar.enemies.size > 0)
+                other = ar;   // a finished duel drops out of the corner (the view glides back to main)
         }
         if (pipGroup == null) {
             pipGroup = new com.badlogic.gdx.scenes.scene2d.Group();
@@ -100,8 +100,8 @@ public class FightLevel extends Level {
         boolean duelActive = activeArena instanceof com.obtuse.game.maingame.fight.arenas.DuelArena;
         if (other == null) {               // no duel: normal camera target
             tgtZoom = 1f; tgtPx = vw / 2; tgtPy = vh / 2;
-        } else if (duelActive) {           // duel fills the screen, nudged right + lower
-            tgtZoom = 1f; tgtPx = vw / 2 - 0.24f * vw; tgtPy = vh / 2 + 0.12f * vh;
+        } else if (duelActive) {           // duel fills the screen, nudged right + slightly lower
+            tgtZoom = 1f; tgtPx = vw / 2 - 0.24f * vw; tgtPy = vh / 2 + 0.04f * vh;
         } else {                           // main at 0.8, nudged left
             tgtZoom = 1f / 0.8f; tgtPx = vw / 2 + 0.09f * vw * tgtZoom; tgtPy = vh / 2;
         }

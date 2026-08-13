@@ -26,30 +26,33 @@ public class DuelArena extends Arena {
     @Override
     protected float[] setHeroPositions() {
         return new float[]{
-                6f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
+                6.5f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
         };
     }
 
     @Override
     protected float[] setEnemyPositions() {
         return new float[]{
-                4f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
+                3.5f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
         };
     }
 
     @Override
     protected boolean end() {
-        boolean e = super.end();
+        boolean e = super.end();   // marks the duel finished, so it drops out of the corner view
         if (!e && !finishedFirst) {
-            playReturnAnimation();   // teleport the duellists out (mirror of the cast) before they rejoin the main arena
+            finishedFirst = true;
             originalArena.addNext(heroes.get(0));
             originalArena.addNext(enemies.get(0));
-            finishedFirst = true;
+            // Glide the view back to the (now full-screen) main arena — the finished duel is gone from
+            // the corner — then teleport the returned fighters INTO the main arena.
+            ((com.obtuse.game.maingame.fight.levels.FightLevel) fightGame.level).switchArena(originalArena);
+            playReturnAnimation();
         }
         return e;
     }
 
-    /** Replay the Duel teleport on the duellists, still in the duel arena, before they return to main. */
+    /** Replay the Duel teleport on the duellists — now in the MAIN arena, as they arrive back. */
     private void playReturnAnimation() {
         com.obtuse.game.abilities.all.Duel duel = new com.obtuse.game.abilities.all.Duel();
         com.obtuse.game.audio.SoundPlayer.play("fight/abilities/duel/teleportation");

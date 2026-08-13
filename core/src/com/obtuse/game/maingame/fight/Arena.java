@@ -33,6 +33,10 @@ public abstract class Arena {
     public Array<Arena> dependOnArenas = new Array<Arena>();
     protected boolean finished = false;
 
+    public boolean isFinished() {
+        return finished;
+    }
+
     public Arena(FightGame fightGame) {
         this.fightGame = fightGame;
         heroPositions = setHeroPositions();
