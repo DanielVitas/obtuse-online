@@ -55,8 +55,11 @@ public abstract class InfoBackground extends BasicObject {
         // Padding proportional to the TEXT height (not the surface width) so the tooltip keeps the
         // same look at any screen size or aspect ratio — the font scales with height, so the padding
         // must too, otherwise a wide/short screen gives huge padding around tiny text and vice versa.
-        float pad = Math.max(3f, height(name) * 0.55f);
-        float gap = pad * 0.6f;
+        // Sit the text a clear margin INSIDE the gold frame: start from the frame thickness (matches
+        // draw()) and add a gap, so the text's left edge never hugs the inner border.
+        float frame = Math.max(2f, Obtuse.height * 0.006f);
+        float pad = frame + Math.max(4f, height(name) * 0.5f);
+        float gap = pad * 0.55f;
         float maxW = Obtuse.width * 0.9f;
 
         float titleLineW = width(name) + (inlineStat != null ? gap + width(inlineStat) : 0);

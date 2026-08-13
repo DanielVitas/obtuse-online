@@ -43,6 +43,11 @@ public class DuelEvent extends Event {
         originalArena.dependOnArenas.add(duelArena);
         caster.holder.arena.fightGame.arenas.add(duelArena);
         originalArena.index -= i;
+        // The turn bar was built at the START of this round, before the duel existed, so the two
+        // duellists dropped off it until next round. Compute the duel's order now and redraw the bar
+        // so both arenas' fighters show together from THIS turn.
+        duelArena.preorder();
+        originalArena.refreshProfiles();
         //((FightLevel) caster.holder.arena.fightGame.level).switchArena(originalArena);
         return 0;
     }
