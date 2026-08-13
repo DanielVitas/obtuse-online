@@ -16,15 +16,17 @@ public abstract class Slot extends BasicObject {
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (slotAlpha >= 1f) {
-            super.draw(batch, parentAlpha);
-            return;
-        }
         Color c = batch.getColor();
         float r = c.r, g = c.g, b = c.b, a = c.a;
-        batch.setColor(r, g, b, a * slotAlpha);
-        super.draw(batch, parentAlpha);
-        batch.setColor(r, g, b, a);
+        if (slotAlpha < 1f)
+            batch.setColor(r, g, b, a * slotAlpha);
+        // Draw the animations back-to-front: the burning overlay is appended last, so drawing in reverse
+        // puts the fire BEHIND the base state (index 0) — keeping the target (red) / on-turn (dark) colour
+        // visible on a slot that's on fire, instead of the flames covering it.
+        for (int i = currentlyDisplayed.size - 1; i >= 0; i--)
+            currentlyDisplayed.get(i).draw(batch, getX(), getY(), getWidth(), getHeight());
+        if (slotAlpha < 1f)
+            batch.setColor(r, g, b, a);
     }
 
     public Slot(String name, float defaultFD, float hoveredFD, float targetedFD, float onTurnFD, float burningFD) {

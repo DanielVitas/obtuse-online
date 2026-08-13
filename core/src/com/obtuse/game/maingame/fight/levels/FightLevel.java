@@ -188,6 +188,15 @@ public class FightLevel extends Level {
         }
     }
 
+    /** Project a live-arena world point to InfoStage (screen) coordinates through the arena camera, so
+     *  screen-space overlays (the damage / heal popup) sit on the character even when the duel view has
+     *  zoomed and shifted that camera. */
+    public com.badlogic.gdx.math.Vector2 worldToScreen(float wx, float wy) {
+        com.badlogic.gdx.math.Vector3 v = new com.badlogic.gdx.math.Vector3(wx, wy, 0);
+        camera(1).project(v);
+        return new com.badlogic.gdx.math.Vector2(v.x, v.y);
+    }
+
     public void removeHolderInfo(Holder holder) {
         if (holder.hpLabel != null)
             holder.hpLabel.remove();

@@ -108,7 +108,8 @@ public abstract class InfoBackground extends BasicObject {
 
         float x = getX(), y = getY(), top = y + h;
         float nameY = top - pad - titleH;
-        name.setPosition(x + pad, nameY + (titleH - height(name)) / 2f);
+        // The name (title) sits a touch further in than the body text below it.
+        name.setPosition(x + pad + gap, nameY + (titleH - height(name)) / 2f);
 
         if (inlineStat != null)
             inlineStat.setPosition(x + w - pad - width(inlineStat),
