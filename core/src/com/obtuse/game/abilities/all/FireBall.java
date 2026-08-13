@@ -27,7 +27,8 @@ public class FireBall extends Ability {
         addSuggestedTarget(ENEMY);
         addAnimation("explosion", 0.05f, Animation.PlayMode.NORMAL,1f,1f,0,0);
         // Ember-coloured sparks BURST outward from the caster while the cast plays (radial burst).
-        addAnimation("ember", 0.06f, Animation.PlayMode.NORMAL, 0.9f, 0.9f, 0, 0);
+        // 0.12s/frame so the burst lasts ~twice as long (proportionally slower).
+        addAnimation("ember", 0.12f, Animation.PlayMode.NORMAL, 0.9f, 0.9f, 0, 0);
 
         description = "Deals " + DMG + " damage to the targeted character.";
     }
