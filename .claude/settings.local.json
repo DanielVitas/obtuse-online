@@ -94,7 +94,8 @@
       "Bash(python3 -c ' *)",
       "Bash(/Users/daniel/Library/Android/sdk/platform-tools/adb devices *)",
       "Bash(echo \"exit: $?\")",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(pkill -f \"http.server 8091\")"
     ]
   }
 }
