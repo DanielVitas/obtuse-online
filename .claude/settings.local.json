@@ -84,7 +84,10 @@
       "Bash(xargs sed -n '1,60p')",
       "Bash(pkill -f \"http.server 8099\")",
       "Bash(rm -f core/src/com/obtuse/game/gameobjects/fight/enemies/DuelHoldEnemy.java core/src/com/obtuse/game/gameobjects/fight/enemies/DuelTestEnemy.java)",
-      "Bash(sed -i '' \"s/def buildVersion = 'v41'/def buildVersion = 'v42'/\" teavm/build.gradle)"
+      "Bash(sed -i '' \"s/def buildVersion = 'v41'/def buildVersion = 'v42'/\" teavm/build.gradle)",
+      "Bash(rm -rf ~/.gradle/caches/modules-2 ~/.gradle/wrapper/dists 2>/dev/null; sync)",
+      "Bash(rm -f core/src/com/obtuse/game/gameobjects/fight/enemies/DuelDmgEnemy.java)",
+      "Bash(sed -i '' \"s/def buildVersion = 'v45'/def buildVersion = 'v46'/\" teavm/build.gradle)"
     ]
   }
 }
