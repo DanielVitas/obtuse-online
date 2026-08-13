@@ -37,6 +37,6 @@ public class DeathEvent extends Event {
             verb = target.holder.arena instanceof DuelArena ? "fell in the duel."
                     : DEFAULTS[random.nextInt(DEFAULTS.length)];
         ((FightLevel) target.holder.arena.fightGame.level).showDeath(target.getName() + " " + verb);
-        return 0.5f;   // hold the message for half a second before the fight moves on
+        return 1f;   // hold the message for a second before the fight moves on
     }
 }

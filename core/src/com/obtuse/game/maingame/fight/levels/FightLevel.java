@@ -100,9 +100,7 @@ public class FightLevel extends Level {
         boolean duelActive = activeArena instanceof com.obtuse.game.maingame.fight.arenas.DuelArena;
         if (other == null) {               // no duel: normal camera target
             tgtZoom = 1f; tgtPx = vw / 2; tgtPy = vh / 2;
-        } else if (duelActive) {           // duel fills the screen, nudged right + slightly lower
-            tgtZoom = 1f; tgtPx = vw / 2 - 0.15f * vw; tgtPy = vh / 2 + 0.04f * vh;
-        } else {                           // main at 0.75, nudged left
+        } else {                           // duel running: both active states use the SAME scale/position
             tgtZoom = 1f / 0.75f; tgtPx = vw / 2 + 0.09f * vw * tgtZoom; tgtPy = vh / 2;
         }
         if (!duelViewInit) {               // first time: snap to the target (nothing to ease from yet)
@@ -347,7 +345,7 @@ public class FightLevel extends Level {
         ((InfoStage) stages.get(2)).showDescription(message);
         com.badlogic.gdx.utils.Timer.schedule(new com.badlogic.gdx.utils.Timer.Task() {
             @Override public void run() { ((InfoStage) stages.get(2)).clearDescription(); }
-        }, 0.5f);
+        }, 1f);
     }
 
     public void loseInfo() {
