@@ -21,17 +21,19 @@ public class DuelArena extends Arena {
         setupHolderFightObjects();
     }
 
+    // The two slots sit close together in the middle (enemy left, hero right) rather than at the far
+    // edges, so the duel reads as an intimate one-on-one.
     @Override
     protected float[] setHeroPositions() {
         return new float[]{
-                8f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
+                6f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
         };
     }
 
     @Override
     protected float[] setEnemyPositions() {
         return new float[]{
-                1f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
+                4f, Obtuse.cameraWidth / Obtuse.ratio * 0.5f
         };
     }
 

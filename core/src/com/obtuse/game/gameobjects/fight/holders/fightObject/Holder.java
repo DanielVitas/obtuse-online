@@ -1,5 +1,6 @@
 package com.obtuse.game.gameobjects.fight.holders.fightObject;
 
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Array;
@@ -119,14 +120,20 @@ public class Holder {
     }
 
     public void createAndAdd(Stage stage) {
+        createAndAdd(stage.getRoot());
+    }
+
+    /** Add the slot / fighter / health bar to a Group (the arena's own transformable group) so a
+     *  duel can scale & move a whole arena as one unit. Stage.addActor() is just adding to its root. */
+    public void createAndAdd(Group group) {
         slot.create(x, y - slot.getHeight() / 2);
-        stage.addActor(slot);
+        group.addActor(slot);
         if (fightObject != null) {
             fightObject.create(x + slot.getWidth() / 2 - fightObject.getWidth() / 2, y);
-            stage.addActor(fightObject);
+            group.addActor(fightObject);
             if (fightObject.alive()) {
                 setHealthBarPosition();
-                stage.addActor(healthBar);
+                group.addActor(healthBar);
             }
         }
     }

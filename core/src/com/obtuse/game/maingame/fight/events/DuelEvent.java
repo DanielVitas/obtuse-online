@@ -48,6 +48,9 @@ public class DuelEvent extends Event {
         // so both arenas' fighters show together from THIS turn.
         duelArena.preorder();
         originalArena.refreshProfiles();
+        // Apply the duel "distant arena" view now (zoom the active arena, show the other in the corner)
+        // rather than waiting for the next switchArena.
+        ((FightLevel) originalArena.fightGame.level).updateDuelView(originalArena);
         //((FightLevel) caster.holder.arena.fightGame.level).switchArena(originalArena);
         return 0;
     }

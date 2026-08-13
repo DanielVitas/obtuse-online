@@ -62,6 +62,64 @@ public class FightLevel extends Level {
             for (Holder holder : holderArray) {
                 addHolder(holder);
             }
+        updateDuelView(arena);
+    }
+
+    private com.badlogic.gdx.scenes.scene2d.Group pipGroup;
+
+    /**
+     * Duel "distant arena" view. Zoom/shift the ACTIVE arena via its own world camera (so input, which
+     * unprojects through the same camera, stays aligned), and render the OTHER arena small, faded and
+     * in a corner (top-right when the main arena is active, top-left when the duel arena is). With no
+     * duel running this restores the normal camera and clears the corner, so ordinary fights are
+     * unchanged. Called after every switchArena and (via it) on resize.
+     */
+    public void updateDuelView(Arena activeArena) {
+        float vw = com.obtuse.game.Obtuse.cameraWidth, vh = vw / com.obtuse.game.Obtuse.ratio;
+        com.badlogic.gdx.graphics.OrthographicCamera cam = camera(1);
+        // The other live arena. INDEXED loop: game.arenas is iterated elsewhere by libGDX's pooled
+        // iterator, and a nested for-each would invalidate it (see the duel turn-order fix).
+        Arena other = null;
+        for (int a = 0; a < game.arenas.size; a++) {
+            Arena ar = game.arenas.get(a);
+            if (ar != activeArena && ar.heroes.size + ar.enemies.size > 0)
+                other = ar;
+        }
+        if (pipGroup == null) {
+            pipGroup = new com.badlogic.gdx.scenes.scene2d.Group();
+            pipGroup.setTransform(true);
+        }
+        pipGroup.clear();
+        if (pipGroup.getParent() == null)
+            stage(0).addActor(pipGroup);   // world background stage, so the PIP isn't zoomed by cam(1)
+
+        if (other == null) {               // no duel: normal camera, empty corner
+            cam.zoom = 1f;
+            cam.position.set(vw / 2, vh / 2, 0);
+            return;
+        }
+        boolean duelActive = activeArena instanceof com.obtuse.game.maingame.fight.arenas.DuelArena;
+        if (duelActive) {                  // duel fills the screen, nudged right + lower
+            cam.zoom = 1f;
+            cam.position.set(vw / 2 - 0.24f * vw, vh / 2 + 0.12f * vh, 0);
+        } else {                           // main at 0.8, nudged left
+            cam.zoom = 1f / 0.8f;
+            cam.position.set(vw / 2 + 0.09f * vw * cam.zoom, vh / 2, 0);
+        }
+        // the OTHER arena, small and faded in the corner
+        for (Array<Holder> hs : new Array[]{other.heroHolders, other.enemyHolders, other.summonHolders})
+            for (int i = 0; i < hs.size; i++)
+                hs.get(i).createAndAdd(pipGroup);
+        pipGroup.setColor(1f, 1f, 1f, 0.5f);
+        if (duelActive) {                  // distant MAIN arena, top-left, 0.5
+            pipGroup.setOrigin(0, vh);
+            pipGroup.setScale(0.5f);
+            pipGroup.setPosition(0.05f * vw, -0.05f * vh);
+        } else {                           // distant DUEL arena, top-right, 0.4
+            pipGroup.setOrigin(vw, vh);
+            pipGroup.setScale(0.4f);
+            pipGroup.setPosition(-0.1f, -0.05f * vh);
+        }
     }
 
     public void removeHolderInfo(Holder holder) {
