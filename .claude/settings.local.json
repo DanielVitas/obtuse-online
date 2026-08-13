@@ -82,7 +82,9 @@
       "Bash(perl -0pi -e 's/\\(com\\\\.obtuse\\\\.game\\\\.gameobjects\\\\.items\\\\.Inventory\\\\.giveAllItems\\\\\\(\\\\\\);\\\\n\\\\n\\\\t\\\\tchangeScreen\\\\\\(\"WorldScreen\"\\\\\\);\\)/$1\\\\n\\\\t\\\\tcom.badlogic.gdx.utils.Timer.schedule\\(new com.badlogic.gdx.utils.Timer.Task\\(\\) {\\\\n\\\\t\\\\t\\\\t\\\\@Override public void run\\(\\) {\\\\n\\\\t\\\\t\\\\t\\\\tcom.obtuse.game.maingame.fight.Fight f = new com.obtuse.game.maingame.fight.Fight\\(\\) { \\\\@Override public void end\\(boolean v\\){} };\\\\n\\\\t\\\\t\\\\t\\\\tf.add\\(new com.obtuse.game.gameobjects.fight.enemies.Skeleton\\(\\)\\);\\\\n\\\\t\\\\t\\\\t\\\\t\\(\\(FightScreen\\) MyScreen.screens.get\\(\"FightScreen\"\\)\\).generateFight\\(f\\);\\\\n\\\\t\\\\t\\\\t\\\\tchangeScreen\\(\"FightScreen\"\\);\\\\n\\\\t\\\\t\\\\t}\\\\n\\\\t\\\\t}, 2f\\);/' core/src/com/obtuse/game/Obtuse.java)",
       "Bash(xargs cat)",
       "Bash(xargs sed -n '1,60p')",
-      "Bash(pkill -f \"http.server 8099\")"
+      "Bash(pkill -f \"http.server 8099\")",
+      "Bash(rm -f core/src/com/obtuse/game/gameobjects/fight/enemies/DuelHoldEnemy.java core/src/com/obtuse/game/gameobjects/fight/enemies/DuelTestEnemy.java)",
+      "Bash(sed -i '' \"s/def buildVersion = 'v41'/def buildVersion = 'v42'/\" teavm/build.gradle)"
     ]
   }
 }
