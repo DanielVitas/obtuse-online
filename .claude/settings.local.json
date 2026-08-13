@@ -73,7 +73,16 @@
       "Bash(perl -0pi -e 's/\\(com\\\\.obtuse\\\\.game\\\\.gameobjects\\\\.items\\\\.Inventory\\\\.giveAllItems\\\\\\(\\\\\\);\\\\n\\\\n\\\\t\\\\tchangeScreen\\\\\\(\"WorldScreen\"\\\\\\);\\)/$1\\\\n\\\\t\\\\tParty.party.get\\(0\\).equipment.add\\(new com.obtuse.game.gameobjects.items.equipment.HealthPotion\\(\\)\\);\\\\n\\\\t\\\\tcom.badlogic.gdx.utils.Timer.schedule\\(new com.badlogic.gdx.utils.Timer.Task\\(\\) {\\\\n\\\\t\\\\t\\\\t\\\\@Override public void run\\(\\) {\\\\n\\\\t\\\\t\\\\t\\\\tchangeScreen\\(\"InventoryScreen\"\\);\\\\n\\\\t\\\\t\\\\t\\\\t\\(\\(InventoryScreen\\) MyScreen.screens.get\\(\"InventoryScreen\"\\)\\).generateInventory\\(\\);\\\\n\\\\t\\\\t\\\\t}\\\\n\\\\t\\\\t}, 1f\\);/' core/src/com/obtuse/game/Obtuse.java)",
       "Bash(rm -f core/src/com/obtuse/game/gameobjects/fight/enemies/DuelTestSkeleton.java)",
       "Bash(sed -i '' \"s/def buildVersion = 'v36'/def buildVersion = 'v37'/\" teavm/build.gradle)",
-      "Bash(sed -i '' \"s/def buildVersion = 'v37'/def buildVersion = 'v38'/\" teavm/build.gradle)"
+      "Bash(sed -i '' \"s/def buildVersion = 'v37'/def buildVersion = 'v38'/\" teavm/build.gradle)",
+      "Bash(perl -0pi -e 's/\\(\\\\\\(\\\\\\(FightLevel\\\\\\) target\\\\.holder\\\\.arena\\\\.fightGame\\\\.level\\\\\\)\\\\.showDeath\\)/com.badlogic.gdx.Gdx.app.log\\(\"DEATH\", target.getName\\(\\) + \" \" + verb\\);\\\\n        $1/' core/src/com/obtuse/game/maingame/fight/events/DeathEvent.java)",
+      "Bash(rm -f core/src/com/obtuse/game/gameobjects/fight/enemies/FireTestSkeleton.java)",
+      "Bash(sed -i '' 's/return 3f;   \\\\/\\\\/ TEMP long hold.*/return 0.5f;   \\\\/\\\\/ hold the message for half a second before the fight moves on/' core/src/com/obtuse/game/maingame/fight/events/DeathEvent.java)",
+      "Bash(sed -i '' '/com.badlogic.gdx.Gdx.app.log\\(\"DEATH\"/d' core/src/com/obtuse/game/maingame/fight/events/DeathEvent.java)",
+      "Bash(sed -i '' 's/}, 3f\\);/}, 0.5f\\);/' core/src/com/obtuse/game/maingame/fight/levels/FightLevel.java)",
+      "Bash(perl -0pi -e 's/\\(com\\\\.obtuse\\\\.game\\\\.gameobjects\\\\.items\\\\.Inventory\\\\.giveAllItems\\\\\\(\\\\\\);\\\\n\\\\n\\\\t\\\\tchangeScreen\\\\\\(\"WorldScreen\"\\\\\\);\\)/$1\\\\n\\\\t\\\\tcom.badlogic.gdx.utils.Timer.schedule\\(new com.badlogic.gdx.utils.Timer.Task\\(\\) {\\\\n\\\\t\\\\t\\\\t\\\\@Override public void run\\(\\) {\\\\n\\\\t\\\\t\\\\t\\\\tcom.obtuse.game.maingame.fight.Fight f = new com.obtuse.game.maingame.fight.Fight\\(\\) { \\\\@Override public void end\\(boolean v\\){} };\\\\n\\\\t\\\\t\\\\t\\\\tf.add\\(new com.obtuse.game.gameobjects.fight.enemies.Skeleton\\(\\)\\);\\\\n\\\\t\\\\t\\\\t\\\\t\\(\\(FightScreen\\) MyScreen.screens.get\\(\"FightScreen\"\\)\\).generateFight\\(f\\);\\\\n\\\\t\\\\t\\\\t\\\\tchangeScreen\\(\"FightScreen\"\\);\\\\n\\\\t\\\\t\\\\t}\\\\n\\\\t\\\\t}, 2f\\);/' core/src/com/obtuse/game/Obtuse.java)",
+      "Bash(xargs cat)",
+      "Bash(xargs sed -n '1,60p')",
+      "Bash(pkill -f \"http.server 8099\")"
     ]
   }
 }
