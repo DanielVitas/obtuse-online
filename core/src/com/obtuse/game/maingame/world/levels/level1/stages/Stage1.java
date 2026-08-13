@@ -24,6 +24,7 @@ public class Stage1 extends WorldStage {
 
     public Stage1(Stage stage) {
         super(0,0,0,10,10, stage);
+        addEnemy(new BasicHugeSlime(-2, 8));
         addEnemy(new BasicSkeleton(0, 8));
         addEnemy(new BasicRedSkull(2,8));
         addEnemy(new BasicDemon(4,8));

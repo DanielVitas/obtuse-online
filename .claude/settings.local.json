@@ -87,7 +87,14 @@
       "Bash(sed -i '' \"s/def buildVersion = 'v41'/def buildVersion = 'v42'/\" teavm/build.gradle)",
       "Bash(rm -rf ~/.gradle/caches/modules-2 ~/.gradle/wrapper/dists 2>/dev/null; sync)",
       "Bash(rm -f core/src/com/obtuse/game/gameobjects/fight/enemies/DuelDmgEnemy.java)",
-      "Bash(sed -i '' \"s/def buildVersion = 'v45'/def buildVersion = 'v46'/\" teavm/build.gradle)"
+      "Bash(sed -i '' \"s/def buildVersion = 'v45'/def buildVersion = 'v46'/\" teavm/build.gradle)",
+      "WebFetch(domain:checkpointcafe.itch.io)",
+      "WebFetch(domain:toffeecraft.itch.io)",
+      "Bash(python3 -c \"import struct;d=open\\('default/main_01.png','rb'\\).read\\(\\);w,h=struct.unpack\\('>II',d[16:24]\\);print\\('slot default/main_01.png',w,'x',h\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(/Users/daniel/Library/Android/sdk/platform-tools/adb devices *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git check-ignore *)"
     ]
   }
 }

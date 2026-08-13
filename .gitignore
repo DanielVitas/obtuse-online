@@ -23,3 +23,6 @@ Thumbs.db
 
 # Conversion scratch (safe to delete entirely)
 _to_delete/
+
+# Raw slime source sprite packs (ToffeeCraft/rvros) — processed frames live under images/, atlas is committed
+android/assets/images/_slime_src/

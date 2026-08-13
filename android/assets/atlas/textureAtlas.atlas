@@ -4784,3 +4784,1024 @@ fight/abilities/swap/gust/main
   orig: 16, 16
   offset: 0, 0
   index: 5
+
+textureAtlasSlimes.png
+size: 512, 512
+format: RGBA8888
+filter: MipMap,MipMap
+repeat: none
+fight/characters/enemies/bigSlime/cast/main
+  rotate: false
+  xy: 104, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/cast/main
+  rotate: false
+  xy: 122, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/bigSlime/cast/main
+  rotate: false
+  xy: 140, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 158, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 176, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 194, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 212, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 230, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 248, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 266, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 284, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 8
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 302, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 9
+fight/characters/enemies/bigSlime/death/main
+  rotate: false
+  xy: 320, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 10
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 338, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 356, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 374, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 392, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 410, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 428, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 446, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 464, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 8
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 482, 56
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 9
+fight/characters/enemies/bigSlime/deathStunned/main
+  rotate: false
+  xy: 2, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 10
+fight/characters/enemies/bigSlime/default/main
+  rotate: false
+  xy: 20, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/default/main
+  rotate: false
+  xy: 38, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/bigSlime/default/main
+  rotate: false
+  xy: 56, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/bigSlime/hurt/main
+  rotate: false
+  xy: 74, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/hurt/main
+  rotate: false
+  xy: 92, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/bigSlime/hurt/main
+  rotate: false
+  xy: 110, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/bigSlime/profile/default/main
+  rotate: false
+  xy: 32, 137
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/profile/onTurn/main
+  rotate: false
+  xy: 50, 137
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/profile/onTurn/main
+  rotate: false
+  xy: 104, 137
+  size: 16, 10
+  orig: 16, 10
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/bigSlime/stunned/main
+  rotate: false
+  xy: 128, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/summon/main
+  rotate: false
+  xy: 146, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/bigSlime/summon/main
+  rotate: false
+  xy: 164, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/bigSlime/summon/main
+  rotate: false
+  xy: 182, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/bigSlime/summon/main
+  rotate: false
+  xy: 200, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/bigSlime/summon/main
+  rotate: false
+  xy: 218, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/bigSlime/summon/main
+  rotate: false
+  xy: 236, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/bigSlime/unstunned/main
+  rotate: false
+  xy: 254, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/cast/main
+  rotate: false
+  xy: 2, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/cast/main
+  rotate: false
+  xy: 36, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/hugeSlime/cast/main
+  rotate: false
+  xy: 70, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/hugeSlime/cast/main
+  rotate: false
+  xy: 104, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/hugeSlime/cast/main
+  rotate: false
+  xy: 138, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/hugeSlime/death/main
+  rotate: false
+  xy: 172, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/death/main
+  rotate: false
+  xy: 206, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/hugeSlime/death/main
+  rotate: false
+  xy: 240, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/hugeSlime/death/main
+  rotate: false
+  xy: 274, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/hugeSlime/deathStunned/main
+  rotate: false
+  xy: 308, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/deathStunned/main
+  rotate: false
+  xy: 342, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/hugeSlime/deathStunned/main
+  rotate: false
+  xy: 376, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/hugeSlime/deathStunned/main
+  rotate: false
+  xy: 410, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 444, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 478, 2
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 2, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 36, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/hugeSlime/hurt/main
+  rotate: false
+  xy: 70, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/hurt/main
+  rotate: false
+  xy: 104, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/hugeSlime/hurt/main
+  rotate: false
+  xy: 138, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/hugeSlime/hurt/main
+  rotate: false
+  xy: 172, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/hugeSlime/profile/default/main
+  rotate: false
+  xy: 452, 119
+  size: 28, 14
+  orig: 28, 14
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/profile/onTurn/main
+  rotate: false
+  xy: 482, 119
+  size: 28, 14
+  orig: 28, 14
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/profile/onTurn/main
+  rotate: false
+  xy: 2, 137
+  size: 28, 14
+  orig: 28, 14
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/hugeSlime/stunned/main
+  rotate: false
+  xy: 206, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/summon/main
+  rotate: false
+  xy: 240, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/hugeSlime/summon/main
+  rotate: false
+  xy: 274, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/hugeSlime/summon/main
+  rotate: false
+  xy: 308, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/hugeSlime/summon/main
+  rotate: false
+  xy: 342, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/hugeSlime/summon/main
+  rotate: false
+  xy: 376, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/hugeSlime/summon/main
+  rotate: false
+  xy: 410, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/hugeSlime/unstunned/main
+  rotate: false
+  xy: 444, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/cast/main
+  rotate: false
+  xy: 272, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/cast/main
+  rotate: false
+  xy: 290, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/slime/cast/main
+  rotate: false
+  xy: 308, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 326, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 344, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 362, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 380, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 398, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 416, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 434, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 452, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 8
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 470, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 9
+fight/characters/enemies/slime/death/main
+  rotate: false
+  xy: 488, 83
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 10
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 2, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 20, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 38, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 56, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 74, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 92, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 110, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 7
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 128, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 8
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 146, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 9
+fight/characters/enemies/slime/deathStunned/main
+  rotate: false
+  xy: 164, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 10
+fight/characters/enemies/slime/default/main
+  rotate: false
+  xy: 182, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/default/main
+  rotate: false
+  xy: 200, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/slime/default/main
+  rotate: false
+  xy: 218, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/slime/hurt/main
+  rotate: false
+  xy: 236, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/hurt/main
+  rotate: false
+  xy: 254, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/slime/hurt/main
+  rotate: false
+  xy: 272, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/slime/profile/default/main
+  rotate: false
+  xy: 68, 137
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/profile/onTurn/main
+  rotate: false
+  xy: 86, 137
+  size: 16, 11
+  orig: 16, 11
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/profile/onTurn/main
+  rotate: false
+  xy: 122, 137
+  size: 16, 10
+  orig: 16, 10
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/slime/stunned/main
+  rotate: false
+  xy: 290, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/summon/main
+  rotate: false
+  xy: 308, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/enemies/slime/summon/main
+  rotate: false
+  xy: 326, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/enemies/slime/summon/main
+  rotate: false
+  xy: 344, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/enemies/slime/summon/main
+  rotate: false
+  xy: 362, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/enemies/slime/summon/main
+  rotate: false
+  xy: 380, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/enemies/slime/summon/main
+  rotate: false
+  xy: 398, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/characters/enemies/slime/unstunned/main
+  rotate: false
+  xy: 416, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/cast/main
+  rotate: false
+  xy: 434, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/cast/main
+  rotate: false
+  xy: 452, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/summons/ooze/cast/main
+  rotate: false
+  xy: 470, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/summons/ooze/cast/main
+  rotate: false
+  xy: 488, 101
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/summons/ooze/death/main
+  rotate: false
+  xy: 2, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/death/main
+  rotate: false
+  xy: 20, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/summons/ooze/death/main
+  rotate: false
+  xy: 38, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/summons/ooze/death/main
+  rotate: false
+  xy: 56, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/summons/ooze/death/main
+  rotate: false
+  xy: 74, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 92, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 110, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 128, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 146, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 164, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/summons/ooze/default/main
+  rotate: false
+  xy: 182, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/default/main
+  rotate: false
+  xy: 200, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/summons/ooze/default/main
+  rotate: false
+  xy: 218, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/summons/ooze/hurt/main
+  rotate: false
+  xy: 236, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/hurt/main
+  rotate: false
+  xy: 254, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/summons/ooze/profile/default/main
+  rotate: false
+  xy: 272, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/profile/onTurn/main
+  rotate: false
+  xy: 290, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/profile/onTurn/main
+  rotate: false
+  xy: 308, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/summons/ooze/stunned/main
+  rotate: false
+  xy: 326, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/summon/main
+  rotate: false
+  xy: 344, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/characters/summons/ooze/summon/main
+  rotate: false
+  xy: 362, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/characters/summons/ooze/summon/main
+  rotate: false
+  xy: 380, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/characters/summons/ooze/summon/main
+  rotate: false
+  xy: 398, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/characters/summons/ooze/summon/main
+  rotate: false
+  xy: 416, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/characters/summons/ooze/unstunned/main
+  rotate: false
+  xy: 434, 119
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+world/interactive/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 478, 29
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 1
+world/interactive/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 2, 56
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 2
+world/interactive/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 36, 56
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 3
+world/interactive/enemies/hugeSlime/default/main
+  rotate: false
+  xy: 70, 56
+  size: 32, 25
+  orig: 32, 25
+  offset: 0, 0
+  index: 4
