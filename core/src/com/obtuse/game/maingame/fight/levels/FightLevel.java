@@ -90,7 +90,18 @@ public class FightLevel extends Level {
                 other = ar;   // a finished duel drops out of the corner (the view glides back to main)
         }
         if (pipGroup == null) {
-            pipGroup = new com.badlogic.gdx.scenes.scene2d.Group();
+            // The slot / fighter art draws with the raw batch colour and ignores the group's alpha, so a
+            // plain setColor() does nothing — tint the batch here, around the children, to actually fade it.
+            pipGroup = new com.badlogic.gdx.scenes.scene2d.Group() {
+                @Override
+                public void draw(com.badlogic.gdx.graphics.g2d.Batch batch, float parentAlpha) {
+                    com.badlogic.gdx.graphics.Color c = batch.getColor();
+                    float r = c.r, g = c.g, b = c.b, a = c.a;
+                    batch.setColor(r, g, b, a * 0.3f);   // the distant arena is heavily faded
+                    super.draw(batch, parentAlpha);
+                    batch.setColor(r, g, b, a);
+                }
+            };
             pipGroup.setTransform(true);
         }
         pipGroup.clear();
@@ -100,8 +111,12 @@ public class FightLevel extends Level {
         boolean duelActive = activeArena instanceof com.obtuse.game.maingame.fight.arenas.DuelArena;
         if (other == null) {               // no duel: normal camera target
             tgtZoom = 1f; tgtPx = vw / 2; tgtPy = vh / 2;
-        } else {                           // duel running: both active states use the SAME scale/position
-            tgtZoom = 1f / 0.75f; tgtPx = vw / 2 + 0.09f * vw * tgtZoom; tgtPy = vh / 2;
+        } else {                           // duel running: same 0.75 scale either way, mirrored left/right
+            tgtZoom = 1f / 0.75f;
+            float dx = 0.09f * vw * tgtZoom;              // nudge magnitude (same both ways)
+            tgtPx = duelActive ? vw / 2 - dx             // duel active: content RIGHT (main PIP sits top-left)
+                               : vw / 2 + dx;            // main active: content LEFT (duel PIP sits top-right)
+            tgtPy = vh / 2;
         }
         if (!duelViewInit) {               // first time: snap to the target (nothing to ease from yet)
             curZoom = tgtZoom; curPx = tgtPx; curPy = tgtPy; duelViewInit = true;
@@ -110,7 +125,6 @@ public class FightLevel extends Level {
             for (Array<Holder> hs : new Array[]{other.heroHolders, other.enemyHolders, other.summonHolders})
                 for (int i = 0; i < hs.size; i++)
                     hs.get(i).createAndAdd(pipGroup);
-            pipGroup.setColor(1f, 1f, 1f, 0.3f);   // the distant arena is heavily faded
             if (duelActive) {              // distant MAIN arena, top-left, 0.5
                 pipGroup.setOrigin(0, vh);
                 pipGroup.setScale(0.5f);
