@@ -216,7 +216,11 @@ public abstract class Arena {
         fightObject.profile.onTurn();
 
         phase(fightObject.preturn);
-        if (fighterOrder.get(index).alive() && check()) {
+        // Check THIS fighter's own liveness, not fighterOrder.get(index): if it died during its own
+        // preturn (e.g. Blood Sacrifice recoil) and its death-split removed it from fighterOrder,
+        // get(index) is now a different fighter — or out of bounds — and a dead fighter would wrongly
+        // take a turn.
+        if (fightObject.alive() && check()) {
             fightObject.takeTurn(this, ((FightLevel) fightGame.level));
             phase(fightObject.postturn);
             check();

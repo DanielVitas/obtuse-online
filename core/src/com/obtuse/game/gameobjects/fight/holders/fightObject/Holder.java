@@ -55,6 +55,7 @@ public class Holder {
         fightObject.profile.remove();
         healthBar = null;
         fightObject = null;
+        clearOnTurn();
     }
 
     public void removeFightWithoutProfileObject() {
@@ -62,6 +63,16 @@ public class Holder {
         fightObject.remove();
         healthBar = null;
         fightObject = null;
+        clearOnTurn();
+    }
+
+    /** A holder that just lost its fighter is no longer "on turn": drop the dark on-turn slot
+     *  highlight now, so a replacement taking this slot the same turn (e.g. a slime split spawning
+     *  into its dead parent's holder) doesn't inherit a permanently-stuck highlight. */
+    private void clearOnTurn() {
+        onTurn = false;
+        if (slot != null)
+            playSlotAnimation();
     }
 
     public void refreshHPLabel() {

@@ -12,11 +12,15 @@ public class ToxicOoze extends Summon {
     public ToxicOoze() {
         super("Ooze", 2);
         setName("Toxic Ooze");
-        // The base already targets EMPTYHEROSLOT + EMPTYSUMMONSLOT (suggesting EMPTYHEROSLOT so the
-        // ooze lands next to the heroes). Allow the enemy side too, so "any empty slot" holds.
-        addTarget(EMPTYENEMYSLOT);
-        addSuggestedTarget(EMPTYSUMMONSLOT);
-        description = "Summons an Ooze onto an empty slot. Each turn the Ooze poisons every unit beside it.";
+        // The Huge Slime should drop the Ooze on its OWN side, never on a hero/summon slot. Enemies
+        // target with inverse=true, so the ally-side slot (EMPTYHEROSLOT) resolves to empty ENEMY
+        // slots for the caster (same way Skeleton's suggested ENEMY inverts to attack heroes). Clear
+        // the base Summon's broader empty-hero/summon targets and keep only the own-side slot.
+        targets.clear();
+        suggestedTargets.clear();
+        addTarget(EMPTYHEROSLOT);
+        addSuggestedTarget(EMPTYHEROSLOT);
+        description = "Summons an Ooze onto an empty enemy slot. Each turn the Ooze poisons every unit beside it.";
     }
 
     @Override
