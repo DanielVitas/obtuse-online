@@ -20,10 +20,10 @@ public abstract class Slot extends BasicObject {
         float r = c.r, g = c.g, b = c.b, a = c.a;
         if (slotAlpha < 1f)
             batch.setColor(r, g, b, a * slotAlpha);
-        // Draw the animations back-to-front: the burning overlay is appended last, so drawing in reverse
-        // puts the fire BEHIND the base state (index 0) — keeping the target (red) / on-turn (dark) colour
-        // visible on a slot that's on fire, instead of the flames covering it.
-        for (int i = currentlyDisplayed.size - 1; i >= 0; i--)
+        // Draw front-to-back (normal order): the base slot state is index 0, and the burning overlay
+        // (appended last, 2x the slot) draws ON TOP so the flames are fully visible over the slot —
+        // drawing the fire behind the base clipped its bottom half behind the slot sprite.
+        for (int i = 0; i < currentlyDisplayed.size; i++)
             currentlyDisplayed.get(i).draw(batch, getX(), getY(), getWidth(), getHeight());
         if (slotAlpha < 1f)
             batch.setColor(r, g, b, a);
