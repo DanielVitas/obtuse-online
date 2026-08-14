@@ -95,7 +95,8 @@
       "Bash(/Users/daniel/Library/Android/sdk/platform-tools/adb devices *)",
       "Bash(echo \"exit: $?\")",
       "Bash(git check-ignore *)",
-      "Bash(pkill -f \"http.server 8091\")"
+      "Bash(pkill -f \"http.server 8091\")",
+      "Bash(git rm *)"
     ]
   }
 }
