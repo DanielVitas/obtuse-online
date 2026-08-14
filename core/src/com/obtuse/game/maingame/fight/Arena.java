@@ -192,8 +192,13 @@ public abstract class Arena {
             }
             index ++;
         }
-        runHolders();
-        phase(endPhaseEvents);
+        // If a side was wiped during the round (check() above set finished), the battle is over — stop
+        // simulating. Skip the end-of-round burning/regen phase so e.g. burning ground doesn't keep
+        // hitting the surviving enemies after the last hero has already died.
+        if (!finished) {
+            runHolders();
+            phase(endPhaseEvents);
+        }
         deleteProfiles();
         check();
     }
