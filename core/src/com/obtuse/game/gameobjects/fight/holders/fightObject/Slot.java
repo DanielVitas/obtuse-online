@@ -36,7 +36,18 @@ public abstract class Slot extends BasicObject {
         addAnimation("targeted", targetedFD, Animation.PlayMode.LOOP);
         addAnimation("onTurn", onTurnFD, Animation.PlayMode.LOOP);
         addAnimation("burning", burningFD, Animation.PlayMode.LOOP);
+        addAnimation("locked", 1f, Animation.PlayMode.LOOP);
         currentlyDisplayed.add(animations.get("default"));
+    }
+
+    /** Show the chain overlay (a locked slot — e.g. a duellist's reserved slot during a duel). */
+    public void chain() {
+        if (!currentlyDisplayed.contains(animations.get("locked"), true))
+            currentlyDisplayed.add(animations.get("locked"));
+    }
+
+    public void unchain() {
+        currentlyDisplayed.removeValue(animations.get("locked"), true);
     }
 
     public void create(float x, float y, float width, float height) {

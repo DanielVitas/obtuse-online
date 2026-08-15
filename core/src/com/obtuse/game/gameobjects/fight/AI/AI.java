@@ -74,11 +74,11 @@ public abstract class AI {
         if (abilityTargets.contains(Ability.SUMMON,true))
             targets.addAll(removeDeadHolders(arena.summonHolders));
         if (abilityTargets.contains(Ability.EMPTYHEROSLOT,true))
-            targets.addAll(complement(arena.heroHolders, removeDeadHolders(arena.heroHolders)));
+            targets.addAll(unlocked(complement(arena.heroHolders, removeDeadHolders(arena.heroHolders))));
         if (abilityTargets.contains(Ability.EMPTYENEMYSLOT,true))
-            targets.addAll(complement(arena.enemyHolders, removeDeadHolders(arena.enemyHolders)));
+            targets.addAll(unlocked(complement(arena.enemyHolders, removeDeadHolders(arena.enemyHolders))));
         if (abilityTargets.contains(Ability.EMPTYSUMMONSLOT,true))
-            targets.addAll(complement(arena.summonHolders, removeDeadHolders(arena.summonHolders)));
+            targets.addAll(unlocked(complement(arena.summonHolders, removeDeadHolders(arena.summonHolders))));
         return targets;
     }
 
@@ -102,12 +102,22 @@ public abstract class AI {
         if (abilityTargets.contains(Ability.SUMMON,true))
             targets.addAll(removeDeadHolders(arena.summonHolders));
         if (abilityTargets.contains(Ability.EMPTYHEROSLOT,true))
-            targets.addAll(complement(arena.heroHolders, removeDeadHolders(arena.heroHolders)));
+            targets.addAll(unlocked(complement(arena.heroHolders, removeDeadHolders(arena.heroHolders))));
         if (abilityTargets.contains(Ability.EMPTYENEMYSLOT,true))
-            targets.addAll(complement(arena.enemyHolders, removeDeadHolders(arena.enemyHolders)));
+            targets.addAll(unlocked(complement(arena.enemyHolders, removeDeadHolders(arena.enemyHolders))));
         if (abilityTargets.contains(Ability.EMPTYSUMMONSLOT,true))
-            targets.addAll(complement(arena.summonHolders, removeDeadHolders(arena.summonHolders)));
+            targets.addAll(unlocked(complement(arena.summonHolders, removeDeadHolders(arena.summonHolders))));
         return targets;
+    }
+
+    /** Drop locked holders (a duellist's reserved slot) from an empty-slot target list — spawns
+     *  (summons / splits) may not land on them, though area effects and Swap still target by slot. */
+    public Array<Holder> unlocked(Array<Holder> holders) {
+        Array<Holder> out = new Array<Holder>();
+        for (Holder holder : holders)
+            if (!holder.locked)
+                out.add(holder);
+        return out;
     }
 
     public Array<Holder> complement(Array<Holder> main, Array<Holder> without) {

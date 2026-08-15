@@ -35,13 +35,19 @@ public class DuelEvent extends Event {
         }
         int i = 1;
         Arena originalArena = caster.holder.arena;
+        // Capture the two vacated slots BEFORE remove()/the duel arena reassign each fighter's .holder,
+        // so the duel can reserve them (chain) and return both fighters to them when it ends.
+        Holder heroHolder = hero.holder;
+        Holder enemyHolder = enemy.holder;
         if (originalArena.fighterOrder.indexOf(target,true) < originalArena.fighterOrder.indexOf(caster,true))
             i += 1;
         originalArena.remove(caster);
         originalArena.remove(target);
-        Arena duelArena = new DuelArena(caster.holder.arena.fightGame, hero, enemy, originalArena);
+        heroHolder.lock();
+        enemyHolder.lock();
+        Arena duelArena = new DuelArena(originalArena.fightGame, hero, enemy, originalArena, heroHolder, enemyHolder);
         originalArena.dependOnArenas.add(duelArena);
-        caster.holder.arena.fightGame.arenas.add(duelArena);
+        originalArena.fightGame.arenas.add(duelArena);
         originalArena.index -= i;
         // The turn bar was built at the START of this round, before the duel existed, so the two
         // duellists dropped off it until next round. Compute the duel's order now and redraw the bar

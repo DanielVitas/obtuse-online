@@ -1,5 +1,5 @@
 textureAtlas.png
-size: 840, 984
+size: 840, 1002
 format: RGBA8888
 filter: MipMap,MipMap
 repeat: none
@@ -5811,5 +5811,12 @@ fight/summons/ooze/unstunned/main
   xy: 2, 966
   size: 16, 16
   orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/slots/basic/locked/main
+  rotate: false
+  xy: 2, 986
+  size: 32, 16
+  orig: 32, 16
   offset: 0, 0
   index: 1

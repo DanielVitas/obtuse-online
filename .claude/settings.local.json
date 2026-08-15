@@ -97,7 +97,15 @@
       "Bash(git check-ignore *)",
       "Bash(pkill -f \"http.server 8091\")",
       "Bash(git rm *)",
-      "Bash(pkill -f \"http.server 8097\")"
+      "Bash(pkill -f \"http.server 8097\")",
+      "Bash(./venv/bin/python -)",
+      "Bash(pkill -f bb2a57)",
+      "Bash(pkill -f \"H_poly\\\\|python -\")",
+      "Bash(./venv/bin/python forms.py)",
+      "Bash(cp /tmp/chain_atlas.png android/assets/atlas/textureAtlas.png)",
+      "Bash(cp /tmp/chain_atlas.atlas android/assets/atlas/textureAtlas.atlas)",
+      "Bash(python3 -c \"from PIL import Image; print\\('atlas now:', Image.open\\('android/assets/atlas/textureAtlas.png'\\).size\\)\")",
+      "Bash(java -version)"
     ]
   }
 }

@@ -71,6 +71,6 @@ public abstract class SlimeSplitTrigger extends Trigger {
     }
 
     private static boolean isEmptyEnemySlot(Holder holder) {
-        return holder.type == 1 && (holder.fightObject == null || !holder.fightObject.alive());
+        return holder.type == 1 && holder.spawnable();
     }
 }

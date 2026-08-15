@@ -28,6 +28,9 @@ public class Holder {
     public Label damageLabel = new Label("", Fonts.get("damage"));
     public Holder summonHolder = null;
     public int burning = 0;
+    /** Reserved for a duellist who is away in the duel arena: shows a chain, blocks spawns, but can
+     *  still be Swapped into. Cleared when the duellist returns. */
+    public boolean locked = false;
 
     public Holder(Arena arena, float x, float y, int type) {
         this.arena = arena;
@@ -40,6 +43,23 @@ public class Holder {
 
     public float burn() {
         return slot.burn();
+    }
+
+    public void lock() {
+        locked = true;
+        if (slot != null)
+            slot.chain();
+    }
+
+    public void unlock() {
+        locked = false;
+        if (slot != null)
+            slot.unchain();
+    }
+
+    /** A slot a spawn (summon / split) may drop into: empty of any living fighter and not locked. */
+    public boolean spawnable() {
+        return !locked && (fightObject == null || !fightObject.alive());
     }
 
     public void playSlotAnimation() {

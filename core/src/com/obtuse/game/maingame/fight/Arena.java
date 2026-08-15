@@ -81,13 +81,13 @@ public abstract class Arena {
     public void addNext(FightObject fightObject) {
         if (fightObject.getClass().getSuperclass() == Hero.class) {
             for (Holder holder : heroHolders)
-                if (holder.fightObject == null) {
+                if (holder.spawnable()) {
                     add(fightObject, holder);
                     break;
                 }
         } else if (fightObject.getClass().getSuperclass() == Enemy.class) {
             for (Holder holder : enemyHolders)
-                if (holder.fightObject == null) {
+                if (holder.spawnable()) {
                     add(fightObject, holder);
                     break;
                 }
