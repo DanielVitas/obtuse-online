@@ -1,5 +1,5 @@
 textureAtlas.png
-size: 840, 964
+size: 840, 984
 format: RGBA8888
 filter: MipMap,MipMap
 repeat: none
@@ -5568,209 +5568,6 @@ fight/characters/enemies/slime/unstunned/main
   orig: 16, 16
   offset: 0, 0
   index: 1
-fight/summons/ooze/cast/main
-  rotate: false
-  xy: 812, 928
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/cast/main
-  rotate: false
-  xy: 2, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-fight/summons/ooze/cast/main
-  rotate: false
-  xy: 20, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-fight/summons/ooze/cast/main
-  rotate: false
-  xy: 38, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 4
-fight/summons/ooze/death/main
-  rotate: false
-  xy: 56, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/death/main
-  rotate: false
-  xy: 74, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-fight/summons/ooze/death/main
-  rotate: false
-  xy: 92, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-fight/summons/ooze/death/main
-  rotate: false
-  xy: 110, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 4
-fight/summons/ooze/death/main
-  rotate: false
-  xy: 128, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 5
-fight/summons/ooze/deathStunned/main
-  rotate: false
-  xy: 146, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/deathStunned/main
-  rotate: false
-  xy: 164, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-fight/summons/ooze/deathStunned/main
-  rotate: false
-  xy: 182, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-fight/summons/ooze/deathStunned/main
-  rotate: false
-  xy: 200, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 4
-fight/summons/ooze/deathStunned/main
-  rotate: false
-  xy: 218, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 5
-fight/summons/ooze/default/main
-  rotate: false
-  xy: 236, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/default/main
-  rotate: false
-  xy: 254, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-fight/summons/ooze/default/main
-  rotate: false
-  xy: 272, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-fight/summons/ooze/hurt/main
-  rotate: false
-  xy: 290, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/hurt/main
-  rotate: false
-  xy: 308, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-fight/summons/ooze/profile/default/main
-  rotate: false
-  xy: 326, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/profile/onTurn/main
-  rotate: false
-  xy: 344, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/profile/onTurn/main
-  rotate: false
-  xy: 362, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-fight/summons/ooze/stunned/main
-  rotate: false
-  xy: 380, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/summon/main
-  rotate: false
-  xy: 398, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
-fight/summons/ooze/summon/main
-  rotate: false
-  xy: 416, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 2
-fight/summons/ooze/summon/main
-  rotate: false
-  xy: 434, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 3
-fight/summons/ooze/summon/main
-  rotate: false
-  xy: 452, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 4
-fight/summons/ooze/summon/main
-  rotate: false
-  xy: 470, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 5
-fight/summons/ooze/unstunned/main
-  rotate: false
-  xy: 488, 946
-  size: 16, 16
-  orig: 16, 16
-  offset: 0, 0
-  index: 1
 world/interactive/enemies/hugeSlime/default/main
   rotate: false
   xy: 172, 901
@@ -5799,3 +5596,220 @@ world/interactive/enemies/hugeSlime/default/main
   orig: 32, 25
   offset: 0, 0
   index: 4
+fight/summons/ooze/cast/main
+  rotate: false
+  xy: 20, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/cast/main
+  rotate: false
+  xy: 38, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/ooze/death/main
+  rotate: false
+  xy: 56, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/death/main
+  rotate: false
+  xy: 74, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/ooze/death/main
+  rotate: false
+  xy: 92, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/ooze/death/main
+  rotate: false
+  xy: 110, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/summons/ooze/death/main
+  rotate: false
+  xy: 128, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/summons/ooze/death/main
+  rotate: false
+  xy: 146, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 452, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 470, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 488, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 506, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 524, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/summons/ooze/deathStunned/main
+  rotate: false
+  xy: 542, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 6
+fight/summons/ooze/default/main
+  rotate: false
+  xy: 164, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/default/main
+  rotate: false
+  xy: 182, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/ooze/default/main
+  rotate: false
+  xy: 200, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/ooze/hurt/main
+  rotate: false
+  xy: 218, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/hurt/main
+  rotate: false
+  xy: 236, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/ooze/hurt/main
+  rotate: false
+  xy: 254, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/ooze/hurt/main
+  rotate: false
+  xy: 272, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/summons/ooze/profile/default/main
+  rotate: false
+  xy: 326, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/profile/onTurn/main
+  rotate: false
+  xy: 290, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/profile/onTurn/main
+  rotate: false
+  xy: 308, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/ooze/stunned/main
+  rotate: false
+  xy: 344, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/summon/main
+  rotate: false
+  xy: 362, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
+fight/summons/ooze/summon/main
+  rotate: false
+  xy: 380, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 2
+fight/summons/ooze/summon/main
+  rotate: false
+  xy: 398, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 3
+fight/summons/ooze/summon/main
+  rotate: false
+  xy: 416, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 4
+fight/summons/ooze/summon/main
+  rotate: false
+  xy: 434, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 5
+fight/summons/ooze/unstunned/main
+  rotate: false
+  xy: 2, 966
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: 1
